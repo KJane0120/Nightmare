@@ -8,7 +8,7 @@
 
             public override ActionType Type => ActionType.State;
 
-            public override Dictionary<int, ActionBase> CreateActionDic()
+            public override Dictionary<int, ActionBase> CreateNextActionDic()
             {
                 return new Dictionary<int, ActionBase>()
                 {
@@ -18,7 +18,6 @@
 
             protected override void DisPlay()
             {
-                throw new NotImplementedException();
             }
         }
     }

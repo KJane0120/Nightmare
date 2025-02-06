@@ -8,15 +8,21 @@
 
             public override ActionType Type => ActionType.Return;
 
-            public override Dictionary<int, ActionBase> CreateActionDic()
+            public override Dictionary<int, ActionBase> CreateNextActionDic()
             {
-                throw new NotImplementedException();
+                return new Dictionary<int, ActionBase>()
+                {
+                    { 0,  new Action_Village(0) },
+                };
             }
 
-            protected override void DisPlay()
+            public override void OnEnter()
             {
-                throw new NotImplementedException();
+                Console.Clear();
+                Instance.MoveNextAction(ActionType.Village);
             }
+
+            protected override void DisPlay(){}
         }
     }
 }

@@ -8,14 +8,17 @@
 
             public override ActionType Type => ActionType.Inventory;
 
-            public override Dictionary<int, ActionBase> CreateActionDic()
+            public override Dictionary<int, ActionBase> CreateNextActionDic()
             {
-                throw new NotImplementedException();
+                return new Dictionary<int, ActionBase>()
+                {
+                    { 0,  new Action_Return(0) },
+                };
             }
 
             protected override void DisPlay()
             {
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
             }
         }
 

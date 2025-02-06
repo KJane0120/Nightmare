@@ -9,7 +9,7 @@ namespace Nightmare
 
             public override ActionType Type => ActionType.Village;
 
-            public override Dictionary<int, ActionBase> CreateActionDic()
+            protected override Dictionary<int, ActionBase> CreateNextActionDic()
             {
                 return new Dictionary<int, ActionBase>()
                 {

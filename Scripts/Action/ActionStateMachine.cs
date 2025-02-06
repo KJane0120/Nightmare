@@ -26,18 +26,21 @@ namespace Nightmare
             get => m_CurrentAction;
             set
             {
-                OnExitStateEvent();
+                OnExitActionEvent();
                 m_CurrentAction.OnExit();
                 m_CurrentAction = value;
                 m_CurrentAction.OnEnter();
-                OnEnterStateEvent();
+                OnEnterActionEvent();
             }
         }
 
         private ActionBase m_CurrentAction = ActionBase.None;
 
-        public Action OnEnterStateEvent = delegate { };
-        public Action OnExitStateEvent = delegate { };
+        //액션이 시작할때
+        public Action OnEnterActionEvent = delegate { };
+
+        //액션이 끝날때
+        public Action OnExitActionEvent = delegate { };
 
         public IReadOnlyDictionary<ActionType, ActionBase> TypeActionDic;
 

@@ -6,17 +6,19 @@
         {
             public Action_Dungeon(int number) : base(number) { }
 
-
             public override ActionType Type => ActionType.Dungeon;
 
-            public override Dictionary<int, ActionBase> CreateActionDic()
+            protected override Dictionary<int, ActionBase> CreateNextActionDic()
             {
-                throw new NotImplementedException();
+                return new Dictionary<int, ActionBase>()
+                {
+                    { 0,  new Action_Return(0) },
+                };
             }
 
             protected override void DisPlay()
             {
-                throw new NotImplementedException();
+
             }
         }
     }

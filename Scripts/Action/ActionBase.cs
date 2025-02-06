@@ -6,12 +6,15 @@
         {
             public abstract ActionType Type { get; }
 
-            public Dictionary<int, ActionBase> ActionDic = new Dictionary<int, ActionBase>();
-            public abstract Dictionary<int, ActionBase> CreateActionDic();
+            //선택할수있는 활동클래스 딕셔너리 생성함수
+            protected abstract Dictionary<int, ActionBase> CreateNextActionDic();
 
-            public Action<int> OnInputInvalidActionNumber = delegate { };
+            //유효하지않은 번호 입력받았을때 쓰이는 함수
+            protected Action<int> OnInputInvalidActionNumber = delegate { };
 
             private int actionNumber = 0;
+
+            private Dictionary<int, ActionBase> actionDic = new Dictionary<int, ActionBase>();
 
             public ActionBase(int number)
             {
@@ -20,7 +23,7 @@
 
             public virtual void OnEnter()
             {
-                ActionDic = CreateActionDic();
+                actionDic = CreateNextActionDic();
                 OnInputInvalidActionNumber = PrintErrorMessage;
 
                 DisPlay();
@@ -36,14 +39,16 @@
                 Console.WriteLine($"\n{actionNumber}. {UtilityManager.GetDescription(Type)}");
             }
 
+            // 활동 표시
             protected void DisplayNextActions()
             {
-                foreach (var action in ActionDic.Values)
+                foreach (var action in actionDic.Values)
                 {
                     action.PrintInfo();
                 }
             }
 
+            // 활동 선택
             protected void InputNextAction()
             {
                 while (true)
@@ -53,9 +58,9 @@
 
                     if (int.TryParse(Console.ReadLine(), out int actionNumber))
                     {
-                        if (ActionDic.ContainsKey(actionNumber))
+                        if (actionDic.ContainsKey(actionNumber))
                         {
-                            Instance.CurrentAction = ActionDic[actionNumber];
+                            Instance.CurrentAction = actionDic[actionNumber];
                             break;
                         }
                         OnInputInvalidActionNumber?.Invoke(actionNumber);
@@ -80,9 +85,9 @@
             private class Action_None
                 : ActionBase
             {
-                public Action_None() : base(-1) { }
+                public Action_None() : base(99) { }
                 public override ActionType Type => ActionType.None;
-                public override Dictionary<int, ActionBase> CreateActionDic()
+                protected override Dictionary<int, ActionBase> CreateNextActionDic()
                 {
                     throw new NotImplementedException();
                 }
