@@ -1,10 +1,10 @@
 ﻿namespace Nightmare
 {
-    internal class Village
+    internal class Game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            GameManager.Instance.GameStart();
         }
     }
 }
