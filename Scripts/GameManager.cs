@@ -98,20 +98,51 @@ namespace Nightmare
                     break;
             }
         }
+       
 
         private Job JobChoice(int num)
         {
             switch (num)
             {
                 case 1:
+                    Player.Stat.Atk = 10;
+                    Player.Stat.Def = 5;
+                    Player.Stat.Hp = 100;
+                    Player.Stat.MaxHp = 100;
+                    Player.Stat.Mp = 50;
+                    Player.Stat.MaxMp = 50;
                     return Job.Dwarf;
                 case 2:
+                    Player.Stat.Atk = 15;
+                    Player.Stat.Def = 3;
+                    Player.Stat.Hp = 100;
+                    Player.Stat.MaxHp = 100;
+                    Player.Stat.Mp = 50;
+                    Player.Stat.MaxMp = 50;
                     return Job.NewSister;
                 case 3:
+                    Player.Stat.Atk = 15;
+                    Player.Stat.Def = 3;
+                    Player.Stat.Hp = 100;
+                    Player.Stat.MaxHp = 100;
+                    Player.Stat.Mp = 50;
+                    Player.Stat.MaxMp = 50;
                     return Job.Saison;
                 case 4:
+                    Player.Stat.Atk = 15;
+                    Player.Stat.Def = 10;
+                    Player.Stat.Hp = 80;
+                    Player.Stat.MaxHp = 80;
+                    Player.Stat.Mp = 100;
+                    Player.Stat.MaxMp = 100;
                     return Job.OctopusWitch;
                 case 5:
+                    Player.Stat.Atk = 25;
+                    Player.Stat.Def = 20;
+                    Player.Stat.Hp = 120;
+                    Player.Stat.MaxHp = 120;
+                    Player.Stat.Mp = 20;
+                    Player.Stat.MaxMp = 20;
                     return Job.WildAnimal;
             }
             Console.WriteLine("\n잘못된 입력입니다.\n다시 직업을 선택해주세요.\n");

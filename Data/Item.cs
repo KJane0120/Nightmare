@@ -49,5 +49,11 @@ namespace Nightmare.Data
             string str = $"{Name} | {GetTypeString()} | {Desc} | {GetPriceString()}";
             return str;
         }
+        public string SelectItem()
+        {
+            string str = IsEquip ? "[E]" : "";
+            str += $"{Name} | {GetTypeString()} | {Desc}";
+            return str;
+        }
     }
 }
