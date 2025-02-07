@@ -40,6 +40,11 @@ namespace Nightmare
                 {
                     Stage stage = new Stage(4, 3);
                 }
+                else if( number > 5)//플레이어가 아이템을 가지고있는지 검사
+                {
+                    Stage Boss = new Stage(0 ,0);
+                    Boss.BossBattle(number);
+                }
 
                 foreach(Stage stage in stages) 
                 {

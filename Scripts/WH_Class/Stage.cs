@@ -20,7 +20,7 @@ namespace Nightmare
             public void Battle()
             {
 
-                int DeathCount = 0;
+                
                 List<Monster> monsters = new List<Monster>();
                 //랜덤 함수
                 Random Ran = new Random();
@@ -34,6 +34,44 @@ namespace Nightmare
                     monsters.Add(mon.Monstersummon(weight));
                 }
 
+                BattlePhase(mon,monsters);
+
+                //플레이어의 정보를 받아서 일정 확률로 장비 얻기
+                //돈 추가
+
+                Console.WriteLine("스테이지 클리어!");
+                //일정 확률의 보상 얻기
+
+                //다시 돌아가기
+
+
+
+
+            }
+            public void BossBattle(int numbers) //player
+            {
+                Boss boss  = new Boss();
+                boss = boss.BossSummon(numbers);
+                boss.BossIntroduce(numbers);
+
+                List<Monster> monsters = new List<Monster>();
+
+                monsters.Add(boss);
+                BattlePhase(boss, monsters);
+                //플레이어의 정보를 받아서 일정 확률로 장비 얻기
+                //돈 추가
+
+                Console.WriteLine("스테이지 클리어!");
+                //일정 확률의 보상 얻기
+
+                //다시 돌아가기
+
+            }
+
+            public void BattlePhase(Monster mon, List<Monster> monsters)
+            {
+                int ii = 1;
+                int DeathCount = 0;
                 while (DeathCount < monsters.Count)
                 {
 
@@ -90,20 +128,7 @@ namespace Nightmare
                     }
 
                 }
-
-                //플레이어의 정보를 받아서 일정 확률로 장비 얻기
-                //돈 추가
-
-                Console.WriteLine("스테이지 클리어!");
-                //일정 확률의 보상 얻기
-
-                //다시 돌아가기
-
-
-
-
             }
-
             public int InputandReturn(int i)
             {
                 if (i == 1)

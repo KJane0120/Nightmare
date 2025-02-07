@@ -20,6 +20,18 @@ namespace Nightmare
             this.DefenseCount = DefenseCount;
             SkillCount = skillCount;
         }
+        public Boss() { }
+
+        public override string ToString()
+        {
+
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Lv.").Append(Level).Append(" ").Append(Name).Append("Hp:").Append(MonsterHealth).Append("\n").Append("공격력:").
+                Append(MonsterAttack).Append("방어력:").Append(MonsterDefense).Append("회피 확률:").Append(MissRate).Append("\n");
+            return sb.ToString();
+
+        }
 
         public void Skill()
         {
