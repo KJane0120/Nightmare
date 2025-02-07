@@ -1,8 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {
@@ -31,19 +27,7 @@ namespace Nightmare
             Player.Stat = new Stat();
             Player.Gold = new Gold();
 
-            // 닉네임 설정
             SetName();
-
-
-            // 직업 설정
-
-
-
-
-
-
-
-            //MoveNextAction(ActionType.Village);
         }
 
         private void SetName()
@@ -55,7 +39,7 @@ namespace Nightmare
             Console.WriteLine();
             Console.WriteLine($"입력하신 이름은 {name} 입니다.\n");
             Console.WriteLine("1. 저장\n2. 취소");
-            Console.WriteLine("원하시는 행동을 입력해주세요.\n>>");
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
             string inputNumber = Console.ReadLine();
             int number = int.Parse(inputNumber);
             SaveName(number, name);
@@ -66,7 +50,7 @@ namespace Nightmare
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
             Console.WriteLine("원하시는 직업을 선택해주세요.\n");
             Console.WriteLine("1. 일곱번째 난쟁이\n2. 새언니\n3. 시종\n4. 문어 마녀\n5. 인간버전 야수");
-            Console.WriteLine("\n원하시는 행동을 입력해주세요.\n>>");
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
             string inputNumber = Console.ReadLine();
 
 
@@ -98,7 +82,7 @@ namespace Nightmare
                     break;
             }
         }
-       
+
 
         private Job JobChoice(int num)
         {
