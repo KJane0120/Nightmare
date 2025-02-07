@@ -1,4 +1,5 @@
-﻿using Nightmare.Data;
+﻿using System.Xml.Linq;
+using Nightmare.Data;
 using static Nightmare.Data.Item;
 //using static Nightmare.
 
@@ -21,39 +22,44 @@ namespace Nightmare
 
             protected override void DisPlay()
             {
+                Item selectItem = DataManager.Instance.ShopItems[1];
+                DataManager.Instance.HaveItems.Add(1, selectItem);
+
                 Console.Clear();
                 Console.WriteLine("인벤토리 - 장착 관리");
                 DisPlayInventory();
+                OnInputInvalidActionNumber = EquipItem;
             }
 
-            //private void EquipItem(Item item)
-            //{
-            //    if (item.IsEquip)
-            //    {
-            //        UnEquip(item);
-            //    }
-            //    else
-            //    {
-            //        item.IsEquip = true;
+            private void EquipItem(int num)
+            {
+                Item selectItem = DataManager.Instance.HaveItems[num];
 
-            //        if (item.Type == ItemType.Weapon)
-            //        {
-            //            EquipAtk += item.Value;
-            //        }
-            //        else EquipDef += item.Value;
-            //    }
-            //}
+                if (selectItem.IsEquip)
+                {
+                    selectItem.IsEquip = false;
 
-            //private void UnEquip(Item item)
-            //{
-            //    item.IsEquip = false;
+                    if (selectItem.Type == ItemType.Weapon)
+                    {
+                        // 공격력 증가
+                        //EquipAtk -= item.Value;
+                    }
+                    // 방어력 증가
+                    //else EquipDef -= item.Value;
+                }
+                else
+                {
+                    selectItem.IsEquip = true;
 
-            //    if (item.Type == ItemType.Weapon)
-            //    {
-            //        EquipAtk -= item.Value;
-            //    }
-            //    else EquipDef -= item.Value;
-            //}
+                    if (selectItem.Type == ItemType.Weapon)
+                    {
+                        // 공격력 증가
+                        //EquipAtk += item.Value;
+                    }
+                    // 방어력 증가
+                    //else EquipDef += item.Value;
+                }
+            }
         }
     }
 }
