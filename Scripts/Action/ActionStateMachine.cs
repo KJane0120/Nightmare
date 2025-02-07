@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel
 
 namespace Nightmare
 {
@@ -19,8 +19,9 @@ namespace Nightmare
             Shop,
             [Description("던전입장")]
             Dungeon,
-            [Description("일반 스테이지 입장")]
-            NormalStage
+            [Description("스테이지 목록 보기")]
+            StageManager
+
 
         }
 
@@ -54,7 +55,9 @@ namespace Nightmare
                     { ActionType.Shop,  new Action_Shop(0) },
                     { ActionType.Dungeon,  new Action_Return(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
-                    {ActionType.NormalStage, new NormalStage(0) }
+                     { ActionType.StageManager,  new StageManager(0) }
+
+
                 };
         }
 

@@ -3,78 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Nightmare.GameManager;
 
-namespace Nightmare //보안성 측면 / 구분의 용도/ 같은 네임스페이스안의 클래스 사용가능 //네임스페이스를 구분지어서 한정 변수를 만들기 가능
+namespace Nightmare
 {
     public partial class GameManager
     {
-        internal class NormalStage : ActionBase
+        internal class Stage
         {
-
-            public List<Monster> monsters;
-            public int DeathCount = 0;
-            public NormalStage(int number) : base(number) { }
-
-            public override ActionType Type => ActionType.NormalStage;
-
-            protected override Dictionary<int, ActionBase> CreateNextActionDic()
+            public int MonsterCount { get; set; }
+            public int weight { get; set; }
+            public Stage(int monsterCount, int weight)
             {
-                return new Dictionary<int, ActionBase>()
-                {
-                    //
-                };
+                this.MonsterCount = monsterCount;
+                this.weight = weight;
             }
-
-
-
-            protected override void DisPlay()
-            {
-                Battle();
-
-            }
-
-
-
             public void Battle()
             {
-                //함수를  따로 뺄 수 있는 것들
-              
+
+                int DeathCount = 0;
+                List<Monster> monsters = new List<Monster>();
                 //랜덤 함수
                 Random Ran = new Random();
                 //함수를 사용하기 위한 개체참조
                 Monster mon = new Monster();
-
                 //몬스터를 저장할 변수
-                monsters = new List<Monster>();
-
-
-                //몇마리 소환할래
-                int SummonCount = Ran.Next(1, 5);
-
                 int ii = 1;
                 //리스트에 넣기
-                for (int i = 0; i < SummonCount; i++)
+                for (int i = 0; i < MonsterCount + Ran.Next(-1,2); i++)
                 {
-                    monsters.Add(mon.Monstersummon());
+                    monsters.Add(mon.Monstersummon(weight));
                 }
 
                 while (DeathCount < monsters.Count)
                 {
-                    
+
                     //foreach로 넣기
                     foreach (Monster monster in monsters)
                     {
-                       
+
                         Console.WriteLine($"{ii}. {monster.MonsterDIe(ref DeathCount)}");
                         ii++;
                     }
-                    
-                    
-                    ii = 1;
-
                     //플레이어 상태 띄우기
-                    //
+                    ii = 1;
 
                     int Select = InputandReturn(1);
                     if (Select == 1)
@@ -96,7 +67,7 @@ namespace Nightmare //보안성 측면 / 구분의 용도/ 같은 네임스페�
                             }
                             else
                             {
-                                mon.AttackedFromPlayer(monsters[AttackSelect-1]);
+                                mon.AttackedFromPlayer(monsters[AttackSelect - 1]);
                                 break;
                             }
 
@@ -123,6 +94,11 @@ namespace Nightmare //보안성 측면 / 구분의 용도/ 같은 네임스페�
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
 
+                Console.WriteLine("스테이지 클리어!");
+                //일정 확률의 보상 얻기
+
+                //다시 돌아가기
+
 
 
 
@@ -130,7 +106,7 @@ namespace Nightmare //보안성 측면 / 구분의 용도/ 같은 네임스페�
 
             public int InputandReturn(int i)
             {
-                if( i == 1)
+                if (i == 1)
                 {
                     Console.WriteLine("행동을 골라주세요");
                     Console.WriteLine("1. 공격");
@@ -143,9 +119,19 @@ namespace Nightmare //보안성 측면 / 구분의 용도/ 같은 네임스페�
                     return int.Parse(Console.ReadLine());
                 }
 
-                
+
+            }
+
+            public override string ToString()
+            {
+
+                String s = $"적의 수: {MonsterCount-1} ~ {MonsterCount + 1}, 적들 능력치 {5*weight} 상승 ";
+                return s ;
             }
 
         }
+
+       
+
     }
 }

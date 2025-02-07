@@ -63,13 +63,14 @@ namespace Nightmare
         }
 
 
-        public Monster Monstersummon()
+        public Monster Monstersummon(int wei)
         {
             //몬스터들의 능력치들을 결정해줄 랜덤
             Random MonsterRandom = new Random();
             //잡몹들 이름
             String[] Name = { "난쟁이 형제들", "물고기", "언니 인어들", "성을 막는 가시덩쿨", "살아 움직이는 집기들", "호박마차" };
-            Monster mons = new Monster(MonsterRandom.Next(30, 50), MonsterRandom.Next(5, 10), MonsterRandom.Next(5, 10), Name[MonsterRandom.Next(0, 6)], MonsterRandom.Next(250, 750));
+            Monster mons = new Monster(MonsterRandom.Next(25 +(wei *5), 35 + (wei * 5)), MonsterRandom.Next(5 + (wei * 5), 10 + (wei * 5)), 
+                MonsterRandom.Next(5 + (wei * 5), 10 + (wei * 5)), Name[MonsterRandom.Next(0, 6)], MonsterRandom.Next(250 + (wei * 50), 750 + (wei * 50)));
 
             return mons;
         }

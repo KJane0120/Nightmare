@@ -16,7 +16,9 @@ namespace Nightmare
                 return new Dictionary<int, ActionBase>()
                 {
                     { 0,  new Action_Return(0) },
-                    {1,   new NormalStage(1)    }
+                    {1, new StageManager(1) }
+                   
+                    
                 };
             }
 
