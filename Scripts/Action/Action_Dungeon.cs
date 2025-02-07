@@ -1,4 +1,4 @@
-﻿using Nightmare.Scripts.WH_Class;
+﻿
 
 namespace Nightmare
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nightmare.Scripts.WH_Class
+namespace Nightmare
 {
     internal class Monster
     {
@@ -29,9 +29,7 @@ namespace Nightmare.Scripts.WH_Class
 
         }
         public Monster()
-        {
-
-        }
+        { }
         public int MonsterAttackToPlayer()
         {
             int EndDamage;
@@ -41,18 +39,21 @@ namespace Nightmare.Scripts.WH_Class
             return EndDamage;
 
         }
-        public String MonsterDIe(int DeathCount)
+        public String MonsterDIe(ref int DeathCount)
         {
             StringBuilder sb = new StringBuilder();
 
 
-            if (MonsterHealth < 0)
+            if (MonsterHealth <= 0)
             {
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                sb.Append("Lv.").Append(Level).Append(" ").Append(Name).Append("  Dead");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                sb.Append("Lv.").Append(Level).Append(" ").Append(Name).Append("Dead");
                 Console.ResetColor();
-                IsLive = false;
-                DeathCount++;
+                if (IsLive) // 이미 사망 처리된 몬스터라면 DeathCount 증가 방지
+                {
+                    IsLive = false;
+                    DeathCount++; 
+                }
                 return sb.ToString();
             }
             else
@@ -80,22 +81,51 @@ namespace Nightmare.Scripts.WH_Class
             return sb.ToString();
         }
 
-        public void AttackedFromPlayer() //Player를 받게할 예정
+        public void AttackedFromPlayer(Monster monster) //Player를 받게할 예정
         {
-            if (IsLive)
+
+            if(monster.MonsterDefense > 10)
             {
-                if (MonsterHealth > 0) //플레이어의 공격력으로 빼줘야함
+                monster.MonsterHealth -= 1;
+                if(monster.MonsterHealth < 0)
                 {
-                    Console.WriteLine($"Lv.{Level} {Name}을 맟췄습니다. [데미지]");
-                    Console.WriteLine($"Hp: {MonsterHealth} -> {MonsterHealth}"); //여기도
+                    Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
+                    Console.WriteLine($"Hp: {monster.MonsterHealth + 1} -> Dead");
                 }
                 else
                 {
-                    Console.WriteLine($"Lv.{Level} {Name}을 맟췄습니다. [데미지]");
-                    Console.WriteLine($"Hp: {MonsterHealth} -> Dead");
+                      Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
+                      Console.WriteLine($"Hp: {monster.MonsterHealth +1} -> {monster.MonsterHealth}"); //여기도
                 }
-
             }
+            else
+            {
+                monster.MonsterHealth -= 10;
+                if (monster.MonsterHealth < 0)
+                {
+                    Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
+                    Console.WriteLine($"Hp: {monster.MonsterHealth + 10} -> Dead");
+                }
+                else
+                {
+                    Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
+                    Console.WriteLine($"Hp: {monster.MonsterHealth + 10} -> {monster.MonsterHealth}"); //여기도
+                }
+            }
+
+            //if (IsLive)
+            //{
+
+            //    Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
+            //    Console.WriteLine($"Hp: {monster.MonsterHealth} -> {monster.MonsterHealth}"); //여기도
+            //}
+            //else
+            //{
+            //    Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
+            //    Console.WriteLine($"Hp: {monster.MonsterHealth} -> Dead");
+            //}
+
+
 
 
         }

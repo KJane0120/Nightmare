@@ -1,5 +1,4 @@
-﻿using Nightmare.Scripts.WH_Class;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Nightmare
 {
