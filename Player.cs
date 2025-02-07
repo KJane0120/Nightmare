@@ -14,7 +14,9 @@ namespace Nightmare
         public Job Job { get; set; }
         public Stat Stat { get; set; }
         public Gold Gold { get; set; }
-                            
+
+        //레벨업 구현 시
+        //private int _Level = 1;
 
         public void StatusDisplay()
         {
@@ -29,6 +31,13 @@ namespace Nightmare
             Console.WriteLine($"Gold : {Gold.PlayerGold} G");
         }
 
+        //레벨업
+        //public void LevelUp()
+        //{
+        //    _Level++;
+        //    Stat.Atk += 0.5f;
+        //    Stat.Def += 1;
+        //}
 
     }
 }
