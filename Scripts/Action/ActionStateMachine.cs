@@ -21,6 +21,8 @@ namespace Nightmare
             Dungeon,
             [Description("아이템 구매")]
             Buy,
+            [Description("장착 관리")]
+            Equip
         }
 
         public ActionBase CurrentAction
@@ -56,7 +58,6 @@ namespace Nightmare
                     { ActionType.Shop,  new Action_Shop(0) },
                     { ActionType.Dungeon,  new Action_Return(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
-                    { ActionType.Buy,  new Action_Buy(0) },
                 };
         }
 

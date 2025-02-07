@@ -24,7 +24,7 @@ namespace Nightmare
         private static DataManager? _Instance = null;
 
         //아이템 리스트
-        //싱점 아이템 리스트  
+        //상점 아이템 리스트  
         public Dictionary<int, Item> ShopItems = new()
         {
             {1, new Item()
@@ -150,13 +150,14 @@ namespace Nightmare
             } }
         };
 
-
+        //가지고 있는 아이템 리스트
+        public Dictionary<int, Item> HaveItems = new () {};
     }
 
 }
 //장착된 아이템 리스트
-//가지고 있는 아이템 리스트
-//보스드랍아이템 리스트 (독사과, 유리구두, 물레, 물거품이 되는 물약, 시들지 않는 장미)
+
+//보스드랍아이템 리스트
 
 
 
