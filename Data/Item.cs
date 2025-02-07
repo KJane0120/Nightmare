@@ -18,6 +18,7 @@ namespace Nightmare.Data
         public int Avd { get; set; }
         public int Crt { get; set; }
         public string? Desc { get; set; }
+
         public int Cost { get; set; }
         public bool IsPurchase { get; set; }
         public bool IsEquip { get; set; }
