@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using Nightmare.Data;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -12,13 +14,25 @@
             {
                 return new Dictionary<int, ActionBase>()
                 {
+                    { 1,  new Action_EquipItem(1) },
                     { 0,  new Action_Return(0) },
                 };
             }
 
             protected override void DisPlay()
             {
-                //throw new NotImplementedException();
+                Console.Clear();
+                Console.WriteLine("인벤토리");
+                DisPlayInventory();
+            }
+
+            public void DisPlayInventory()
+            {
+                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+                Console.WriteLine();
+                Console.WriteLine("[아이템 목록]");
+                //DataManager.Instance.HaveItems.Count;
+                Console.WriteLine();
             }
         }
         
