@@ -18,7 +18,9 @@ namespace Nightmare
             [Description("상점")]
             Shop,
             [Description("던전입장")]
-            Dungeon
+            Dungeon,
+            [Description("장착 관리")]
+            Equip
         }
 
         public ActionBase CurrentAction
