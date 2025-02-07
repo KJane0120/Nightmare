@@ -50,7 +50,7 @@ namespace Nightmare
                 Console.WriteLine("스테이지를 골라주십시오");
                 int StageNumber = int.Parse(Console.ReadLine());
 
-                stages[StageNumber].Battle();
+                stages[StageNumber-1].Battle();
 
 
 
