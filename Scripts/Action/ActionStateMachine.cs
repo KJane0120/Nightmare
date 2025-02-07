@@ -19,6 +19,8 @@ namespace Nightmare
             Shop,
             [Description("던전입장")]
             Dungeon,
+            [Description("아이템 구매")]
+            Buy,
             [Description("장착 관리")]
             Equip
         }

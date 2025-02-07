@@ -1,4 +1,7 @@
-﻿
+﻿using Nightmare.Data;
+using static Nightmare.Data.Item;
+//using static Nightmare.
+
 namespace Nightmare
 {
     public partial class GameManager
@@ -23,34 +26,38 @@ namespace Nightmare
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
+
+                OnInputInvalidActionNumber = EquipItem();
             }
 
-            //public void EquipItem(Item item)
-            //{
-            //    if (item.IsEquip) //장착 중인 아이템 선택시 해제
-            //    {
-            //        UnEquip(item);
-            //    }
-            //    else //아이템 착용
-            //    {
-            //        item.IsEquip = true;
+            private Action<int> EquipItem(Item item)
+            {
+                if (item.IsEquip)
+                {
+                    UnEquip(item);
+                }
+                else
+                {
+                    item.IsEquip = true;
 
-            //        if (item.Type == ItemType.Weapon) //타입이 무기일 경우 공격력 증가 
-            //            EquipAtk += item.Value;
-            //        else                              //타입이 갑옷일 경우 방어력 증가
-            //            EquipDef += item.Value;
-            //    }
-            //}
+                    if (item.Type == ItemType.Weapon)
+                    {
+                        EquipAtk += item.Value;
+                    }
+                    else EquipDef += item.Value;
+                }
+            }
 
-            //public void UnEquip(Item item)
-            //{
-            //    item.IsEquip = false;
+            private void UnEquip(Item item)
+            {
+                item.IsEquip = false;
 
-            //    if (item.Type == ItemType.Weapon)
-            //        EquipAtk -= item.Value;
-            //    else
-            //        EquipDef -= item.Value;
-            //}
+                if (item.Type == ItemType.Weapon)
+                {
+                    EquipAtk -= item.Value;
+                }
+                else EquipDef -= item.Value;
+            }
         }
     }
 }

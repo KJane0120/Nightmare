@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using Nightmare.Data;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -24,7 +26,7 @@
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
-
+                //DataManager.Instance.HaveItems.Count;
                 Console.WriteLine();
             }
         }
