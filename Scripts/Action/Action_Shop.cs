@@ -8,7 +8,7 @@
 
             public override ActionType Type => ActionType.Shop;
 
-            public override Dictionary<int, ActionBase> CreateNextActionDic()
+            protected override Dictionary<int, ActionBase> CreateNextActionDic()
             {
                 return new Dictionary<int, ActionBase>()
                 {
