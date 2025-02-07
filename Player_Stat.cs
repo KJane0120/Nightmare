@@ -9,7 +9,7 @@ namespace Nightmare
 {
     public class Stat
     {
-        public int Atk = 10;
+        public float Atk = 10;
         public int EquipAtk = 0;
         public int Def = 5;
         public int EquipDef = 0;
@@ -29,6 +29,8 @@ namespace Nightmare
             PlayerLevel = 1;
         }
     }
+
+   
 
     public class Gold
     {
