@@ -86,7 +86,7 @@ namespace Nightmare
         public void AttackedFromPlayer(Monster monster) //Player를 받게할 예정
         {
 
-            if(monster.MonsterDefense > 10)
+            if(monster.MonsterDefense >= 10)
             {
                 monster.MonsterHealth -= 1;
                 if(monster.MonsterHealth < 0)
