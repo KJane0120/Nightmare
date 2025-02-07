@@ -22,7 +22,7 @@ namespace Nightmare
             [Description("아이템 구매")]
             Buy,
             [Description("장착 관리")]
-            Equip
+            Equip,
             [Description("스테이지 목록 보기")]
             StageManager
         }
