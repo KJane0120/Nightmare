@@ -27,6 +27,10 @@ namespace Nightmare
         public void GameStart()
         {
             Player = new Player();
+            Player.Level = new Level();
+            Player.Stat = new Stat();
+            Player.Gold = new Gold();
+
             // 닉네임 설정
             SetName();
 
@@ -34,15 +38,12 @@ namespace Nightmare
             // 직업 설정
 
 
-            Player.Level = new Level();
-            Player.Name = name;
-            Player.Stat = new Stat();
-            Player.Gold = new Gold();
-            //Player.Job = JobChoice();
 
 
 
-           //MoveNextAction(ActionType.Village);
+
+
+            //MoveNextAction(ActionType.Village);
         }
 
         private void SetName()
@@ -89,6 +90,7 @@ namespace Nightmare
             switch (num)
             {
                 case 1:
+                    Player.Name = name;
                     SetJob();
                     break;
                 case 2:
