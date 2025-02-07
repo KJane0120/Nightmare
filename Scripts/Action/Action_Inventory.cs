@@ -35,7 +35,7 @@ namespace Nightmare
                 Console.WriteLine();
             }
         }
-
+        
     }
 
 }
