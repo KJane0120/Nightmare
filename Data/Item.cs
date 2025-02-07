@@ -19,6 +19,10 @@ namespace Nightmare.Data
         public int Crt { get; set; }
         public string? Desc { get; set; }
 
+        public int Cost { get; set; }
+        public bool IsPurchase { get; set; }
+        public bool IsEquip { get; set; }
+
         public enum ItemType
         {
             None,
@@ -27,10 +31,27 @@ namespace Nightmare.Data
             [Description("방어구")]
             Armor,
         }
+
+        public string GetTypeString()
+        {
+            string str = (Type == ItemType.Weapon) ? $"공격력 +{Atk}" : $"방어력 +{Def}";
+            return str;
+        }
+
+        public string GetPriceString()
+        {
+            string str = IsPurchase ? "구매 완료" : $"{Cost}";
+            return str;
+        }
+        public string ShowShopItem()
+        {
+            string str = $"{Name} | {GetTypeString()} | {Desc} | {GetPriceString()}";
+            return str;
+        }
     }
     public class ShopItem : Item
     {
-
+        
     }
 
     //public interface IEquip

@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using System.Numerics;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -12,12 +14,33 @@
             {
                 return new Dictionary<int, ActionBase>()
                 {
+                    { 1, new Action_Buy(1) },
                     { 0, new Action_Return(0) },
-                    { 1, new Action_Buy(1) }
                 };
             }
             protected override void DisPlay()
             {
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine("상점");
+                Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
+                Console.WriteLine();
+                Console.WriteLine("[보유 골드]");
+                //Console.WriteLine($"{player.Gold} G");
+
+                Console.WriteLine();
+                Console.WriteLine("[아이템 목록]");
+
+                for (int i = 1; i < DataManager.Instance.ShopItems.Count; i++)
+                {
+                    Console.WriteLine($"- {DataManager.Instance.ShopItems[i].ShowShopItem()}");
+                }
+                //for (int i = 0; i < itemList.Count; i++)
+                //{
+                //    Console.WriteLine($"- {itemList[i].ItemDisplay()} | {itemList[i].GetPriceString()}");
+                //}
+
+
             }
         }
     }
