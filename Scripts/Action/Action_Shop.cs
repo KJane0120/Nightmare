@@ -26,7 +26,7 @@ namespace Nightmare
                 Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
                 Console.WriteLine();
                 Console.WriteLine("[보유 골드]");
-                //Console.WriteLine($"{player.Gold} G");
+                Console.WriteLine($"{GameManager.Instance.Player.Gold.PlayerGold} G");
 
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
@@ -35,10 +35,7 @@ namespace Nightmare
                 {
                     Console.WriteLine($"- {DataManager.Instance.ShopItems[i].ShowShopItem()}");
                 }
-                //for (int i = 0; i < itemList.Count; i++)
-                //{
-                //    Console.WriteLine($"- {itemList[i].ItemDisplay()} | {itemList[i].GetPriceString()}");
-                //}
+              
 
 
             }
