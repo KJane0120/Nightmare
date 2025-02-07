@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-
+﻿
 namespace Nightmare
 {
     public partial class GameManager
