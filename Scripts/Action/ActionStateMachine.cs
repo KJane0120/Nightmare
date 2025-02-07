@@ -18,7 +18,11 @@ namespace Nightmare
             [Description("상점")]
             Shop,
             [Description("던전입장")]
-            Dungeon
+            Dungeon,
+            [Description("스테이지 목록 보기")]
+            StageManager
+
+
         }
 
         public ActionBase CurrentAction
@@ -26,21 +30,18 @@ namespace Nightmare
             get => m_CurrentAction;
             set
             {
-                OnExitActionEvent();
+                OnExitStateEvent();
                 m_CurrentAction.OnExit();
                 m_CurrentAction = value;
                 m_CurrentAction.OnEnter();
-                OnEnterActionEvent();
+                OnEnterStateEvent();
             }
         }
 
         private ActionBase m_CurrentAction = ActionBase.None;
 
-        //액션이 시작할때
-        public Action OnEnterActionEvent = delegate { };
-
-        //액션이 끝날때
-        public Action OnExitActionEvent = delegate { };
+        public Action OnEnterStateEvent = delegate { };
+        public Action OnExitStateEvent = delegate { };
 
         public IReadOnlyDictionary<ActionType, ActionBase> TypeActionDic;
 
@@ -54,6 +55,9 @@ namespace Nightmare
                     { ActionType.Shop,  new Action_Shop(0) },
                     { ActionType.Dungeon,  new Action_Return(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
+                     { ActionType.StageManager,  new StageManager(0) }
+
+
                 };
         }
 
@@ -63,5 +67,5 @@ namespace Nightmare
             CurrentAction = TypeActionDic[type];
         }
     }
- 
+
 }
