@@ -12,7 +12,8 @@
             {
                 return new Dictionary<int, ActionBase>()
                 {
-                    { 0,  new Action_Return(0) },
+                    { 0, new Action_Return(0) },
+                    { 1, new Action_Buy(1) }
                 };
             }
             protected override void DisPlay()
