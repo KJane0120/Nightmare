@@ -77,7 +77,8 @@ namespace Nightmare
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Lv.").Append(Level).Append(" ").Append(Name).Append("\t").Append("Hp:").Append(MonsterHealth);
+            sb.Append("Lv.").Append(Level).Append(" ").Append(Name).Append("Hp:").Append(MonsterHealth).Append("\n").Append("공격력").
+                Append(MonsterAttack).Append("방어력").Append(MonsterDefense).Append("\n");
             return sb.ToString();
         }
 
@@ -100,16 +101,16 @@ namespace Nightmare
             }
             else
             {
-                monster.MonsterHealth -= 10;
+                monster.MonsterHealth -= 10 - monster.MonsterDefense;
                 if (monster.MonsterHealth < 0)
                 {
                     Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
-                    Console.WriteLine($"Hp: {monster.MonsterHealth + 10} -> Dead");
+                    Console.WriteLine($"Hp: {monster.MonsterHealth + 10 - monster.MonsterDefense} -> Dead");
                 }
                 else
                 {
                     Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지]");
-                    Console.WriteLine($"Hp: {monster.MonsterHealth + 10} -> {monster.MonsterHealth}"); //여기도
+                    Console.WriteLine($"Hp: {monster.MonsterHealth + 10 - monster.MonsterDefense} -> {monster.MonsterHealth}"); //여기도
                 }
             }
 
