@@ -6,7 +6,7 @@ namespace Nightmare
 {
     public partial class GameManager
     {
-        public class Action_EquipItem : ActionBase
+        public class Action_EquipItem : Action_Inventory
         {
             public Action_EquipItem(int number) : base(number) { }
             public override ActionType Type => ActionType.Equip;
@@ -23,41 +23,37 @@ namespace Nightmare
             {
                 Console.Clear();
                 Console.WriteLine("인벤토리 - 장착 관리");
-                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
-                Console.WriteLine();
-                Console.WriteLine("[아이템 목록]");
-
-                OnInputInvalidActionNumber = EquipItem();
+                DisPlayInventory();
             }
 
-            private Action<int> EquipItem(Item item)
-            {
-                if (item.IsEquip)
-                {
-                    UnEquip(item);
-                }
-                else
-                {
-                    item.IsEquip = true;
+            //private void EquipItem(Item item)
+            //{
+            //    if (item.IsEquip)
+            //    {
+            //        UnEquip(item);
+            //    }
+            //    else
+            //    {
+            //        item.IsEquip = true;
 
-                    if (item.Type == ItemType.Weapon)
-                    {
-                        EquipAtk += item.Value;
-                    }
-                    else EquipDef += item.Value;
-                }
-            }
+            //        if (item.Type == ItemType.Weapon)
+            //        {
+            //            EquipAtk += item.Value;
+            //        }
+            //        else EquipDef += item.Value;
+            //    }
+            //}
 
-            private void UnEquip(Item item)
-            {
-                item.IsEquip = false;
+            //private void UnEquip(Item item)
+            //{
+            //    item.IsEquip = false;
 
-                if (item.Type == ItemType.Weapon)
-                {
-                    EquipAtk -= item.Value;
-                }
-                else EquipDef -= item.Value;
-            }
+            //    if (item.Type == ItemType.Weapon)
+            //    {
+            //        EquipAtk -= item.Value;
+            //    }
+            //    else EquipDef -= item.Value;
+            //}
         }
     }
 }
