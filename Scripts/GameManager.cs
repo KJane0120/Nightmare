@@ -42,7 +42,7 @@ namespace Nightmare
 
 
 
-            MoveNextAction(ActionType.Village);
+           //MoveNextAction(ActionType.Village);
         }
 
         private void SetName()
@@ -73,6 +73,7 @@ namespace Nightmare
             if (int.TryParse(inputNumber, out int actionNumber))
             {
                 Player.Job = JobChoice(actionNumber);
+                MoveNextAction(ActionType.Village);
             }
             else
             {
