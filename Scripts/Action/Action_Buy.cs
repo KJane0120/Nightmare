@@ -25,9 +25,9 @@ namespace Nightmare
             {
                 Item selectItem = DataManager.Instance.ShopItems[number];
 
-                //아이템이 구매한 적이 있다면 
+                //아이템이 구매한 적이 없다면 
                 if (selectItem.IsPurchase == false)
-                {
+                {   //아이템가격보다 플레이어의 보유골드가 더 많다면
                     if (GameManager.Instance.Player.Gold.PlayerGold >= selectItem.Cost)
                     {
                         Console.WriteLine("구매가 완료되었습니다.");
