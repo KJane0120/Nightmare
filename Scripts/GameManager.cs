@@ -41,8 +41,21 @@
             Console.WriteLine("1. 저장\n2. 취소");
             Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
             string inputNumber = Console.ReadLine();
-            int number = int.Parse(inputNumber);
-            SaveName(number, name);
+
+
+            if (int.TryParse(inputNumber, out int number))
+            {
+                if (number == 1)
+                {
+                    SaveName(number, name);
+                }
+                else { SetName(); }
+            }
+            else
+            {
+                Console.WriteLine("\n잘못된 입력입니다.");
+                SetName();
+            }
         }
 
         private void SetJob() // 직업설정
