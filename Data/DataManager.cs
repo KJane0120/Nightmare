@@ -37,7 +37,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "보석 대신 적의 두개골을 깨부수는 강철 곡괭이"
+                Desc = "보석 대신 적의 두개골을 깨부수는 강철 곡괭이",
+                Cost = 300
             } },
             {2, new Item()
             {
@@ -49,7 +50,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "두들겨 맞아도 끄떡없는 마법의 모자"
+                Desc = "두들겨 맞아도 끄떡없는 마법의 모자",
+                Cost = 300
             } },
             {3, new Item()
             {
@@ -61,7 +63,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "신데렐라를 못 잡은 새언니의 분노가 깃든 부지깽이"
+                Desc = "신데렐라를 못 잡은 새언니의 분노가 깃든 부지깽이",
+                Cost = 300
             } },
             {4, new Item()
             {
@@ -73,7 +76,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "신데렐라의 눈물과 한으로 꿰멘 드레스"
+                Desc = "신데렐라의 눈물과 한으로 꿰멘 드레스",
+                Cost = 1300
             } },
             {5, new Item()
             {
@@ -85,7 +89,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "시간을 되돌릴 순 없어도, 적의 숨은 멈출 수 있는 시계"
+                Desc = "시간을 되돌릴 순 없어도, 적의 숨은 멈출 수 있는 시계",
+                Cost = 500
             } },
             {6, new Item()
             {
@@ -97,7 +102,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "수많은 배신과 독을 거쳐 살아남은 은쟁반"
+                Desc = "수많은 배신과 독을 거쳐 살아남은 은쟁반",
+                Cost = 300
             } },
             {7, new Item()
             {
@@ -109,7 +115,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "적을 유혹한 후 파멸시키는 마녀의 수정구"
+                Desc = "적을 유혹한 후 파멸시키는 마녀의 수정구",
+                Cost = 800
             } },
             {8, new Item()
             {
@@ -121,7 +128,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "깊고 깊은 어둠 속에서 주운 목걸이"
+                Desc = "깊고 깊은 어둠 속에서 주운 목걸이",
+                Cost = 500
             } },
             //문장반지랑 그림자 턱시도는 공격력/방어력이 아닌 다른 스탯을 가지고 있음 일단 무기, 방어구로 작성해놓겠음
             {9, new Item()
@@ -134,7 +142,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "낀 순간 손톱이 날카로워진다"
+                Desc = "낀 순간 손톱이 날카로워진다",
+                Cost = 900
             } },
             {10, new Item()
             {
@@ -146,7 +155,8 @@ namespace Nightmare
                 Hp = 0,
                 Avd = 0,
                 Crt = 0,
-                Desc = "낀 순간 손톱이 날카로워진다"
+                Desc = "적의 공격을 한발 앞서 피할 수 있게 해준다.",
+                Cost = 1200
             } }
         };
 
