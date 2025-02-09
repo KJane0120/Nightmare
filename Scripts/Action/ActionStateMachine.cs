@@ -56,8 +56,9 @@ namespace Nightmare
                     { ActionType.Inventory,  new Action_Inventory(0) },
                     { ActionType.Shop,  new Action_Shop(0) },
                     { ActionType.Dungeon,  new Action_Return(0) },
+                    {ActionType.Buy, new Action_Buy(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
-                     { ActionType.StageManager,  new StageManager(0) }
+                    { ActionType.StageManager,  new StageManager(0) },
 
 
                 };
