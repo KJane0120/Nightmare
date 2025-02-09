@@ -37,7 +37,6 @@ namespace Nightmare
                     Console.WriteLine(item.SelectItem());
                 }
 
-                //DataManager.Instance.HaveItems.Count;
                 Console.WriteLine();
             }
         }

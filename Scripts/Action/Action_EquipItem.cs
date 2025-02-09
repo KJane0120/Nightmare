@@ -1,7 +1,6 @@
 ﻿using System.Xml.Linq;
 using Nightmare.Data;
 using static Nightmare.Data.Item;
-//using static Nightmare.
 
 namespace Nightmare
 {
@@ -22,9 +21,6 @@ namespace Nightmare
 
             protected override void DisPlay()
             {
-                Item selectItem = DataManager.Instance.ShopItems[1];
-                DataManager.Instance.HaveItems.Add(1, selectItem);
-
                 Console.Clear();
                 Console.WriteLine("인벤토리 - 장착 관리");
                 DisPlayInventory();
