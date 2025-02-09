@@ -24,7 +24,9 @@ namespace Nightmare
             [Description("장착 관리")]
             Equip,
             [Description("스테이지 목록 보기")]
-            StageManager
+            StageManager,
+            [Description("퀘스트")]
+            QuestList
         }
 
         public ActionBase CurrentAction
@@ -57,9 +59,8 @@ namespace Nightmare
                     { ActionType.Shop,  new Action_Shop(0) },
                     { ActionType.Dungeon,  new Action_Return(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
-                     { ActionType.StageManager,  new StageManager(0) }
-
-
+                    { ActionType.StageManager,  new StageManager(0) },
+                    { ActionType.QuestList,  new Action_QusetList(0) }
                 };
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using Nightmare.Data;
 using static Nightmare.Data.Item;
+using Newtonsoft.Json;
 
 namespace Nightmare
 {
@@ -152,6 +153,11 @@ namespace Nightmare
 
         //가지고 있는 아이템 리스트
         public Dictionary<int, Item> HaveItems = new () {};
+
+        //퀘스트 데이터 리스트
+
+        //아이템 데이터 리스트
+        public Dictionary<long, Item> ItemDatas = new() { };
     }
 
 }
