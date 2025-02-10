@@ -34,6 +34,7 @@ namespace Nightmare
                         selectItem.IsPurchase = true;
                         GameManager.Instance.Player.Gold.PlayerGold -= selectItem.Cost;
                         DataManager.Instance.HaveItems.Add(selectItem.Id, selectItem);
+                        DataManager.Instance.HaveItemDatas.Add(selectItem);
                         DisPlay();
                     }
                     else
@@ -54,8 +55,8 @@ namespace Nightmare
             }
             protected override void DisPlay()
             {
-                OnInputInvalidActionNumber = PrintErrorMsg;
                 Console.Clear();
+                OnInputInvalidActionNumber = PrintErrorMsg;
                 Console.WriteLine();
                 Console.WriteLine("상점 - 아이템 구매");
                 Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
@@ -65,9 +66,9 @@ namespace Nightmare
 
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
-                for (int i = 1; i < DataManager.Instance.ShopItems.Count; i++)
+                for (int i = 0; i < DataManager.Instance.ShopItems.Count; i++)
                 {
-                    Console.WriteLine($"- {i}. {DataManager.Instance.ShopItems[i].ShowShopItem()}");
+                    Console.WriteLine($"- {i+1}. {DataManager.Instance.ShopItems[i+1].ShowShopItem()}");
                 }
 
                 Console.WriteLine();
