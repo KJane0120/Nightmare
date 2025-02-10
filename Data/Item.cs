@@ -23,6 +23,8 @@ namespace Nightmare.Data
         public bool IsPurchase { get; set; } = false;
         public bool IsEquip { get; set; } = false;
 
+        public bool IsSold { get; set; } = false;
+
         public enum ItemType
         {
             None,
@@ -48,6 +50,13 @@ namespace Nightmare.Data
         {
             string str = $"{Name} | {GetTypeString()} | {Desc} | {GetPriceString()}";
             return str;
+        }
+        //아이템판매 시 정보 출력 양식
+        public string ShowSellItem()
+        {
+            string str = $"{Name} | {GetTypeString()} | {Desc} ";
+            str += IsSold ? "판매완료" : $"{Cost * 0.85}";
+            return str;  
         }
         public string SelectItem()
         {

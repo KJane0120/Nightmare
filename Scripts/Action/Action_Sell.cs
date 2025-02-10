@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using Nightmare.Data;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -17,10 +19,40 @@
                 };
             }
 
+            private void PrintErrorMsg(int number)
+            {
+                Item selectItem = DataManager.Instance.HaveItemDatas[number];
+
+                //아이템이 판매한 적이 없다면 
+                if (selectItem.IsSold == false)
+                {
+
+                    Console.WriteLine("판매가 완료되었습니다.");
+                    selectItem.IsSold = true;
+                    //소수점 계산이 있어서 int가 아닌 float이나 double의 형태로 나중에 수정할 것
+                    GameManager.Instance.Player.Gold.PlayerGold += (int)(selectItem.Cost * 0.85);
+                    //인벤토리 딕셔너리에서 삭제
+                    DataManager.Instance.HaveItems.Remove(selectItem.Id, out selectItem);
+                    //상점 아이템 구매 목록에 다시 살수 있도록 IsPurchase == false로 바꾸기
+                    selectItem.IsPurchase = false;
+                    selectItem.IsEquip = false;
+                    DisPlay();
+
+                }
+                else
+                {
+                    Console.WriteLine("이미 판매한 아이템입니다.");
+                }
+            }
+            //1~10까지가 아닌 유효하지 않은 숫자 입력을 받았을 때 
+            //후에 ActionBase에 있는 PrintErrorMessage를 UtilityManager에 따로 뺄 예정이므로
+            //그때 수정할 것
+            //Console.WriteLine("잘못된 입력입니다.");
+
             protected override void DisPlay()
             {
-               // OnInputInvalidActionNumber = PrintErrorMsg; 
                 Console.Clear();
+                OnInputInvalidActionNumber = PrintErrorMsg;
                 Console.WriteLine();
                 Console.WriteLine("상점 - 아이템 판매");
                 Console.WriteLine("이 곳에서는 보유한 아이템을 판매할 수 있습니다.");
@@ -30,9 +62,9 @@
 
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
-                for (int i = 0; i < DataManager.Instance.HaveItems.Count; i++)
+                for (int i = 0; i < DataManager.Instance.HaveItemDatas.Count; i++)
                 {
-                    Console.WriteLine($"-  {DataManager.Instance.HaveItems[i].ShowSellItem()}");
+                    Console.WriteLine($"- {i + 1}.  {DataManager.Instance.HaveItemDatas[i].ShowSellItem()}");
                 }
 
                 Console.WriteLine();
