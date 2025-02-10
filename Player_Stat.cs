@@ -1,17 +1,25 @@
 ﻿using System.ComponentModel;
+using Nightmare.Data;
 
 namespace Nightmare
 {
     public class Stat
     {
-        public float Atk = 10;
-        public int EquipAtk = 0;
-        public int Def = 5;
-        public int EquipDef = 0;
-        public int Hp = 100;
-        public int MaxHp = 100;
-        public int Mp = 50;
-        public int MaxMp = 50;
+        Item itemStat = new Item() { Atk = 0, Def = 0 };
+        public float BaseAtk;
+        public int EquipAtk;
+        public int BaseDef;
+        public int EquipDef;
+        public int Hp;
+        public int MaxHp;
+        public int Mp;
+        public int MaxMp;
+
+        public Stat()
+        {
+            EquipAtk = itemStat.Atk;
+            EquipDef = itemStat.Def;
+        }
     }
 
 
@@ -40,19 +48,19 @@ namespace Nightmare
     {
         None = 0,
 
-        [Description("일곱번째 난쟁이")]
+        [Description("백설공주와 일곱 번째 난쟁이")]
         Dwarf = 1,
 
-        [Description("새언니")]
+        [Description("신데렐라의 새 언니")]
         NewSister = 2,
 
-        [Description("시종")]
+        [Description("모두가 잠든 성의 하인")]
         Saison = 3,
 
-        [Description("문어 마녀")]
+        [Description("깊은 바다 속 문어 마녀")]
         OctopusWitch = 4,
 
-        [Description("인간버전 야수")]
+        [Description("힘을 잃은 야수")]
         WildAnimal = 5
 
     };
