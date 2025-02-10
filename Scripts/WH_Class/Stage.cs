@@ -4,6 +4,9 @@
     {
         internal class Stage
         {
+
+
+       
             public int MonsterCount { get; set; }
             public int weight { get; set; }
             public Stage(int monsterCount, int weight)
@@ -11,10 +14,8 @@
                 this.MonsterCount = monsterCount;
                 this.weight = weight;
             }
-            public void Battle()
+            public void Battle(Player player)
             {
-
-                
                 List<Monster> monsters = new List<Monster>();
                 //랜덤 함수
                 Random Ran = new Random();
@@ -28,7 +29,7 @@
                     monsters.Add(mon.Monstersummon(weight));
                 }
 
-                BattlePhase(mon,monsters);
+                BattlePhase(mon,monsters,player);
 
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
@@ -37,21 +38,17 @@
                 //일정 확률의 보상 얻기
 
                 //다시 돌아가기
-
-
-
-
             }
-            public void BossBattle(int numbers) //player
+            public void BossBattle(Player player) //player
             {
                 Boss boss  = new Boss();
-                boss = boss.BossSummon(numbers);
-                boss.BossIntroduce(numbers);
+                boss = boss.BossSummon((int)player.Job);
+                boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
 
                 monsters.Add(boss);
-                BattlePhase(boss, monsters);
+                BattlePhase(boss, monsters, player);
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
 
@@ -62,23 +59,30 @@
 
             }
 
-            public void BattlePhase(Monster mon, List<Monster> monsters)
+            public void BattlePhase(Monster mon, List<Monster> monsters, Player player)
             {
                 int ii = 1;
                 int DeathCount = 0;
                 while (DeathCount < monsters.Count)
                 {
-
                     //foreach로 넣기
                     foreach (Monster monster in monsters)
                     {
-
                         Console.WriteLine($"{ii}. {monster.MonsterDIe(ref DeathCount)}");
                         ii++;
                     }
                     //플레이어 상태 띄우기
-                    ii = 1;
+                    Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
+                    Console.WriteLine($"공격력: {player.Stat.Atk + player.Stat.EquipAtk})");
+                    Console.WriteLine($"공격력: {player.Stat.Def + player.Stat.EquipDef})");
+                    Console.WriteLine($"마력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
+                    //Console.WriteLine($"공격력: {player.Stat.)");
+                    //Console.WriteLine($"공격력: {player.Stat.Atk})");
 
+
+
+
+                    ii = 1;
                     int Select = InputandReturn(1);
                     if (Select == 1)
                     {
@@ -116,11 +120,17 @@
                     {
                         if (mons.IsLive)
                         {
-                            mons.MonsterAttackToPlayer();
-                            //만약 플레이어가 죽었다면 초기로 돌아가기
+                            int Damage = mons.MonsterAttackToPlayer();
+                            player.Stat.Hp -= Damage;
+                            Console.WriteLine($"{Damage}만큼 피해를 입어 {player.Stat.Hp - Damage}가 되었습니다");
+                            if(player.Stat.Hp < 0)
+                            {
+                                Instance.MoveNextAction(ActionType.Village);
+                            }
+                            
+                            
                         }
                     }
-
                 }
             }
             public int InputandReturn(int i)
