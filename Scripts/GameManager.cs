@@ -26,6 +26,8 @@
             Player.Level = new Level();
             Player.Stat = new Stat();
             Player.Gold = new Gold();
+            Player.Avd = new Avd();
+            Player.Crt = new Crt();
 
             SetName();
         }

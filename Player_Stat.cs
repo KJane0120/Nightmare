@@ -18,14 +18,13 @@ namespace Nightmare
     public class Level
     {
         public int PlayerLevel;
-
         public Level()
         {
             PlayerLevel = 1;
         }
     }
 
-   
+
 
     public class Gold
     {
@@ -58,5 +57,29 @@ namespace Nightmare
 
     };
 
+    public class Avd //회피율
+    {
+        public int PlayerAvd;
+        public int EquipAvd;
+
+        public Avd()
+        {
+            EquipAvd = 0;
+            PlayerAvd = 10;
+        }
+    }
+
+
+    public class Crt //치명타율
+    {
+        public int PlayerCrt;
+        public int EquipCrt;
+
+        public Crt()
+        {
+            EquipCrt = 0;
+            PlayerCrt = 15;
+        }
+    }
 
 }
