@@ -46,6 +46,11 @@ namespace Nightmare
                     Console.WriteLine("이미 보유한 아이템입니다.");
                 }
 
+                //1~10까지가 아닌 유효하지 않은 숫자 입력을 받았을 때 
+                //후에 ActionBase에 있는 PrintErrorMessage를 UtilityManager에 따로 뺄 예정이므로
+                //그때 수정할 것
+                //Console.WriteLine("잘못된 입력입니다.");
+
             }
             protected override void DisPlay()
             {
