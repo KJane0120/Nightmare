@@ -21,7 +21,7 @@ namespace Nightmare
 
             private void PrintErrorMsg(int number)
             {
-                Item selectItem = DataManager.Instance.HaveItemDatas[number];
+                Item selectItem = DataManager.Instance.HaveItemDatas[number-1];
 
                 //아이템이 판매한 적이 없다면 
                 if (selectItem.IsSold == false)
@@ -30,9 +30,9 @@ namespace Nightmare
                     Console.WriteLine("판매가 완료되었습니다.");
                     selectItem.IsSold = true;
                     //소수점 계산이 있어서 int가 아닌 float이나 double의 형태로 나중에 수정할 것
-                    GameManager.Instance.Player.Gold.PlayerGold += (int)(selectItem.Cost * 0.85);
+                    GameManager.Instance.Player.Gold.PlayerGold += (int)(selectItem.Cost * 0.85f);
                     //인벤토리 딕셔너리에서 삭제
-                    DataManager.Instance.HaveItems.Remove(selectItem.Id, out selectItem);
+                    DataManager.Instance.HaveItems.Remove(selectItem.Id);
                     //상점 아이템 구매 목록에 다시 살수 있도록 IsPurchase == false로 바꾸기
                     selectItem.IsPurchase = false;
                     selectItem.IsEquip = false;
@@ -44,7 +44,7 @@ namespace Nightmare
                     Console.WriteLine("이미 판매한 아이템입니다.");
                 }
             }
-            //1~10까지가 아닌 유효하지 않은 숫자 입력을 받았을 때 
+            //유효하지 않은 숫자 입력을 받았을 때 
             //후에 ActionBase에 있는 PrintErrorMessage를 UtilityManager에 따로 뺄 예정이므로
             //그때 수정할 것
             //Console.WriteLine("잘못된 입력입니다.");

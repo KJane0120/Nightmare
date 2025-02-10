@@ -55,7 +55,7 @@ namespace Nightmare.Data
         public string ShowSellItem()
         {
             string str = $"{Name} | {GetTypeString()} | {Desc} ";
-            str += IsSold ? "판매완료" : $"{Cost * 0.85}";
+            str += IsSold ? " | 판매완료" : $" | {Cost * 0.85f} G";
             return str;  
         }
         public string SelectItem()
