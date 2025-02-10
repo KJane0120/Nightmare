@@ -17,6 +17,7 @@ namespace Nightmare
                     { 2,  new Action_Inventory(2) },
                     { 3,  new Action_Shop(3) },
                     { 4,  new Action_Dungeon(4) },
+                    { 5,  new Action_QusetList(5) },
                     { 0,  new Action_Return(0) },
                 };
             }
