@@ -14,6 +14,7 @@ namespace Nightmare
                 return new Dictionary<int, ActionBase>()
                 {
                     { 1, new Action_Buy(1) },
+                    { 2, new Action_Sell(2) },
                     { 0, new Action_Return(0) },
                 };
             }

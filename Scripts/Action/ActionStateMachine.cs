@@ -24,7 +24,10 @@ namespace Nightmare
             [Description("장착 관리")]
             Equip,
             [Description("스테이지 목록 보기")]
-            StageManager
+            StageManager,
+            [Description("아이템 판매")]
+            Sell
+
         }
 
         public ActionBase CurrentAction
@@ -59,6 +62,7 @@ namespace Nightmare
                     {ActionType.Buy, new Action_Buy(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
                     { ActionType.StageManager,  new StageManager(0) },
+                    {ActionType.Sell, new Action_Sell(0) }
 
 
                 };
