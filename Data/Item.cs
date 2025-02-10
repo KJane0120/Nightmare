@@ -27,11 +27,17 @@ namespace Nightmare.Data
 
         public enum ItemType
         {
-            None,
+            None = 0,
             [Description("무기")]
-            Weapon,
+            Weapon = 1,
             [Description("방어구")]
-            Armor,
+            Armor = 2,
+            [Description("액세서리")]
+            accessory = 3,
+            [Description("하트조각")]
+            HeartPiece = 4,
+            [Description("포션")]
+            Portion = 5,
         }
         //무기인지 방어구인지에 따라 공격력이나 방어력을 출력
         public string GetTypeString()
