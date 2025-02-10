@@ -21,7 +21,7 @@ namespace Nightmare
             {
                 StringBuilder sb = new StringBuilder();
                 base.ToString();
-                sb.Append(base.ToString()).Append(SkillDamage).Append(SkillTarget);
+                sb.Append(base.ToString()).Append("\n증감효과: ").Append(SkillDamage).Append("\n스킬대상: ").Append(SkillTarget);
                 return sb.ToString();
             }
 
