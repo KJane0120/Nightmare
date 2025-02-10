@@ -61,6 +61,7 @@
 
             public void BattlePhase(Monster mon, List<Monster> monsters, Player player)
             {
+                Random ran = new Random();
                 int ii = 1;
                 int DeathCount = 0;
                 while (DeathCount < monsters.Count)
@@ -74,13 +75,10 @@
                     //플레이어 상태 띄우기
                     Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
                     Console.WriteLine($"공격력: {player.Stat.Atk + player.Stat.EquipAtk})");
-                    Console.WriteLine($"공격력: {player.Stat.Def + player.Stat.EquipDef})");
-                    Console.WriteLine($"마력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
-                    //Console.WriteLine($"공격력: {player.Stat.)");
-                    //Console.WriteLine($"공격력: {player.Stat.Atk})");
-
-
-
+                    Console.WriteLine($"방어력: {player.Stat.Def + player.Stat.EquipDef})");
+                    Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
+                    Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}");
+                    Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})");
 
                     ii = 1;
                     int Select = InputandReturn(1);
@@ -103,7 +101,7 @@
                             }
                             else
                             {
-                                mon.AttackedFromPlayer(monsters[AttackSelect - 1]);
+                                mon.AttackedFromPlayer(monsters[AttackSelect - 1], player);
                                 break;
                             }
 
@@ -115,14 +113,23 @@
                     {
                         Console.WriteLine("잘못된 선택입니다.");
                     }
-
                     foreach (Monster mons in monsters)
                     {
                         if (mons.IsLive)
                         {
+                            
                             int Damage = mons.MonsterAttackToPlayer();
-                            player.Stat.Hp -= Damage;
-                            Console.WriteLine($"{Damage}만큼 피해를 입어 {player.Stat.Hp - Damage}가 되었습니다");
+                            if ((player.Avd.EquipAvd + player.Avd.PlayerAvd) < ran.Next(0, 101))
+                            {
+                                player.Stat.Hp -= Damage;
+                                Console.WriteLine($"{Damage}만큼 피해를 입어 {player.Stat.Hp - Damage}가 되었습니다");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"회피 성공");
+                            }
+                            
+
                             if(player.Stat.Hp < 0)
                             {
                                 Instance.MoveNextAction(ActionType.Village);

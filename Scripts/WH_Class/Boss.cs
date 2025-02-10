@@ -14,7 +14,7 @@ namespace Nightmare
         {
             this.MissRate = MissRate;
             this.DefenseCount = DefenseCount;
-            SkillCount = skillCount;
+            this.SkillCount = skillCount;
         }
         public Boss() { }
 
