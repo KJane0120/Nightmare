@@ -17,9 +17,6 @@ namespace Nightmare
                 }
                 return _Instance;
             }
-
-
-
         }
 
         private static DataManager? _Instance = null;
@@ -152,12 +149,25 @@ namespace Nightmare
         };
 
         //가지고 있는 아이템 리스트
-        public Dictionary<int, Item> HaveItems = new () {};
+        public Dictionary<int, Item> HaveItems = new() { };
 
         //퀘스트 데이터 리스트
+        public List<Quest> QuestDatas = new List<Quest>();
+
+        //플레이어 전용 퀘스트 가져오기
+        public List<Quest> GetPlayerQuestGroup(long questGroupId)
+        {
+            return QuestDatas.Where(x => x.QuestGroupId == questGroupId).ToList();
+        }
 
         //아이템 데이터 리스트
         public Dictionary<long, Item> ItemDatas = new() { };
+
+        //몬스터 데이터
+        public Dictionary<long, Boss> BossDatas = new ();
+
+        //플레이어 데이터
+        public Dictionary<long, Player> PlayerDatas = new();
     }
 
 }
