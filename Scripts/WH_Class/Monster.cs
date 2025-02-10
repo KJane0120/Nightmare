@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+
 
 namespace Nightmare
 {
     internal class Monster
     {
+        public long Id { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
         public int MonsterHealth { get; set; }
