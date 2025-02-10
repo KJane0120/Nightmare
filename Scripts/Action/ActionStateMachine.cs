@@ -25,6 +25,8 @@ namespace Nightmare
             Equip,
             [Description("스테이지 목록 보기")]
             StageManager,
+            [Description("아이템 판매")]
+            Sell,
             [Description("퀘스트")]
             QuestList
         }
@@ -58,8 +60,10 @@ namespace Nightmare
                     { ActionType.Inventory,  new Action_Inventory(0) },
                     { ActionType.Shop,  new Action_Shop(0) },
                     { ActionType.Dungeon,  new Action_Return(0) },
+                    { ActionType.Buy, new Action_Buy(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
                     { ActionType.StageManager,  new StageManager(0) },
+                    { ActionType.Sell, new Action_Sell(0) },
                     { ActionType.QuestList,  new Action_QuestList(0) }
                 };
         }

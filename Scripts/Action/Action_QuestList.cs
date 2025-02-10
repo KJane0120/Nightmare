@@ -1,5 +1,5 @@
-﻿namespace Nightmare
-{
+﻿namespace Nightmare 
+{ 
     public partial class GameManager
     {
         public class Action_QuestList : ActionBase
@@ -75,8 +75,6 @@
                     Console.WriteLine("잘못된 입력입니다.");
                 }
             }
-
-
         }
     }
 
