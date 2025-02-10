@@ -25,7 +25,6 @@ namespace Nightmare
         //상점 아이템 리스트  
         public Dictionary<int, Item> ShopItems = new();
         
-
         //가지고 있는 아이템 리스트
         public Dictionary<int, Item> HaveItems = new() { };
 
@@ -49,6 +48,11 @@ namespace Nightmare
 
         //플레이어 데이터
         public Dictionary<long, Player> PlayerDatas = new();
+
+        //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
+        public List<Item> ConsumableItems = new();
+        //스테이지 클리어별 보상에서 드랍될 시 추가해주기
+        
     }
 
 }
