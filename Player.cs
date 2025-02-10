@@ -15,6 +15,8 @@ namespace Nightmare
         public Stat Stat { get; set; }
         public Gold Gold { get; set; }
 
+        public long QuestGroupId { get; set; }
+
         //레벨업 구현 시
         //private int _Level = 1;
 

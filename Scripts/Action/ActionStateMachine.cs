@@ -60,7 +60,7 @@ namespace Nightmare
                     { ActionType.Dungeon,  new Action_Return(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
                     { ActionType.StageManager,  new StageManager(0) },
-                    { ActionType.QuestList,  new Action_QusetList(0) }
+                    { ActionType.QuestList,  new Action_QuestList(0) }
                 };
         }
 

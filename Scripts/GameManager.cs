@@ -26,6 +26,9 @@ namespace Nightmare
 
         public void GameStart()
         {
+
+            DataManager.Initialize();
+
             Player = new Player();
             Player.Level = new Level();
             Player.Stat = new Stat();
@@ -111,6 +114,7 @@ namespace Nightmare
                     Player.Stat.MaxHp = 100;
                     Player.Stat.Mp = 50;
                     Player.Stat.MaxMp = 50;
+                    Player.QuestGroupId = 1;
                     return Job.Dwarf;
                 case 2:
                     Player.Stat.Atk = 15;
@@ -119,6 +123,7 @@ namespace Nightmare
                     Player.Stat.MaxHp = 100;
                     Player.Stat.Mp = 50;
                     Player.Stat.MaxMp = 50;
+                    Player.QuestGroupId = 2;
                     return Job.NewSister;
                 case 3:
                     Player.Stat.Atk = 15;
@@ -127,6 +132,7 @@ namespace Nightmare
                     Player.Stat.MaxHp = 100;
                     Player.Stat.Mp = 50;
                     Player.Stat.MaxMp = 50;
+                    Player.QuestGroupId = 3;
                     return Job.Saison;
                 case 4:
                     Player.Stat.Atk = 15;
@@ -135,6 +141,7 @@ namespace Nightmare
                     Player.Stat.MaxHp = 80;
                     Player.Stat.Mp = 100;
                     Player.Stat.MaxMp = 100;
+                    Player.QuestGroupId = 4;
                     return Job.OctopusWitch;
                 case 5:
                     Player.Stat.Atk = 25;
@@ -143,6 +150,7 @@ namespace Nightmare
                     Player.Stat.MaxHp = 120;
                     Player.Stat.Mp = 20;
                     Player.Stat.MaxMp = 20;
+                    Player.QuestGroupId = 5;
                     return Job.WildAnimal;
             }
             Console.WriteLine("\n잘못된 입력입니다.\n다시 직업을 선택해주세요.\n");
