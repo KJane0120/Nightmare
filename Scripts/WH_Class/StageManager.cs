@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Nightmare.GameManager;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {
@@ -24,26 +17,26 @@ namespace Nightmare
 
             protected override void DisPlay()
             {
-                SelectStage(0);
+                SelectStage(Instance.Player);
             }
-            public void SelectStage(int number) //플레이어 레벨 들어갈거임
+            public void SelectStage(Player player) //플레이어 레벨 들어갈거임
             {
                 int numbers = 1;
                 Random random = new Random();
                 List<Stage> stages = new List<Stage>();
                 stages.Add(new Stage(2, 1));
-                if(number > 2) 
+                if(player.Level.PlayerLevel > 2) 
                 {
                     Stage stage = new Stage(3, 2);
                 }
-                else if( number > 4)
+                else if(player.Level.PlayerLevel > 4)
                 {
                     Stage stage = new Stage(4, 3);
                 }
-                else if( number > 5)//플레이어가 아이템을 가지고있는지 검사
+                else if(player.Level.PlayerLevel > 5)//플레이어가 아이템을 가지고있는지 검사
                 {
                     Stage Boss = new Stage(0 ,0);
-                    Boss.BossBattle(number);
+                    Boss.BossBattle(player);
                 }
 
                 foreach(Stage stage in stages) 
@@ -55,7 +48,7 @@ namespace Nightmare
                 Console.WriteLine("스테이지를 골라주십시오");
                 int StageNumber = int.Parse(Console.ReadLine());
 
-                stages[StageNumber-1].Battle();
+                stages[StageNumber-1].Battle(player);
 
 
 
