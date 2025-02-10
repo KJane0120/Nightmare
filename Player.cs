@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using static Nightmare.GameManager;
+
+namespace Nightmare
 {
     public class Player
     {
@@ -36,6 +38,7 @@
             Stat.Def += 1;
         }
 
+        public List<Skill> Playerskill = new List<Skill>();
     }
 }
 

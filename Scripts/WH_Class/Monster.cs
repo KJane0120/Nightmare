@@ -2,7 +2,7 @@
 
 namespace Nightmare
 {
-    internal class Monster
+    public class Monster
     {
         public int Level { get; set; }
         public string Name { get; set; }
