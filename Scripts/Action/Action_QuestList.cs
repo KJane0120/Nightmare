@@ -2,9 +2,9 @@
 { 
     public partial class GameManager
     {
-        public class Action_QusetList : ActionBase
+        public class Action_QuestList : ActionBase
         {
-            public Action_QusetList(int number) : base(number) { }
+            public Action_QuestList(int number) : base(number) { }
 
             public override ActionType Type => ActionType.QuestList;
 

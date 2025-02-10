@@ -63,8 +63,8 @@ namespace Nightmare
                     {ActionType.Buy, new Action_Buy(0) },
                     { ActionType.Return,  new Action_Dungeon(0) },
                     { ActionType.StageManager,  new StageManager(0) },
-                    {ActionType.Sell, new Action_Sell(0) }
-                    { ActionType.QuestList,  new Action_QusetList(0) }
+                    {ActionType.Sell, new Action_Sell(0) },
+                    { ActionType.QuestList,  new Action_QuestList(0) }
                 };
         }
 
