@@ -1,13 +1,15 @@
-﻿namespace Nightmare
+﻿using System.Collections.Generic;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
         internal class Stage
         {
-            int MoneyRange;
-            int RandomRange;
-            bool Clear;
-       
+            public int MoneyRange { get; set; }
+            public int RandomRange {  get; set; }
+            public bool Clear { get; set; }
+            public bool IsFinal { get; set; }
 
             public Stage(int randomRange, int MoneyRange)
             {
@@ -43,7 +45,7 @@
             public void BossBattle(Player player) //player
             {
                 Boss boss  = new Boss();
-                boss = boss.BossSummon((int)player.Job);
+                boss = DataManager.Instance.BossDatas[(int)player.Job];
                 boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
@@ -93,6 +95,7 @@
                             if (AttackSelect < 1 || AttackSelect > monsters.Count)
                             {
                                 Console.WriteLine("잘못된 적 선택");
+                                
                                 continue;
                             }
                             else if (!monsters[AttackSelect - 1].IsLive)
@@ -103,27 +106,95 @@
                             else
                             {
                                 mon.AttackedFromPlayer(monsters[AttackSelect - 1], player);
+                                foreach (Skill skill in player.Playerskill)
+                                {
+                                    if (skill.CurrentCoolTime < skill.SkillCoolTime)
+                                    {
+                                        skill.CurrentCoolTime++;                                        
+                                    }
+                                }
+                                Instance.TakeAction();
                                 break;
                             }
-
                         }
                     }
                     else if (Select == 2)
-                    { }
+                    {
+                        int number = 1;
+                        foreach (Skill skill in player.Playerskill)
+                        {
+                            Console.WriteLine($"{number}. {skill.ToString()}");
+                            number++;
+                        }
+
+                        while (true)
+                        {
+                            int str = InputandReturn(3);
+                            if (str > player.Playerskill.Count || str == 0)
+                            {
+                                Console.WriteLine("잘못된 선택입니다.");
+                                continue;
+                            }
+                            if (player.Playerskill[str - 1].SkillMp > player.Stat.Mp)
+                            {
+                                Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp - player.Stat.Mp}가 부족합니다");
+                                BattlePhase(mon, monsters, player);
+                                continue;
+                            }
+                            if (player.Playerskill[str - 1].CurrentCoolTime < player.Playerskill[str - 1].SkillCoolTime)
+                            {                                
+                                Console.WriteLine("쿨타임입니다.");
+                                BattlePhase(mon, monsters, player);
+                                continue;
+                            }
+
+                            foreach (Skill skill in player.Playerskill)
+                            {
+                                if(skill.CurrentCoolTime < skill.SkillCoolTime)
+                                {
+                                    skill.CurrentCoolTime++;
+                                }
+                            }
+                            Instance.TakeAction();
+                            player.Playerskill[str - 1].SkillUse(player, monsters, ref DeathCount);
+                            player.Playerskill[str - 1].CurrentCoolTime = 0;                            
+                            break;
+                        }
+                    }
+                    else if (Select == 3)
+                    {
+                        Instance.TakeAction();
+                    }
                     else
                     {
                         Console.WriteLine("잘못된 선택입니다.");
                     }
+
+
+
+                    //몬스터 공격
+
+
                     foreach (Monster mons in monsters)
                     {
+                        mons.MonsterDIe(ref DeathCount);
                         if (mons.IsLive)
                         {
                             
                             int Damage = mons.MonsterAttackToPlayer();
                             if ((player.Avd.EquipAvd + player.Avd.PlayerAvd) < ran.Next(0, 101))
                             {
-                                player.Stat.Hp -= Damage;
-                                Console.WriteLine($"{Damage}만큼 피해를 입어 {player.Stat.Hp - Damage}가 되었습니다");
+                                if (Damage > (player.Stat.BaseDef + player.Stat.EquipDef))
+                                {
+                                    player.Stat.Hp -= Damage - (player.Stat.BaseDef + player.Stat.EquipDef);
+                                    Console.WriteLine($"데미지 {Damage} -플레이어 방어력{player.Stat.BaseDef + player.Stat.EquipDef} =" +
+                                        $"{Damage - (player.Stat.BaseDef + player.Stat.EquipDef)} 피해를 입어 {player.Stat.Hp}가 되었습니다");
+                                }
+                                else
+                                {
+                                    player.Stat.Hp -= 1;
+                                    Console.WriteLine("방어력이 높아서 1만 닳음");
+                                }
                             }
                             else
                             {
@@ -148,15 +219,33 @@
                     Console.WriteLine("행동을 골라주세요");
                     Console.WriteLine("1. 공격");
                     Console.WriteLine("2. 스킬");
+                    Console.WriteLine("3. 아이템 사용");
                     return int.Parse(Console.ReadLine());
                 }
-                else
+                else if(i == 2)
                 {
                     Console.WriteLine("어느 적을 공격할거니");
                     return int.Parse(Console.ReadLine());
                 }
+                else 
+                {
+                    Console.WriteLine("사용할 스킬을 골라주세요");
+
+                    return int.Parse(Console.ReadLine());
+                }
 
 
+
+            }
+
+            public void GetClearBoSang(List<Monster> mm, Player player)
+            {
+                foreach(Monster m in mm ) 
+                {
+                    player.Gold.PlayerGold += m.MonsterMoney;
+                    
+
+                }
             }
 
             public override string ToString()

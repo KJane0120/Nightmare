@@ -50,7 +50,9 @@ namespace Nightmare
                 else if (player.Level.PlayerLevel >= 7)
                 {
                     Stage stage = new Stage(2, 3);
+                    stage.IsFinal = true;
                     stages.Add(stage);
+                    
                 }
                 else if(player.Level.PlayerLevel >= 8)//플레이어가 아이템을 가지고있는지 검사
                 {
