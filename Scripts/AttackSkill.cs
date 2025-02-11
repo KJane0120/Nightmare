@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace Nightmare
 {
@@ -14,14 +15,16 @@ namespace Nightmare
                 return sb.ToString();
             }
 
-            public override void SkillUse(Player player, List<Monster> monster) // 공격형 스킬 사용
+            public override void SkillUse(Player player, List<Monster> monster, ref int D) // 공격형 스킬 사용
             {
                 if (SkillTarget == 1) // 단일 공격형 스킬
                 {
+                    Console.WriteLine("어떤 적을 공격하십니까");
                     int num = int.Parse(Console.ReadLine());
                     player.Stat.Mp -= SkillMp;
                     monster[num - 1].MonsterHealth -= (int)(player.Stat.BaseAtk + player.Stat.EquipAtk) * 2;
                     Console.WriteLine($"{SkillName}로 {monster[num - 1].Name}에게 {(int)(player.Stat.BaseAtk + player.Stat.EquipAtk) * 2}의 피해를 입혔습니다.");
+                    monster[num - 1].MonsterDIe(ref D);
                 }
                 else
                 {
@@ -30,6 +33,7 @@ namespace Nightmare
                         player.Stat.Mp -= SkillMp;
                         monster1.MonsterHealth -= (int)((player.Stat.BaseAtk + player.Stat.EquipAtk) * 1.5f);
                         Console.WriteLine($"{SkillName}로 {monster1.Name}에게 {(int)(player.Stat.BaseAtk + player.Stat.EquipAtk) * 1.5f}의 피해를 입혔습니다.");
+                        monster1.MonsterDIe(ref D);
                     }
                 }
             }
