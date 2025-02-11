@@ -13,7 +13,7 @@ namespace Nightmare
                 if (_Instance == null)
                 {
                     _Instance = new DataManager();
-                    Initialize();
+                    
                 }
                 return _Instance;
             }
@@ -119,6 +119,27 @@ namespace Nightmare
         public List<Item> ConsumableItems = new();
         //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
 
+        public List<Portion> PortionDatas = new()
+        {
+            new Portion()
+            {
+                Data = Instance.ItemDatas[18],
+                PortionCount = 3,
+                PortionMaxCount = 3
+            },
+            new Portion()
+            {
+                Data = Instance.ItemDatas[24],
+                PortionCount = 3,
+                PortionMaxCount = 3
+            },
+            new Portion()
+            {
+                Data = Instance.ItemDatas[25],
+                PortionCount = 0,
+                PortionMaxCount = 4
+            }
+        };
     }
 
 }
