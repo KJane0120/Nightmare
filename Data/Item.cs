@@ -12,7 +12,7 @@ namespace Nightmare.Data
         public int Id { get; set; }
         public string? Name { get; set; }
         public ItemType Type { get; set; }
-       
+
         //Hp, Mp, Atk, Def, Avd, Crt를 하나의 변수로 묶어 아이템타입이 ~면 ~증가. 
         public float Value { get; set; }
         public string? Desc { get; set; }
@@ -44,8 +44,36 @@ namespace Nightmare.Data
         //무기인지 방어구인지에 따라 공격력이나 방어력을 출력
         public string GetTypeString()
         {
-            string str = (Type == ItemType.Weapon) ? $"공격력 +{Value}" : $"방어력 +{Value}";
+            string str = "";
+            switch (Type)
+            {
+                case ItemType.Weapon:
+                    str = $"공격력 +{Value}";
+                    break;
+                case ItemType.Armor:
+                    str = $"방어력 +{Value}";
+                    break;
+                case ItemType.accessory:
+                    str = $"치명타율 +{Value} | 회피율 +{Value}";
+                    break;
+                case ItemType.HeartPiece:
+                    str = "";
+                    break;
+                case ItemType.HPPortion:
+                    str = $"HP +{Value}";
+                    break;
+                case ItemType.MPPortion:
+                    str = $"MP +{Value}";
+                    break;
+                case ItemType.Special:
+                    str = $"HP +{Value} | MP +{Value}";
+                    break;
+
+
+            }
             return str;
+
+
         }
         //구매 여부에 따른 출력
         public string GetPriceString()
@@ -64,12 +92,18 @@ namespace Nightmare.Data
         {
             string str = $"{Name} | {GetTypeString()} | {Desc} ";
             str += IsSold ? " | 판매완료" : $" | {Cost * 0.85f} G";
-            return str;  
+            return str;
         }
         public string SelectItem()
         {
             string str = IsEquip ? "[E]" : "";
             str += $"{Name} | {GetTypeString()} | {Desc}";
+            return str;
+        }
+
+        public string ShowPortion()
+        {
+            string str = $"{Name} | ";
             return str;
         }
     }
