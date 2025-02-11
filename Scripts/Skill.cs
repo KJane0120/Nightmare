@@ -14,6 +14,10 @@ namespace Nightmare
             public int SkillMp { get; set; }
             public int SkillCoolTime { get; set; }
 
+            public Skill()
+            {
+
+            }
 
             public override string ToString()
             {
@@ -33,6 +37,13 @@ namespace Nightmare
             }
 
             public virtual void SkillUse(Player player, List<Monster> monster)
+            {
+
+            }
+
+
+
+            public void SkillSet(Player player)
             {
                 switch ((int)player.Job)
                 {
@@ -70,15 +81,6 @@ namespace Nightmare
                         break;
                 }
             }
-            //public void SkillSet(Player player)
-            //{
-               
-            //}
-
-
-
-
-
         }
     }
 }

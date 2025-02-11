@@ -29,6 +29,8 @@
             Player.Crt = new Crt();
 
             SetName();
+            Skill skill = new Skill();
+            skill.SkillSet(Player);
         }
 
         private void SetName()
