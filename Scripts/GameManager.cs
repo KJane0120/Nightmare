@@ -18,6 +18,16 @@
 
         private string name;
 
+        public List<(Monster monster, int remainingTurns, String doco, int howmany)> DebuffedMonsters = new List<(Monster, int, String, int)>();
+        public List<(Player player, int remainingTurns, String doco, int howmany)> Buffedplayer = new List<(Player, int, String, int)>();
+
+        private Dictionary<int , int> map = new Dictionary<int , int>();
+
+        public void GameClear()
+        {
+            DataManager.Instance.CurrentStageClear++;
+        }
+
 
         public void GameStart()
         {
@@ -32,8 +42,6 @@
             Player.Crt = new Crt();
 
             SetName();
-            Skill skill = new Skill();
-            skill.SkillSet(Player);
         }
 
         private void SetName()
@@ -86,7 +94,7 @@
 
         private void SetJob() // 직업설정
         {
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine("어떤 동화를 들어보시겠습니까?\n");
             Console.WriteLine("1. 백설공주와 일곱 번째 난쟁이");
             Console.WriteLine("2. 신데렐라의 새 언니");
@@ -102,11 +110,13 @@
             if (int.TryParse(inputNumber, out int actionNumber))
             {
                 Player.Job = JobChoice(actionNumber);
+                Skill skill = new Skill();
+                skill.SkillSet(Player);
                 MoveNextAction(ActionType.Village);
             }
             else
             {
-                Console.WriteLine("\n잘못된 입력입니다.\n다시 직업을 선택해주세요.\n");
+                Console.WriteLine("\n잘못된 입력입니다.\n다시 동화를 선택해주세요.\n");
                 SetJob();
             }
         }
@@ -127,8 +137,77 @@
             }
         }
 
+        public void TakeAction()
+        {
 
-        private Job JobChoice(int num)
+            if (DebuffedMonsters != null)
+            {
+                // 디버프 지속 시간 감소 및 제거
+                for (int i = DebuffedMonsters.Count - 1; i >= 0; i--)
+                {
+                    var (monster, remainingTurns, doco, howmany) = DebuffedMonsters[i];
+                    remainingTurns--;
+
+                    if (remainingTurns <= 0)
+                    {
+
+                        Console.WriteLine($"{monster.Name}의 디버프가 해제됨!");
+                        if (doco.Equals("공격력"))
+                        {
+                            monster.MonsterAttack += howmany;
+                        }
+                        else if (doco.Equals("방어력"))
+                        {
+                            monster.MonsterDefense += howmany;
+                        }
+                        DebuffedMonsters.RemoveAt(i);
+                    }
+                    else
+                    {
+                        DebuffedMonsters[i] = (monster, remainingTurns, doco, howmany); // 값 업데이트
+                    }
+                }
+            }
+            if(Buffedplayer != null)
+            {
+                for (int i = Buffedplayer.Count - 1; i >= 0; i--)
+                {
+                    var (player, remainingTurns, doco, howmany) = Buffedplayer[i];
+                    remainingTurns--;
+
+                    if (remainingTurns <= 0)
+                    {
+
+                        Console.WriteLine($"{player.Name}의 버프가 해제됨!");
+                        if (doco.Equals("공격력"))
+                        {
+                            Player.Stat.BaseAtk -= howmany;
+                        }
+                        else if (doco.Equals("방어력"))
+                        {
+                            Player.Stat.BaseDef -= howmany;
+                        }
+                        else if(doco.Equals("회피율"))
+                        {
+                            player.Avd.PlayerAvd -= howmany;
+                        }
+                        else if (doco.Equals("치명타율"))
+                        {
+                            player.Crt.PlayerCrt -= howmany;
+                        }
+                        Buffedplayer.RemoveAt(i);
+                    }
+                    else
+                    {
+                        Buffedplayer[i] = (Player, remainingTurns, doco, howmany); // 값 업데이트
+                    }
+                }
+            }
+
+
+
+        }
+            private Job JobChoice(int num)
         {
             var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, int Avd, int Crt)> {
             { 1, (Job.Dwarf,10,5,100,30,10,15) },
