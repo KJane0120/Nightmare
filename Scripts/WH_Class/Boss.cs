@@ -9,8 +9,8 @@ namespace Nightmare
         public int DefenseCount {  get; set; }
         public int SkillCount { get; set; }
 
-        public Boss(int MissRate, int DefenseCount, int skillCount, int Health, int Attack, int Defense, String name, int MonsterMoney) : 
-            base(Health,Attack,Defense,name,MonsterMoney)
+        public Boss(int MissRate, int DefenseCount, int skillCount, int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp, int level) : 
+            base(level,Health,Attack,Defense,name,MonsterMoney, MonsterExp)
         {
             this.MissRate = MissRate;
             this.DefenseCount = DefenseCount;
@@ -39,19 +39,19 @@ namespace Nightmare
             switch(num) 
             {
                 case 0:
-                    Boss SnowWhite = new Boss(30, 0, 3, 500, 30, 30, "독기 품은 백설공주", 1500);
+                    Boss SnowWhite = new Boss(30,2,2,250,45,25,"백설공주",1500,50,5);
                     return SnowWhite;
                 case 1:
-                    Boss Cinderella = new Boss(30, 0, 3, 500, 30, 30, "자정이 넘어간 신데렐라", 1500);
+                    Boss Cinderella = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
                     return Cinderella;
                 case 2:
-                    Boss Aurora = new Boss(30, 0, 3, 500, 30, 30, "불면증 걸린 숲속의 공주", 1500);
+                    Boss Aurora = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
                     return Aurora;
                  case 3:
-                    Boss Ariel = new Boss(30, 0, 3, 500, 30, 30, "문명파괴자 인어공주", 1500);
+                    Boss Ariel = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
                     return Ariel;
                 default:
-                    Boss Belle = new Boss(30, 0, 3, 500, 30, 30, "3대 750 야수의 미녀", 1500);
+                    Boss Belle = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
                     return Belle;
             }
 

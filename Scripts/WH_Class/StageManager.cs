@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using static Nightmare.GameManager;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -24,18 +26,36 @@
                 int numbers = 1;
                 Random random = new Random();
                 List<Stage> stages = new List<Stage>();
-                stages.Add(new Stage(2, 1));
-                if(player.Level.PlayerLevel > 2) 
+                stages.Add(new Stage(0, 1));
+                if (player.Level.PlayerLevel >= 3)
                 {
-                    Stage stage = new Stage(3, 2);
+                    Stage stage = new Stage(0, 1);
+                    stages.Add(stage);
                 }
-                else if(player.Level.PlayerLevel > 4)
+                else if (player.Level.PlayerLevel >= 4)
                 {
-                    Stage stage = new Stage(4, 3);
+                    Stage stage = new Stage(1, 2);
+                    stages.Add(stage);
                 }
-                else if(player.Level.PlayerLevel > 5)//플레이어가 아이템을 가지고있는지 검사
+                else if (player.Level.PlayerLevel >= 5)
+                {
+                    Stage stage = new Stage(1, 2);
+                    stages.Add(stage);
+                }
+                else if (player.Level.PlayerLevel >= 6)
+                {
+                    Stage stage = new Stage(2, 3);
+                    stages.Add(stage);
+                }
+                else if (player.Level.PlayerLevel >= 7)
+                {
+                    Stage stage = new Stage(2, 3);
+                    stages.Add(stage);
+                }
+                else if(player.Level.PlayerLevel >= 8)//플레이어가 아이템을 가지고있는지 검사
                 {
                     Stage Boss = new Stage(0 ,0);
+                    stages.Add(Boss);
                     Boss.BossBattle(player);
                 }
 

@@ -4,15 +4,16 @@
     {
         internal class Stage
         {
-
-
+            int MoneyRange;
+            int RandomRange;
+            bool Clear;
        
-            public int MonsterCount { get; set; }
-            public int weight { get; set; }
-            public Stage(int monsterCount, int weight)
+
+            public Stage(int randomRange, int MoneyRange)
             {
-                this.MonsterCount = monsterCount;
-                this.weight = weight;
+                RandomRange = randomRange;
+                this.MoneyRange = MoneyRange;
+                
             }
             public void Battle(Player player)
             {
@@ -24,9 +25,9 @@
                 //몬스터를 저장할 변수
                 int ii = 1;
                 //리스트에 넣기
-                for (int i = 0; i < MonsterCount + Ran.Next(-1,2); i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    monsters.Add(mon.Monstersummon(weight));
+                    monsters.Add(mon.Monstersummon(Ran.Next(1 + ( 3*RandomRange), 4 + (3*RandomRange)), MoneyRange));
                 }
 
                 BattlePhase(mon,monsters,player);
@@ -74,8 +75,8 @@
                     }
                     //플레이어 상태 띄우기
                     Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
-                    Console.WriteLine($"공격력: {player.Stat.Atk + player.Stat.EquipAtk})");
-                    Console.WriteLine($"방어력: {player.Stat.Def + player.Stat.EquipDef})");
+                    Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})");
+                    Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})");
                     Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
                     Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}");
                     Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})");
@@ -161,7 +162,7 @@
             public override string ToString()
             {
 
-                String s = $"적의 수: {MonsterCount-1} ~ {MonsterCount + 1}, 적들 능력치 {5*weight} 상승 ";
+                String s = $"적의 수: 3 ";
                 return s ;
             }
 
