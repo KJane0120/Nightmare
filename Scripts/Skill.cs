@@ -70,10 +70,10 @@ namespace Nightmare
                         break;
                 }
             }
-            public void SkillSet(Player player)
-            {
+            //public void SkillSet(Player player)
+            //{
                
-            }
+            //}
 
 
 
