@@ -6,14 +6,14 @@ namespace Nightmare
     internal class Boss : Monster
     {
         public int MissRate {  get; set; }
-        public int DefenseCount {  get; set; }
+
         public int SkillCount { get; set; }
 
-        public Boss(int MissRate, int DefenseCount, int skillCount, int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp, int level) : 
+        public Boss(int MissRate, int skillCount, int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp, int level) : 
             base(level,Health,Attack,Defense,name,MonsterMoney, MonsterExp)
         {
             this.MissRate = MissRate;
-            this.DefenseCount = DefenseCount;
+
             this.SkillCount = skillCount;
         }
         public Boss() { }

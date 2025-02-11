@@ -57,7 +57,7 @@ namespace Nightmare
 
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
-
+              
                 //다시 돌아가기
 
             }
@@ -163,6 +163,8 @@ namespace Nightmare
                     }
                     else if (Select == 3)
                     {
+                        
+
                         Instance.TakeAction();
                     }
                     else
@@ -227,10 +229,18 @@ namespace Nightmare
                     Console.WriteLine("어느 적을 공격할거니");
                     return int.Parse(Console.ReadLine());
                 }
-                else 
+                else  if( i == 3)
                 {
                     Console.WriteLine("사용할 스킬을 골라주세요");
 
+                    return int.Parse(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine("사용할 아이템을 골라주세요");
+                    Console.WriteLine("1. 앨리스의 쿠키");
+                    Console.WriteLine("2. 엘리스의 음료");
+                    Console.WriteLine("사용할 아이템을 골라주세요");
                     return int.Parse(Console.ReadLine());
                 }
 
