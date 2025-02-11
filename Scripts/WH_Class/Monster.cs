@@ -13,14 +13,16 @@ namespace Nightmare
         public bool IsLive { get; set; } //체력이 0이면 Fales
 
         public int MonsterMoney { get; set; }
+        public int MonsterExp { get; set; }
 
-        public Monster(int Health, int Attack, int Defense, String name, int MonsterMoney)//생성자
+        public Monster(int Level ,int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp)//생성자
         {
-
+            this.Level = Level;
             MonsterHealth = Health;
             MonsterAttack = Attack;
             MonsterDefense = Defense;
             this.MonsterMoney = MonsterMoney;
+            this.MonsterExp = MonsterExp;
             Name = name;
             IsLive = true;
 
@@ -62,14 +64,15 @@ namespace Nightmare
         }
 
 
-        public Monster Monstersummon(int wei)
+        public Monster Monstersummon(int Level, int Money)
         {
             //몬스터들의 능력치들을 결정해줄 랜덤
             Random MonsterRandom = new Random();
             //잡몹들 이름
-            String[] Name = { "난쟁이 형제들", "물고기", "언니 인어들", "성을 막는 가시덩쿨", "살아 움직이는 집기들", "호박마차" };
-            Monster mons = new Monster(MonsterRandom.Next(25 +(wei *5), 35 + (wei * 5)), MonsterRandom.Next(5 + (wei * 5), 10 + (wei * 5)), 
-                MonsterRandom.Next(5 + (wei * 5), 10 + (wei * 5)), Name[MonsterRandom.Next(0, 6)], MonsterRandom.Next(250 + (wei * 50), 750 + (wei * 50)));
+            String[] Name = { "첫째 난쟁이", "둘째 난쟁이"," 셋째 난쟁이", "넷째 난쟁이","다섯째 난쟁이", "여섯째 난쟁이","요정 할머니","호박마차",
+                "가시덩굴","첫째 언니","둘째 언니","셋째 언니","넷째 언니","다섯째 언니","여섯째 언니","촛대 집사","먼지털이 도우미","작은 컵" };
+            Monster mons = new Monster(Level, 10 * Level , Level * 3 , Level * 1, Name[MonsterRandom.Next(0, 18)], MonsterRandom.Next(80*Money,100 * Money)
+                ,MonsterRandom.Next(Money * 3,  3 +(3 * Money)) );
 
             return mons;
         }
@@ -86,17 +89,17 @@ namespace Nightmare
         {
             Random ran = new Random();
 
-            if(monster.MonsterDefense >= (player.Stat.Def + player.Stat.EquipDef))
+            if(monster.MonsterDefense >= (player.Stat.BaseDef + player.Stat.EquipDef))
             {
                 monster.MonsterHealth -= 1;
                 if(monster.MonsterHealth < 0)
                 {
-                    Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.Atk + player.Stat.EquipAtk)}]");
+                    Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.BaseAtk + player.Stat.EquipAtk)}]");
                     Console.WriteLine($"Hp: {monster.MonsterHealth + 1} -> Dead");
                 }
                 else
                 {
-                      Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.Atk + player.Stat.EquipAtk)}]");
+                      Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.BaseAtk + player.Stat.EquipAtk)}]");
                       Console.WriteLine($"Hp: {monster.MonsterHealth +1} -> {monster.MonsterHealth}"); //여기도
                 }
             }
@@ -104,30 +107,30 @@ namespace Nightmare
             {
                 if ((player.Crt.PlayerCrt + player.Crt.EquipCrt) < ran.Next(0, 101))
                 {
-                    monster.MonsterHealth -= (int)(player.Stat.Atk + player.Stat.EquipAtk) - monster.MonsterDefense;
+                    monster.MonsterHealth -= (int)(player.Stat.BaseAtk + player.Stat.EquipAtk) - monster.MonsterDefense;
                     if (monster.MonsterHealth < 0)
                     {
-                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.Atk + player.Stat.EquipAtk)}]");
+                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.BaseAtk + player.Stat.EquipAtk)}]");
                         Console.WriteLine($"Hp: {monster.MonsterHealth + 10 - monster.MonsterDefense} -> Dead");
                     }
                     else
                     {
-                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.Atk + player.Stat.EquipAtk)}]");
+                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.BaseAtk + player.Stat.EquipAtk)}]");
                         Console.WriteLine($"Hp: {monster.MonsterHealth + 10 - monster.MonsterDefense} -> {monster.MonsterHealth}"); //여기도
                     }
                 }
                 else
                 {
-                    monster.MonsterHealth -= 2 *((int)(player.Stat.Atk + player.Stat.EquipAtk) - monster.MonsterDefense);
+                    monster.MonsterHealth -= 2 *((int)(player.Stat.BaseAtk + player.Stat.EquipAtk) - monster.MonsterDefense);
                     
                     if (monster.MonsterHealth < 0)
                     {
-                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [크리티컬: {2 * ((int)(player.Stat.Atk + player.Stat.EquipAtk))}]");
+                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [크리티컬: {2 * ((int)(player.Stat.BaseAtk + player.Stat.EquipAtk))}]");
                         Console.WriteLine($"Hp: {monster.MonsterHealth + 10 - monster.MonsterDefense} -> Dead");
                     }
                     else
                     {
-                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [크리티컬: {2 * ((int)(player.Stat.Atk + player.Stat.EquipAtk))}]");
+                        Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [크리티컬: {2 * ((int)(player.Stat.BaseAtk + player.Stat.EquipAtk))}]");
                         Console.WriteLine($"Hp: {monster.MonsterHealth + 10 - monster.MonsterDefense} -> {monster.MonsterHealth}"); //여기도
                     }
                 }
