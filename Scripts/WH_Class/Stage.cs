@@ -1,6 +1,4 @@
-﻿using Nightmare.Data;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {
@@ -8,7 +6,7 @@ namespace Nightmare
         {
             public int MoneyRange { get; set; }
             public int RandomRange {  get; set; }
-            public bool IsFinal = false;
+            public bool Clear { get; set; } 
        
 
             public Stage(int randomRange, int MoneyRange)
@@ -36,16 +34,16 @@ namespace Nightmare
 
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
-                Instance.GameClear();
+
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
-                
+
                 //다시 돌아가기
             }
             public void BossBattle(Player player) //player
             {
                 Boss boss  = new Boss();
-                boss = DataManager.Instance.BossDatas[(int)player.Job];
+                boss = boss.BossSummon((int)player.Job);
                 boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
@@ -57,7 +55,6 @@ namespace Nightmare
 
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
-          
 
                 //다시 돌아가기
 
@@ -77,7 +74,6 @@ namespace Nightmare
                         ii++;
                     }
                     //플레이어 상태 띄우기
-                    //고치자
                     Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
                     Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})");
                     Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})");
@@ -107,9 +103,23 @@ namespace Nightmare
                             else
                             {
                                 mon.AttackedFromPlayer(monsters[AttackSelect - 1], player);
+                                foreach (Skill skill in player.Playerskill)
+                                {
+                                    if (skill.CurrentCoolTime < skill.SkillCoolTime)
+                                    {
+                                        skill.CurrentCoolTime++;                                        
+                                    }
+                                }
+                                //foreach (var skill in player.Playerskill)
+                                //{
+                                //    if(skill is StatSkill unUse)
+                                //    {
+                                //        unUse.UnUse(player, monsters, );
+                                        
+                                //    }
+                                //}
                                 break;
                             }
-
                         }
                     }
                     else if (Select == 2)
@@ -129,25 +139,32 @@ namespace Nightmare
                                 Console.WriteLine("잘못된 선택입니다.");
                                 continue;
                             }
-                            if(player.Playerskill[str - 1].SkillMp > player.Stat.Mp )
+                            if (player.Playerskill[str - 1].SkillMp > player.Stat.Mp)
                             {
-                                Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp -player.Stat.Mp}가 부족합니다");
+                                Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp - player.Stat.Mp}가 부족합니다");
+                                continue;
+                            }
+                            if (player.Playerskill[str - 1].CurrentCoolTime < player.Playerskill[str - 1].SkillCoolTime)
+                            {                                
+                                Console.WriteLine("쿨타임입니다.");
                                 continue;
                             }
 
-
-                            
+                            foreach (Skill skill in player.Playerskill)
+                            {
+                                if(skill.CurrentCoolTime < skill.SkillCoolTime)
+                                {
+                                    skill.CurrentCoolTime++;
+                                }
+                            }
                             player.Playerskill[str - 1].SkillUse(player, monsters, ref DeathCount);
+                            player.Playerskill[str - 1].CurrentCoolTime = 0;                            
                             break;
-
                         }
                     }
                     else if (Select == 3)
                     {
-                        foreach(Item item in DataManager.Instance.ConsumableItems)
-                        {
-                            item.ToString();
-                        }
+
                     }
                     else
                     {
@@ -220,6 +237,16 @@ namespace Nightmare
 
 
 
+            }
+
+            public void GetClearBoSang(List<Monster> mm, Player player)
+            {
+                foreach(Monster m in mm ) 
+                {
+                    player.Gold.PlayerGold += m.MonsterMoney;
+                    
+
+                }
             }
 
             public override string ToString()

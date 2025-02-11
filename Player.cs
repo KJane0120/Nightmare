@@ -11,7 +11,8 @@ namespace Nightmare
         public Gold Gold { get; set; }
         public Avd Avd { get; set; }
         public Crt Crt { get; set; }
-        public long QuestGroupID {  get; set; }
+        public int CurrentExp { get; set; }
+        public long QuestGroupID { get; set; }
 
         public long QuestGroupId { get; set; }
 
@@ -36,10 +37,55 @@ namespace Nightmare
         //레벨업
         public void LevelUp()
         {
-            _Level++;
-            Stat.BaseAtk += 0.5f;
-            Stat.BaseDef += 1;
+            int[] Exp = { 10, 12, 15, 30, 36, 40, 48, 54, 60 };
+
+
+            if (Level.PlayerLevel < 10)
+            {
+                while (Exp[Level.PlayerLevel - 1] < CurrentExp)
+                {
+                    if (Level.PlayerLevel == 4)
+                    {
+                        Level.PlayerLevel++;
+                        Stat.BaseAtk += 5;
+                        Stat.BaseDef += 3;
+                        Stat.Hp += 20;
+                        Stat.MaxHp += 20;
+                    }
+                    else if (Level.PlayerLevel == 8)
+                    {
+                        Level.PlayerLevel++;
+                        Stat.BaseAtk += 5;
+                        Stat.BaseDef += 3;
+                        Stat.Hp += 20;
+                        Stat.MaxHp += 20;
+                    }
+                    else if (Level.PlayerLevel == 9)
+                    {
+                        Level.PlayerLevel++;
+                        Stat.BaseAtk += 7;
+                        Stat.BaseDef += 3;
+                        Stat.Hp += 20;
+                        Stat.MaxHp += 20;
+                    }
+                    else
+                    {
+                        Level.PlayerLevel++;
+                        Stat.BaseAtk += 3;
+                        Stat.BaseDef += 1;
+                        Stat.Hp += 10;
+                        Stat.MaxHp += 10;
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine($"Lv.{Level.PlayerLevel} -> Lv.{Level.PlayerLevel + 1}");
+                    Console.WriteLine();
+                }
+            }
         }
+
+
+
+
 
         public List<Skill> Playerskill = new List<Skill>();
     }
