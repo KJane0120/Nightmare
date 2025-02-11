@@ -34,28 +34,7 @@ namespace Nightmare
 
         }
 
-        public Boss BossSummon(int num)
-        {
-            switch(num) 
-            {
-                case 0:
-                    Boss SnowWhite = new Boss(30,2,2,250,45,25,"백설공주",1500,50,5);
-                    return SnowWhite;
-                case 1:
-                    Boss Cinderella = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Cinderella;
-                case 2:
-                    Boss Aurora = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Aurora;
-                 case 3:
-                    Boss Ariel = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Ariel;
-                default:
-                    Boss Belle = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Belle;
-            }
-
-        }
+   
         public void BossIntroduce(int num)
         {
             switch (num)

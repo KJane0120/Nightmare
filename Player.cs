@@ -16,6 +16,8 @@ namespace Nightmare
 
         public long QuestGroupId { get; set; }
 
+
+
         //레벨업 구현 시
         private int _Level = 1;
 

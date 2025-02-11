@@ -9,9 +9,9 @@ namespace Nightmare
         {
             public string Buffskill { get; set; }
             public string SkillType { get; set; }
-            //public int SkillInTime { get; set; }
+            
 
-            public StatSkill(string n, string d, int damage, int t, int m, int cooltime, string buff, string sType) : base(n, d, damage, t, m, cooltime)
+            public StatSkill(string n, string d, int damage, int t, int m, int cooltime, string buff, string sType, int st) : base(n, d, damage, t, m, cooltime, st)
             {
                 Buffskill = buff;
                 SkillType = sType;
@@ -72,12 +72,14 @@ namespace Nightmare
                     {
                         player.Stat.Mp -= SkillMp;
                         player.Stat.BaseAtk += SkillDamage;
+                        Instance.Buffedplayer.Add(((Player player, int remainingTurns, string doco, int howmany))(player, SkillInTime, SkillType, SkillDamage));
                         Console.WriteLine($"{SkillName}(으)로 공격력이 {SkillDamage}만큼 올랐습니다.");
                     }
                     else if (SkillType.Equals("방어력"))
                     {
                         player.Stat.Mp -= SkillMp;
                         player.Stat.BaseDef += SkillDamage;
+                        Instance.Buffedplayer.Add(((Player player, int remainingTurns, string doco, int howmany))(player, SkillInTime, SkillType, SkillDamage));
                         Console.WriteLine($"{SkillName}(으)로 방어력이 {SkillDamage}만큼 올랐습니다.");
                     }
                     else if (SkillType.Equals("체력"))
@@ -91,12 +93,14 @@ namespace Nightmare
                     {
                         player.Stat.Mp -= SkillMp;
                         player.Avd.PlayerAvd += SkillDamage;
+                        Instance.Buffedplayer.Add(((Player player, int remainingTurns, string doco, int howmany))(player, SkillInTime, SkillType, SkillDamage));
                         Console.WriteLine($"{SkillName}(으)로 회피율이 {SkillDamage}만큼 올랐습니다.");
                     }
                     else
                     {
                         player.Stat.Mp -= SkillMp;
                         player.Crt.PlayerCrt += SkillDamage;
+                        Instance.Buffedplayer.Add(((Player player, int remainingTurns, string doco, int howmany))(player, SkillInTime, SkillType, SkillDamage));
                         Console.WriteLine($"{SkillName}(으)로 치명타율이 {SkillDamage}만큼 올랐습니다.");
                     }
                 }
@@ -106,7 +110,8 @@ namespace Nightmare
                     {
                         player.Stat.Mp -= SkillMp;
                         int num = int.Parse(Console.ReadLine());
-                        monster[num - 1].MonsterAttack -= (int)SkillDamage;                        
+                        monster[num - 1].MonsterAttack -= (int)SkillDamage;
+                        Instance.DebuffedMonsters.Add(((Monster monster, int remainingTurns, string doco, int howmany))(monster[num - 1], SkillInTime, SkillType, SkillDamage));
                         Console.WriteLine($"{SkillName}(으)로 {monster[num - 1].Name}의 공격력이 {SkillDamage}만큼 내렸습니다.");
                     }
                     else if (SkillType.Equals("방어력"))
@@ -114,6 +119,7 @@ namespace Nightmare
                         player.Stat.Mp -= SkillMp;
                         int num = int.Parse(Console.ReadLine());
                         monster[num - 1].MonsterDefense -= (int)SkillDamage;
+                        Instance.DebuffedMonsters.Add(((Monster monster, int remainingTurns, string doco, int howmany))(monster[num - 1], SkillInTime, SkillType, SkillDamage));
                         Console.WriteLine($"{SkillName}(으)로 {monster[num - 1].Name}의 방어력이 {SkillDamage}만큼 내렸습니다.");
                     }
                 }
