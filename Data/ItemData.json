@@ -1,0 +1,323 @@
+{
+    "ItemDatas": {
+        "1": {
+            "Id": 1,
+            "Name": "광부의 복수 곡괭이",
+            "ItemType": 1,
+            "Atk": 7,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "광물이 아닌 것도 잘 깨뜨립니다.",
+            "Cost": 2000,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "2": {
+            "Id": 2,
+            "Name": "하이 호 가죽 모자",
+            "ItemType": 2,
+            "Atk": 0,
+            "Def": 3,
+            "Value": 0,
+            "Desc": "숲의 기운으로 보호해줍니다.",
+            "Cost": 1500,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "3": {
+            "Id": 3,
+            "Name": "분노의 부지깽이",
+            "ItemType": 1,
+            "Atk": 5,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "매일 잿더미를 뒤집어 쓸 때 사용되었습니다.",
+            "Cost": 1500,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "4": {
+            "Id": 4,
+            "Name": "찢긴 무도회 드레스",
+            "ItemType": 2,
+            "Atk": 0,
+            "Def": 10,
+            "Value": 0,
+            "Desc": "눈물을 담아 바느질 되었습니다.",
+            "Cost": 3000,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "5": {
+            "Id": 5,
+            "Name": "저주의 회중시계",
+            "ItemType": 1,
+            "Atk": 8,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "성에서는 시간을 잘 지켜야 합니다.",
+            "Cost": 2500,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "6": {
+            "Id": 6,
+            "Name": "핏빛 은쟁반",
+            "ItemType": 2,
+            "Atk": 0,
+            "Def": 5,
+            "Value": 0,
+            "Desc": "물건 나르기 외에도 부족함이 없습니다.",
+            "Cost": 2000,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "7": {
+            "Id": 7,
+            "Name": "혼을 빼앗는 수정구",
+            "ItemType": 1,
+            "Atk": 10,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "마법의 단짝입니다.",
+            "Cost": 3000,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "8": {
+            "Id": 8,
+            "Name": "침묵의 소라 목걸이",
+            "ItemType": 2,
+            "Atk": 0,
+            "Def": 7,
+            "Value": 0,
+            "Desc": "바다의 시원함이 느껴집니다.",
+            "Cost": 2500,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "9": {
+            "Id": 9,
+            "Name": "야수의 문장 반지",
+            "ItemType": 3,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 1, //임의값
+            "Desc": "자랑스러운 야수 가문의 상징입니다.",
+            "Cost": 3000,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "10": {
+            "Id": 10,
+            "Name": "그림자 턱시도",
+            "ItemType": 3,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "자랑스러운 야수 가문의 상징입니다.",
+            "Cost": 3000,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "11": {
+            "Id": 11,
+            "Name": "나무 검",
+            "ItemType": 1,
+            "Atk": 1, //임의 값
+            "Def": 0,
+            "Value": 0,
+            "Desc": "그럭저럭 쓸만합니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "12": {
+            "Id": 12,
+            "Name": "나무 방패",
+            "ItemType": 2,
+            "Atk": 0,
+            "Def": 1, //임의값
+            "Value": 0,
+            "Desc": "그럭저럭 쓸만합니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        //13~17 하트조각은 임의값 넣었음
+        "13": {
+            "Id": 13,
+            "Name": "빨간 하트조각",
+            "ItemType": 4,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "백설공주를 처치한 후 얻은 조각, 무엇인진 알 수 없습니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "14": {
+            "Id": 14,
+            "Name": "파란 하트조각",
+            "ItemType": 4,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "신데렐라를 처치한 후 얻은 조각, 무엇인진 알 수 없습니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "15": {
+            "Id": 15,
+            "Name": "분홍 하트조각",
+            "ItemType": 4,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "오로라를 처치한 후 얻은 조각, 무엇인진 알 수 없습니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "16": {
+            "Id": 16,
+            "Name": "초록 하트조각",
+            "ItemType": 4,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "아리엘을 처치한 후 얻은 조각, 무엇인진 알 수 없습니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "17": {
+            "Id": 17,
+            "Name": "노란 하트조각",
+            "ItemType": 4,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "벨을 처치한 후 얻은 조각, 무엇인진 알 수 없습니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "18": {
+            "Id": 18,
+            "Name": "앨리스의 쿠키",
+            "ItemType": 5,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "Eat Me! 라는 꼬리표가 달려있다", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        }, //19~ 23은 드랍아이템 기획 후 업뎃 예정. 아래는 임시 코드
+        "19": {
+            "Id": 19,
+            "Name": "새빨간 독사과",
+            "ItemType": 3,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "깨물고 싶은 욕망을 참을 수 없을 겁니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "20": {
+            "Id": 20,
+            "Name": "반짝이는 유리구두",
+            "ItemType": 3,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "계단에서 구두 한 짝을 잃어버리고 말았답니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "21": {
+            "Id": 21,
+            "Name": "물레",
+            "ItemType": 3,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "바늘에 찔리면 영원한 잠으로 빠져듭니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "22": {
+            "Id": 22,
+            "Name": "물거품 물약",
+            "ItemType": 3,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "그럭저럭 쓸만합니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "23": {
+            "Id": 23,
+            "Name": "싱싱한 장미",
+            "ItemType": 3,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 0,
+            "Desc": "그럭저럭 쓸만합니다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        },
+        "24": {
+            "Id": 24,
+            "Name": "앨리스의 음료",
+            "ItemType": 6,
+            "Atk": 0,
+            "Def": 0,
+            "Value": 1,
+            "Desc": "Drink Me! 라는 꼬리표가 달려있다.", //임의값
+            "Cost": 0,
+            "IsPurchase": false,
+            "IsEquip": false,
+            "IsSold": false
+        }
+    }
+}
+
+//상점아이템
+//기본아이템 나무 검 11번 나무 방패 12번
+//보스드랍아이템 19(독사과) 20(유리구두) 21(물레) 22(물거품이 되는 물약) 23(시들지 않는 장미)
+//체력 회복 포션 18번 마나 회복 포션 24번
+//하트조각 13(빨간색) 14(파란색) 15(분홍색) 16(초록색) 17(노란색)

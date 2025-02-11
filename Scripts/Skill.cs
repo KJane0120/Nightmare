@@ -40,9 +40,6 @@ namespace Nightmare
             {
 
             }
-
-
-
             public void SkillSet(Player player)
             {
                 switch ((int)player.Job)

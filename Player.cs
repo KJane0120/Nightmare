@@ -13,6 +13,8 @@ namespace Nightmare
         public Crt Crt { get; set; }
         public long QuestGroupID {  get; set; }
 
+        public long QuestGroupId { get; set; }
+
         //레벨업 구현 시
         private int _Level = 1;
 
@@ -38,7 +40,6 @@ namespace Nightmare
             Stat.BaseAtk += 0.5f;
             Stat.BaseDef += 1;
         }
-
 
         public List<Skill> Playerskill = new List<Skill>();
     }

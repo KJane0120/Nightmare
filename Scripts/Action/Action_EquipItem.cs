@@ -1,7 +1,6 @@
-﻿using System.Xml.Linq;
-using Nightmare.Data;
+﻿using Nightmare.Data;
 using static Nightmare.Data.Item;
-//using static Nightmare.
+using static Nightmare.Stat;
 
 namespace Nightmare
 {
@@ -22,9 +21,6 @@ namespace Nightmare
 
             protected override void DisPlay()
             {
-                Item selectItem = DataManager.Instance.ShopItems[1];
-                DataManager.Instance.HaveItems.Add(1, selectItem);
-
                 Console.Clear();
                 Console.WriteLine("인벤토리 - 장착 관리");
                 DisPlayInventory();
@@ -34,6 +30,7 @@ namespace Nightmare
             private void EquipItem(int num)
             {
                 Item selectItem = DataManager.Instance.HaveItems[num];
+                //Stat equipStat;
 
                 if (selectItem.IsEquip)
                 {
@@ -41,11 +38,9 @@ namespace Nightmare
 
                     if (selectItem.Type == ItemType.Weapon)
                     {
-                        // 공격력 증가
-                        //EquipAtk -= item.Value;
+                        //equipStat.EquipAtk -= Item.item.Value;
                     }
-                    // 방어력 증가
-                    //else EquipDef -= item.Value;
+                    //else equipStat.EquipDef -= item.Value;
                 }
                 else
                 {
@@ -53,10 +48,8 @@ namespace Nightmare
 
                     if (selectItem.Type == ItemType.Weapon)
                     {
-                        // 공격력 증가
                         //EquipAtk += item.Value;
                     }
-                    // 방어력 증가
                     //else EquipDef += item.Value;
                 }
             }

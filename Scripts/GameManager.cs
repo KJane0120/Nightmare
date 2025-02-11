@@ -21,6 +21,9 @@
 
         public void GameStart()
         {
+
+            DataManager.Initialize();
+
             Player = new Player();
             Player.Level = new Level();
             Player.Stat = new Stat();
