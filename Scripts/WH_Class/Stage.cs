@@ -103,9 +103,23 @@
                             else
                             {
                                 mon.AttackedFromPlayer(monsters[AttackSelect - 1], player);
+                                foreach (Skill skill in player.Playerskill)
+                                {
+                                    if (skill.CurrentCoolTime < skill.SkillCoolTime)
+                                    {
+                                        skill.CurrentCoolTime++;                                        
+                                    }
+                                }
+                                //foreach (var skill in player.Playerskill)
+                                //{
+                                //    if(skill is StatSkill unUse)
+                                //    {
+                                //        unUse.UnUse(player, monsters, );
+                                        
+                                //    }
+                                //}
                                 break;
                             }
-
                         }
                     }
                     else if (Select == 2)
@@ -123,11 +137,29 @@
                             if (str > player.Playerskill.Count || str == 0)
                             {
                                 Console.WriteLine("잘못된 선택입니다.");
+                                continue;
+                            }
+                            if (player.Playerskill[str - 1].SkillMp > player.Stat.Mp)
+                            {
+                                Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp - player.Stat.Mp}가 부족합니다");
+                                continue;
+                            }
+                            if (player.Playerskill[str - 1].CurrentCoolTime < player.Playerskill[str - 1].SkillCoolTime)
+                            {                                
+                                Console.WriteLine("쿨타임입니다.");
+                                continue;
                             }
 
+                            foreach (Skill skill in player.Playerskill)
+                            {
+                                if(skill.CurrentCoolTime < skill.SkillCoolTime)
+                                {
+                                    skill.CurrentCoolTime++;
+                                }
+                            }
                             player.Playerskill[str - 1].SkillUse(player, monsters, ref DeathCount);
+                            player.Playerskill[str - 1].CurrentCoolTime = 0;                            
                             break;
-
                         }
                     }
                     else if (Select == 3)

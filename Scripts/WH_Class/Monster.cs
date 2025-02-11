@@ -94,7 +94,7 @@ namespace Nightmare
             if (monster.MonsterDefense >= (player.Stat.BaseDef + player.Stat.EquipDef))
             {
                 monster.MonsterHealth -= 1;
-                if (monster.MonsterHealth < 0)
+                if (monster.MonsterHealth <= 0)
                 {
                     Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.BaseAtk + player.Stat.EquipAtk - monster.MonsterDefense)}]");
                     Console.WriteLine($"Hp: {monster.MonsterHealth + 1} -> Dead");
@@ -110,7 +110,7 @@ namespace Nightmare
                 if ((player.Crt.PlayerCrt + player.Crt.EquipCrt) < ran.Next(0, 101))
                 {
                     monster.MonsterHealth -= (int)(player.Stat.BaseAtk + player.Stat.EquipAtk) - monster.MonsterDefense;
-                    if (monster.MonsterHealth < 0)
+                    if (monster.MonsterHealth <= 0)
                     {
                         Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [데미지{(int)(player.Stat.BaseAtk + player.Stat.EquipAtk - monster.MonsterDefense)}]");
                         Console.WriteLine($"Hp: {monster.MonsterHealth + (int)(player.Stat.BaseAtk + player.Stat.EquipAtk) - monster.MonsterDefense} -> Dead");
@@ -125,7 +125,7 @@ namespace Nightmare
                 {
                     monster.MonsterHealth -= 2 * ((int)(player.Stat.BaseAtk + player.Stat.EquipAtk) - monster.MonsterDefense);
 
-                    if (monster.MonsterHealth < 0)
+                    if (monster.MonsterHealth <= 0)
                     {
                         Console.WriteLine($"Lv.{monster.Level} {monster.Name}을 맟췄습니다. [크리티컬: {2 * ((int)(player.Stat.BaseAtk + player.Stat.EquipAtk)) - monster.MonsterDefense}]");
                         Console.WriteLine($"Hp: {monster.MonsterHealth + 2 * ((int)(player.Stat.BaseAtk + player.Stat.EquipAtk)) - monster.MonsterDefense} -> Dead");

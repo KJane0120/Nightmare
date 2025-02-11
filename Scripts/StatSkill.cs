@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Numerics;
+using System.Text;
 
 namespace Nightmare
 {
@@ -8,10 +9,13 @@ namespace Nightmare
         {
             public string Buffskill { get; set; }
             public string SkillType { get; set; }
+            //public int SkillInTime { get; set; }
+
             public StatSkill(string n, string d, int damage, int t, int m, int cooltime, string buff, string sType) : base(n, d, damage, t, m, cooltime)
             {
                 Buffskill = buff;
                 SkillType = sType;
+                //SkillInTime = time;
             }
 
             public override string ToString()
@@ -21,6 +25,44 @@ namespace Nightmare
                 sb.Append(base.ToString()).Append("\n증감효과: ").Append($"{SkillType} + {SkillDamage}").Append("\n스킬대상: ").Append($"{SkillTarget}명\n");
                 return sb.ToString();
             }
+
+            //public void UnUse(Player player, List<Monster> monster, int num)
+            //{
+            //    if (Buffskill.Equals("버프")) // 버프형 스킬 사용
+            //    {
+            //        if (SkillType.Equals("공격력"))
+            //        {
+            //            player.Stat.BaseAtk -= SkillDamage;
+            //        }
+            //        else if (SkillType.Equals("방어력"))
+            //        {
+            //            player.Stat.BaseDef -= SkillDamage;
+            //        }
+            //        else if (SkillType.Equals("체력"))
+            //        {
+                        
+            //        }
+            //        else if (SkillType.Equals("회피율"))
+            //        {
+            //            player.Avd.PlayerAvd -= SkillDamage;
+            //        }
+            //        else
+            //        {
+            //            player.Crt.PlayerCrt -= SkillDamage;
+            //        }
+            //    }
+            //    else // 디버프형 스킬 사용
+            //    {
+            //        if (SkillType.Equals("공격력"))
+            //        {
+            //            monster[num - 1].MonsterAttack += (int)SkillDamage;
+            //        }
+            //        else if (SkillType.Equals("방어력"))
+            //        {
+            //            monster[num - 1].MonsterDefense += (int)SkillDamage;
+            //        }
+            //    }
+            //}
 
             public override void SkillUse(Player player, List<Monster> monster, ref int D)
             {
@@ -64,7 +106,7 @@ namespace Nightmare
                     {
                         player.Stat.Mp -= SkillMp;
                         int num = int.Parse(Console.ReadLine());
-                        monster[num - 1].MonsterAttack -= (int)SkillDamage;
+                        monster[num - 1].MonsterAttack -= (int)SkillDamage;                        
                         Console.WriteLine($"{SkillName}(으)로 {monster[num - 1].Name}의 공격력이 {SkillDamage}만큼 내렸습니다.");
                     }
                     else if (SkillType.Equals("방어력"))
@@ -79,3 +121,4 @@ namespace Nightmare
         }
     }
 }
+

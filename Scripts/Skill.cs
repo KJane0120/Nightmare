@@ -13,7 +13,7 @@ namespace Nightmare
             public float SkillTarget { get; set; }
             public float SkillMp { get; set; }
             public int SkillCoolTime { get; set; }
-            //public int CurrentCoolTime { get; set; }
+            public int CurrentCoolTime { get; set; }
 
             public Skill()
             {
@@ -35,31 +35,14 @@ namespace Nightmare
                 SkillTarget = t;
                 SkillMp = m;
                 SkillCoolTime = cooltime;
-                //CurrentCoolTime = 0;
+                CurrentCoolTime = cooltime;
             }
 
             public virtual void SkillUse(Player player, List<Monster> monster, ref int Death)
             {
-                // 스킬 쿨타임
-                //if (CurrentCoolTime > 0)
-                //{
-                //    Console.WriteLine($"{SkillName}은(는) 아직 쿨타임입니다. (남은 쿨타임: {CurrentCoolTime})");
-                //    return;
-                //}
-                //else
-                //{
-                //    Console.WriteLine($"{player.Name}이(가) {SkillName}을(를) 사용합니다!");
-                //    CurrentCoolTime = SkillCoolTime;
-                //}
+               
             }
 
-            //public void ReduceCooldown() // 쿨타임 감소
-            //{
-            //    if (CurrentCoolTime > 0)
-            //    {
-            //        CurrentCoolTime--;
-            //    }
-            //}
 
             public void SkillSet(Player player)
             {
