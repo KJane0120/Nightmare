@@ -18,6 +18,13 @@
 
         private string name;
 
+        private Dictionary<int , int> map = new Dictionary<int , int>();
+
+        public void GameClear()
+        {
+            DataManager.Instance.CurrentStageClear++;
+        }
+
 
         public void GameStart()
         {

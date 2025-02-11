@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using Nightmare.Data;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -6,7 +8,7 @@
         {
             public int MoneyRange { get; set; }
             public int RandomRange {  get; set; }
-            public bool Clear { get; set; } 
+            public bool IsFinal = false;
        
 
             public Stage(int randomRange, int MoneyRange)
@@ -34,10 +36,10 @@
 
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
-
+                Instance.GameClear();
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
-
+                
                 //다시 돌아가기
             }
             public void BossBattle(Player player) //player
@@ -55,6 +57,7 @@
 
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
+          
 
                 //다시 돌아가기
 
@@ -205,16 +208,6 @@
 
 
 
-            }
-
-            public void GetClearBoSang(List<Monster> mm, Player player)
-            {
-                foreach(Monster m in mm ) 
-                {
-                    player.Gold.PlayerGold += m.MonsterMoney;
-                    
-
-                }
             }
 
             public override string ToString()

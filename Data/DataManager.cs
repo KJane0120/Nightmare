@@ -80,6 +80,9 @@ namespace Nightmare
         //퀘스트 데이터 리스트
         public List<Quest> QuestDatas = new();
 
+
+        public int CurrentStageClear;
+
         //퀘스트 가져오기
         public List<Quest> GetPlayerQuestGroup()
         {
