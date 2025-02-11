@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {
         internal class Stage
         {
+
+
+       
             public int MonsterCount { get; set; }
             public int weight { get; set; }
             public Stage(int monsterCount, int weight)
@@ -17,10 +14,8 @@ namespace Nightmare
                 this.MonsterCount = monsterCount;
                 this.weight = weight;
             }
-            public void Battle()
+            public void Battle(Player player)
             {
-
-                
                 List<Monster> monsters = new List<Monster>();
                 //랜덤 함수
                 Random Ran = new Random();
@@ -34,7 +29,7 @@ namespace Nightmare
                     monsters.Add(mon.Monstersummon(weight));
                 }
 
-                BattlePhase(mon,monsters);
+                BattlePhase(mon,monsters,player);
 
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
@@ -43,21 +38,17 @@ namespace Nightmare
                 //일정 확률의 보상 얻기
 
                 //다시 돌아가기
-
-
-
-
             }
-            public void BossBattle(int numbers) //player
+            public void BossBattle(Player player) //player
             {
                 Boss boss  = new Boss();
-                boss = boss.BossSummon(numbers);
-                boss.BossIntroduce(numbers);
+                boss = boss.BossSummon((int)player.Job);
+                boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
 
                 monsters.Add(boss);
-                BattlePhase(boss, monsters);
+                BattlePhase(boss, monsters, player);
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
 
@@ -68,23 +59,28 @@ namespace Nightmare
 
             }
 
-            public void BattlePhase(Monster mon, List<Monster> monsters)
+            public void BattlePhase(Monster mon, List<Monster> monsters, Player player)
             {
+                Random ran = new Random();
                 int ii = 1;
                 int DeathCount = 0;
                 while (DeathCount < monsters.Count)
                 {
-
                     //foreach로 넣기
                     foreach (Monster monster in monsters)
                     {
-
                         Console.WriteLine($"{ii}. {monster.MonsterDIe(ref DeathCount)}");
                         ii++;
                     }
                     //플레이어 상태 띄우기
-                    ii = 1;
+                    Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
+                    Console.WriteLine($"공격력: {player.Stat.Atk + player.Stat.EquipAtk})");
+                    Console.WriteLine($"방어력: {player.Stat.Def + player.Stat.EquipDef})");
+                    Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
+                    Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}");
+                    Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})");
 
+                    ii = 1;
                     int Select = InputandReturn(1);
                     if (Select == 1)
                     {
@@ -105,7 +101,7 @@ namespace Nightmare
                             }
                             else
                             {
-                                mon.AttackedFromPlayer(monsters[AttackSelect - 1]);
+                                mon.AttackedFromPlayer(monsters[AttackSelect - 1], player);
                                 break;
                             }
 
@@ -117,16 +113,31 @@ namespace Nightmare
                     {
                         Console.WriteLine("잘못된 선택입니다.");
                     }
-
                     foreach (Monster mons in monsters)
                     {
                         if (mons.IsLive)
                         {
-                            mons.MonsterAttackToPlayer();
-                            //만약 플레이어가 죽었다면 초기로 돌아가기
+                            
+                            int Damage = mons.MonsterAttackToPlayer();
+                            if ((player.Avd.EquipAvd + player.Avd.PlayerAvd) < ran.Next(0, 101))
+                            {
+                                player.Stat.Hp -= Damage;
+                                Console.WriteLine($"{Damage}만큼 피해를 입어 {player.Stat.Hp - Damage}가 되었습니다");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"회피 성공");
+                            }
+                            
+
+                            if(player.Stat.Hp < 0)
+                            {
+                                Instance.MoveNextAction(ActionType.Village);
+                            }
+                            
+                            
                         }
                     }
-
                 }
             }
             public int InputandReturn(int i)
