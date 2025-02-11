@@ -24,17 +24,15 @@ namespace Nightmare
                 };
             }
 
-            private void PrintErrorMsg(int number)
-            {
-                Item selectItem = DataManager.Instance.ItemDatas[number];
+            //private void PrintErrorMsg(int number)
+            //{
+            //    Item selectItem = DataManager.Instance.ItemDatas[number];
 
-                
-
-            }
+            //}
             protected override void DisPlay()
             {
                 Console.Clear();
-                OnInputInvalidActionNumber = PrintErrorMsg;
+              //  OnInputInvalidActionNumber = PrintErrorMsg;
                 Console.WriteLine("회복");
                 Console.WriteLine("포션을 사용하여 HP나 MP를 회복할 수 있습니다.");
 
