@@ -23,7 +23,7 @@ namespace Nightmare
             public override string ToString()
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("스킬명: ").Append(SkillName).Append("\n").Append(SkillDst).Append("\n").Append($"소요마나: {SkillMp}\n").Append($"쿨타임: {SkillCoolTime}");
+                sb.Append("스킬명: ").Append(SkillName).Append("\n").Append(SkillDst).Append("\n").Append($"소요마나: {SkillMp}\n").Append($"쿨타임: {SkillCoolTime}턴");
                 return sb.ToString();
             }
 
