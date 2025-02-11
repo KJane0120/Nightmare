@@ -28,37 +28,49 @@ namespace Nightmare
 
         private static void JsonDataLoad()
         {
-            string fileName = "Data\\QuestData.json";
+            string questfilePath = GetFilePath("QuestData");
+            string bossfilePath = GetFilePath("BossData");
 
-            if (!File.Exists(GetFilePath(fileName)))
+            if (!File.Exists(questfilePath))
             {
                 Console.WriteLine("파일이 없습니다.");
                 return;
             }
-            else
-            {
-                //임시로 몬스터 데이터 불러오기 
-                //TODO: 합쳐서 불러오기
-                string json = File.ReadAllText(fileName);
-                string json2 = File.ReadAllText("Data\\BossData.json");
-                var data = JsonConvert.DeserializeObject<List<Quest>>(json);
-                var data2 = JsonConvert.DeserializeObject<Dictionary<long,Boss>>(json2);
 
-                Instance.BossDatas = data2;
-                Instance.QuestDatas = data;
+            string questJson = File.ReadAllText(questfilePath);
+            var qusetData = JsonConvert.DeserializeObject<List<Quest>>(questJson);
+            Instance.QuestDatas = qusetData;
+
+            if (!File.Exists(bossfilePath))
+            {
+                Console.WriteLine("파일이 없습니다.");
+                return;
             }
+
+            string bossJson = File.ReadAllText(bossfilePath);
+            var bossData = JsonConvert.DeserializeObject<Dictionary<long, Boss>>(bossJson);
+            Instance.BossDatas = bossData;
         }
 
         private static string GetFilePath(string fileName)
         {
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
-            return path;
+            var paths = AppDomain.CurrentDomain.BaseDirectory.Split('\\');
+            var newPath = "";
+
+            for (int i = 0; i < paths.Length - 4; i++)
+            {
+                newPath += paths[i] + "\\";
+            }
+
+            newPath += $"Data\\{fileName}.json";
+
+            return newPath;
         }
 
         //아이템 리스트
         //상점 아이템 리스트  
         public Dictionary<int, Item> ShopItems = new();
-        
+
         //가지고 있는 아이템 리스트
         public Dictionary<int, Item> HaveItems = new() { };
 
@@ -94,7 +106,7 @@ namespace Nightmare
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
         public List<Item> ConsumableItems = new();
         //스테이지 클리어별 보상에서 드랍될 시 추가해주기
-        
+
     }
 
 }
