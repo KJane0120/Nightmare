@@ -39,7 +39,8 @@ namespace Nightmare
         public void DisplayQuestTitle()
         {
             string IsProgressText = IsProgress ? "[진행중]" : "";
-            Console.WriteLine($"\n{Id}.{Title}{IsProgressText}");
+            Console.Write($"\n{Id}.{Title}");
+            UtilityManager.ColorWriteLine(IsProgressText,ConsoleColor.Green);
         }
 
         public void DisplayQuestInfo()
