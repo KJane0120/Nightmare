@@ -31,9 +31,14 @@ namespace Nightmare
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
 
-                for (int i = 0; i < DataManager.Instance.ShopItems.Count; i++)
+                //for (int i = 0; i < DataManager.Instance.ShopItems.Count; i++)
+                //{
+                //    Console.WriteLine($"- {DataManager.Instance.ShopItems[i+1].ShowShopItem()}");
+                //}
+
+                foreach (var item in DataManager.Instance.ItemDatas.Where(item => item.Key >= 1 && item.Key <= 10))
                 {
-                    Console.WriteLine($"- {DataManager.Instance.ShopItems[i+1].ShowShopItem()}");
+                    Console.WriteLine($"- {item.Value.ShowShopItem()}");
                 }
               
 

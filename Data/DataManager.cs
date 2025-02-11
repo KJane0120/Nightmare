@@ -13,7 +13,7 @@ namespace Nightmare
                 if (_Instance == null)
                 {
                     _Instance = new DataManager();
-                    Initialize();
+
                 }
                 return _Instance;
             }
@@ -30,6 +30,7 @@ namespace Nightmare
         {
             string questfilePath = GetFilePath("QuestData");
             string bossfilePath = GetFilePath("BossData");
+            string itemfilePath = GetFilePath("ItemData");
 
             if (!File.Exists(questfilePath))
             {
@@ -38,8 +39,8 @@ namespace Nightmare
             }
 
             string questJson = File.ReadAllText(questfilePath);
-            var qusetData = JsonConvert.DeserializeObject<List<Quest>>(questJson);
-            Instance.QuestDatas = qusetData;
+            var questData = JsonConvert.DeserializeObject<List<Quest>>(questJson);
+            Instance.QuestDatas = questData;
 
             if (!File.Exists(bossfilePath))
             {
@@ -50,6 +51,17 @@ namespace Nightmare
             string bossJson = File.ReadAllText(bossfilePath);
             var bossData = JsonConvert.DeserializeObject<Dictionary<long, Boss>>(bossJson);
             Instance.BossDatas = bossData;
+
+            if (!File.Exists(itemfilePath))
+            {
+                Console.WriteLine("파일이 없습니다.");
+                return;
+            }
+
+            string itemJson = File.ReadAllText(itemfilePath);
+            var itemData = JsonConvert.DeserializeObject<Dictionary<long, Item>>(itemJson);
+            Instance.ItemDatas = itemData;
+
         }
 
         private static string GetFilePath(string fileName)
@@ -108,8 +120,29 @@ namespace Nightmare
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
         public List<Item> ConsumableItems = new();
-        //스테이지 클리어별 보상에서 드랍될 시 추가해주기
+        //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
 
+        public List<Portion> PortionDatas = new()
+        {
+            new Portion()
+            {
+                PortionId = 18,
+                PortionCount = 3,
+                PortionMaxCount = 3
+            },
+            new Portion()
+            {
+                PortionId = 24,
+                PortionCount = 3,
+                PortionMaxCount = 3
+            },
+            new Portion()
+            {
+                PortionId = 25,
+                PortionCount = 0,
+                PortionMaxCount = 4
+            }
+        };
     }
 
 }
