@@ -126,11 +126,11 @@
         private Job JobChoice(int num)
         {
             var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, int Avd, int Crt)> {
-            { 1, (Job.Dwarf,10,5,100,50,10,15) },
-            { 2, (Job.NewSister, 15, 3, 100, 50, 10, 15) },
-            { 3, (Job.Saison, 15, 3, 100, 50, 10, 15) },
-            { 4, (Job.OctopusWitch, 15, 10, 80, 100, 10, 15) },
-            { 5, (Job.WildAnimal, 25, 20, 120, 20, 10, 20) }};
+            { 1, (Job.Dwarf,10,5,100,30,10,15) },
+            { 2, (Job.NewSister, 15, 5, 70, 30, 10, 15) },
+            { 3, (Job.Saison, 12, 7, 100, 20, 10, 15) },
+            { 4, (Job.OctopusWitch, 7, 4, 50, 50, 10, 15) },
+            { 5, (Job.WildAnimal, 20, 10, 150, 10, 10, 15) }};
 
 
             if (jobStats.TryGetValue(num, out var stats))
@@ -144,12 +144,11 @@
                 return stats.job;
             }
 
-            Console.WriteLine("\n잘못된 입력입니다.\n다시 직업을 선택해주세요.\n");
+            Console.WriteLine("\n잘못된 입력입니다.\n다시 동화를 선택해주세요.\n");
             Console.WriteLine();
 
             SetJob();
             return Job.None;
         }
-
     }
 }
