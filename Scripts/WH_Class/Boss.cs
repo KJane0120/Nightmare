@@ -6,14 +6,14 @@ namespace Nightmare
     internal class Boss : Monster
     {
         public int MissRate {  get; set; }
-        public int DefenseCount {  get; set; }
+
         public int SkillCount { get; set; }
 
-        public Boss(int MissRate, int DefenseCount, int skillCount, int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp, int level) : 
+        public Boss(int MissRate, int skillCount, int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp, int level) : 
             base(level,Health,Attack,Defense,name,MonsterMoney, MonsterExp)
         {
             this.MissRate = MissRate;
-            this.DefenseCount = DefenseCount;
+
             this.SkillCount = skillCount;
         }
         public Boss() { }
@@ -34,28 +34,7 @@ namespace Nightmare
 
         }
 
-        public Boss BossSummon(int num)
-        {
-            switch(num) 
-            {
-                case 0:
-                    Boss SnowWhite = new Boss(30,2,2,250,45,25,"백설공주",1500,50,5);
-                    return SnowWhite;
-                case 1:
-                    Boss Cinderella = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Cinderella;
-                case 2:
-                    Boss Aurora = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Aurora;
-                 case 3:
-                    Boss Ariel = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Ariel;
-                default:
-                    Boss Belle = new Boss(30, 2, 2, 250, 45, 25, "백설공주", 1500, 50, 5);
-                    return Belle;
-            }
-
-        }
+   
         public void BossIntroduce(int num)
         {
             switch (num)

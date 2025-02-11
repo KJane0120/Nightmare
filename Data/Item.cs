@@ -12,13 +12,10 @@ namespace Nightmare.Data
         public int Id { get; set; }
         public string? Name { get; set; }
         public ItemType Type { get; set; }
-        public int Atk { get; set; }
-        public int Def { get; set; }
 
-        //Hp, Mp, Avd, Crt를 하나의 변수로 묶어 아이템타입이 ~면 ~증가. 라는 식으로 하는 건 어떤지.
+        //Hp, Mp, Atk, Def, Avd, Crt를 하나의 변수로 묶어 아이템타입이 ~면 ~증가. 
         public float Value { get; set; }
         public string? Desc { get; set; }
-
         public int Cost { get; set; }
         public bool IsPurchase { get; set; } = false;
         public bool IsEquip { get; set; } = false;
@@ -40,12 +37,43 @@ namespace Nightmare.Data
             HPPortion = 5,
             [Description("마나 회복 포션")]
             MPPortion = 6,
+            [Description("스페셜 아이템")]
+            Special = 7,
         }
+
         //무기인지 방어구인지에 따라 공격력이나 방어력을 출력
         public string GetTypeString()
         {
-            string str = (Type == ItemType.Weapon) ? $"공격력 +{Atk}" : $"방어력 +{Def}";
+            string str = "";
+            switch (Type)
+            {
+                case ItemType.Weapon:
+                    str = $"공격력 +{Value}";
+                    break;
+                case ItemType.Armor:
+                    str = $"방어력 +{Value}";
+                    break;
+                case ItemType.accessory:
+                    str = $"치명타율 +{Value} | 회피율 +{Value}";
+                    break;
+                case ItemType.HeartPiece:
+                    str = "";
+                    break;
+                case ItemType.HPPortion:
+                    str = $"HP +{Value}";
+                    break;
+                case ItemType.MPPortion:
+                    str = $"MP +{Value}";
+                    break;
+                case ItemType.Special:
+                    str = $"HP +{Value} | MP +{Value}";
+                    break;
+
+
+            }
             return str;
+
+
         }
         //구매 여부에 따른 출력
         public string GetPriceString()
@@ -64,12 +92,18 @@ namespace Nightmare.Data
         {
             string str = $"{Name} | {GetTypeString()} | {Desc} ";
             str += IsSold ? " | 판매완료" : $" | {Cost * 0.85f} G";
-            return str;  
+            return str;
         }
         public string SelectItem()
         {
             string str = IsEquip ? "[E]" : "";
             str += $"{Name} | {GetTypeString()} | {Desc}";
+            return str;
+        }
+
+        public string ShowPortion()
+        {
+            string str = $"{Name} | ";
             return str;
         }
     }

@@ -23,7 +23,7 @@ namespace Nightmare
 
             private void PrintErrorMsg(int number)
             {
-                Item selectItem = DataManager.Instance.ShopItems[number];
+                Item selectItem = DataManager.Instance.ItemDatas[number];
 
                 //아이템이 구매한 적이 없다면 
                 if (selectItem.IsPurchase == false)
@@ -66,11 +66,14 @@ namespace Nightmare
 
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
-                for (int i = 0; i < DataManager.Instance.ShopItems.Count; i++)
-                {
-                    Console.WriteLine($"- {i+1}. {DataManager.Instance.ShopItems[i+1].ShowShopItem()}");
-                }
 
+                int i = 1;
+                foreach (var item in DataManager.Instance.ItemDatas.Where(item => item.Key >= 1 && item.Key <= 10))
+                {
+                    
+                    Console.WriteLine($"- {i}. {item.Value.ShowShopItem()}");
+                    i++;
+                }
                 Console.WriteLine();
             
 
