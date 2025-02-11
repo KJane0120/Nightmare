@@ -14,5 +14,15 @@ namespace Nightmare
             PlayerGold = 500;
         }
 
+        public void GoldIncrease(int add) // 골드 증가
+        {
+            PlayerGold += add;
+        }
+
+        public void GoldDecrease(int add) // 골드 감소
+        {
+            PlayerGold -= add;
+        }
+
     }
 }
