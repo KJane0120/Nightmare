@@ -5,11 +5,11 @@ namespace Nightmare
 {
     public class Stat
     {
-        Item itemStat = new Item() { Atk = 0, Def = 0 };
+        Item itemStat = new Item() { Value = 0 };
         public float BaseAtk;
-        public int EquipAtk;
+        public float EquipAtk;
         public int BaseDef;
-        public int EquipDef;
+        public float EquipDef;
         public int Hp;
         public int MaxHp;
         public int Mp;
@@ -17,8 +17,8 @@ namespace Nightmare
 
         public Stat()
         {
-            EquipAtk = itemStat.Atk;
-            EquipDef = itemStat.Def;
+            EquipAtk = itemStat.Value;
+            EquipDef = itemStat.Value;
         }
     }
 

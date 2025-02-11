@@ -117,7 +117,7 @@ namespace Nightmare
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
         public List<Item> ConsumableItems = new();
-        //스테이지 클리어별 보상에서 드랍될 시 추가해주기
+        //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
 
     }
 

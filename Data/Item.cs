@@ -16,7 +16,6 @@ namespace Nightmare.Data
         //Hp, Mp, Atk, Def, Avd, Crt를 하나의 변수로 묶어 아이템타입이 ~면 ~증가. 
         public float Value { get; set; }
         public string? Desc { get; set; }
-
         public int Cost { get; set; }
         public bool IsPurchase { get; set; } = false;
         public bool IsEquip { get; set; } = false;
