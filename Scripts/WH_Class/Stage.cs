@@ -4,9 +4,9 @@
     {
         internal class Stage
         {
-            int MoneyRange;
-            int RandomRange;
-            bool Clear;
+            public int MoneyRange { get; set; }
+            public int RandomRange {  get; set; }
+            public bool Clear { get; set; } 
        
 
             public Stage(int randomRange, int MoneyRange)
@@ -109,21 +109,61 @@
                         }
                     }
                     else if (Select == 2)
-                    { }
+                    {
+                        int number = 1;
+                        foreach (Skill skill in player.Playerskill)
+                        {
+                            Console.WriteLine($"{number}. {skill.ToString()}");
+                            number++;
+                        }
+
+                        while (true)
+                        {
+                            int str = InputandReturn(3);
+                            if (str > player.Playerskill.Count || str == 0)
+                            {
+                                Console.WriteLine("잘못된 선택입니다.");
+                            }
+
+                            player.Playerskill[str - 1].SkillUse(player, monsters, ref DeathCount);
+                            break;
+
+                        }
+                    }
+                    else if (Select == 3)
+                    {
+
+                    }
                     else
                     {
                         Console.WriteLine("잘못된 선택입니다.");
                     }
+
+
+
+                    //몬스터 공격
+
+
                     foreach (Monster mons in monsters)
                     {
+                        mons.MonsterDIe(ref DeathCount);
                         if (mons.IsLive)
                         {
                             
                             int Damage = mons.MonsterAttackToPlayer();
                             if ((player.Avd.EquipAvd + player.Avd.PlayerAvd) < ran.Next(0, 101))
                             {
-                                player.Stat.Hp -= Damage;
-                                Console.WriteLine($"{Damage}만큼 피해를 입어 {player.Stat.Hp - Damage}가 되었습니다");
+                                if (Damage > (player.Stat.BaseDef + player.Stat.EquipDef))
+                                {
+                                    player.Stat.Hp -= Damage - (player.Stat.BaseDef + player.Stat.EquipDef);
+                                    Console.WriteLine($"데미지 {Damage} -플레이어 방어력{player.Stat.BaseDef + player.Stat.EquipDef} =" +
+                                        $"{Damage - (player.Stat.BaseDef + player.Stat.EquipDef)} 피해를 입어 {player.Stat.Hp}가 되었습니다");
+                                }
+                                else
+                                {
+                                    player.Stat.Hp -= 1;
+                                    Console.WriteLine("방어력이 높아서 1만 닳음");
+                                }
                             }
                             else
                             {
@@ -148,15 +188,33 @@
                     Console.WriteLine("행동을 골라주세요");
                     Console.WriteLine("1. 공격");
                     Console.WriteLine("2. 스킬");
+                    Console.WriteLine("3. 아이템 사용");
                     return int.Parse(Console.ReadLine());
                 }
-                else
+                else if(i == 2)
                 {
                     Console.WriteLine("어느 적을 공격할거니");
                     return int.Parse(Console.ReadLine());
                 }
+                else 
+                {
+                    Console.WriteLine("사용할 스킬을 골라주세요");
+
+                    return int.Parse(Console.ReadLine());
+                }
 
 
+
+            }
+
+            public void GetClearBoSang(List<Monster> mm, Player player)
+            {
+                foreach(Monster m in mm ) 
+                {
+                    player.Gold.PlayerGold += m.MonsterMoney;
+                    
+
+                }
             }
 
             public override string ToString()

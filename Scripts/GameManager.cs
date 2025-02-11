@@ -32,8 +32,7 @@
             Player.Crt = new Crt();
 
             SetName();
-            Skill skill = new Skill();
-            skill.SkillSet(Player);
+
         }
 
         private void SetName()
@@ -102,6 +101,8 @@
             if (int.TryParse(inputNumber, out int actionNumber))
             {
                 Player.Job = JobChoice(actionNumber);
+                Skill skill = new Skill();
+                skill.SkillSet(Player);
                 MoveNextAction(ActionType.Village);
             }
             else

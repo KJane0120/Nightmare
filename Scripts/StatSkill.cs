@@ -22,7 +22,7 @@ namespace Nightmare
                 return sb.ToString();
             }
 
-            public override void SkillUse(Player player, List<Monster> monster)
+            public override void SkillUse(Player player, List<Monster> monster, ref int D)
             {
                 if (Buffskill.Equals("버프")) // 버프형 스킬 사용
                 {

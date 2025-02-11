@@ -36,7 +36,7 @@ namespace Nightmare
                 SkillCoolTime = cooltime;
             }
 
-            public virtual void SkillUse(Player player, List<Monster> monster)
+            public virtual void SkillUse(Player player, List<Monster> monster, ref int Death)
             {
 
             }
@@ -45,8 +45,8 @@ namespace Nightmare
                 switch ((int)player.Job)
                 {
                     case 1:
-                        Skill dwarfSkill1 = new Skill("난쟁이의 몸통박치기", "난쟁이가 화났습니다.", 20, 1, 10, 3);
-                        Skill dwarfSkill2 = new Skill("난쟁이의 포효", "난쟁이가 울부짖습니다.", 5, 1, 10, 3);
+                        Skill dwarfSkill1 = new AttackSkill("난쟁이의 몸통박치기", "난쟁이가 화났습니다.", 20, 1, 10, 3);
+                        Skill dwarfSkill2 = new AttackSkill("난쟁이의 포효", "난쟁이가 울부짖습니다.", 5, 1, 10, 3);
                         player.Playerskill.Add(dwarfSkill1);
                         player.Playerskill.Add(dwarfSkill2);
                         break;
