@@ -13,6 +13,7 @@ namespace Nightmare
                 Buffskill = buff;
                 SkillType = sType;
             }
+
             public override string ToString()
             {
                 StringBuilder sb = new StringBuilder();
@@ -28,13 +29,13 @@ namespace Nightmare
                     if (SkillType.Equals("공격력"))
                     {
                         player.Stat.Mp -= SkillMp;
-                        player.Stat.Atk += SkillDamage;
+                        player.Stat.BaseAtk += SkillDamage;
                         Console.WriteLine($"{SkillName}(으)로 공격력이 {SkillDamage}만큼 올랐습니다.");
                     }
                     else if (SkillType.Equals("방어력"))
                     {
                         player.Stat.Mp -= SkillMp;
-                        player.Stat.Def += SkillDamage;
+                        player.Stat.BaseDef += SkillDamage;
                         Console.WriteLine($"{SkillName}(으)로 방어력이 {SkillDamage}만큼 올랐습니다.");
                     }
                     else if (SkillType.Equals("체력"))
@@ -76,10 +77,5 @@ namespace Nightmare
                 }
             }
         }
-
-
-
-
-
     }
 }

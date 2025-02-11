@@ -32,6 +32,8 @@
             Player.Crt = new Crt();
 
             SetName();
+            Skill skill = new Skill();
+            skill.SkillSet(Player);
         }
 
         private void SetName()
@@ -84,6 +86,7 @@
 
         private void SetJob() // 직업설정
         {
+            Console.WriteLine("");
             Console.WriteLine("어떤 동화를 들어보시겠습니까?\n");
             Console.WriteLine("1. 백설공주와 일곱 번째 난쟁이");
             Console.WriteLine("2. 신데렐라의 새 언니");
@@ -127,55 +130,26 @@
 
         private Job JobChoice(int num)
         {
-            switch (num)
+            var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, int Avd, int Crt)> {
+            { 1, (Job.Dwarf,10,5,100,30,10,15) },
+            { 2, (Job.NewSister, 15, 5, 70, 30, 10, 15) },
+            { 3, (Job.Saison, 12, 7, 100, 20, 10, 15) },
+            { 4, (Job.OctopusWitch, 7, 4, 50, 50, 10, 15) },
+            { 5, (Job.WildAnimal, 20, 10, 150, 10, 10, 15) }};
+
+
+            if (jobStats.TryGetValue(num, out var stats))
             {
-                case 1:
-                    Player.Stat.Atk = 10;
-                    Player.Stat.Def = 5;
-                    Player.Stat.Hp = 100;
-                    Player.Stat.MaxHp = 100;
-                    Player.Stat.Mp = 50;
-                    Player.Stat.MaxMp = 50;
-                    Player.QuestGroupId = 1;
-                    return Job.Dwarf;
-                case 2:
-                    Player.Stat.Atk = 15;
-                    Player.Stat.Def = 3;
-                    Player.Stat.Hp = 100;
-                    Player.Stat.MaxHp = 100;
-                    Player.Stat.Mp = 50;
-                    Player.Stat.MaxMp = 50;
-                    Player.QuestGroupId = 2;
-                    return Job.NewSister;
-                case 3:
-                    Player.Stat.Atk = 15;
-                    Player.Stat.Def = 3;
-                    Player.Stat.Hp = 100;
-                    Player.Stat.MaxHp = 100;
-                    Player.Stat.Mp = 50;
-                    Player.Stat.MaxMp = 50;
-                    Player.QuestGroupId = 3;
-                    return Job.Saison;
-                case 4:
-                    Player.Stat.Atk = 15;
-                    Player.Stat.Def = 10;
-                    Player.Stat.Hp = 80;
-                    Player.Stat.MaxHp = 80;
-                    Player.Stat.Mp = 100;
-                    Player.Stat.MaxMp = 100;
-                    Player.QuestGroupId = 4;
-                    return Job.OctopusWitch;
-                case 5:
-                    Player.Stat.Atk = 25;
-                    Player.Stat.Def = 20;
-                    Player.Stat.Hp = 120;
-                    Player.Stat.MaxHp = 120;
-                    Player.Stat.Mp = 20;
-                    Player.Stat.MaxMp = 20;
-                    Player.QuestGroupId = 5;
-                    return Job.WildAnimal;
+                Player.Stat.BaseAtk = stats.BaseAtk;
+                Player.Stat.BaseDef = stats.BaseDef;
+                Player.Stat.Hp = Player.Stat.MaxHp = stats.Hp;
+                Player.Stat.Mp = Player.Stat.MaxMp = stats.Mp;
+                Player.Avd.PlayerAvd = stats.Avd;
+                Player.Crt.PlayerCrt = stats.Crt;
+                return stats.job;
             }
-            Console.WriteLine("\n잘못된 입력입니다.\n다시 직업을 선택해주세요.\n");
+
+            Console.WriteLine("\n잘못된 입력입니다.\n다시 동화를 선택해주세요.\n");
             Console.WriteLine();
 
             SetJob();

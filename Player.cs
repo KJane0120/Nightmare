@@ -11,6 +11,7 @@ namespace Nightmare
         public Gold Gold { get; set; }
         public Avd Avd { get; set; }
         public Crt Crt { get; set; }
+        public long QuestGroupID {  get; set; }
 
         public long QuestGroupId { get; set; }
 
@@ -21,9 +22,9 @@ namespace Nightmare
         {
             Console.WriteLine($"Lv. {Level.PlayerLevel}");
             Console.WriteLine($"{Name} ( {UtilityManager.GetDescription(Job)} )");
-            string str = Stat.EquipAtk == 0 ? $"공격력 : {Stat.Atk}" : $"공격력 : {Stat.Atk + Stat.EquipAtk} (+{Stat.EquipAtk})";
+            string str = Stat.EquipAtk == 0 ? $"공격력 : {Stat.BaseAtk}" : $"공격력 : {Stat.BaseAtk + Stat.EquipAtk} (+{Stat.EquipAtk})";
             Console.WriteLine(str);
-            str = Stat.EquipDef == 0 ? $"방어력 : {Stat.Def}" : $"방어력 : {Stat.Def + Stat.EquipDef} (+{Stat.EquipDef})";
+            str = Stat.EquipDef == 0 ? $"방어력 : {Stat.BaseDef}" : $"방어력 : {Stat.BaseDef + Stat.EquipDef} (+{Stat.EquipDef})";
             Console.WriteLine(str);
             Console.WriteLine($"체력 : {Stat.Hp} / {Stat.MaxHp}");
             Console.WriteLine($"마력 : {Stat.Mp} / {Stat.MaxMp}");
@@ -36,8 +37,8 @@ namespace Nightmare
         public void LevelUp()
         {
             _Level++;
-            Stat.Atk += 0.5f;
-            Stat.Def += 1;
+            Stat.BaseAtk += 0.5f;
+            Stat.BaseDef += 1;
         }
 
         public List<Skill> Playerskill = new List<Skill>();
