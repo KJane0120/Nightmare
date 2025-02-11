@@ -32,7 +32,6 @@
             Player.Crt = new Crt();
 
             SetName();
-
         }
 
         private void SetName()
@@ -85,7 +84,7 @@
 
         private void SetJob() // 직업설정
         {
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine("어떤 동화를 들어보시겠습니까?\n");
             Console.WriteLine("1. 백설공주와 일곱 번째 난쟁이");
             Console.WriteLine("2. 신데렐라의 새 언니");

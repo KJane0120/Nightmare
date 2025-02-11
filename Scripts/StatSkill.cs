@@ -18,7 +18,7 @@ namespace Nightmare
             {
                 StringBuilder sb = new StringBuilder();
                 base.ToString();
-                sb.Append(base.ToString()).Append("\n증감효과: ").Append(SkillDamage).Append("\n스킬대상: ").Append(SkillTarget);
+                sb.Append(base.ToString()).Append("\n증감효과: ").Append($"{SkillType} + {SkillDamage}").Append("\n스킬대상: ").Append($"{SkillTarget}명\n");
                 return sb.ToString();
             }
 
@@ -64,14 +64,14 @@ namespace Nightmare
                     {
                         player.Stat.Mp -= SkillMp;
                         int num = int.Parse(Console.ReadLine());
-                        monster[num - 1].MonsterAttack -= SkillDamage;
+                        monster[num - 1].MonsterAttack -= (int)SkillDamage;
                         Console.WriteLine($"{SkillName}(으)로 {monster[num - 1].Name}의 공격력이 {SkillDamage}만큼 내렸습니다.");
                     }
                     else if (SkillType.Equals("방어력"))
                     {
                         player.Stat.Mp -= SkillMp;
                         int num = int.Parse(Console.ReadLine());
-                        monster[num - 1].MonsterDefense -= SkillDamage;
+                        monster[num - 1].MonsterDefense -= (int)SkillDamage;
                         Console.WriteLine($"{SkillName}(으)로 {monster[num - 1].Name}의 방어력이 {SkillDamage}만큼 내렸습니다.");
                     }
                 }
