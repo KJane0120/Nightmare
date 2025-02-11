@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using System.Collections.Generic;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -6,8 +8,8 @@
         {
             public int MoneyRange { get; set; }
             public int RandomRange {  get; set; }
-            public bool Clear { get; set; } 
-       
+            public bool Clear { get; set; }
+            public bool IsFinal { get; set; }
 
             public Stage(int randomRange, int MoneyRange)
             {
@@ -43,7 +45,7 @@
             public void BossBattle(Player player) //player
             {
                 Boss boss  = new Boss();
-                boss = boss.BossSummon((int)player.Job);
+                boss = DataManager.Instance.BossDatas[(int)player.Job];
                 boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
@@ -93,6 +95,7 @@
                             if (AttackSelect < 1 || AttackSelect > monsters.Count)
                             {
                                 Console.WriteLine("잘못된 적 선택");
+                                
                                 continue;
                             }
                             else if (!monsters[AttackSelect - 1].IsLive)
@@ -110,14 +113,7 @@
                                         skill.CurrentCoolTime++;                                        
                                     }
                                 }
-                                //foreach (var skill in player.Playerskill)
-                                //{
-                                //    if(skill is StatSkill unUse)
-                                //    {
-                                //        unUse.UnUse(player, monsters, );
-                                        
-                                //    }
-                                //}
+                                Instance.TakeAction();
                                 break;
                             }
                         }
@@ -142,11 +138,13 @@
                             if (player.Playerskill[str - 1].SkillMp > player.Stat.Mp)
                             {
                                 Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp - player.Stat.Mp}가 부족합니다");
+                                BattlePhase(mon, monsters, player);
                                 continue;
                             }
                             if (player.Playerskill[str - 1].CurrentCoolTime < player.Playerskill[str - 1].SkillCoolTime)
                             {                                
                                 Console.WriteLine("쿨타임입니다.");
+                                BattlePhase(mon, monsters, player);
                                 continue;
                             }
 
@@ -157,6 +155,7 @@
                                     skill.CurrentCoolTime++;
                                 }
                             }
+                            Instance.TakeAction();
                             player.Playerskill[str - 1].SkillUse(player, monsters, ref DeathCount);
                             player.Playerskill[str - 1].CurrentCoolTime = 0;                            
                             break;
@@ -164,7 +163,7 @@
                     }
                     else if (Select == 3)
                     {
-
+                        Instance.TakeAction();
                     }
                     else
                     {

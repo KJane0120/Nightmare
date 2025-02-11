@@ -38,7 +38,7 @@ namespace Nightmare
                 }
             }
 
-            public AttackSkill(string n, string d, int damage, int t, int m, int cooltime) : base(n, d, damage, t, m, cooltime)
+            public AttackSkill(string n, string d, int damage, int t, int m, int cooltime, int st) : base(n, d, damage, t, m, cooltime, st)
             {
 
             }
