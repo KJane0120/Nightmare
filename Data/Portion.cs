@@ -48,7 +48,7 @@ namespace Nightmare
                     }
                     else
                     {
-                        stat.Hp += 10;
+                        stat.Mp += 10;
                     }
 
                     //Mp+10이 MaxMp보다 크다면 Mp = MaxMp
@@ -82,9 +82,9 @@ namespace Nightmare
             else
             {
                 Console.WriteLine("포션이 부족합니다!");
-                
             }
             OnUsePortionEvent();
+
             
         }
 
@@ -99,6 +99,11 @@ namespace Nightmare
                 portion.PortionCount = portion.PortionMaxCount;
                 Console.WriteLine("더이상 가질 수 없습니다.");
             }
+        }
+        public string ShowPortion()
+        {
+            string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (개수 : {PortionCount} / {PortionMaxCount} )";
+            return str;
         }
     }
 }
