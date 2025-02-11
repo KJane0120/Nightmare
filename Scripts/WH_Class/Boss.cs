@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+
 
 namespace Nightmare
 {
@@ -18,7 +14,7 @@ namespace Nightmare
         {
             this.MissRate = MissRate;
             this.DefenseCount = DefenseCount;
-            SkillCount = skillCount;
+            this.SkillCount = skillCount;
         }
         public Boss() { }
 
