@@ -30,6 +30,7 @@ namespace Nightmare
         {
             string questfilePath = GetFilePath("QuestData");
             string bossfilePath = GetFilePath("BossData");
+            string itemfilePath = GetFilePath("ItemData");
 
             if (!File.Exists(questfilePath))
             {
@@ -38,8 +39,8 @@ namespace Nightmare
             }
 
             string questJson = File.ReadAllText(questfilePath);
-            var qusetData = JsonConvert.DeserializeObject<List<Quest>>(questJson);
-            Instance.QuestDatas = qusetData;
+            var questData = JsonConvert.DeserializeObject<List<Quest>>(questJson);
+            Instance.QuestDatas = questData;
 
             if (!File.Exists(bossfilePath))
             {
@@ -50,6 +51,17 @@ namespace Nightmare
             string bossJson = File.ReadAllText(bossfilePath);
             var bossData = JsonConvert.DeserializeObject<Dictionary<long, Boss>>(bossJson);
             Instance.BossDatas = bossData;
+
+            if (!File.Exists(itemfilePath))
+            {
+                Console.WriteLine("파일이 없습니다.");
+                return;
+            }
+
+            string itemJson = File.ReadAllText(itemfilePath);
+            var itemData = JsonConvert.DeserializeObject<Dictionary<long, Item>>(itemJson);
+            Instance.ItemDatas = itemData;
+
         }
 
         private static string GetFilePath(string fileName)
