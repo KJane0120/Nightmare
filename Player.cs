@@ -13,7 +13,6 @@ namespace Nightmare
         public Crt Crt { get; set; }
         public int CurrentExp { get; set; }
         public long QuestGroupID { get; set; }
-
         public long QuestGroupId { get; set; }
 
 
