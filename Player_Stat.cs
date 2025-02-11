@@ -34,14 +34,7 @@ namespace Nightmare
 
 
 
-    public class Gold
-    {
-        public int PlayerGold;
-        public Gold()
-        {
-            PlayerGold = 1500;
-        }
-    }
+    
 
 
     public enum Job
