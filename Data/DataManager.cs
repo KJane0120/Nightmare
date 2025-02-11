@@ -13,7 +13,7 @@ namespace Nightmare
                 if (_Instance == null)
                 {
                     _Instance = new DataManager();
-                    
+
                 }
                 return _Instance;
             }
@@ -123,19 +123,19 @@ namespace Nightmare
         {
             new Portion()
             {
-                Data = Instance.ItemDatas[18],
+                PortionId = 18,
                 PortionCount = 3,
                 PortionMaxCount = 3
             },
             new Portion()
             {
-                Data = Instance.ItemDatas[24],
+                PortionId = 24,
                 PortionCount = 3,
                 PortionMaxCount = 3
             },
             new Portion()
             {
-                Data = Instance.ItemDatas[25],
+                PortionId = 25,
                 PortionCount = 0,
                 PortionMaxCount = 4
             }

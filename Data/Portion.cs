@@ -9,7 +9,8 @@ namespace Nightmare
 {
     public class Portion : Item
     {
-        public Item Data { get; set; }
+        public long PortionId { get; set; }
+        public Item Data => DataManager.Instance.ItemDatas[PortionId];
         public int PortionCount { get; set; }
         public int PortionMaxCount { get; set; }
 
