@@ -21,8 +21,9 @@
 
         public void GameStart()
         {
-
             DataManager.Initialize();
+
+            ASCIIManager.DisplayASCIIArt();
 
             Player = new Player();
             Player.Level = new Level();
@@ -38,7 +39,7 @@
 
         private void SetName()
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("\"늦었다, 늦었어!\"");
             Console.WriteLine("하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다.");
             Console.WriteLine("말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?");
