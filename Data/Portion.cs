@@ -14,6 +14,10 @@ namespace Nightmare
         public int PortionCount { get; set; }
         public int PortionMaxCount { get; set; }
 
+        //포션을 사용했을 때 이벤트
+        public Action OnUsePortionEvent = delegate { };
+
+        
 
         public void UsePortion()
         {
@@ -33,7 +37,7 @@ namespace Nightmare
                     {
                        stat.Hp += 20;
                     }
-                        //Hp+20이 MaxHp보다 크다면 Hp =MaxHp
+                        //Hp+20이 MaxHp보다 크다면 Hp = MaxHp
                         //아니라면 Hp += 20
                 }
                 else if(Data.Type == ItemType.MPPortion) //마나 회복 포션이라면
@@ -73,7 +77,27 @@ namespace Nightmare
                         stat.Mp += 50;
                     }
                 }
-                //DisPlay();
+                
+            }
+            else
+            {
+                Console.WriteLine("포션이 부족합니다!");
+                
+            }
+            OnUsePortionEvent();
+            
+        }
+
+        public void MaximumHavePortion(Portion portion)
+        {
+            if(portion.PortionCount < portion.PortionMaxCount)
+            {
+                portion.PortionCount++;
+            }
+            else
+            {
+                portion.PortionCount = portion.PortionMaxCount;
+                Console.WriteLine("더이상 가질 수 없습니다.");
             }
         }
     }

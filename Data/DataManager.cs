@@ -24,6 +24,7 @@ namespace Nightmare
         public static void Initialize()
         {
             JsonDataLoad();
+            Instance.InitializeConsumableItems();
         }
 
         private static void JsonDataLoad()
@@ -80,7 +81,7 @@ namespace Nightmare
         }
 
         //아이템 리스트
-        //상점 아이템 리스트  
+        //상점 아이템 리스트  => json으로 바꾸면서 더이상 이 리스트를 참조하지 않아서 삭제해도 될듯합니다. 
         public Dictionary<int, Item> ShopItems = new();
 
         //가지고 있는 아이템 리스트
@@ -120,6 +121,25 @@ namespace Nightmare
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
         public List<Item> ConsumableItems = new();
+
+        //기본 포션 3개씩 추가하는 함수
+        public void InitializeConsumableItems()
+        {
+            foreach (var portion in PortionDatas.Where(p => p.PortionId == 18 || p.PortionId == 24))
+            {
+                if (ItemDatas.TryGetValue(portion.PortionId, out Item itemData))
+                {
+                    // PortionCount만큼 ConsumableItems 리스트에 추가
+                    for (int i = 0; i < portion.PortionCount; i++)
+                    {
+                        ConsumableItems.Add(itemData);
+                        //HaveItems.Add(itemData.Id, itemData);
+                        //인벤토리 아이템목록에 추가해주고 싶음
+                    }
+                }
+            }
+        }
+
         //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
 
         public List<Portion> PortionDatas = new()
@@ -144,7 +164,6 @@ namespace Nightmare
             }
         };
     }
-
 }
 //장착된 아이템 리스트
 
