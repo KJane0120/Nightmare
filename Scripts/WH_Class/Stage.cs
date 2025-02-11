@@ -45,7 +45,7 @@ namespace Nightmare
             public void BossBattle(Player player) //player
             {
                 Boss boss  = new Boss();
-                boss = boss.BossSummon((int)player.Job);
+                boss = DataManager.Instance.BossDatas[(int)player.Job];
                 boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
@@ -77,6 +77,7 @@ namespace Nightmare
                         ii++;
                     }
                     //플레이어 상태 띄우기
+                    //고치자
                     Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
                     Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})");
                     Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})");
@@ -126,8 +127,16 @@ namespace Nightmare
                             if (str > player.Playerskill.Count || str == 0)
                             {
                                 Console.WriteLine("잘못된 선택입니다.");
+                                continue;
+                            }
+                            if(player.Playerskill[str - 1].SkillMp > player.Stat.Mp )
+                            {
+                                Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp -player.Stat.Mp}가 부족합니다");
+                                continue;
                             }
 
+
+                            
                             player.Playerskill[str - 1].SkillUse(player, monsters, ref DeathCount);
                             break;
 
@@ -135,7 +144,10 @@ namespace Nightmare
                     }
                     else if (Select == 3)
                     {
-
+                        foreach(Item item in DataManager.Instance.ConsumableItems)
+                        {
+                            item.ToString();
+                        }
                     }
                     else
                     {
