@@ -34,10 +34,6 @@ namespace Nightmare
 
             public virtual void SkillUse(Player player, List<Monster> monster)
             {
-
-            }
-            public void SkillSet(Player player)
-            {
                 switch ((int)player.Job)
                 {
                     case 1:
@@ -73,6 +69,10 @@ namespace Nightmare
                         player.Playerskill.Add(WildAnimal2);
                         break;
                 }
+            }
+            public void SkillSet(Player player)
+            {
+               
             }
 
 
