@@ -28,7 +28,9 @@ namespace Nightmare
             [Description("아이템 판매")]
             Sell,
             [Description("퀘스트")]
-            QuestList
+            QuestList,
+            [Description("회복아이템")]
+            Recovery,
         }
 
         public ActionBase CurrentAction
@@ -64,7 +66,8 @@ namespace Nightmare
                     { ActionType.Return,  new Action_Dungeon(0) },
                     { ActionType.StageManager,  new StageManager(0) },
                     { ActionType.Sell, new Action_Sell(0) },
-                    { ActionType.QuestList,  new Action_QuestList(0) }
+                    { ActionType.QuestList,  new Action_QuestList(0) },
+                {ActionType.Recovery, new Action_RecoveryItem(0) },
                 };
         }
 
