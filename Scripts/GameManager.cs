@@ -24,6 +24,8 @@
 
         private Dictionary<int , int> map = new Dictionary<int , int>();
 
+        public bool IsFirstUsePortion { get; set; } = false;
+
         public void GameClear()
         {
             DataManager.Instance.CurrentStageClear++;
@@ -226,6 +228,7 @@
                 Player.Stat.Mp = Player.Stat.MaxMp = stats.Mp;
                 Player.Avd.PlayerAvd = stats.Avd;
                 Player.Crt.PlayerCrt = stats.Crt;
+                Player.QuestGroupId = num;
                 return stats.job;
             }
 

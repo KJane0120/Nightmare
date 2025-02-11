@@ -23,6 +23,8 @@
 
             public virtual void OnEnter()
             {
+                Console.Clear();
+
                 actionDic = CreateNextActionDic();
                 OnInputInvalidActionNumber = PrintErrorMessage;
 
@@ -69,13 +71,12 @@
                     {
                         PrintErrorMessage(0);
                     }
-                    continue;
                 }
             }
 
             private void PrintErrorMessage(int number)
             {
-                Console.WriteLine("\n잘못된 입력입니다.");
+                UtilityManager.PrintErrorMessage();
             }
         }
 

@@ -7,7 +7,8 @@
     "Desc": "시계토끼 : 어두운 기운에 물든 방해꾼들이 세계의 뒤엄킹을 가속화 하고있어.\n시계토끼:악몽의 주인을 만나기 위하여 하나씩 정화하자. ",
     "Condition": {
       "QuestType": 0,
-      "ConditionValue": 1
+      "ConditionValue": 1,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -36,7 +37,8 @@
     "Desc": "시계 토끼: 악몽의 주인에게 들키지 않도록 동화를 입어보자.",
     "Condition": {
       "QuestType": 1,
-      "ConditionVaule": 0
+      "ConditionValue": 0,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -55,7 +57,8 @@
     "Desc": "시계 토끼: 그 아이가 어떻게 커지거나 작아졌는지 궁금하지 않아?",
     "Condition": {
       "QuestType": 2,
-      "ConditionVaule": 0
+      "ConditionValue": 0,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -74,7 +77,8 @@
     "Desc": "세상에서 누가 제일 무섭니? 그건 바로...",
     "Condition": {
       "QuestType": 3,
-      "ConditionVaule": 1
+      "ConditionValue": 1,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -93,7 +97,8 @@
     "Desc": "시계 바늘이 정각을 가리키자 거대한 종소리가 울려 퍼집니다.",
     "Condition": {
       "QuestType": 3,
-      "ConditionVaule": 2
+      "ConditionValue": 2,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -112,7 +117,8 @@
     "Desc": "입을 맞추자,성은 오랜 잠에서 깨어나기 시작합니다.",
     "Condition": {
       "QuestType": 3,
-      "ConditionVaule": 3
+      "ConditionValue": 3,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -131,7 +137,8 @@
     "Desc": "목소리를 잃은 이는 단말마조차 남지 않습니다.",
     "Condition": {
       "QuestType": 3,
-      "ConditionVaule": 4
+      "ConditionValue": 4,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -150,7 +157,8 @@
     "Desc": "세상에 영원히 존속되는 건 없습니다.",
     "Condition": {
       "QuestType": 3,
-      "ConditionVaule": 5
+      "ConditionValue": 5,
+      "IsConditionClear": false
     },
     "Rewards": [
       {
@@ -169,7 +177,8 @@
     "Desc": "시계 토끼: 축하해! 동화를 모두 정화하고 이야기를 되돌렸어!",
     "Condition": {
       "QuestType": 4,
-      "ConditionVaule": 0
+      "ConditionValue": 0,
+      "IsConditionClear": false
     },
     "Rewards": [],
     "IsProgress": false,
