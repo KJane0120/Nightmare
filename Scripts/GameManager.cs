@@ -81,6 +81,7 @@
 
         private void SetJob() // 직업설정
         {
+            Console.WriteLine("");
             Console.WriteLine("어떤 동화를 들어보시겠습니까?\n");
             Console.WriteLine("1. 백설공주와 일곱 번째 난쟁이");
             Console.WriteLine("2. 신데렐라의 새 언니");
@@ -124,20 +125,22 @@
 
         private Job JobChoice(int num)
         {
-            var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int hp, int mp)> {
-            { 1, (Job.Dwarf,10,5,100,50) },
-            { 2, (Job.NewSister, 15, 3, 100, 50) },
-            { 3, (Job.Saison, 15, 3, 100, 50) },
-            { 4, (Job.OctopusWitch, 15, 10, 80, 100) },
-            { 5, (Job.WildAnimal, 25, 20, 120, 20) }};
+            var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, int Avd, int Crt)> {
+            { 1, (Job.Dwarf,10,5,100,50,10,15) },
+            { 2, (Job.NewSister, 15, 3, 100, 50, 10, 15) },
+            { 3, (Job.Saison, 15, 3, 100, 50, 10, 15) },
+            { 4, (Job.OctopusWitch, 15, 10, 80, 100, 10, 15) },
+            { 5, (Job.WildAnimal, 25, 20, 120, 20, 10, 20) }};
 
 
             if (jobStats.TryGetValue(num, out var stats))
             {
                 Player.Stat.BaseAtk = stats.BaseAtk;
                 Player.Stat.BaseDef = stats.BaseDef;
-                Player.Stat.Hp = Player.Stat.MaxHp = stats.hp;
-                Player.Stat.Mp = Player.Stat.MaxMp = stats.mp;
+                Player.Stat.Hp = Player.Stat.MaxHp = stats.Hp;
+                Player.Stat.Mp = Player.Stat.MaxMp = stats.Mp;
+                Player.Avd.PlayerAvd = stats.Avd;
+                Player.Crt.PlayerCrt = stats.Crt;
                 return stats.job;
             }
 
@@ -147,6 +150,6 @@
             SetJob();
             return Job.None;
         }
-        
+
     }
 }
