@@ -13,6 +13,7 @@ namespace Nightmare
                 Buffskill = buff;
                 SkillType = sType;
             }
+
             public override string ToString()
             {
                 StringBuilder sb = new StringBuilder();
