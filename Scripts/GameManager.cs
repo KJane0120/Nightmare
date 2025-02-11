@@ -106,7 +106,7 @@
             }
             else
             {
-                Console.WriteLine("\n잘못된 입력입니다.\n다시 직업을 선택해주세요.\n");
+                Console.WriteLine("\n잘못된 입력입니다.\n다시 동화를 선택해주세요.\n");
                 SetJob();
             }
         }

@@ -5,23 +5,30 @@ namespace Nightmare
 {
     public class Stat
     {
-        Item itemStat = new Item() { Atk = 0, Def = 0 };
-        public float BaseAtk;
-        public int EquipAtk;
-        public int BaseDef;
-        public int EquipDef;
-        public int Hp;
-        public int MaxHp;
-        public int Mp;
-        public int MaxMp;
+        public float BaseAtk { get; set; }
+        public float EquipAtk => equipAtk;
+        public float BaseDef { get; set; }
+        public float EquipDef => equipDef;
+        public float Hp { get; set; }
+        public float MaxHp { get; set; }
+        public float Mp { get; set; }
+        public float MaxMp { get; set; }
 
-        public Stat()
+        private float equipAtk;
+
+        private float equipDef;
+
+        public void AddEquipAtk(float add)
         {
-            EquipAtk = itemStat.Atk;
-            EquipDef = itemStat.Def;
+            equipAtk += add;
+        }
+        public void AddEquipDef(float add)
+        { 
+            equipDef += add;
         }
     }
 
+   
 
     public class Level
     {
@@ -31,10 +38,6 @@ namespace Nightmare
             PlayerLevel = 1;
         }
     }
-
-
-
-    
 
 
     public enum Job
@@ -60,8 +63,8 @@ namespace Nightmare
 
     public class Avd //회피율
     {
-        public int PlayerAvd;
-        public int EquipAvd;
+        public float PlayerAvd;
+        public float EquipAvd;
 
         public Avd()
         {
@@ -73,8 +76,8 @@ namespace Nightmare
 
     public class Crt //치명타율
     {
-        public int PlayerCrt;
-        public int EquipCrt;
+        public float PlayerCrt;
+        public float EquipCrt;
 
         public Crt()
         {
@@ -82,5 +85,4 @@ namespace Nightmare
             PlayerCrt = 15;
         }
     }
-
 }
