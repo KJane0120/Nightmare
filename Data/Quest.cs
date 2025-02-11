@@ -153,9 +153,4 @@ namespace Nightmare
             }
         }
     }
-
-    public class QuestContainer
-    {
-        public List<Quest> QuestDatas { get; set; }
-    }
 }

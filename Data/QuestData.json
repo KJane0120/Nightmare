@@ -165,8 +165,8 @@
   {
     "Id": 0,
     "QuestGroupId": 6,
-    "Title": "사랑의 힘으로",
-    "Desc": "시계 토끼: 축하해! 동화를 모두 정화했어!",
+    "Title": "마침내 저주는 풀리고",
+    "Desc": "시계 토끼: 축하해! 동화를 모두 정화하고 이야기를 되돌렸어!",
     "Condition": {
       "QuestType": 4,
       "ConditionVaule": 0
