@@ -22,8 +22,9 @@ namespace Nightmare
         private string name;
 
         public List<(Monster monster, int remainingTurns, String doco, int howmany)> DebuffedMonsters = new List<(Monster, int, String, int)>();
+        public List<(Boss Boss, int remainingTurns, String doco, int howmany)> buffboss = new List<(Boss, int, String, int)>();
         public List<(Player player, int remainingTurns, String doco, int howmany)> Buffedplayer = new List<(Player, int, String, int)>();
-
+        public List<(Player player, int remainingTurns, String doco, int howmany)> deBuffedplayer = new List<(Player, int, String, int)>();
         private Dictionary<int, int> map = new Dictionary<int, int>();
 
         public bool IsFirstUsePortion { get; set; } = false;
@@ -205,6 +206,42 @@ namespace Nightmare
                     }
                 }
             }
+            if (buffboss != null)
+            {
+                // 디버프 지속 시간 감소 및 제거
+                for (int i = buffboss.Count - 1; i >= 0; i--)
+                {
+                    var (Boss, remainingTurns, doco, howmany) = buffboss[i];
+                    remainingTurns--;
+
+                    if (remainingTurns <= 0)
+                    {
+
+                        Console.WriteLine($"{Boss.Name}의 버프가 해제됨!");
+                        if (doco.Equals("공격력"))
+                        {
+                            Boss.MonsterAttack -= howmany;
+                        }
+                        else if (doco.Equals("방어력"))
+                        {
+                            Boss.MonsterDefense -= howmany;
+                        }
+                        else if(doco.Equals("회피력"))
+                        {
+                            Boss.MissRate -= howmany;
+                        }
+                        else if(doco.Equals("치명타율"))
+                        {
+                            Boss.Crtical -= howmany;
+                        }
+                        buffboss.RemoveAt(i);
+                    }
+                    else
+                    {
+                        buffboss[i] = (Boss, remainingTurns, doco, howmany); // 값 업데이트
+                    }
+                }
+            }
             if (Buffedplayer != null)
             {
                 for (int i = Buffedplayer.Count - 1; i >= 0; i--)
@@ -239,6 +276,43 @@ namespace Nightmare
                         Buffedplayer[i] = (Player, remainingTurns, doco, howmany); // 값 업데이트
                     }
                 }
+
+            }
+            if (deBuffedplayer != null)
+            {
+                for (int i = Buffedplayer.Count - 1; i >= 0; i--)
+                {
+                    var (player, remainingTurns, doco, howmany) = Buffedplayer[i];
+                    remainingTurns--;
+
+                    if (remainingTurns <= 0)
+                    {
+
+                        Console.WriteLine($"{player.Name}의 디버프가 해제됨!");
+                        if (doco.Equals("공격력"))
+                        {
+                            Player.Stat.BaseAtk += howmany;
+                        }
+                        else if (doco.Equals("방어력"))
+                        {
+                            Player.Stat.BaseDef += howmany;
+                        }
+                        //else if (doco.Equals("회피율"))
+                        //{
+                        //    player.Avd.PlayerAvd -= howmany;
+                        //}
+                        //else if (doco.Equals("치명타율"))
+                        //{
+                        //    player.Crt.PlayerCrt -= howmany;
+                        //}
+                        Buffedplayer.RemoveAt(i);
+                    }
+                    else
+                    {
+                        Buffedplayer[i] = (Player, remainingTurns, doco, howmany); // 값 업데이트
+                    }
+                }
+
             }
 
 
