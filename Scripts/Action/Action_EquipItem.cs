@@ -1,8 +1,4 @@
-﻿using Nightmare.Data;
-using static Nightmare.Data.Item;
-using static Nightmare.Stat;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {

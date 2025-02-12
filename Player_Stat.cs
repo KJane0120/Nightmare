@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using Nightmare.Data;
 
 namespace Nightmare
 {
