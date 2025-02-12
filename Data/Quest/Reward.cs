@@ -11,6 +11,7 @@
         public long RewardId { get; set; }
         public RewardType RewardType { get; set; }
         public long RewardAmount { get; set; }
+        public Item ItemData => DataManager.Instance.ItemDatas[RewardId];
 
         public void ReceiveReward()
         {
@@ -20,24 +21,21 @@
                     GameManager.Instance.Player.Gold.PlayerGold += (int)RewardAmount;
                     break;
                 case RewardType.Item:
-                    Item RewardItem = DataManager.Instance.ItemDatas[RewardId];
-                    DataManager.Instance.HaveItems.Add(RewardItem);
+                    DataManager.Instance.HaveItems.Add(ItemData);
                     break;
             }
         }
 
-        public void DisplayRewardInfo()
+        public string GetRewardInfo()
         {
             switch (RewardType)
             {
                 case RewardType.Gold:
-                    Console.WriteLine($"{RewardAmount}G");
-                    break;
+                    return $"{RewardAmount}G";
                 case RewardType.Item:
-                    Item item = DataManager.Instance.ItemDatas[RewardId];
-                    Console.WriteLine($"{DataManager.Instance.ItemDatas[RewardId].Name} x 1");
-                    break;
+                    return $"{ItemData.Name} x {RewardAmount}";
             }
+            return "";
         }
     }
 }
