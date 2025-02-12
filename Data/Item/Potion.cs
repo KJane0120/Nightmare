@@ -111,6 +111,12 @@
                 Console.WriteLine("더이상 가질 수 없습니다.");
             }
         }
+
+        public override string ToString()
+        {
+            String s = base.ToString() +$"{Data.GetTypeString()} | {Data.Desc} | (개수 : {PotionCount} / {PotionMaxCount} ";
+            return s;
+        }
         public string ShowPotion()
         {
             string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (개수 : {PotionCount} / {PotionMaxCount} )";

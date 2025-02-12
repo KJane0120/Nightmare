@@ -476,22 +476,28 @@
                 }
                 else if (Select == 3)
                 {
+
+                    DataManager.Instance.ConsumableItems.Add(DataManager.Instance.ItemDatas[18]);
+
                     List<Item> usableItems = new List<Item>();
 
-                    usableItems.AddRange(DataManager.Instance.ConsumableItems.OfType<Potion>());
-                    usableItems.AddRange(DataManager.Instance.ConsumableItems.OfType<KillBossItem>());
+                    foreach (Item item in DataManager.Instance.ConsumableItems)
+                    {
+                        usableItems.Add(item);
+                    }
 
+                    
                     if (usableItems.Count == 0)
                     {
                         Console.WriteLine("사용할 수 있는 아이템이 없습니다!");
-                        PlayerAction(monsters,player,mon,ref DeathCount);
+                        return;
                     }
 
                    
                     Console.WriteLine("사용할 아이템을 선택하세요:");
                     for (int i = 0; i < usableItems.Count; i++)
                     {
-                        Console.WriteLine($"{i + 1}. {usableItems[i].showItem()}");
+                        Console.WriteLine($"{i + 1}. {usableItems[i].ToString()}");
                     }
 
                     int choice;

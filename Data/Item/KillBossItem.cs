@@ -33,7 +33,11 @@
             }
         }
 
-
+        public override string ToString()
+        {
+            String s = base.ToString() + $"{Data.GetTypeString()} | {Data.Desc} ";
+            return s;
+        }
         public String ShowBossItem()
         {
             string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (효과가 들어갈듯 )";

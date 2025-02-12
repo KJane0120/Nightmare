@@ -95,10 +95,10 @@ namespace Nightmare
             return str;
         }
 
-        public String showItem()
+        public override string ToString()
         {
-            string str = $"{Name} | {GetTypeString()} | {Desc} )";
-            return str;
+            String s = $"{Name}";
+            return s;
         }
 
         public virtual void UseItem(Item item)
