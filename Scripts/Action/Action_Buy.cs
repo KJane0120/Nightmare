@@ -33,7 +33,6 @@ namespace Nightmare
                         Console.WriteLine("구매가 완료되었습니다.");
                         selectItem.IsPurchase = true;
                         GameManager.Instance.Player.Gold.PlayerGold -= selectItem.Cost;
-                        //DataManager.Instance.HaveItems.Add(selectItem.Id, selectItem);
                         DataManager.Instance.HaveItems.Add(selectItem);
                         DisPlay();
                     }
