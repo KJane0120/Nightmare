@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Nightmare.Data;
+using System.Collections.Generic;
 
 namespace Nightmare
 {
@@ -41,6 +42,9 @@ namespace Nightmare
                         Console.WriteLine($"{ii}. {monster.MonsterDIe(ref DeathCount)}");
                         ii++;
                     }
+
+
+
                     if (DeathCount >= monsters.Count)
                     {
                         break;
@@ -246,7 +250,20 @@ namespace Nightmare
                     }
                     else if (Select == 3)
                     {
-                        
+                        int Selects = InputandReturn(4);
+
+                        if (Select == 1)
+                        {
+                            foreach (Portion portion in DataManager.Instance.ConsumableItems)
+                            {
+                                if ((int)portion.Data.Type == 5)
+                                {
+                                    portion.UsePortion();
+                                    break;
+                                }
+                            }
+                        }
+
 
                         Instance.TakeAction();
                     }
@@ -345,8 +362,19 @@ namespace Nightmare
 
                 if(RandomRange > 1 || random.Next(0,11) > 5)
                 {
-                    //DataManager.Instance.HaveItemDatas.Add(); 일반 아이템
-                    if(IsFinal || random.Next(0, 11) > 5)
+                    Portion Healthportion = new Portion
+                    {
+                        PortionId = 18
+                    };
+                    Healthportion.MaximumHavePortion(Healthportion);
+
+                    Portion manaportion = new Portion
+                    {
+                        PortionId = 24
+                    };
+                    manaportion.MaximumHavePortion(manaportion);
+
+                    if (IsFinal || random.Next(0, 11) > 5)
                     {
                         //DataManager.Instance.HaveItemDatas.Add(); 보스템 떨구기
                     }
