@@ -21,17 +21,23 @@ namespace Nightmare
 
         private static DataManager? _Instance = null;
 
+        private static bool isInitialized = false;
+
+        private SaveGameData? saveGameData;
+
+
         public static void Initialize()
         {
+            if (isInitialized) return;
             JsonDataLoad();
             Instance.InitializeConsumableItems();
         }
 
         private static void JsonDataLoad()
         {
-            string questfilePath = GetFilePath("QuestData");
-            string bossfilePath = GetFilePath("BossData");
-            string itemfilePath = GetFilePath("ItemData");
+            string questfilePath = GetFilePath("QuestData", "Data");
+            string bossfilePath = GetFilePath("BossData", "Data");
+            string itemfilePath = GetFilePath("ItemData", "Data");
 
             if (!File.Exists(questfilePath))
             {
@@ -65,7 +71,7 @@ namespace Nightmare
 
         }
 
-        private static string GetFilePath(string fileName)
+        private static string GetFilePath(string fileName, string folderName)
         {
             var paths = AppDomain.CurrentDomain.BaseDirectory.Split('\\');
             var newPath = "";
@@ -75,9 +81,39 @@ namespace Nightmare
                 newPath += paths[i] + "\\";
             }
 
-            newPath += $"Data\\{fileName}.json";
+            newPath += $"{folderName}\\{fileName}.json";
 
             return newPath;
+        }
+
+        public void SaveGameData()
+        {
+            saveGameData.HaveItems = Instance.HaveItems;
+            saveGameData.GameClearCount = GameManager.Instance.GameClearCount;
+            saveGameData.GoldAmount = GameManager.Instance.Player.Gold.PlayerGold;
+            saveGameData.CanSelectPlayers = Instance.CanSelectPlayerDatas;
+
+            string GameData = JsonConvert.SerializeObject(saveGameData);
+            File.WriteAllText(GetFilePath("SaveData", "SaveData"), GameData);
+        }
+
+        public void LoadGameData()
+        {
+            if (!File.Exists(GetFilePath("SaveData", "SaveData")))
+            {
+                saveGameData = new SaveGameData();
+                return;
+            }
+            else
+            {
+                string GameData = File.ReadAllText(GetFilePath("SaveData", "SaveData"));
+                saveGameData = JsonConvert.DeserializeObject<SaveGameData>(GameData);
+
+                GameManager.Instance.GameClearCount = saveGameData.GameClearCount;
+                GameManager.Instance.Player.Gold.PlayerGold = (int)saveGameData.GoldAmount;
+                Instance.HaveItems = saveGameData.HaveItems;
+                Instance.CanSelectPlayerDatas = saveGameData.CanSelectPlayers;
+            }
         }
 
         //아이템 리스트
@@ -89,9 +125,6 @@ namespace Nightmare
 
         //퀘스트 데이터 리스트
         public List<Quest> QuestDatas = new();
-
-
-        public int CurrentStageClear;
 
         //퀘스트 가져오기
         public List<Quest> GetPlayerQuestGroup()
@@ -115,6 +148,9 @@ namespace Nightmare
 
         //플레이어 데이터
         public Dictionary<long, Player> PlayerDatas = new();
+
+        //선택 가능한 직업
+        public Dictionary<long, Player> CanSelectPlayerDatas = new();
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
         public List<Item> ConsumableItems = new();
@@ -163,6 +199,21 @@ namespace Nightmare
                 PortionMaxCount = 4
             }
         };
+
+        public void DataReset()
+        {
+            // 가지고 있는 아이템 중에 하트조각이외에 아이템은 삭제
+            foreach (var item in HaveItems)
+            {
+                if (item.Type != ItemType.HeartPiece)
+                {
+                    HaveItems.Remove(item);
+                }
+            }
+
+            // 장착된 아이템 삭제
+            EquippedItems.Clear();
+        }
     }
 }
 
