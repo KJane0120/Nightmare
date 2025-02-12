@@ -26,6 +26,11 @@
             public void DisPlayInventory()
             {
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+
+                var Baglines = ASCIIManager.Getlines("BagA");
+
+                ASCIIManager.DisplayAlignASCIIArt(Baglines, Align.Center, VerticalAlign.Top);
+
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
 
