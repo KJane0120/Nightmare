@@ -16,15 +16,15 @@
                     { 0,  new Action_Return(0) },
                 };
             }
-
+            protected void PrintErrorMsg(int num)
+            {
+                UtilityManager.PrintErrorMessage();
+            }
             protected override void DisPlay()
             {
+                OnInputInvalidActionNumber = PrintErrorMsg;
+                Console.Clear();
                 Console.WriteLine("인벤토리");
-                DisPlayInventory();
-            }
-
-            public void DisPlayInventory()
-            {
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
 
                 var Baglines = ASCIIManager.Getlines("BagA");
@@ -33,17 +33,14 @@
 
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
-
+                
                 foreach (Item item in DataManager.Instance.HaveItems)
                 {
-                    Console.WriteLine(item.SelectItem());
+                    Console.WriteLine($" - {item.SelectItem()}");
                 }
 
                 Console.WriteLine();
             }
-
-            //Equip();
-            //UnEquip();
         }
     }
 }

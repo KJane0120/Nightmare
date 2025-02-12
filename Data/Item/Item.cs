@@ -37,6 +37,8 @@ namespace Nightmare
 
         public bool IsSold { get; set; } = false;
 
+        public Action OnEquipEvent = delegate { };
+
         //무기인지 방어구인지에 따라 공격력이나 방어력을 출력
         public string GetTypeString()
         {
@@ -107,6 +109,7 @@ namespace Nightmare
         {
             monsters[0].MonsterHealth -= 999;
             Death++;
+
         }
 
         public virtual void UseItem(Item item)
@@ -176,6 +179,7 @@ namespace Nightmare
                     GameManager.Instance.Player.Crt.EquipCrt += selectItem.Value;
                     break;
             }
+            OnEquipEvent();
         }
 
         public void UnEquip(Item item)
@@ -207,6 +211,8 @@ namespace Nightmare
                     GameManager.Instance.Player.Crt.EquipCrt -= item.Value;
                     break;
             }
+
+            OnEquipEvent();
         }
     }
 }
