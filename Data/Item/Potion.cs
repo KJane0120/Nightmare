@@ -36,9 +36,9 @@
             if (PotionCount != 0) // 선택한 아이템의 PotionCount
             {
                 Console.WriteLine("회복이 완료되었습니다.");
-                PortionCount -= 1;
+                PotionCount -= 1;
                 DataManager.Instance.HaveItems.Remove(Data);
-                if (Data.Type == ItemType.HPPortion)//체력 회복 포션이라면 
+                if (Data.Type == ItemType.HPPotion)//체력 회복 포션이라면 
                 {
                     if (stat.Hp + 20 > stat.MaxHp)
                     {
