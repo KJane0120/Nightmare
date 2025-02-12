@@ -19,8 +19,12 @@
             protected override void DisPlay()
             {
                 Console.Clear();
-                //Console.WriteLine("상태 보기");
-                Console.WriteLine("악몽을 물리칠 당신의 현재 상태는...");
+
+                var charlines = ASCIIManager.Getlines("Char");
+
+                ASCIIManager.DisplayAlignASCIIArt(charlines, Align.Center, VerticalAlign.Top);
+
+                Console.WriteLine($"악몽을 물리칠 당신의 현재 상태는...");                
                 Console.WriteLine();
 
                 Instance.Player.StatusDisplay();
