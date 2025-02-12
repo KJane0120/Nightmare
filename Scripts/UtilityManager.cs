@@ -21,7 +21,6 @@ namespace Nightmare
             return e.ToString();
         }
 
-
         /// <summary>
         /// 주어진 범위내의 숫자를 입력 로직 함수
         /// </summary>
@@ -29,16 +28,19 @@ namespace Nightmare
         /// <param name="max">최댓값</param>
         /// <param name="success">범위내 숫자였을때 불리는 함수</param>
         /// <param name="failure">범위밖 숫자였을때 불리는 함수</param>
-        static public void InputNumberInRange(int min, int max, Action<int> success, Action failure)
+        /// <param name="nextActionText">다음 행동 텍스트</param>
+        /// <param name="waitTime">failure처리를 부르기까지 기다리는 시간</param>
+        static public void InputNumberInRange(int min, int max, Action<int> success, Action failure,string nextActionText,int waitTime = 800)
         {
             while (true)
             {
-                Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
+                Console.Write($"\n{nextActionText}\n>>");
                 if (int.TryParse(Console.ReadLine(), out int number) && (min <= number) && (number <= max))
                 {
                     success?.Invoke(number);
                 }
                 PrintErrorMessage();
+                Thread.Sleep(waitTime);
                 failure?.Invoke();
             }
         }
