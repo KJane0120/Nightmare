@@ -18,13 +18,13 @@
                     { 4,  new Action_Dungeon(4) },
                     { 5,  new Action_QuestList(5) },
                     { 6,  new Action_GameClear(6) }, //디버깅
+                    { 7,  new Action_GameOver(7) }, //디버깅
                 };
             }
 
             protected override void DisPlay()
             {
-                string titleText = Instance.GameClearCount > 1 ? "악몽의 주인이 그림자를 드리우는 중..." : "동화의 흐름이 엉키는중....";
-
+                string titleText = Instance.GameClearCount > 0 ? "악몽의 주인이 그림자를 드리우는 중..." : "동화의 흐름이 엉키는중....";
                 Console.WriteLine(titleText);
             }
         }
