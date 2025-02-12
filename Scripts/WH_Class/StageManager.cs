@@ -1,4 +1,5 @@
-﻿using static Nightmare.GameManager;
+﻿using Nightmare.Data;
+using static Nightmare.GameManager;
 
 namespace Nightmare
 {
@@ -74,7 +75,7 @@ namespace Nightmare
                         stages.Add(stage);
 
                     }
-                    else if (player.Level.PlayerLevel >= 8)//플레이어가 아이템을 가지고있는지 검사 DataManager.Instance.HaveItemDatas.Contains();
+                    else if (player.Level.PlayerLevel >= 8 && DataManager.Instance.ConsumableItems.Any(d => d.Id == (int)Instance.Player.Job + 17))//플레이어가 아이템을 가지고있는지 검사 DataManager.Instance.HaveItemDatas.Contains();
                     {
 
                         Stage Boss = new Stage(0, 0);

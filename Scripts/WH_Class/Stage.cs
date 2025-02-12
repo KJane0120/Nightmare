@@ -27,23 +27,18 @@ namespace Nightmare
                     Monster monster = new Monster(1, 10, 3, 1, "연습용 표적", 0, 0);
                     monsters.Add(monster);
                 }
-
                 Random ran = new Random();
                 int ii = 1;
                 int DeathCount = 0;
 
-
                 while (DeathCount < monsters.Count)
                 {
-
                     //foreach로 넣기
                     foreach (Monster monster in monsters)
                     {
                         Console.WriteLine($"{ii}. {monster.MonsterDIe(ref DeathCount)}");
                         ii++;
                     }
-
-
 
                     if (DeathCount >= monsters.Count)
                     {
@@ -141,7 +136,6 @@ namespace Nightmare
                 BattlePhase(boss, monsters, player);
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
-
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
                 GetClearBoSang(monsters, player);
@@ -181,8 +175,7 @@ namespace Nightmare
 
                             if (AttackSelect < 1 || AttackSelect > monsters.Count)
                             {
-                                Console.WriteLine("잘못된 적 선택");
-                                
+                                UtilityManager.PrintErrorMessage();
                                 continue;
                             }
                             else if (!monsters[AttackSelect - 1].IsLive)
@@ -219,7 +212,7 @@ namespace Nightmare
                             int str = InputandReturn(3);
                             if (str > player.Playerskill.Count || str == 0)
                             {
-                                Console.WriteLine("잘못된 선택입니다.");
+                                UtilityManager.PrintErrorMessage();
                                 continue;
                             }
                             if (player.Playerskill[str - 1].SkillMp > player.Stat.Mp)
@@ -252,23 +245,44 @@ namespace Nightmare
                     {
                         int Selects = InputandReturn(4);
 
-                        if (Select == 1)
+                        if (Selects == 1)
                         {
-
-     
+                            var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == Item.ItemType.HPPortion ) as Portion;
+                            if(portion != null)
+                            { portion.UsePortion();
+                                Console.WriteLine("체력이 회복되었습니다.");
+                            }
                         }
+                        else if(Selects == 2)
+                        {
+                            var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == Item.ItemType.MPPortion) as Portion;
+                            if (portion != null)
+                            { portion.UsePortion();
+                                Console.WriteLine("체력이 회복되었습니다.");
+                            }
+                        }
+                        else if(DataManager.Instance.ConsumableItems.Any(d => d.Type == Item.ItemType.Special) && Selects == 3)
+                        {
+                            var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == Item.ItemType.Special) as Portion;
+                            if (portion != null)
+                            { portion.UsePortion();
+                                Console.WriteLine("체력이 회복되었습니다.");
+                            }
+                        }
+                        else
+                        {
+                            UtilityManager.PrintErrorMessage();
+                        }
+
                         Instance.TakeAction();
                     }
                     else
                     {
-                        Console.WriteLine("잘못된 선택입니다.");
+                        UtilityManager.PrintErrorMessage();
                     }
 
 
-
                     //몬스터 공격
-
-
                     foreach (Monster mons in monsters)
                     {
                         mons.MonsterDIe(ref DeathCount);
@@ -294,14 +308,10 @@ namespace Nightmare
                             {
                                 Console.WriteLine($"회피 성공");
                             }
-                            
-
                             if(player.Stat.Hp < 0)
                             {
                                 Instance.MoveNextAction(ActionType.Village);
                             }
-                            
-                            
                         }
                     }
                 }
@@ -354,18 +364,22 @@ namespace Nightmare
 
                 if(RandomRange > 1 || random.Next(0,11) > 5)
                 {
-                    Portion Healthportion = new Portion
+                    if (random.Next(0, 10) > 5)
                     {
-                        PortionId = 18
-                    };
-                    Healthportion.MaximumHavePortion(Healthportion);
-
-                    Portion manaportion = new Portion
+                        Portion Healthportion = new Portion
+                        {
+                            PortionId = 18
+                        };
+                        Healthportion.MaximumHavePortion(Healthportion);
+                    }
+                    else
                     {
-                        PortionId = 24
-                    };
-                    manaportion.MaximumHavePortion(manaportion);
-
+                        Portion manaportion = new Portion
+                        {
+                            PortionId = 24
+                        };
+                        manaportion.MaximumHavePortion(manaportion);
+                    }
                     if (IsFinal || random.Next(0, 11) > 5)
                     {
                         //DataManager.Instance.HaveItemDatas.Add(); 보스템 떨구기
