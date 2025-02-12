@@ -1,4 +1,5 @@
 ﻿using Nightmare.Data;
+using System.Text.Json.Serialization;
 
 namespace Nightmare
 {
@@ -14,16 +15,18 @@ namespace Nightmare
         public RewardType RewardType { get; set; }
         public long RewardAmount { get; set; }
 
+        [JsonIgnore]
+        public Item ItemData => DataManager.Instance.ItemDatas[RewardId];
+
         public void ReceiveReward()
         {
             switch (RewardType)
             {
                 case RewardType.Gold:
-                    GameManager.Instance.Player.Gold.PlayerGold += (int)RewardAmount;
+                    GameManager.Instance.Player.Gold.GoldIncrease((int)RewardAmount);
                     break;
                 case RewardType.Item:
-                    Item RewardItem = DataManager.Instance.ItemDatas[RewardId];
-                    DataManager.Instance.HaveItems.Add((int)RewardId, RewardItem);
+                    DataManager.Instance.HaveItems.Add(ItemData);
                     break;
             }
         }
