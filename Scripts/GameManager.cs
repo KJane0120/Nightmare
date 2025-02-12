@@ -24,7 +24,7 @@
 
         private Dictionary<int, int> map = new Dictionary<int, int>();
 
-        public bool IsFirstUsePortion { get; set; } = false;
+        public bool IsFirstUsePotion { get; set; } = false;
 
         public void GameClear()
         {

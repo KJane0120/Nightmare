@@ -352,17 +352,17 @@ namespace Nightmare
 
                 if(RandomRange > 1 || random.Next(0,11) > 5)
                 {
-                    Portion Healthportion = new Portion
+                    Potion Healthportion = new Potion
                     {
-                        PortionId = 18
+                        PotionId = 18
                     };
-                    Healthportion.PickUpPortion(Healthportion);
+                    Healthportion.PickUpPotion(Healthportion);
 
-                    Portion manaportion = new Portion
+                    Potion manaportion = new Potion
                     {
-                        PortionId = 24
+                        PotionId = 24
                     };
-                    manaportion.PickUpPortion(manaportion);
+                    manaportion.PickUpPotion(manaportion);
 
                     if (IsFinal || random.Next(0, 11) > 5)
                     {

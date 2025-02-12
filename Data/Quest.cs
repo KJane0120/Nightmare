@@ -137,7 +137,7 @@ namespace Nightmare
                     return DataManager.Instance.EquippedItems.Count > 0;
                 case QuestType.UseItem:
                     //첫 포션 아이템 사용 
-                    return GameManager.Instance.IsFirstUsePortion; 
+                    return GameManager.Instance.IsFirstUsePotion; 
                 default:
                     return false;
             }

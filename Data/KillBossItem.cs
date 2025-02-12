@@ -24,7 +24,7 @@ namespace Nightmare
 
         public override void UseItem(Item item)
         {
-            if (item.Type == ItemType.HPPortion || item.Type == ItemType.MPPortion || item.Type == ItemType.Special)
+            if (item.Type == ItemType.HPPotion || item.Type == ItemType.MPPotion || item.Type == ItemType.Special)
             {
                 
             }

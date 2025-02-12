@@ -181,12 +181,12 @@ namespace Nightmare
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
         {
-            foreach (var portion in PortionDatas.Where(p => p.PortionId == 18 || p.PortionId == 24))
+            foreach (var portion in PortionDatas.Where(p => p.PotionId == 18 || p.PotionId == 24))
             {
-                if (ItemDatas.TryGetValue(portion.PortionId, out Item itemData))
+                if (ItemDatas.TryGetValue(portion.PotionId, out Item itemData))
                 {
                     // PortionCount만큼 ConsumableItems 리스트에 추가
-                    for (int i = 0; i < portion.PortionCount; i++)
+                    for (int i = 0; i < portion.PotionCount; i++)
                     {
                         ConsumableItems.Add(itemData);
                         HaveItems.Add(itemData);
@@ -200,26 +200,26 @@ namespace Nightmare
         //장착된 아이템 리스트
         public List<Item> EquippedItems = new();
 
-        public List<Portion> PortionDatas = new()
+        public List<Potion> PortionDatas = new()
         {
             
-            new Portion()
+            new Potion()
             {
-                PortionId = 18,
-                PortionCount = 3,
-                PortionMaxCount = 3
+                PotionId = 18,
+                PotionCount = 3,
+                PotionMaxCount = 3
             },
-            new Portion()
+            new Potion()
             {
-                PortionId = 24,
-                PortionCount = 3,
-                PortionMaxCount = 3
+                PotionId = 24,
+                PotionCount = 3,
+                PotionMaxCount = 3
             },
-            new Portion()
+            new Potion()
             {
-                PortionId = 25,
-                PortionCount = 0,
-                PortionMaxCount = 4
+                PotionId = 25,
+                PotionCount = 0,
+                PotionMaxCount = 4
             }
         };
     }
