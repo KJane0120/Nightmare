@@ -130,12 +130,19 @@ namespace Nightmare
         private void SetJob() // 직업설정
         {
             Console.Clear();
-            Console.WriteLine("어떤 동화를 들어보시겠습니까?\n");
-            Console.WriteLine("1. 백설공주와 일곱째 난쟁이");
-            Console.WriteLine("2. 신데렐라의 새 언니");
-            Console.WriteLine("3. 모두가 잠든 성의 하인");
-            Console.WriteLine("4. 깊은 바다 속 문어 마녀");
-            Console.WriteLine("5. 힘을 잃은 야수");
+            string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" +
+                "\n" +
+                "\n1. 백설공주와 일곱째 난쟁이" +
+                "\n2. 신데렐라의 새 언니" +
+                "\n3. 모두가 잠든 성의 하인" +
+                "\n4. 깊은 바다 속 문어 마녀" +
+                "\n5. 힘을 잃은 야수" +
+                "\n";
+            foreach (char c in jobChoiceMessage)
+            {
+                Console.Write(c);
+                Thread.Sleep(30);
+            }
 
             UtilityManager.InputNumberInRange(1, 5, JobInputNumberInRange, SetJob, "듣고싶은 동화를 선택해주세요.");
         }
