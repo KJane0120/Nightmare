@@ -146,7 +146,7 @@ namespace Nightmare
                 //일정 확률의 보상 얻기
                 GetClearBoSang(monsters, player);
                 //다시 돌아가기
-
+                Instance.GameClear();
             }
 
             public void BattlePhase(Monster mon, List<Monster> monsters, Player player)
@@ -263,8 +263,6 @@ namespace Nightmare
                                 }
                             }
                         }
-
-
                         Instance.TakeAction();
                     }
                     else
