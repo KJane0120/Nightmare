@@ -59,28 +59,51 @@ namespace Nightmare
         private void startGame() // 시작화면
         {
             Console.Clear();
-            string startMessage = "\"늦었다, 늦었어!\"" +
-                "\n하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다." +
-                "\n말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?" +
-                "\n당신은 호기심에 말하는 토끼를 쫓아갑니다." +
-                "\n이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다." +
-                "\n떨어지고," +
-                "\n떨어져서," +
-                "\n눈을 뜨면 그곳은..." +
-                "\n악몽입니다." +
-                "\n" +
-                "\nOnce Upon a Nightmare";
+            //string startMessage = "\"늦었다, 늦었어!\"" +
+            //    "\n하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다." +
+            //    "\n말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?" +
+            //    "\n당신은 호기심에 말하는 토끼를 쫓아갑니다." +
+            //    "\n이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다." +
+            //    "\n떨어지고," +
+            //    "\n떨어져서," +
+            //    "\n눈을 뜨면 그곳은..." +
+            //    "\n악몽입니다." +
+            //    "\n" +
+            //    "\nOnce Upon a Nightmare";
 
-            foreach (char c in startMessage)
-            {
-                Console.Write(c);
-                //Thread.Sleep(30); 
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("다음 이야기를 들으려면 아무 키나 입력하세요.");
-            Console.ReadKey();
+            //foreach (char c in startMessage)
+            //{
+            //    Console.Write(c);
+            //    //Thread.Sleep(30); 
+            //}
+            Console.WriteLine("\"늦었다, 늦었어!\"");
+            Thread.Sleep(500);
+            Console.WriteLine("하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다.");
+            Thread.Sleep(500);
+            Console.WriteLine("말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?");
+            Thread.Sleep(500);
+            Console.WriteLine("당신은 호기심에 말하는 토끼를 쫓아갑니다.");
+            Thread.Sleep(500);
+            Console.WriteLine("이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다.");
+            Thread.Sleep(500);
+            Console.WriteLine("떨어지고,");
+            Thread.Sleep(500);
+            Console.WriteLine("떨어져서,");
+            Thread.Sleep(500);
+            Console.WriteLine("눈을 뜨면 그곳은...");
+            Thread.Sleep(500);
+            Console.WriteLine("악몽입니다.");
+            Thread.Sleep(500);
+            Console.WriteLine();            
+            Console.WriteLine("Once Upon a Nightmare");
+            Thread.Sleep(2000);
+            Console.Clear() ;
+            var Posterlines = ASCIIManager.Getlines("Poster");
+
+            ASCIIManager.DisplayAlignASCIIArt(Posterlines, Align.Center, VerticalAlign.Top);
+            Thread.Sleep(4000);
+            //Console.WriteLine("다음 이야기를 들으려면 아무 키나 입력하세요.");
+            //Console.ReadKey();
 
             GameLoad();
             SetName();

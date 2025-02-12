@@ -11,17 +11,19 @@ namespace Nightmare
             AppDomain.CurrentDomain.ProcessExit += GameManager.Instance.GameSave;
 
             Console.SetWindowSize(120, 40);
-            var titlelines = ASCIIManager.Getlines("Title");
-            var booklines = ASCIIManager.Getlines("Book");
+            //var titlelines = ASCIIManager.Getlines("Title");
+            //var booklines = ASCIIManager.Getlines("Book");
             //var posterlines = ASCIIManager.Getlines("Poster");
 
-            ASCIIManager.DisplayAlignASCIIArt(titlelines, Align.Center, VerticalAlign.Top);
-            ASCIIManager.DisplayAlignASCIIArt(booklines, Align.Center, VerticalAlign.Middle);
+            //ASCIIManager.DisplayAlignASCIIArt(titlelines, Align.Center, VerticalAlign.Top);
+            //ASCIIManager.DisplayAlignASCIIArt(booklines, Align.Center, VerticalAlign.Middle);
             //ASCIIManager.DisplayAlignASCIIArt(posterlines, Align.Center, VerticalAlign.Top);
 
             var lines = new string[] { "1. 악몽 속으로 들어가기", "2. 게임 종료" };
-            ASCIIManager.AlignText(lines, Align.Left, VerticalAlign.Bottom, titlelines.Length + booklines.Length);
+            //ASCIIManager.AlignText(lines, Align.Left, VerticalAlign.Bottom, titlelines.Length + booklines.Length);
             //ASCIIManager.AlignText(lines, Align.Left, VerticalAlign.Bottom, posterlines.Length);
+            Console.WriteLine(lines[0]);
+            Console.WriteLine(lines[1]);
 
             if (int.TryParse(Console.ReadLine(), out int input))
             {
