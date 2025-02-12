@@ -25,6 +25,14 @@ namespace Nightmare
         {
             equipDef += add;
         }
+        public void SubtEquipAtk(float subt)
+        {
+            equipAtk -= subt;
+        }
+        public void SubtEquipDef(float subt)
+        {
+            equipDef -= subt;
+        }
 
         public Stat(float baseAtk, float baseDef, float hp, float maxHp, float mp, float maxMp)
         {
