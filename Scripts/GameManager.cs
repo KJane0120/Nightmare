@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using System.Data;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -22,21 +24,27 @@
         public List<(Monster monster, int remainingTurns, String doco, int howmany)> DebuffedMonsters = new List<(Monster, int, String, int)>();
         public List<(Player player, int remainingTurns, String doco, int howmany)> Buffedplayer = new List<(Player, int, String, int)>();
 
-        private Dictionary<int , int> map = new Dictionary<int , int>();
+        private Dictionary<int, int> map = new Dictionary<int, int>();
 
         public bool IsFirstUsePortion { get; set; } = false;
 
+        public int GameClearCount = 0;
+
         public void GameClear()
         {
-            DataManager.Instance.CurrentStageClear++;
+            GameClearCount++;
+            MoveNextAction(ActionType.GameClear);
         }
 
+        public void GameReStart()
+        {
+            GameClearCount++;
+            MoveNextAction(ActionType.GameClear);
+        }
 
         public void GameStart()
         {
             Console.Clear();
-
-            DataManager.Initialize();
 
             Player = new Player();
             Player.Level = new Level();
@@ -45,7 +53,26 @@
             Player.Avd = new Avd();
             Player.Crt = new Crt();
 
+            GameLoad();
             SetName();
+        }
+
+        public void GameSave(object sender, EventArgs e)
+        {
+            DataManager.Instance.SaveGameData();
+        }
+
+        public void GameLoad()
+        {
+            DataManager.Initialize();
+            DataManager.Instance.LoadGameData();
+        }
+
+        public void GameDataReset()
+        {
+            TutorialOk = false;
+            IsFirstUsePortion = false;
+            DataManager.Instance.DataReset();
         }
 
         private void SetName()
@@ -172,7 +199,7 @@
                     }
                 }
             }
-            if(Buffedplayer != null)
+            if (Buffedplayer != null)
             {
                 for (int i = Buffedplayer.Count - 1; i >= 0; i--)
                 {
@@ -191,7 +218,7 @@
                         {
                             Player.Stat.BaseDef -= howmany;
                         }
-                        else if(doco.Equals("회피율"))
+                        else if (doco.Equals("회피율"))
                         {
                             player.Avd.PlayerAvd -= howmany;
                         }
@@ -211,7 +238,7 @@
 
 
         }
-            private Job JobChoice(int num)
+        private Job JobChoice(int num)
         {
             var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, int Avd, int Crt)> {
             { 1, (Job.Dwarf,10,5,100,30,10,15) },
