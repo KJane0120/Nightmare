@@ -23,7 +23,7 @@ namespace Nightmare
                     break;
                 case RewardType.Item:
                     Item RewardItem = DataManager.Instance.ItemDatas[RewardId];
-                    DataManager.Instance.HaveItems.Add((int)RewardId, RewardItem);
+                    DataManager.Instance.HaveItems.Add(RewardItem);
                     break;
             }
         }
