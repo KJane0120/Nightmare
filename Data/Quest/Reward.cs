@@ -13,7 +13,6 @@ namespace Nightmare
         public long RewardId { get; set; }
         public RewardType RewardType { get; set; }
         public long RewardAmount { get; set; }
-        public Item ItemData => DataManager.Instance.ItemDatas[RewardId];
 
         [JsonIgnore]
         public Item ItemData => DataManager.Instance.ItemDatas[RewardId];

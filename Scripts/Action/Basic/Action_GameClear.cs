@@ -46,7 +46,7 @@ namespace Nightmare
                     lines.Add($"{reward.GetRewardInfo()} ");
                 }
 
-                ASCIIManager.AlignText(lines, Align.Center, VerticalAlign.Bottom, 130);
+                //ASCIIManager.AlignText(lines, Align.Center, VerticalAlign.Bottom, 130);
                 UtilityManager.InputNumberInRange(1, 2, ReStart, null, "다른동화를 읽어 보시겠습니까? 1. 네 2. 아니오");
             }
 
