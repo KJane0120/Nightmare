@@ -4,13 +4,11 @@ namespace Nightmare
 {
     internal class SoundManager
     {
-        private static readonly string FILENAME_BGM = "BGM.mp3";
-
         private static MediaFoundationReader audioFile;
 
         private static DirectSoundOut outputDevice;
 
-        public static string currentFile = "";
+        private static string currentFile = "";
 
         public static void PlayBGM(string fileName)
         {
