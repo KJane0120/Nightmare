@@ -142,6 +142,9 @@ namespace Nightmare
 
         //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
 
+        //장착된 아이템 리스트
+        public List<Item> EquippedItems = new();
+
         public List<Portion> PortionDatas = new()
         {
             new Portion()
@@ -165,7 +168,7 @@ namespace Nightmare
         };
     }
 }
-//장착된 아이템 리스트
+
 
 //보스드랍아이템 리스트
 

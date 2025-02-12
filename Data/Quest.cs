@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Nightmare.Data;
-using System.Text;
+﻿using System.Text;
 
 namespace Nightmare
 {
@@ -21,13 +19,27 @@ namespace Nightmare
         public string? Desc { get; set; } // 퀘스트 내용
         public Condition Condition { get; set; } // 퀘스트 클리어 조건
         public Reward[] Rewards { get; set; } //퀘스트 보상
-        public bool IsProgress { get; set; } //퀘스트 진행중인지
+        
+        //퀘스트 진행중인지
+        public bool IsProgress
+        {
+            get => isProgress;
+            set
+            {
+                isProgress = value;
+                if (isProgress)
+                {
+                    WaitForCondition();
+                }
+            }
+        }
 
-        [JsonIgnore]
-        public bool IsClear => Condition.IsClear();
+        private bool isProgress = false;
+
         public void DisplayQuestTitle()
         {
-            Console.WriteLine($"\n{Id}.{Title}");
+            string IsProgressText = IsProgress ? "[진행중]" : "";
+            Console.WriteLine($"\n{Id}.{Title}{IsProgressText}");
         }
 
         public void DisplayQuestInfo()
@@ -44,6 +56,30 @@ namespace Nightmare
                 reward.DisplayRewardInfo();
             }
         }
+
+        public async void WaitForCondition()
+        {
+            Task waitTask = WaitForFirstWeapon();
+            await waitTask;
+            Console.WriteLine("\n퀘스트 완료!");
+            Condition.IsConditionClear = true;
+        }
+
+        private async Task WaitForFirstWeapon()
+        {
+            while (!Condition.GetClearConditoin())
+            {
+                await Task.Delay(1000);
+            }
+        }
+
+        public void ReceiveReward()
+        {
+            foreach (var reward in Rewards)
+            {
+                reward.ReceiveReward();
+            }
+        }
     }
 
 
@@ -53,13 +89,15 @@ namespace Nightmare
 
         public long ConditionValue { get; set; }
 
+        public bool IsConditionClear { get; set; }
+
         public string GetConditionText()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("-");
 
-            switch(QuestType)
+            switch (QuestType)
             {
                 case QuestType.ChapterClear:
                     sb.Append($"{ConditionValue}챕터 클리어");
@@ -71,11 +109,11 @@ namespace Nightmare
                     sb.Append($"포션 사용해보기");
                     break;
                 case QuestType.KillBoss:
-                    sb.Append($"{DataManager.Instance.BossDatas[ConditionValue].Name}처치");
+                    sb.Append($"{DataManager.Instance.BossDatas[ConditionValue].Name} 처치");
                     break;
             }
 
-            if(IsClear())
+            if (IsConditionClear)
             {
                 sb.Append(" 완료!");
             }
@@ -83,74 +121,27 @@ namespace Nightmare
             return sb.ToString();
         }
 
-        public bool IsClear()
+        public bool GetClearConditoin()
         {
             switch (QuestType)
             {
                 case QuestType.ChapterClear:
-                    // 스테이지 클리어
+                    // TODO:튜토리얼 스테이지 클리어
                     return false;
                 case QuestType.KillBoss:
                     //보스 처치
                     return !DataManager.Instance.BossDatas[ConditionValue].IsLive;
                 case QuestType.Equip:
                     //첫 아이템 장착
-                    return false;
+                    //질문사항 : 장착을 하고 있는 상황에서 퀘스트를 수락했을때 완료라고 뜨는지 아님 수락받은 시점부터인지 
+                    return DataManager.Instance.EquippedItems.Count > 0;
                 case QuestType.UseItem:
-                    //첫 아이템 사용 
-                    return false;
+                    //첫 포션 아이템 사용 
+                    return GameManager.Instance.IsFirstUsePortion; 
                 default:
                     return false;
             }
         }
-    }
 
-
-    public enum RewardType
-    {
-        Gold = 0,
-        Item = 1,
-    }
-
-    public class Reward
-    {
-        public long RewardId { get; set; }
-        public RewardType RewardType { get; set; }
-        public long RewardAmount { get; set; }
-
-        public void ReceiveReward()
-        {
-            switch (RewardType)
-            {
-                case RewardType.Gold:
-                    GameManager.Instance.Player.Gold.PlayerGold += (int)RewardAmount;
-                    break;
-                case RewardType.Item:
-                    Item RewardItem = DataManager.Instance.ItemDatas[RewardId];
-                    DataManager.Instance.HaveItems.Add((int)RewardId, RewardItem);
-                    break;
-            }
-        }
-
-        public void DisplayRewardInfo()
-        {
-            switch (RewardType)
-            {
-                case RewardType.Gold:
-                    Console.WriteLine($"{RewardAmount}G");
-                    break;
-                case RewardType.Item:
-                    try
-                    {
-                        Item item = DataManager.Instance.ItemDatas[RewardId];
-                    }
-                    catch
-                    {
-                        Console.WriteLine("아이템이 없습니다.");
-                    }
-                    //Console.WriteLine($"{DataManager.Instance.ItemDatas[RewardId].Name} x 1");
-                    break;
-            }
-        }
     }
 }
