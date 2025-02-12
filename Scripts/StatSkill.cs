@@ -55,14 +55,14 @@ namespace Nightmare
                         player.Stat.Mp -= SkillMp;
                         player.Avd.PlayerAvd += SkillDamage;
                         Instance.Buffedplayer.Add(((Player player, int remainingTurns, string doco, int howmany))(player, SkillInTime, SkillType, SkillDamage));
-                        Console.WriteLine($"{SkillName}(으)로 회피율이 {SkillDamage}만큼 올랐습니다.");
+                        Console.WriteLine($"{SkillName}(으)로 회피율이 {Math.Round(SkillDamage * 100 ,0)} % 만큼 올랐습니다.");
                     }
                     else
                     {
                         player.Stat.Mp -= SkillMp;
                         player.Crt.PlayerCrt += SkillDamage;
                         Instance.Buffedplayer.Add(((Player player, int remainingTurns, string doco, int howmany))(player, SkillInTime, SkillType, SkillDamage));
-                        Console.WriteLine($"{SkillName}(으)로 치명타율이 {SkillDamage}만큼 올랐습니다.");
+                        Console.WriteLine($"{SkillName}(으)로 치명타율이 {Math.Round(SkillDamage * 100, 0)} % 만큼 올랐습니다.");
                     }
                 }
                 else // 디버프형 스킬 사용

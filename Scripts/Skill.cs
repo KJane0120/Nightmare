@@ -51,7 +51,7 @@ namespace Nightmare
                 {
                     case 1:
                         Skill dwarfSkill1 = new AttackSkill("광부의 곡괭이질", (player.Stat.BaseAtk + player.Stat.EquipAtk) * 2, 1, 10, 3,0);
-                        Skill dwarfSkill2 = new StatSkill("광물의 공명", 5, 1, 10, 3, "버프", "치명타율",3);
+                        Skill dwarfSkill2 = new StatSkill("광물의 공명", 0.05f, 1, 10, 3, "버프", "치명타율",3);
                         player.Playerskill.Add(dwarfSkill1);
                         player.Playerskill.Add(dwarfSkill2);
                         break;
@@ -63,7 +63,7 @@ namespace Nightmare
                         break;
                     case 3:
                         Skill saisonSkill1 = new AttackSkill("성의 톱니바퀴", (player.Stat.BaseAtk + player.Stat.EquipAtk) / 1.5f, 2, 10, 3,0);
-                        Skill saisonSkill2 = new StatSkill("오늘의 일정", 5, 1, 10, 3, "버프", "회피율",3);
+                        Skill saisonSkill2 = new StatSkill("오늘의 일정", 0.05f, 1, 10, 3, "버프", "회피율",3);
                         player.Playerskill.Add(saisonSkill1);
                         player.Playerskill.Add(saisonSkill2);
                         break;
