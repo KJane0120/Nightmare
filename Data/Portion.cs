@@ -38,6 +38,7 @@ namespace Nightmare
             {
                 Console.WriteLine("회복이 완료되었습니다.");
                 PortionCount -= 1;
+                DataManager.Instance.HaveItems.Remove(Data);
                 if (Data.Type == ItemType.HPPortion)//체력 회복 포션이라면 
                 {
                     if ((stat.Hp + 20) > stat.MaxHp)
@@ -105,6 +106,7 @@ namespace Nightmare
             {
                 portion.PortionCount++;
                 DataManager.Instance.ConsumableItems.Add(portion);
+                Console.WriteLine($"{portion.Name}을(를) 획득했습니다! ");
             }
             else
             {
