@@ -498,22 +498,29 @@
                     while (true)
                     {
                         Console.Write("번호 입력: ");
-                        if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= usableItems.Count)
+
+
+                        choice = int.Parse(Console.ReadLine());
+
+                        if(choice <=0 || choice > usableItems.Count)
+                        {
+                            UtilityManager.PrintErrorMessage();
+                            continue;
+                        }
+
+                        Item selectedItem = usableItems[choice - 1];
+
+
+                        if (selectedItem is Potion potion)
+                        {
+                            potion.UsePotion();
                             break;
-                        Console.WriteLine("잘못된 입력입니다..");
-                    }
-
-                    
-                    Item selectedItem = usableItems[choice - 1];
-
-                    
-                    if (selectedItem is Potion potion)
-                    {
-                        potion.UsePotion();
-                    }
-                    else if (selectedItem is KillBossItem bossItem)
-                    {
-                        bossItem.UseKillBossItem(bossItem);
+                        }
+                        else if (selectedItem is KillBossItem bossItem)
+                        {
+                            bossItem.UseKillBossItem(bossItem);
+                            break;
+                        }
                     }
 
                     Instance.TakeAction();
