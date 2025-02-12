@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Nightmare.Data;
+using System.Collections.Generic;
 
 namespace Nightmare
 {
@@ -17,6 +18,92 @@ namespace Nightmare
                 this.MoneyRange = MoneyRange;
                 
             }
+            public bool TutorialBattle(Player player)
+            {
+                List<Monster > monsters = new List<Monster>();
+                Monster mon = new Monster();
+                for (int i = 0; i < 3; i++)
+                {
+                    Monster monster = new Monster(1, 10, 3, 1, "연습용 표적", 0, 0);
+                    monsters.Add(monster);
+                }
+
+                Random ran = new Random();
+                int ii = 1;
+                int DeathCount = 0;
+
+
+                while (DeathCount < monsters.Count)
+                {
+
+                    //foreach로 넣기
+                    foreach (Monster monster in monsters)
+                    {
+                        Console.WriteLine($"{ii}. {monster.MonsterDIe(ref DeathCount)}");
+                        ii++;
+                    }
+
+
+
+                    if (DeathCount >= monsters.Count)
+                    {
+                        break;
+                    }
+
+                    //플레이어 상태 띄우기
+                    Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
+                    Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})");
+                    Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})");
+                    Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
+                    Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}");
+                    Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})");
+
+                    Console.WriteLine($"현재 DeathCount: {DeathCount}/{monsters.Count}");
+                    ii = 1;
+                    Console.WriteLine("행동을 선택해주세요(스킬 사용 정지)");
+                    Console.WriteLine("1. 공격");
+                    int Select = int.Parse( Console.ReadLine() );
+                    if (Select == 1)
+                    {
+                        //어느 적을 공격하는지
+                        while (true)
+                        {
+                            Console.WriteLine("누굴 공격하니");
+                            int AttackSelect = int.Parse( Console.ReadLine() );
+
+                            if (AttackSelect < 1 || AttackSelect > monsters.Count)
+                            {
+                                Console.WriteLine("잘못된 적 선택");
+
+                                continue;
+                            }
+                            else if (!monsters[AttackSelect - 1].IsLive)
+                            {
+                                Console.WriteLine("이미 죽었습니다.");
+                                continue;
+                            }
+                            else
+                            {
+                                mon.AttackedFromPlayer(monsters[AttackSelect - 1], player);
+                                foreach (Skill skill in player.Playerskill)
+                                {
+                                    if (skill.CurrentCoolTime < skill.SkillCoolTime)
+                                    {
+                                        skill.CurrentCoolTime++;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                Console.WriteLine("튜토리얼 클리어!");
+                return true;
+
+            }
+
+
+
             public void Battle(Player player)
             {
                 List<Monster> monsters = new List<Monster>();
@@ -39,7 +126,7 @@ namespace Nightmare
 
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
-
+                GetClearBoSang(monsters,player);
                 //다시 돌아가기
             }
             public void BossBattle(Player player) //player
@@ -57,9 +144,9 @@ namespace Nightmare
 
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
-              
+                GetClearBoSang(monsters, player);
                 //다시 돌아가기
-
+                Instance.GameClear();
             }
 
             public void BattlePhase(Monster mon, List<Monster> monsters, Player player)
@@ -163,8 +250,19 @@ namespace Nightmare
                     }
                     else if (Select == 3)
                     {
-                        
+                        int Selects = InputandReturn(4);
 
+                        if (Select == 1)
+                        {
+                            foreach (Portion portion in DataManager.Instance.ConsumableItems)
+                            {
+                                if ((int)portion.Data.Type == 5)
+                                {
+                                    portion.UsePortion();
+                                    break;
+                                }
+                            }
+                        }
                         Instance.TakeAction();
                     }
                     else
@@ -250,12 +348,36 @@ namespace Nightmare
 
             public void GetClearBoSang(List<Monster> mm, Player player)
             {
+                Random random = new Random();
+                int AllMoney = 0;
                 foreach(Monster m in mm ) 
                 {
                     player.Gold.PlayerGold += m.MonsterMoney;
-                    
-
+                    AllMoney += m.MonsterMoney;
                 }
+
+                Console.WriteLine($"{AllMoney}Gold 획득! 총 골드 {player.Gold.PlayerGold}");
+
+                if(RandomRange > 1 || random.Next(0,11) > 5)
+                {
+                    Portion Healthportion = new Portion
+                    {
+                        PortionId = 18
+                    };
+                    Healthportion.MaximumHavePortion(Healthportion);
+
+                    Portion manaportion = new Portion
+                    {
+                        PortionId = 24
+                    };
+                    manaportion.MaximumHavePortion(manaportion);
+
+                    if (IsFinal || random.Next(0, 11) > 5)
+                    {
+                        //DataManager.Instance.HaveItemDatas.Add(); 보스템 떨구기
+                    }
+                }
+
             }
 
             public override string ToString()

@@ -13,6 +13,7 @@
                 return _Instance;
             }
         }
+        public bool TutorialOk = false;
 
         private static GameManager? _Instance = null;
 

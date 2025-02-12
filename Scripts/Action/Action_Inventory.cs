@@ -39,8 +39,9 @@ namespace Nightmare
 
                 Console.WriteLine();
             }
-        }
-        
-    }
 
+            //Equip();
+            //UnEquip();
+        }
+    }
 }
