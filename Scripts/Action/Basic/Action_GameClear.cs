@@ -30,7 +30,7 @@
             {
                 Console.WriteLine("게임 클리어!");
 
-                var quest = DataManager.Instance.QuestDatas.FirstOrDefault(x => x.QuestGroupId == Instance.Player.QuestGroupID);
+                var quest = DataManager.Instance.QuestDatas.FirstOrDefault(x => x.QuestGroupId == Instance.Player.QuestGroupId);
 
                 foreach (var reward in quest.Rewards)
                 {
