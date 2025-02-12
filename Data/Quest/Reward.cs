@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using System.Text.Json.Serialization;
+
+namespace Nightmare
 {
     public enum RewardType
     {
@@ -13,12 +15,15 @@
         public long RewardAmount { get; set; }
         public Item ItemData => DataManager.Instance.ItemDatas[RewardId];
 
+        [JsonIgnore]
+        public Item ItemData => DataManager.Instance.ItemDatas[RewardId];
+
         public void ReceiveReward()
         {
             switch (RewardType)
             {
                 case RewardType.Gold:
-                    GameManager.Instance.Player.Gold.PlayerGold += (int)RewardAmount;
+                    GameManager.Instance.Player.Gold.GoldIncrease((int)RewardAmount);
                     break;
                 case RewardType.Item:
                     DataManager.Instance.HaveItems.Add(ItemData);

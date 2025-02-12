@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using System.Data;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -27,16 +29,22 @@
 
         public bool IsFirstUsePotion { get; set; } = false;
 
+        public int GameClearCount = 0;
+
         public void GameClear()
         {
-            DataManager.Instance.CurrentStageClear++;
+            GameClearCount++;
+            MoveNextAction(ActionType.GameClear);
         }
 
+        public void GameReStart()
+        {
+            GameClearCount++;
+            MoveNextAction(ActionType.GameClear);
+        }
 
         public void GameStart()
         {
-
-            DataManager.Initialize();
 
             Player = new Player();
             Player.Level = new Level();
@@ -66,7 +74,7 @@
             foreach (char c in startMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(30); 
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -74,8 +82,27 @@
             Console.WriteLine("다음 이야기를 들으려면 아무 키나 입력하세요.");
             Console.ReadKey();
 
+            GameLoad();
             SetName();
         }
+        public void GameSave(object sender, EventArgs e)
+        {
+            DataManager.Instance.SaveGameData();
+        }
+
+        public void GameLoad()
+        {
+            DataManager.Initialize();
+            DataManager.Instance.LoadGameData();
+        }
+
+        public void GameDataReset()
+        {
+            TutorialOk = false;
+            IsFirstUsePotion = false;
+            DataManager.Instance.DataReset();
+        }
+
 
         // 이름 설정
         private void SetName()
@@ -91,7 +118,7 @@
             foreach (char c in nameMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(30);
             }
 
             name = Console.ReadLine();
@@ -104,7 +131,7 @@
             foreach (char c in saveMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(30);
             }
            
             Console.WriteLine();
@@ -140,7 +167,7 @@
             foreach (char c in jobChoiceMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(30);
             }
 
             UtilityManager.InputNumberInRange(1, 5, JobInputNumberInRange, SetJob, "듣고싶은 동화를 선택해주세요.");

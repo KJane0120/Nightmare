@@ -106,5 +106,99 @@ namespace Nightmare
             // override를 통해 구현 예정
         }
 
+        // 장착할 수 없는 특정 아이템 ID 목록
+        private readonly HashSet<long> NonEquippableItemIds = new()
+        {
+              13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25  // 장착 불가능한 목록. 13-17(하트조각) 18(쿠키) 19-23(스페셜 드랍아이템) 24(음료) 25(사랑의 정수)
+        };
+
+        public void Equip(int number)
+        {
+
+            // 선택한 아이템이 존재하는지 확인
+            if (number < 0 || number >= DataManager.Instance.HaveItems.Count)
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                return;
+            }
+
+            Item selectItem = DataManager.Instance.HaveItems[number];
+
+            if (selectItem == null)
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                return;
+            }
+            //소모성 아이템 및 하트조각은 장착 불가
+            if (NonEquippableItemIds.Contains(selectItem.Id))
+            {
+                Console.WriteLine($"{selectItem.Name}은(는) 장착할 수 없습니다.");
+                return;
+            }
+            // 선택한 아이템이 이미 장착된 상태라면 해제
+
+            if (selectItem.IsEquip)
+            {
+                UnEquip(selectItem);
+                return;
+            }
+
+            // 같은 타입의 장비가 이미 장착된 경우, 기존 아이템을 해제
+            Item equippedItem = DataManager.Instance.EquippedItems.FirstOrDefault(item => item.Type == selectItem.Type);
+
+            if (equippedItem != null)
+            {
+                UnEquip(equippedItem);
+            }
+
+            // 새 아이템 장착
+            selectItem.IsEquip = true;
+            DataManager.Instance.EquippedItems.Add(selectItem);
+
+            switch (selectItem.Type)
+            {
+                case ItemType.Weapon:
+                    GameManager.Instance.Player.Stat.AddEquipAtk(selectItem.Value);
+                    break;
+                case ItemType.Armor:
+                    GameManager.Instance.Player.Stat.AddEquipDef(selectItem.Value);
+                    break;
+                case ItemType.Accessory:
+                    GameManager.Instance.Player.Avd.EquipAvd += selectItem.Value;
+                    GameManager.Instance.Player.Crt.EquipCrt += selectItem.Value;
+                    break;
+            }
+        }
+
+        public void UnEquip(Item item)
+        {
+            if (item == null || !item.IsEquip)
+            {
+                return;
+            }
+
+            if (NonEquippableItemIds.Contains(item.Id))
+            {
+                Console.WriteLine($"{item.Name}은(는) 해제할 수 없습니다.");
+                return;
+            }
+
+            item.IsEquip = false;
+            DataManager.Instance.EquippedItems.Remove(item);
+
+            switch (item.Type)
+            {
+                case ItemType.Weapon:
+                    GameManager.Instance.Player.Stat.SubtEquipAtk(item.Value);
+                    break;
+                case ItemType.Armor:
+                    GameManager.Instance.Player.Stat.SubtEquipDef(item.Value);
+                    break;
+                case ItemType.Accessory:
+                    GameManager.Instance.Player.Avd.EquipAvd -= item.Value;
+                    GameManager.Instance.Player.Crt.EquipCrt -= item.Value;
+                    break;
+            }
+        }
     }
 }
