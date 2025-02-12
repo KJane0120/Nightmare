@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using System.Runtime.CompilerServices;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -21,7 +23,7 @@
         public List<(Monster monster, int remainingTurns, String doco, int howmany)> DebuffedMonsters = new List<(Monster, int, String, int)>();
         public List<(Player player, int remainingTurns, String doco, int howmany)> Buffedplayer = new List<(Player, int, String, int)>();
 
-        private Dictionary<int , int> map = new Dictionary<int , int>();
+        private Dictionary<int, int> map = new Dictionary<int, int>();
 
         public bool IsFirstUsePortion { get; set; } = false;
 
@@ -61,65 +63,62 @@
             Console.WriteLine();
             Console.WriteLine("Once Upon a Nightmare");
             Console.WriteLine();
-            Console.WriteLine("깜빡, 깜빡.");
-            Console.WriteLine("시계 토끼가 당신을 내려다 보고 있습니다.");
+            Console.WriteLine();
+            Console.WriteLine("로딩중...");
+            Thread.Sleep(5000);
 
             // 이름 설정
+            Console.Clear() ;
+            Console.WriteLine("깜빡, 깜빡.");
+            Console.WriteLine("시계 토끼가 당신을 내려다 보고 있습니다.");            
             Console.WriteLine();
             Console.WriteLine("시계 토끼: 안녕? 악몽에서 나가고 싶니?");
             Console.WriteLine("시계 토끼: 우선 네 이름을 알려 줘.");
             Console.WriteLine();
             Console.WriteLine("일그러진 동화 속을 유영할 당신의 이름은?");
             name = Console.ReadLine();
-            Console.WriteLine();
+            Console.Clear();
             Console.WriteLine($"안녕하세요, {name}.");
             Console.WriteLine("설정하신 이름으로 주인공이 되시겠습니까?");
             Console.WriteLine();
             Console.WriteLine("1. 저장\n2. 취소");
-            Console.Write("\n어느 페이지로 넘어가시겠습니까?\n>>");
-            string inputNumber = Console.ReadLine();
 
-            if (int.TryParse(inputNumber, out int number))
+            UtilityManager.InputNumberInRange(1, 2, SuccessInputNumberInRange, SetName, "어느 페이지로 넘어가시겠습니까?");
+        }
+
+        private void SuccessInputNumberInRange(int number)
+        {
+            if (number == 1)
             {
-                if (number == 1)
-                {
-                    SaveName(number, name);
-                }
-                else { SetName(); }
+                SaveName(number, name);
             }
             else
             {
-                Console.WriteLine("\n잘못된 입력입니다.");
                 SetName();
             }
         }
 
         private void SetJob() // 직업설정
         {
-            Console.WriteLine();
+            Console.Clear();
             Console.WriteLine("어떤 동화를 들어보시겠습니까?\n");
             Console.WriteLine("1. 백설공주와 일곱 번째 난쟁이");
             Console.WriteLine("2. 신데렐라의 새 언니");
             Console.WriteLine("3. 모두가 잠든 성의 하인");
             Console.WriteLine("4. 깊은 바다 속 문어 마녀");
             Console.WriteLine("5. 힘을 잃은 야수");
-            Console.WriteLine();
-            Console.Write("원하시는 행동을 입력해주세요.\n>>");
-            string inputNumber = Console.ReadLine();
 
+            UtilityManager.InputNumberInRange(1, 5, JobInputNumberInRange, SetJob, "듣고싶은 동화를 선택해주세요.");
+        }
 
-            // 입력받은 값이 int로 변환이 가능할 때
-            if (int.TryParse(inputNumber, out int actionNumber))
+        private void JobInputNumberInRange(int number)
+        {
+            if (number >= 1 && number <= 5)
             {
-                Player.Job = JobChoice(actionNumber);
+                Player.Job = JobChoice(number);
                 Skill skill = new Skill();
                 skill.SkillSet(Player);
                 MoveNextAction(ActionType.Village);
-            }
-            else
-            {
-                Console.WriteLine("\n잘못된 입력입니다.\n다시 동화를 선택해주세요.\n");
-                SetJob();
             }
         }
 
@@ -170,7 +169,7 @@
                     }
                 }
             }
-            if(Buffedplayer != null)
+            if (Buffedplayer != null)
             {
                 for (int i = Buffedplayer.Count - 1; i >= 0; i--)
                 {
@@ -189,7 +188,7 @@
                         {
                             Player.Stat.BaseDef -= howmany;
                         }
-                        else if(doco.Equals("회피율"))
+                        else if (doco.Equals("회피율"))
                         {
                             player.Avd.PlayerAvd -= howmany;
                         }
@@ -209,14 +208,14 @@
 
 
         }
-            private Job JobChoice(int num)
+        private Job JobChoice(int num)
         {
-            var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, int Avd, int Crt)> {
-            { 1, (Job.Dwarf,10,5,100,30,10,15) },
-            { 2, (Job.NewSister, 15, 5, 70, 30, 10, 15) },
-            { 3, (Job.Saison, 12, 7, 100, 20, 10, 15) },
-            { 4, (Job.OctopusWitch, 7, 4, 50, 50, 10, 15) },
-            { 5, (Job.WildAnimal, 20, 10, 150, 10, 10, 15) }};
+            var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, float Avd, float Crt)> {
+            { 1, (Job.Dwarf,10,5,100,30,0.1f,0.15f) },
+            { 2, (Job.NewSister, 15, 5, 70, 30, 0.1f, 0.15f) },
+            { 3, (Job.Saison, 12, 7, 100, 20, 0.1f, 0.15f) },
+            { 4, (Job.OctopusWitch, 7, 4, 50, 50, 0.1f, 0.15f) },
+            { 5, (Job.WildAnimal, 20, 10, 150, 10, 0.1f, 0.15f) }};
 
 
             if (jobStats.TryGetValue(num, out var stats))
@@ -229,12 +228,8 @@
                 Player.Crt.PlayerCrt = stats.Crt;
                 Player.QuestGroupId = num;
                 return stats.job;
-            }
+            }                       
 
-            Console.WriteLine("\n잘못된 입력입니다.\n다시 동화를 선택해주세요.\n");
-            Console.WriteLine();
-
-            SetJob();
             return Job.None;
         }
     }
