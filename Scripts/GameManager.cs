@@ -36,6 +36,7 @@ namespace Nightmare
 
         public void GameStart()
         {
+            Console.Clear();
 
             DataManager.Initialize();
 
