@@ -74,7 +74,7 @@ namespace Nightmare
             foreach (char c in startMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(300); 
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -118,7 +118,7 @@ namespace Nightmare
             foreach (char c in nameMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(300);
             }
 
             name = Console.ReadLine();
@@ -131,7 +131,7 @@ namespace Nightmare
             foreach (char c in saveMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(300);
             }
            
             Console.WriteLine();
@@ -167,7 +167,7 @@ namespace Nightmare
             foreach (char c in jobChoiceMessage)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                //Thread.Sleep(300);
             }
 
             UtilityManager.InputNumberInRange(1, 5, JobInputNumberInRange, SetJob, "듣고싶은 동화를 선택해주세요.");
