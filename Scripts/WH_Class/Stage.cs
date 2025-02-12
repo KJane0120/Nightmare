@@ -52,20 +52,26 @@ namespace Nightmare
                     Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
                     Console.WriteLine($"치명타율: {Math.Round((player.Crt.PlayerCrt + player.Crt.EquipCrt) * 100), 0} %");
                     Console.WriteLine($"회피율: {Math.Round((player.Avd.EquipAvd + player.Avd.PlayerAvd) * 100), 0} %");
-
-                    Console.WriteLine($"현재 DeathCount: {DeathCount}/{monsters.Count}");
                     ii = 1;
                     Console.WriteLine("행동을 선택해주세요(스킬 사용 정지)");
                     Console.WriteLine("1. 공격");
                     int Select = int.Parse( Console.ReadLine() );
                     if (Select == 1)
                     {
+                        int AttackSelect;
                         //어느 적을 공격하는지
                         while (true)
                         {
                             Console.WriteLine("누굴 공격하니");
-                            int AttackSelect = int.Parse( Console.ReadLine() );
-
+                            try
+                            {
+                                AttackSelect = int.Parse(Console.ReadLine());
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine("숫자 제대로 입력해");
+                                continue;
+                            }
                             if (AttackSelect < 1 || AttackSelect > monsters.Count)
                             {
                                 Console.WriteLine("잘못된 적 선택");
@@ -320,36 +326,41 @@ namespace Nightmare
             }
             public int InputandReturn(int i)
             {
-                if (i == 1)
+                int number;
+                while (true)
                 {
-                    Console.WriteLine("행동을 골라주세요");
-                    Console.WriteLine("1. 공격");
-                    Console.WriteLine("2. 스킬");
-                    Console.WriteLine("3. 아이템 사용");
-                    return int.Parse(Console.ReadLine());
-                }
-                else if(i == 2)
-                {
-                    Console.WriteLine("어느 적을 공격할거니");
-                    return int.Parse(Console.ReadLine());
-                }
-                else  if( i == 3)
-                {
-                    Console.WriteLine("사용할 스킬을 골라주세요");
+                    try
+                    {
+                        if (i == 1)
+                        {
+                            Console.WriteLine("행동을 골라주세요");
+                            Console.WriteLine("1. 공격");
+                            Console.WriteLine("2. 스킬");
+                            Console.WriteLine("3. 아이템 사용");
+                        }
+                        else if (i == 2)
+                        {
+                            Console.WriteLine("어느 적을 공격할거니");
+                        }
+                        else if (i == 3)
+                        {
+                            Console.WriteLine("사용할 스킬을 골라주세요");
+                        }
+                        else
+                        {
+                            Console.WriteLine("사용할 아이템을 골라주세요");
+                            Console.WriteLine("1. 앨리스의 쿠키");
+                            Console.WriteLine("2. 엘리스의 음료");
+                        }
 
-                    return int.Parse(Console.ReadLine());
+                        number = int.Parse(Console.ReadLine());
+                        return number;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("숫자를 입력하세요.");
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("사용할 아이템을 골라주세요");
-                    Console.WriteLine("1. 앨리스의 쿠키");
-                    Console.WriteLine("2. 엘리스의 음료");
-                    Console.WriteLine("사용할 아이템을 골라주세요");
-                    return int.Parse(Console.ReadLine());
-                }
-
-
-
             }
 
             public void GetClearBoSang(List<Monster> mm, Player player)
@@ -393,7 +404,7 @@ namespace Nightmare
             public override string ToString()
             {
 
-                String s = $"적의 수: 3 ";
+                String s = $"적의 수: 3 평균 레벨{1 +(3* RandomRange)} ~ {4+ (3*RandomRange)} ";
                 return s ;
             }
 

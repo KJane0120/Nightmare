@@ -26,6 +26,7 @@ namespace Nightmare
             }
             public void SelectStage(Player player) //플레이어 레벨 들어갈거임
             {
+             
                 if (!Instance.TutorialOk)
                 {
                     Stage Tuto = new Stage(0, 0);
