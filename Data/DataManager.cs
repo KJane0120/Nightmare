@@ -1,4 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Nightmare.Data.Item;
+using Nightmare.Data.Quest;
+using Nightmare.Scripts.Action.Dungeon;
+using Nightmare.Scripts.Action.Status;
 
 namespace Nightmare
 {
@@ -19,23 +23,17 @@ namespace Nightmare
 
         private static DataManager? _Instance = null;
 
-        private static bool isInitialized = false;
-
-        private SaveGameData? saveGameData;
-
-
         public static void Initialize()
         {
-            if (isInitialized) return;
             JsonDataLoad();
             Instance.InitializeConsumableItems();
         }
 
         private static void JsonDataLoad()
         {
-            string questfilePath = GetFilePath("QuestData", "Data");
-            string bossfilePath = GetFilePath("BossData", "Data");
-            string itemfilePath = GetFilePath("ItemData", "Data");
+            string questfilePath = GetFilePath("QuestData");
+            string bossfilePath = GetFilePath("BossData");
+            string itemfilePath = GetFilePath("ItemData");
 
             if (!File.Exists(questfilePath))
             {
@@ -69,7 +67,7 @@ namespace Nightmare
 
         }
 
-        private static string GetFilePath(string fileName, string folderName)
+        private static string GetFilePath(string fileName)
         {
             var paths = AppDomain.CurrentDomain.BaseDirectory.Split('\\');
             var newPath = "";
@@ -79,50 +77,19 @@ namespace Nightmare
                 newPath += paths[i] + "\\";
             }
 
-            newPath += $"{folderName}\\{fileName}.json";
+            newPath += $"Data\\{fileName}.json";
 
             return newPath;
         }
-      
-        public void SaveGameData()
-        {
-            saveGameData.HaveItems = Instance.HaveItems;
-            saveGameData.GameClearCount = GameManager.Instance.GameClearCount;
-            saveGameData.GoldAmount = GameManager.Instance.Player.Gold.PlayerGold;
-            saveGameData.CanSelectPlayers = Instance.CanSelectPlayerDatas;
-
-            string GameData = JsonConvert.SerializeObject(saveGameData);
-            File.WriteAllText(GetFilePath("SaveData", "SaveData"), GameData);
-        }
-
-        public void LoadGameData()
-        {
-            if (!File.Exists(GetFilePath("SaveData", "SaveData")))
-            {
-                saveGameData = new SaveGameData();
-                return;
-            }
-            else
-            {
-                string GameData = File.ReadAllText(GetFilePath("SaveData", "SaveData"));
-                saveGameData = JsonConvert.DeserializeObject<SaveGameData>(GameData);
-
-                GameManager.Instance.GameClearCount = saveGameData.GameClearCount;
-                GameManager.Instance.Player.Gold.PlayerGold = (int)saveGameData.GoldAmount;
-                Instance.HaveItems = saveGameData.HaveItems;
-                Instance.CanSelectPlayerDatas = saveGameData.CanSelectPlayers;
-            }
-        }
-
-        //아이템 리스트
-        //상점 아이템 리스트  => json으로 바꾸면서 더이상 이 리스트를 참조하지 않아서 삭제해도 될듯합니다. 
-        public Dictionary<int, Item> ShopItems = new();
 
         //Dict 데이터 사용시 for문 오류, 아이템 판매 시 출력되는 아이템목록 리스트 생성
         public List<Item> HaveItems = new List<Item>();
 
         //퀘스트 데이터 리스트
         public List<Quest> QuestDatas = new();
+
+
+        public int CurrentStageClear;
 
         //퀘스트 가져오기
         public List<Quest> GetPlayerQuestGroup()
@@ -145,13 +112,70 @@ namespace Nightmare
         public Dictionary<long, Boss> BossDatas = new();
 
         //플레이어 데이터
-        public Dictionary<long, Player> PlayerDatas = new();
+        public Dictionary<long, Player> PlayerDatas = new()
+        {
+            { 1,new Player() },
+            { 2,new Player() },
+            { 3,new Player() },
+            { 4,new Player() },
+            { 5,new Player() }
+        };
 
-        //선택 가능한 직업
-        public Dictionary<long, Player> CanSelectPlayerDatas = new();
+        public void SetPlayerDatas()
+        {
+            PlayerDatas[1].Level = GameManager.Instance.Player.Level;
+            PlayerDatas[1].Name = GameManager.Instance.Player.Name;
+            PlayerDatas[1].Job = Job.Dwarf;
+            PlayerDatas[1].Stat = new Stat(10, 5, 100, 100, 30, 30);
+            PlayerDatas[1].Gold = GameManager.Instance.Player.Gold;
+            PlayerDatas[1].Avd = GameManager.Instance.Player.Avd;
+            PlayerDatas[1].Crt = GameManager.Instance.Player.Crt;
+            PlayerDatas[1].CurrentExp = 0;
+            PlayerDatas[1].QuestGroupId = 12345;
+
+            PlayerDatas[2].Level = GameManager.Instance.Player.Level;
+            PlayerDatas[2].Name = GameManager.Instance.Player.Name;
+            PlayerDatas[2].Job = Job.NewSister;
+            PlayerDatas[2].Stat = new Stat(15, 5, 70, 70, 30, 30);
+            PlayerDatas[2].Gold = GameManager.Instance.Player.Gold;
+            PlayerDatas[2].Avd = GameManager.Instance.Player.Avd;
+            PlayerDatas[2].Crt = GameManager.Instance.Player.Crt;
+            PlayerDatas[2].CurrentExp = 0;
+            PlayerDatas[2].QuestGroupId = 12345;
+
+            PlayerDatas[3].Level = GameManager.Instance.Player.Level;
+            PlayerDatas[3].Name = GameManager.Instance.Player.Name;
+            PlayerDatas[3].Job = Job.Saison;
+            PlayerDatas[3].Stat = new Stat(12, 7, 100, 100, 20, 20);
+            PlayerDatas[3].Gold = GameManager.Instance.Player.Gold;
+            PlayerDatas[3].Avd = GameManager.Instance.Player.Avd;
+            PlayerDatas[3].Crt = GameManager.Instance.Player.Crt;
+            PlayerDatas[3].CurrentExp = 0;
+            PlayerDatas[3].QuestGroupId = 12345;
+
+            PlayerDatas[4].Level = GameManager.Instance.Player.Level;
+            PlayerDatas[4].Name = GameManager.Instance.Player.Name;
+            PlayerDatas[4].Job = Job.OctopusWitch;
+            PlayerDatas[4].Stat = new Stat(7, 4, 50, 50, 50, 50);
+            PlayerDatas[4].Gold = GameManager.Instance.Player.Gold;
+            PlayerDatas[4].Avd = GameManager.Instance.Player.Avd;
+            PlayerDatas[4].Crt = GameManager.Instance.Player.Crt;
+            PlayerDatas[4].CurrentExp = 0;
+            PlayerDatas[4].QuestGroupId = 12345;
+
+            PlayerDatas[5].Level = GameManager.Instance.Player.Level;
+            PlayerDatas[5].Name = GameManager.Instance.Player.Name;
+            PlayerDatas[5].Job = Job.WildAnimal;
+            PlayerDatas[5].Stat = new Stat(20, 10, 150, 150, 10, 10);
+            PlayerDatas[5].Gold = GameManager.Instance.Player.Gold;
+            PlayerDatas[5].Avd = GameManager.Instance.Player.Avd;
+            PlayerDatas[5].Crt = GameManager.Instance.Player.Crt;
+            PlayerDatas[5].CurrentExp = 0;
+            PlayerDatas[5].QuestGroupId = 12345;
+        }
+
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션 3종+스페셜 드랍아이템 5종)
-
         public List<Item> ConsumableItems = new();
         
         
@@ -161,12 +185,12 @@ namespace Nightmare
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
         {
-            foreach (var portion in PortionDatas.Where(p => p.PortionId == 18 || p.PortionId == 24))
+            foreach (var portion in PortionDatas.Where(p => p.PotionId == 18 || p.PotionId == 24))
             {
-                if (ItemDatas.TryGetValue(portion.PortionId, out Item itemData))
+                if (ItemDatas.TryGetValue(portion.PotionId, out Item itemData))
                 {
                     // PortionCount만큼 ConsumableItems 리스트에 추가
-                    for (int i = 0; i < portion.PortionCount; i++)
+                    for (int i = 0; i < portion.PotionCount; i++)
                     {
                         ConsumableItems.Add(itemData);
                         HaveItems.Add(itemData);
@@ -180,43 +204,28 @@ namespace Nightmare
         //장착된 아이템 리스트
         public List<Item> EquippedItems = new();
 
-        public List<Portion> PortionDatas = new()
+        public List<Potion> PortionDatas = new()
         {
             
-            new Portion()
+            new Potion()
             {
-                PortionId = 18,
-                PortionCount = 3,
-                PortionMaxCount = 3
+                PotionId = 18,
+                PotionCount = 3,
+                PotionMaxCount = 3
             },
-            new Portion()
+            new Potion()
             {
-                PortionId = 24,
-                PortionCount = 3,
-                PortionMaxCount = 3
+                PotionId = 24,
+                PotionCount = 3,
+                PotionMaxCount = 3
             },
-            new Portion()
+            new Potion()
             {
-                PortionId = 25,
-                PortionCount = 0,
-                PortionMaxCount = 4
+                PotionId = 25,
+                PotionCount = 0,
+                PotionMaxCount = 4
             }
         };
-
-        public void DataReset()
-        {
-            // 가지고 있는 아이템 중에 하트조각이외에 아이템은 삭제
-            foreach (var item in HaveItems)
-            {
-                if (item.Type != ItemType.HeartPiece)
-                {
-                    HaveItems.Remove(item);
-                }
-            }
-
-            // 장착된 아이템 삭제
-            EquippedItems.Clear();
-        }
     }
 }
 
