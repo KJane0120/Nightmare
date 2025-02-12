@@ -1,5 +1,4 @@
-﻿
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {

@@ -1,6 +1,5 @@
 ﻿using System.Text;
 
-
 namespace Nightmare
 {
     public partial class GameManager

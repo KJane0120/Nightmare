@@ -1,5 +1,4 @@
-﻿
-namespace Nightmare
+﻿namespace Nightmare
 {
     public class KillBossItem : Item
     {
@@ -26,7 +25,7 @@ namespace Nightmare
         {
             if (item.Type == ItemType.HPPotion || item.Type == ItemType.MPPotion || item.Type == ItemType.Special)
             {
-                
+
             }
             else if (item.Type == ItemType.Accessory)
             {

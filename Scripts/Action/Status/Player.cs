@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using static Nightmare.GameManager;
+﻿using static Nightmare.GameManager;
 
 namespace Nightmare
 {

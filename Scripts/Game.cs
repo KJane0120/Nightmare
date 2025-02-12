@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     internal class Game
     {

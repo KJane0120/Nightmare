@@ -22,7 +22,7 @@ namespace Nightmare
             equipAtk += add;
         }
         public void AddEquipDef(float add)
-        { 
+        {
             equipDef += add;
         }
 
@@ -41,7 +41,7 @@ namespace Nightmare
         }
     }
 
-   
+
 
     public class Level
     {
@@ -77,7 +77,7 @@ namespace Nightmare
     public class Avd //회피율
     {
         public float PlayerAvd = 0.1f;
-        public float EquipAvd;              
+        public float EquipAvd;
 
         public void AddPlayerAvd(float add) // 회피율 증가
         {
