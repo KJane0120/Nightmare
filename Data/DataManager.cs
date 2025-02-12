@@ -1,6 +1,4 @@
-﻿using Nightmare.Data;
-using static Nightmare.Data.Item;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nightmare
 {
@@ -79,10 +77,6 @@ namespace Nightmare
 
             return newPath;
         }
-
-        //아이템 리스트
-        //상점 아이템 리스트  => json으로 바꾸면서 더이상 이 리스트를 참조하지 않아서 삭제해도 될듯합니다. 
-        public Dictionary<int, Item> ShopItems = new();
 
         //Dict 데이터 사용시 for문 오류, 아이템 판매 시 출력되는 아이템목록 리스트 생성
         public List<Item> HaveItems = new List<Item>();
@@ -177,8 +171,12 @@ namespace Nightmare
         }
 
 
-        //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
+        //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션 3종+스페셜 드랍아이템 5종)
         public List<Item> ConsumableItems = new();
+        
+        
+        //보스 처치시 필요한 필수 아이템 데이터
+        public Dictionary<long, KillBossItem> KillBossItemDatas = new();
 
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
@@ -191,8 +189,7 @@ namespace Nightmare
                     for (int i = 0; i < portion.PortionCount; i++)
                     {
                         ConsumableItems.Add(itemData);
-                        //HaveItems.Add(itemData.Id, itemData);
-                        //인벤토리 아이템목록에 추가해주고 싶음
+                        HaveItems.Add(itemData);
                     }
                 }
             }
@@ -205,6 +202,7 @@ namespace Nightmare
 
         public List<Portion> PortionDatas = new()
         {
+            
             new Portion()
             {
                 PortionId = 18,
@@ -226,9 +224,6 @@ namespace Nightmare
         };
     }
 }
-
-
-//보스드랍아이템 리스트
 
 
 
