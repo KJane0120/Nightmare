@@ -1,6 +1,4 @@
-﻿using Nightmare.Data.Item;
-
-namespace Nightmare.Data.Quest
+﻿namespace Nightmare
 {
     public enum RewardType
     {

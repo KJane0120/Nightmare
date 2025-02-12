@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public enum Align
     {

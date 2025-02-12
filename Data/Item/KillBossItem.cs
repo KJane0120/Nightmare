@@ -1,4 +1,4 @@
-﻿namespace Nightmare.Data.Item
+﻿namespace Nightmare
 {
     public class KillBossItem : Item
     {
