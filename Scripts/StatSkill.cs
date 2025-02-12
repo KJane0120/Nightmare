@@ -14,8 +14,7 @@ namespace Nightmare
             public StatSkill(string n, float damage, int t, int m, int cooltime, string buff, string sType, int st) : base(n, damage, t, m, cooltime, st)
             {
                 Buffskill = buff;
-                SkillType = sType;
-                //SkillInTime = time;
+                SkillType = sType;                
             }
 
             public override string ToString()
@@ -25,44 +24,6 @@ namespace Nightmare
                 sb.Append(base.ToString()).Append("\n증감효과: ").Append($"{SkillType} + {SkillDamage}").Append("\n스킬대상: ").Append($"{SkillTarget}명\n");
                 return sb.ToString();
             }
-
-            //public void UnUse(Player player, List<Monster> monster, int num)
-            //{
-            //    if (Buffskill.Equals("버프")) // 버프형 스킬 사용
-            //    {
-            //        if (SkillType.Equals("공격력"))
-            //        {
-            //            player.Stat.BaseAtk -= SkillDamage;
-            //        }
-            //        else if (SkillType.Equals("방어력"))
-            //        {
-            //            player.Stat.BaseDef -= SkillDamage;
-            //        }
-            //        else if (SkillType.Equals("체력"))
-            //        {
-                        
-            //        }
-            //        else if (SkillType.Equals("회피율"))
-            //        {
-            //            player.Avd.PlayerAvd -= SkillDamage;
-            //        }
-            //        else
-            //        {
-            //            player.Crt.PlayerCrt -= SkillDamage;
-            //        }
-            //    }
-            //    else // 디버프형 스킬 사용
-            //    {
-            //        if (SkillType.Equals("공격력"))
-            //        {
-            //            monster[num - 1].MonsterAttack += (int)SkillDamage;
-            //        }
-            //        else if (SkillType.Equals("방어력"))
-            //        {
-            //            monster[num - 1].MonsterDefense += (int)SkillDamage;
-            //        }
-            //    }
-            //}
 
             public override void SkillUse(Player player, List<Monster> monster, ref int D)
             {
