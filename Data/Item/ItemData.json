@@ -131,7 +131,6 @@
         "IsEquip": false,
         "IsSold": false
     },
-    //13~17 하트조각은 임의값 넣었음
     "13": {
         "Id": 13,
         "Name": "빨간 하트조각",
@@ -192,18 +191,18 @@
         "Name": "앨리스의 쿠키",
         "Type": 5,
         "Value": 20,
-        "Desc": "Eat Me! 라는 꼬리표가 달려있다", //임의값
+        "Desc": "Eat Me! 라는 꼬리표가 달려있다", 
         "Cost": 0,
         "IsPurchase": false,
         "IsEquip": false,
         "IsSold": false
-    }, //19~ 23은 드랍아이템 기획 후 업뎃 예정. 아래는 임시 코드
+    }, 
     "19": {
         "Id": 19,
         "Name": "새빨간 독사과",
         "Type": 3,
         "Value": 0,
-        "Desc": "깨물고 싶은 욕망을 참을 수 없을 겁니다.", //임의값
+        "Desc": "깨물고 싶은 욕망을 참을 수 없을 겁니다.", 
         "Cost": 0,
         "IsPurchase": false,
         "IsEquip": false,
@@ -214,7 +213,7 @@
         "Name": "반짝이는 유리구두",
         "Type": 3,
         "Value": 0,
-        "Desc": "계단에서 구두 한 짝을 잃어버리고 말았답니다.", //임의값
+        "Desc": "계단에서 구두 한 짝을 잃어버리고 말았답니다.",
         "Cost": 0,
         "IsPurchase": false,
         "IsEquip": false,
