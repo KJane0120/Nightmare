@@ -64,9 +64,9 @@ namespace Nightmare
             Console.WriteLine();
             Console.WriteLine("Once Upon a Nightmare");
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("로딩중...");
-            Thread.Sleep(5000);
+            Console.WriteLine();            
+            Console.WriteLine("다음 이야기를 들으려면 아무 키나 입력하세요.");
+            Console.ReadKey();
 
             // 이름 설정
             Console.Clear() ;
