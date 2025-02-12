@@ -11,7 +11,6 @@ namespace Nightmare
             AppDomain.CurrentDomain.ProcessExit += GameManager.Instance.GameSave;
 
             Console.SetWindowSize(120, 40);
-
             var titlelines = ASCIIManager.Getlines("Title");
             var booklines = ASCIIManager.Getlines("Book");
 

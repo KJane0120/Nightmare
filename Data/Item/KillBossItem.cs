@@ -32,5 +32,12 @@
                 UseKillBossItem(item);
             }
         }
+
+
+        public String ShowBossItem()
+        {
+            string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (효과가 들어갈듯 )";
+            return str;
+        }
     }
 }

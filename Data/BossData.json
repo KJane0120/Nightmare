@@ -1,6 +1,7 @@
 {
   "1": {
     "MissRate": 30,
+    "Crtica": 10,
     "SkillCount": 3,
     "Id": 1,
     "Level": 1,
@@ -13,6 +14,7 @@
   },
   "2": {
     "MissRate": 30,
+    "Crtica": 10,
     "SkillCount": 3,
     "Id": 2,
     "Level": 1,
@@ -25,6 +27,7 @@
   },
   "3": {
     "MissRate": 30,
+    "Crtica": 10,
     "SkillCount": 3,
     "Id": 3,
     "Level": 1,
@@ -37,6 +40,7 @@
   },
   "4": {
     "MissRate": 30,
+    "Crtica": 10,
     "SkillCount": 3,
     "Id": 4,
     "Level": 1,
@@ -49,6 +53,7 @@
   },
   "5": {
     "MissRate": 30,
+    "Crtica": 10,
     "SkillCount": 3,
     "Id": 5,
     "Level": 1,
