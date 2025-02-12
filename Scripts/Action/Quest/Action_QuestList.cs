@@ -12,6 +12,8 @@
 
             private Dictionary<int, Quest> questDic = new();
 
+            private Quest selectedQuest;
+
             protected override Dictionary<int, ActionBase> CreateNextActionDic()
             {
                 return new Dictionary<int, ActionBase>()
@@ -22,65 +24,50 @@
 
             public override void OnEnter()
             {
+                quests = DataManager.Instance.GetPlayerQuestGroup();
+                DisplayQuestList();
+            }
+
+            private void DisplayQuestList()
+            {
                 Console.Clear();
                 DisPlay();
-                SelectQuest();
+                UtilityManager.InputNumberInRange(0, quests.Count, SelectQuest,null,"원하시는 퀘스트를 입력해주세요");
             }
 
             protected override void DisPlay()
             {
-                quests = DataManager.Instance.GetPlayerQuestGroup();
-
                 Console.WriteLine("퀘스트");
 
                 for (int i = 0; i < quests.Count; i++)
                 {
                     questDic.Add(i + 1, quests[i]);
                     quests[i].Id = i + 1;
-                    quests[i].DisplayQuestTitle();
+                    questDic[i+1].DisplayQuestTitle();
                 }
 
                 Console.WriteLine("\n0. 나가기");
             }
 
-            private void SelectQuest()
+            private void SelectQuest(int num)
             {
-                while (true)
+                if (num == 0)
                 {
-                    Console.Write("\n원하는 퀘스트를 선택해주세요\n>>");
-                    if (int.TryParse(Console.ReadLine(), out int input))
-                    {
-                        if (input == 0)
-                        {
-                            Instance.MoveNextAction(ActionType.Village);
-                            break;
-                        }
-                        DisplayQuestInfo(questDic[input]);
-                        break;
-                    }
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Instance.MoveNextAction(ActionType.Village);
                 }
+                DisplayQuestInfo(questDic[num]);
             }
 
-            private void DisplayQuestInfo(Quest selectedQuest)
+            private void DisplayQuestInfo(Quest quest)
             {
                 Console.Clear();
-
+                selectedQuest = quest;
                 selectedQuest.DisplayQuestInfo();
-                DisplayNextAction(selectedQuest);
-
-                while (true)
-                {
-                    Console.Write("\n원하는 행동을 입력해주세요\n>>");
-                    if (int.TryParse(Console.ReadLine(), out int input))
-                    {
-                        SelectAction(selectedQuest, input);
-                    }
-                    Console.WriteLine("잘못된 입력입니다.");
-                }
+                DisplayNextAction();
+                UtilityManager.InputNumberInRange(1, 2, SelectAction, null, "원하는 행동을 입력해주세요");
             }
 
-            private void DisplayNextAction(Quest selectedQuest)
+            private void DisplayNextAction()
             {
                 if (!selectedQuest.IsProgress)
                 {
@@ -89,24 +76,34 @@
                 }
                 else
                 {
-                    Console.WriteLine("\n1. 보상받기");
-                    Console.Write("2. 돌아가기\n");
+                    if (selectedQuest.Condition.IsConditionClear)
+                    {
+                        Console.WriteLine("\n1. 보상받기");
+                        Console.Write("2. 돌아가기\n");
+                    }
+                    else
+                    {
+                        Console.Write("\n1. 돌아가기\n");
+                    }
                 }
             }
 
-            private void SelectAction(Quest selectedQuest,int input)
+            private void SelectAction(int input)
             {
                 //1번을 입력받았으면
                 if (input == 1)
                 {
                     // 퀘스트가 진행중이면
-                    if(selectedQuest.IsProgress)
+                    if (selectedQuest.IsProgress)
                     {
-                        //보상받기
-                        selectedQuest.ReceiveReward();
-                        //완료한 퀘스트는 표시되지않게 리스트에서 삭제
-                        quests.Remove(selectedQuest);
-                        selectedQuest.IsProgress = false;
+                        if (selectedQuest.Condition.IsConditionClear)
+                        {    
+                            //보상받기
+                            selectedQuest.ReceiveReward();
+                            //완료한 퀘스트는 표시되지않게 리스트에서 삭제
+                            quests.Remove(selectedQuest);
+                            selectedQuest.IsProgress = false;
+                        }
                     }
                     //퀘스트가 진행중이지않으면
                     else
@@ -115,7 +112,9 @@
                         selectedQuest.IsProgress = true;
                     }
                 }
-                Instance.MoveNextAction(ActionType.QuestList);
+
+                questDic.Clear();
+                DisplayQuestList();
             }
         }
     }
