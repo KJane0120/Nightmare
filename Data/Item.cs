@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace Nightmare.Data
+namespace Nightmare
 {
+    public enum ItemType
+    {
+        None = 0,
+        [Description("무기")]
+        Weapon = 1,
+        [Description("방어구")]
+        Armor = 2,
+        [Description("액세서리")]
+        Accessory = 3,
+        [Description("하트조각")]
+        HeartPiece = 4,
+        [Description("체력 회복 포션")]
+        HPPortion = 5,
+        [Description("마나 회복 포션")]
+        MPPortion = 6,
+        [Description("스페셜 아이템")]
+        Special = 7,
+    }
     public class Item
     {
         public int Id { get; set; }
@@ -22,25 +35,6 @@ namespace Nightmare.Data
 
         public bool IsSold { get; set; } = false;
 
-        public enum ItemType
-        {
-            None = 0,
-            [Description("무기")]
-            Weapon = 1,
-            [Description("방어구")]
-            Armor = 2,
-            [Description("액세서리")]
-            accessory = 3,
-            [Description("하트조각")]
-            HeartPiece = 4,
-            [Description("체력 회복 포션")]
-            HPPortion = 5,
-            [Description("마나 회복 포션")]
-            MPPortion = 6,
-            [Description("스페셜 아이템")]
-            Special = 7,
-        }
-
         //무기인지 방어구인지에 따라 공격력이나 방어력을 출력
         public string GetTypeString()
         {
@@ -53,7 +47,7 @@ namespace Nightmare.Data
                 case ItemType.Armor:
                     str = $"방어력 +{Value}";
                     break;
-                case ItemType.accessory:
+                case ItemType.Accessory:
                     str = $"치명타율 +{Value} | 회피율 +{Value}";
                     break;
                 case ItemType.HeartPiece:
