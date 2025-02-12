@@ -254,14 +254,8 @@ namespace Nightmare
 
                         if (Select == 1)
                         {
-                            foreach (Portion portion in DataManager.Instance.ConsumableItems)
-                            {
-                                if ((int)portion.Data.Type == 5)
-                                {
-                                    portion.UsePortion();
-                                    break;
-                                }
-                            }
+
+     
                         }
                         Instance.TakeAction();
                     }
@@ -282,7 +276,7 @@ namespace Nightmare
                         {
                             
                             int Damage = mons.MonsterAttackToPlayer();
-                            if ((player.Avd.EquipAvd + player.Avd.PlayerAvd) < ran.Next(0, 101))
+                            if (((player.Avd.EquipAvd + player.Avd.PlayerAvd)*100) < ran.Next(0, 101))
                             {
                                 if (Damage > (player.Stat.BaseDef + player.Stat.EquipDef))
                                 {
