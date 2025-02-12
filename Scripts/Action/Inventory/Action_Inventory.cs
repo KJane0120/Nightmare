@@ -16,9 +16,14 @@
                     { 0,  new Action_Return(0) },
                 };
             }
-
+            protected void PrintErrorMsg(int num)
+            {
+                UtilityManager.PrintErrorMessage();
+            }
             protected override void DisPlay()
             {
+                OnInputInvalidActionNumber = PrintErrorMsg;
+                Console.Clear();
                 Console.WriteLine("인벤토리");
                 DisPlayInventory();
             }
@@ -36,9 +41,6 @@
 
                 Console.WriteLine();
             }
-
-            //Equip();
-            //UnEquip();
         }
     }
 }
