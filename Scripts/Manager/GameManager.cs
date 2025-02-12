@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using System.Data;
+
+namespace Nightmare
 {
     public partial class GameManager
     {
@@ -26,17 +28,23 @@
 
         public bool IsFirstUsePotion { get; set; } = false;
 
+        public int GameClearCount = 0;
+
         public void GameClear()
         {
-            DataManager.Instance.CurrentStageClear++;
+            GameClearCount++;
+            MoveNextAction(ActionType.GameClear);
         }
 
+        public void GameReStart()
+        {
+            GameClearCount++;
+            MoveNextAction(ActionType.GameClear);
+        }
 
         public void GameStart()
         {
             Console.Clear();
-
-            DataManager.Initialize();
 
             Player = new Player();
             Player.Level = new Level();
@@ -74,8 +82,27 @@
             Console.WriteLine("다음 이야기를 들으려면 아무 키나 입력하세요.");
             Console.ReadKey();
 
+            GameLoad();
             SetName();
         }
+        public void GameSave(object sender, EventArgs e)
+        {
+            DataManager.Instance.SaveGameData();
+        }
+
+        public void GameLoad()
+        {
+            DataManager.Initialize();
+            DataManager.Instance.LoadGameData();
+        }
+
+        public void GameDataReset()
+        {
+            TutorialOk = false;
+            IsFirstUsePotion = false;
+            DataManager.Instance.DataReset();
+        }
+
 
         // 이름 설정
         private void SetName()
