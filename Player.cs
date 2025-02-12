@@ -14,11 +14,8 @@ namespace Nightmare
         public int CurrentExp { get; set; }
         public long QuestGroupID { get; set; }
         public long QuestGroupId { get; set; }
-
-
-
-        //레벨업 구현 시
-        private int _Level = 1;
+                      
+      
 
         public void StatusDisplay()
         {
@@ -30,8 +27,8 @@ namespace Nightmare
             Console.WriteLine(str);
             Console.WriteLine($"체력 : {Stat.Hp} / {Stat.MaxHp}");
             Console.WriteLine($"마력 : {Stat.Mp} / {Stat.MaxMp}");
-            Console.WriteLine($"회피율 : {(Avd.PlayerAvd + Avd.EquipAvd)} %");
-            Console.WriteLine($"치명타율 : {(Crt.PlayerCrt + Crt.EquipCrt)} %");
+            Console.WriteLine($"회피율 : {(Avd.PlayerAvd + Avd.EquipAvd)}");
+            Console.WriteLine($"치명타율 : {(Crt.PlayerCrt + Crt.EquipCrt)}");
             Console.WriteLine($"Gold : {Gold.PlayerGold} G");
         }
 

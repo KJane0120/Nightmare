@@ -66,7 +66,7 @@ namespace Nightmare
         public float PlayerAvd;
         public float EquipAvd;              
 
-        public void AddPlayerAvd(int add) // 회피율 증가
+        public void AddPlayerAvd(float add) // 회피율 증가
         {
             PlayerAvd += add;
         }
@@ -78,7 +78,7 @@ namespace Nightmare
         public float PlayerCrt;
         public float EquipCrt;
 
-        public void AddPlayerCrt(int add) // 치명타 증가
+        public void AddPlayerCrt(float add) // 치명타 증가
         {
             PlayerCrt += add;
         }
