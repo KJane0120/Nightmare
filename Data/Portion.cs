@@ -99,6 +99,7 @@ namespace Nightmare
             if(portion.PortionCount < portion.PortionMaxCount)
             {
                 portion.PortionCount++;
+                DataManager.Instance.ConsumableItems.Add(portion);
             }
             else
             {
