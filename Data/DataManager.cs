@@ -33,9 +33,9 @@ namespace Nightmare
 
         private static void JsonDataLoad()
         {
-            string questfilePath = GetFilePath("QuestData", "Data");
+            string questfilePath = GetFilePath("QuestData", "Data\\Quest");
             string bossfilePath = GetFilePath("BossData", "Data");
-            string itemfilePath = GetFilePath("ItemData", "Data");
+            string itemfilePath = GetFilePath("ItemData", "Data\\Item");
 
             if (!File.Exists(questfilePath))
             {
