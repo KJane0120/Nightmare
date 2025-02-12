@@ -16,7 +16,7 @@
             }
             protected void PrintErrorMsg(int num)
             {
-                if (num >= 1 && num <= DataManager.Instance.HaveItems.Count) // 유효한 아이템 번호인지 체크
+                if (num >= 0 && num < DataManager.Instance.HaveItems.Count) // 유효한 아이템 번호인지 체크
                 {
                     EquipItem(num);  // 아이템을 장착
                 }
@@ -39,11 +39,7 @@
             // 아이템 장착 처리
             private void EquipItem(int num)
             {
-                if (num < 1 || num > DataManager.Instance.HaveItems.Count)
-                {
-                    UtilityManager.PrintErrorMessage();
-                    return;
-                }
+                
 
                 Item selectItem = DataManager.Instance.HaveItems[num - 1];  // 유효한 인덱스를 사용해 아이템 선택
 

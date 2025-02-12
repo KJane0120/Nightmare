@@ -33,10 +33,11 @@
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
-
+                int i = 1;
                 foreach (Item item in DataManager.Instance.HaveItems)
                 {
-                    Console.WriteLine($" - {item.SelectItem()}");
+                    Console.WriteLine($" - {i}. {item.SelectItem()}");
+                    i++;
                 }
 
                 Console.WriteLine();
