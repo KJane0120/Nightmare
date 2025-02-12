@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Nightmare.Scripts.Action.Status
+namespace Nightmare
 {
     public class Stat
     {

@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
-
-namespace Nightmare.Scripts.Action.Dungeon
+namespace Nightmare
 {
     internal class Boss : Monster
     {

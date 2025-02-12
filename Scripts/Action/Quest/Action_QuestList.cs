@@ -1,6 +1,4 @@
-﻿using Nightmare.Data.Quest;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {

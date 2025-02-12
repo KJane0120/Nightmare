@@ -1,7 +1,6 @@
 ﻿using System.Text;
-using Nightmare.Scripts.Action.Status;
 
-namespace Nightmare.Scripts.Action.Dungeon
+namespace Nightmare
 {
     public class Monster
     {

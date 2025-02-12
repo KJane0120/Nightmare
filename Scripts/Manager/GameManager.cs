@@ -1,8 +1,4 @@
-﻿using Nightmare.Scripts.Action.Dungeon;
-using Nightmare.Scripts.Action.Status;
-using Nightmare.Scripts.Manager;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {
