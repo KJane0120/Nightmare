@@ -19,8 +19,8 @@
             protected override void DisPlay()
             {
                 Console.Clear();
-                Console.WriteLine("상태 보기");
-                Console.WriteLine("캐릭터의 정보가 표시됩니다.");
+                //Console.WriteLine("상태 보기");
+                Console.WriteLine("악몽을 물리칠 당신의 현재 상태는...");
                 Console.WriteLine();
 
                 Instance.Player.StatusDisplay();

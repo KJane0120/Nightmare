@@ -44,7 +44,7 @@ namespace Nightmare
     {
         None = 0,
 
-        [Description("백설공주와 일곱 번째 난쟁이")]
+        [Description("백설공주와 일곱째 난쟁이")]
         Dwarf = 1,
 
         [Description("신데렐라의 새 언니")]
