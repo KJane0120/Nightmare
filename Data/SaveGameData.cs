@@ -1,6 +1,4 @@
-﻿using Nightmare.Data;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public class SaveGameData
     {
