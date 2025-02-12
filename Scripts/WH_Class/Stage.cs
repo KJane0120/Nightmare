@@ -145,6 +145,7 @@ namespace Nightmare
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
                 GetClearBoSang(monsters, player);
+                DataManager.Instance.HaveItemDatas.Add(DataManager.Instance.ItemDatas[12 + (int)player.Job]);
                 //다시 돌아가기
                 Instance.GameClear();
             }
