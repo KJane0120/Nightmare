@@ -27,7 +27,10 @@
             }
             public void SelectStage(Player player) //플레이어 레벨 들어갈거임
             {
-             
+                Item item = new Item();
+
+                item = DataManager.Instance.ItemDatas[18 + (int)player.Job];
+
                 if (Instance.TutorialOk)
                 {
                     Stage Tuto = new Stage(0, 0);
@@ -96,7 +99,7 @@
                     }
 
                   
-                    if (player.Level.PlayerLevel >= 8 && DataManager.Instance.BossConsumableItems.Any(d => d.Id == (int)Instance.Player.Job + 17))
+                    if (player.Level.PlayerLevel >= 8 && DataManager.Instance.BossConsumableItems.Contains(item))
                     {
                         Stage Boss = new Stage(0, 0);
                         stages.Add(Boss);

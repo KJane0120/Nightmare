@@ -131,9 +131,8 @@ namespace Nightmare
             {
                 Boss boss = new Boss();
                 Skill skill = new Skill();
-
-                skill.BossSkillSet(player, boss);
                 boss = DataManager.Instance.BossDatas[(int)player.Job];
+                skill.BossSkillSet(player, boss);
                 boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
@@ -328,8 +327,8 @@ namespace Nightmare
                 Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})                      |");
                 Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})                       |");
                 Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}        |");
-                Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}                     |");
-                Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})                      |");
+                Console.WriteLine($"치명타율: {Math.Round((player.Avd.PlayerAvd+player.Avd.EquipAvd) * 100),0}                     |");
+                Console.WriteLine($"회피율: {Math.Round((player.Crt.PlayerCrt+player.Crt.EquipCrt)*100,0)})                      |");
                 Console.WriteLine("----------------------------------");
             }
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -512,6 +511,11 @@ namespace Nightmare
                             UtilityManager.PrintErrorMessage();
                             continue;
                         }
+                        else if (str == 0)
+                        {
+                            PlayerAction(monsters, player, mon, ref DeathCount);
+                            return;
+                        }
                         else if (player.Playerskill[str - 1].SkillMp > player.Stat.Mp)
                         {
                             Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp - player.Stat.Mp}가 부족합니다");
@@ -524,11 +528,7 @@ namespace Nightmare
                             PlayerAction(monsters, player, mon, ref DeathCount);
                             return;
                         }
-                        else if (str == 0)
-                        {
-                            PlayerAction(monsters, player, mon, ref DeathCount);
-                            return;
-                        }
+                    
 
                         foreach (Skill skill in player.Playerskill)
                         {
@@ -612,6 +612,7 @@ namespace Nightmare
                             {
                                 DataManager.Instance.HealthConsumableItems[choice - 1].UsePotion();
                                 DataManager.Instance.HealthConsumableItems.RemoveAt(choice - 1);
+                                Instance.TakeAction();
                                 break;
 
                             }
@@ -619,12 +620,14 @@ namespace Nightmare
                             {
                                 DataManager.Instance.ManaConsumableItems[choice - hecount - 1].UsePotion();
                                 DataManager.Instance.ManaConsumableItems.RemoveAt(choice - hecount - 1);
+                                Instance.TakeAction();
                                 break;
                             }
                             else if(choice > hecount+manacount && choice <= hecount+manacount+lovecount)
                             {
                                 DataManager.Instance.LoveConsumableItems[choice - manacount - hecount - 1].UsePotion();
                                 DataManager.Instance.LoveConsumableItems.RemoveAt(choice - manacount - hecount - 1);
+                                Instance.TakeAction();
                                 break;
                             }
                             else
@@ -632,6 +635,7 @@ namespace Nightmare
                                 if (monsters[0].MonsterHealth < monsters[0].MonsterHealth * (15.0 / 100) && Isboss)
                                 {
                                     DataManager.Instance.BossConsumableItems[0].BossKill(monsters,ref DeathCount);
+                                    Instance.TakeAction();
                                 }
                                 else
                                 {
