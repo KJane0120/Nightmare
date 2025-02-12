@@ -21,9 +21,9 @@
 
         public void GameStart()
         {
-            DataManager.Initialize();
+            Console.Clear();
 
-            ASCIIManager.DisplayASCIIArt();
+            DataManager.Initialize();
 
             Player = new Player();
             Player.Level = new Level();
