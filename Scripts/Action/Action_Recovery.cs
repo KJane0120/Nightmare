@@ -28,9 +28,9 @@ namespace Nightmare
                     return;
                 }
                 var selectPortion = DataManager.Instance.PortionDatas[index];
-                selectPortion.OnUsePortionEvent = DisPlay;
+                selectPortion.OnUsePotionEvent = DisPlay;
 
-                selectPortion.UsePortion();
+                selectPortion.UsePotion();
                 
 
             }
@@ -49,7 +49,7 @@ namespace Nightmare
                 int i = 0;
                 foreach (var portion in DataManager.Instance.PortionDatas)
                 {
-                    Console.WriteLine($" - {i + 1}. {portion.ShowPortion()}");
+                    Console.WriteLine($" - {i + 1}. {portion.ShowPotion()}");
                     i++;
                 }
 

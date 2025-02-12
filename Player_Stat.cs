@@ -25,6 +25,20 @@ namespace Nightmare
         { 
             equipDef += add;
         }
+
+        public Stat(float baseAtk, float baseDef, float hp, float maxHp, float mp, float maxMp)
+        {
+            BaseAtk = baseAtk;
+            BaseDef = baseDef;
+            Hp = hp;
+            MaxHp = maxHp;
+            Mp = mp;
+            MaxMp = maxMp;
+        }
+
+        public Stat()
+        {
+        }
     }
 
    
@@ -62,7 +76,7 @@ namespace Nightmare
 
     public class Avd //회피율
     {
-        public float PlayerAvd;
+        public float PlayerAvd = 0.1f;
         public float EquipAvd;              
 
         public void AddPlayerAvd(float add) // 회피율 증가
@@ -74,7 +88,7 @@ namespace Nightmare
 
     public class Crt //치명타율
     {
-        public float PlayerCrt;
+        public float PlayerCrt = 0.15f;
         public float EquipCrt;
 
         public void AddPlayerCrt(float add) // 치명타 증가

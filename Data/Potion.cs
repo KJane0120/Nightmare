@@ -1,22 +1,22 @@
 ﻿
 namespace Nightmare
 {
-    public class Portion : Item
+    public class Potion : Item
     {
-        public long PortionId { get; set; }
-        public Item Data => DataManager.Instance.ItemDatas[PortionId];
-        public int PortionCount { get; set; }
-        public int PortionMaxCount { get; set; }
+        public long PotionId { get; set; }
+        public Item Data => DataManager.Instance.ItemDatas[PotionId];
+        public int PotionCount { get; set; }
+        public int PotionMaxCount { get; set; }
 
         //포션을 사용했을 때 이벤트
-        public Action OnUsePortionEvent = delegate { };
+        public Action OnUsePotionEvent = delegate { };
 
        
         public override void UseItem(Item i)
         {
-            if (i.Type == ItemType.HPPortion || i.Type == ItemType.MPPortion || i.Type == ItemType.Special)
+            if (i.Type == ItemType.HPPotion || i.Type == ItemType.MPPotion || i.Type == ItemType.Special)
             {
-                UsePortion();
+                UsePotion();
             }
             else if (i.Type == ItemType.Accessory)
             {
@@ -24,21 +24,21 @@ namespace Nightmare
             }
         }
 
-        public void UsePortion()
+        public void UsePotion()
         {
             //첫 포션 사용 퀘스트 플래그
-            if (!GameManager.Instance.IsFirstUsePortion)
+            if (!GameManager.Instance.IsFirstUsePotion)
             {
-                GameManager.Instance.IsFirstUsePortion = true;
+                GameManager.Instance.IsFirstUsePotion = true;
             }
 
             var stat = GameManager.Instance.Player.Stat;
             //20, 10같은 회복수치를 숫자로 적는게 아닌 변수값에 저장할 것
-            if (PortionCount != 0) // 선택한 아이템의 PortionCount
+            if (PotionCount != 0) // 선택한 아이템의 PotionCount
             {
                 Console.WriteLine("회복이 완료되었습니다.");
-                PortionCount -= 1;
-                if (Data.Type == ItemType.HPPortion)//체력 회복 포션이라면 
+                PotionCount -= 1;
+                if (Data.Type == ItemType.HPPotion)//체력 회복 포션이라면 
                 {
                     if ((stat.Hp + 20) > stat.MaxHp)
                     {
@@ -51,7 +51,7 @@ namespace Nightmare
                     //Hp+20이 MaxHp보다 크다면 Hp = MaxHp
                     //아니라면 Hp += 20
                 }
-                else if (Data.Type == ItemType.MPPortion) //마나 회복 포션이라면
+                else if (Data.Type == ItemType.MPPotion) //마나 회복 포션이라면
                 {
                     if ((stat.Mp + 10) > stat.MaxMp)
                     {
@@ -94,27 +94,27 @@ namespace Nightmare
             {
                 Console.WriteLine("포션이 부족합니다!");
             }
-            OnUsePortionEvent();
+            OnUsePotionEvent();
 
 
         }
         //보상이 포션일 때 이 함수 사용
-        public void PickUpPortion(Portion portion)
+        public void PickUpPotion(Potion portion)
         {
-            if (portion.PortionCount < portion.PortionMaxCount)
+            if (portion.PotionCount < portion.PotionMaxCount)
             {
-                portion.PortionCount++;
+                portion.PotionCount++;
                 DataManager.Instance.ConsumableItems.Add(portion);
             }
             else
             {
-                portion.PortionCount = portion.PortionMaxCount;
+                portion.PotionCount = portion.PotionMaxCount;
                 Console.WriteLine("더이상 가질 수 없습니다.");
             }
         }
-        public string ShowPortion()
+        public string ShowPotion()
         {
-            string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (개수 : {PortionCount} / {PortionMaxCount} )";
+            string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (개수 : {PotionCount} / {PotionMaxCount} )";
             return str;
         }
     }

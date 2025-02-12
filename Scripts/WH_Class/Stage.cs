@@ -366,22 +366,17 @@ namespace Nightmare
 
                 if (RandomRange > 1 || random.Next(0, 11) > 5)
                 {
-                    if (random.Next(0, 10) > 5)
+                    Potion Healthportion = new Potion
                     {
-                        Portion Healthportion = new Portion
-                        {
-                            PortionId = 18
-                        };
-                        Healthportion.PickUpPortion(Healthportion);
-                    }
-                    else
+                        PotionId = 18
+                    };
+                    Healthportion.PickUpPotion(Healthportion);
+
+                    Potion manaportion = new Potion
                     {
-                        Portion manaportion = new Portion
-                        {
-                            PortionId = 24
-                        };
-                        manaportion.PickUpPortion(manaportion);
-                    }
+                        PotionId = 24
+                    };
+                    manaportion.PickUpPotion(manaportion);
                     if (IsFinal || random.Next(0, 11) > 5)
                     {
                         KillBossItem killBoss = new KillBossItem();

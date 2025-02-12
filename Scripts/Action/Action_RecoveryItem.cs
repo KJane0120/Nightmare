@@ -37,7 +37,7 @@ namespace Nightmare
 
                 foreach (var portion in DataManager.Instance.PortionDatas)
                 {
-                    Console.WriteLine($" - {portion.ShowPortion()}");
+                    Console.WriteLine($" - {portion.ShowPotion()}");
                 }
             }
         }

@@ -14,9 +14,9 @@ namespace Nightmare
         [Description("하트조각")]
         HeartPiece = 4,
         [Description("체력 회복 포션")]
-        HPPortion = 5,
+        HPPotion = 5,
         [Description("마나 회복 포션")]
-        MPPortion = 6,
+        MPPotion = 6,
         [Description("스페셜 아이템")]
         Special = 7,
     }
@@ -53,10 +53,10 @@ namespace Nightmare
                 case ItemType.HeartPiece:
                     str = "";
                     break;
-                case ItemType.HPPortion:
+                case ItemType.HPPotion:
                     str = $"HP +{Value}";
                     break;
-                case ItemType.MPPortion:
+                case ItemType.MPPotion:
                     str = $"MP +{Value}";
                     break;
                 case ItemType.Special:

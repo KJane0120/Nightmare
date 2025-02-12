@@ -13,9 +13,9 @@ namespace Nightmare
         public Avd Avd { get; set; }
         public Crt Crt { get; set; }
         public int CurrentExp { get; set; }
-        public long QuestGroupID { get; set; }
         public long QuestGroupId { get; set; }
-                            
+
+
 
         public void StatusDisplay()
         {
@@ -27,7 +27,7 @@ namespace Nightmare
             Console.WriteLine(str);
             Console.WriteLine($"체력 : {Stat.Hp} / {Stat.MaxHp}");
             Console.WriteLine($"마력 : {Stat.Mp} / {Stat.MaxMp}");
-            Console.WriteLine($"회피율: {Math.Round((Avd.EquipAvd +Avd.PlayerAvd) * 100),0} %");
+            Console.WriteLine($"회피율: {Math.Round((Avd.EquipAvd + Avd.PlayerAvd) * 100),0} %");
             Console.WriteLine($"치명타율 : {Math.Round((Crt.PlayerCrt + Crt.EquipCrt) * 100),0} %");
             Console.WriteLine($"Gold : {Gold.PlayerGold} G");
         }
