@@ -1,7 +1,4 @@
-﻿using Nightmare.Scripts.Action.Status;
-using static Nightmare.GameManager;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {

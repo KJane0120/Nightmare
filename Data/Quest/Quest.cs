@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Nightmare.Data.Quest
+namespace Nightmare
 {
     public enum QuestType
     {

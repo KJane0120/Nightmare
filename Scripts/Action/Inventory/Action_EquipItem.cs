@@ -1,7 +1,4 @@
-﻿using Nightmare.Data.Item;
-using Nightmare.Scripts.Manager;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {

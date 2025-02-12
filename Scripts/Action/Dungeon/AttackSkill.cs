@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-using Nightmare.Scripts.Action.Dungeon;
-using Nightmare.Scripts.Action.Status;
+﻿using System.Text;
 
 namespace Nightmare
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace Nightmare.Scripts.Manager
+namespace Nightmare
 {
     internal class UtilityManager
     {
