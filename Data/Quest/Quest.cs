@@ -36,10 +36,10 @@ namespace Nightmare
 
         private bool isProgress = false;
 
-        public void DisplayQuestTitle()
+        public string GetQuestTitle()
         {
             string IsProgressText = IsProgress ? "[진행중]" : "";
-            Console.WriteLine($"\n{Id}.{Title}{IsProgressText}");
+            return $"{Id}.{Title}{IsProgressText}";
         }
 
         public void DisplayQuestInfo()
@@ -53,7 +53,7 @@ namespace Nightmare
 
             foreach (var reward in Rewards)
             {
-                reward.DisplayRewardInfo();
+                Console.WriteLine($"- {reward.GetRewardInfo()}");
             }
         }
 

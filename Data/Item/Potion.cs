@@ -32,7 +32,6 @@
             //20, 10같은 회복수치를 숫자로 적는게 아닌 변수값에 저장할 것
             if (this.Type == ItemType.HPPotion)//체력 회복 포션이라면 
             {
-
                 if (stat.Hp + 20 > stat.MaxHp)
                 {
                     Console.WriteLine($"체력 회복:{stat.Hp} -> {stat.MaxHp}");
@@ -110,6 +109,7 @@
             {
                 portion.PotionCount++;
                 Console.WriteLine($"{portion.Name} 개수가 증가했습니다. 현재 개수: {portion.PotionCount}");
+
             }
             else
             {

@@ -1,12 +1,11 @@
-﻿namespace Nightmare
+namespace Nightmare
 {
     public partial class GameManager
     {
         public class Action_GameClear : ActionBase
         {
             public Action_GameClear(int number) : base(number) { }
-
-            public override ActionType Type => ActionType.QuestList;
+            public override ActionType Type => ActionType.GameClear;
 
             protected override Dictionary<int, ActionBase> CreateNextActionDic()
             {
@@ -18,6 +17,7 @@
 
             public override void OnEnter()
             {
+                SoundManager.PlayBGM("HappyEnding");
                 Console.Clear();
                 //플레이한 직업 삭제
                 DataManager.Instance.CanSelectPlayerDatas.Remove((int)Instance.Player.Job);
@@ -28,26 +28,47 @@
 
             protected override void DisPlay()
             {
-                Console.WriteLine("게임 클리어!");
+                ASCIIManager.DisplayAlignASCIIArt("Heart", Align.Center, VerticalAlign.Top);
 
                 var quest = DataManager.Instance.QuestDatas.FirstOrDefault(x => x.QuestGroupId == Instance.Player.QuestGroupId);
 
-                foreach (var reward in quest.Rewards)
+                if (quest == null)
                 {
-                    reward.DisplayRewardInfo();
-                    Console.Write("을(를)획득하였습니다!");
+                    Console.WriteLine("퀘스트를 찾을수 없습니다");
                 }
 
-                Console.WriteLine("1.다시하기");
-                Console.WriteLine("2.게임 종료");
+                var clearTexts = new List<string>();
+                clearTexts.Add($"{Instance.name}은(는) 끝내 쓰러지고,");
+                clearTexts.Add("당신은 이야기를 원래대로 돌려놓는 데에 성공했습니다.");
+                clearTexts.Add($"{quest.Title}클리어.");
+                clearTexts.Add("-보상-");
 
-                UtilityManager.InputNumberInRange(1, 2, ReStart, null, "원하시는 행동을 입력해주세요");
+                foreach (var reward in quest.Rewards)
+                {
+                    reward.ReceiveReward();
+                    clearTexts.Add($"{reward.GetRewardInfo()} ");
+                }
+
+                ASCIIManager.AlignText(clearTexts.ToArray(), Align.Center, VerticalAlign.Bottom);
+
+                Thread.Sleep(5000);
+                Console.Clear();
+
+                var endTexts = new List<string>();
+                endTexts.Add("Happily Ever After");
+                endTexts.Add("다른동화를 읽어 보시겠습니까?");
+                endTexts.Add("1. 네");
+                endTexts.Add("2. 아니오");
+
+                ASCIIManager.AlignText(endTexts.ToArray(), Align.Center, VerticalAlign.Middle);
+                UtilityManager.InputNumberInRange(1, 2, ReStart, null, "");
             }
 
             private void ReStart(int num)
             {
                 if (num == 1)
                 {
+                    Instance.GameDataReset();
                     Instance.GameStart();
                 }
                 else

@@ -17,15 +17,27 @@
 
                 };
             }
-            //private void PrintErrorMsg(int number)
-            //{
-            //    Item selectItem = DataManager.Instance.ItemDatas[number];
+            private void PrintErrorMsg(int number)
+            {
 
-            //}
+                int index = number - 1;
+                if (index < 0 || index >= DataManager.Instance.PortionDatas.Count)
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    return;
+                }
+                var selectPortion = DataManager.Instance.PortionDatas[index];
+                selectPortion.OnUsePotionEvent = DisPlay;
+
+                selectPortion.UsePotion();
+
+
+            }
 
             protected override void DisPlay()
             {
                 Console.Clear();
+
               //  OnInputInvalidActionNumber = PrintErrorMsg;
                
                 while (true)

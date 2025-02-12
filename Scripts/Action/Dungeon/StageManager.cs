@@ -20,6 +20,9 @@
 
             protected override void DisPlay()
             {
+                var CastleAline = ASCIIManager.Getlines("CastleA");
+
+                ASCIIManager.DisplayAlignASCIIArt(CastleAline, Align.Center, VerticalAlign.Top);
                 SelectStage(Instance.Player);
             }
             public void SelectStage(Player player) //플레이어 레벨 들어갈거임

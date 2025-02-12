@@ -25,6 +25,10 @@
 
             protected override void DisPlay()
             {
+                var CastleAline = ASCIIManager.Getlines("CastleA");
+
+                ASCIIManager.DisplayAlignASCIIArt(CastleAline, Align.Center, VerticalAlign.Top);
+
                 Console.WriteLine("던전에 어서오세요");
             }
         }

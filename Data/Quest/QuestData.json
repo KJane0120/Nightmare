@@ -84,7 +84,12 @@
       {
         "RewardId": 13,
         "RewardType": 1,
-        "RewardAmount": 0
+        "RewardAmount": 1
+      },
+      {
+        "RewardId": 25,
+        "RewardType": 1,
+        "RewardAmount": 1
       }
     ],
     "IsProgress": false,
@@ -104,7 +109,12 @@
       {
         "RewardId": 14,
         "RewardType": 1,
-        "RewardAmount": 0
+        "RewardAmount": 1
+      },
+      {
+        "RewardId": 25,
+        "RewardType": 1,
+        "RewardAmount": 1
       }
     ],
     "IsProgress": false,
@@ -124,7 +134,12 @@
       {
         "RewardId": 15,
         "RewardType": 1,
-        "RewardAmount": 0
+        "RewardAmount": 1
+      },
+      {
+        "RewardId": 25,
+        "RewardType": 1,
+        "RewardAmount": 1
       }
     ],
     "IsProgress": false,
@@ -144,7 +159,12 @@
       {
         "RewardId": 16,
         "RewardType": 1,
-        "RewardAmount": 0
+        "RewardAmount": 1
+      },
+      {
+        "RewardId": 25,
+        "RewardType": 1,
+        "RewardAmount": 1
       }
     ],
     "IsProgress": false,
@@ -164,7 +184,12 @@
       {
         "RewardId": 17,
         "RewardType": 1,
-        "RewardAmount": 0
+        "RewardAmount": 1
+      },
+      {
+        "RewardId": 25,
+        "RewardType": 1,
+        "RewardAmount": 1
       }
     ],
     "IsProgress": false,

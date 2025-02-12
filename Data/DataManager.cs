@@ -28,7 +28,6 @@ namespace Nightmare
         {
             if (isInitialized) return;
             JsonDataLoad();
-            Instance.InitializeConsumableItems();
         }
 
         private static void JsonDataLoad()
@@ -219,6 +218,7 @@ namespace Nightmare
         //보스 처치시 필요한 필수 아이템 데이터
         public Dictionary<long, KillBossItem> KillBossItemDatas = new();
 
+
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
         {
@@ -254,20 +254,6 @@ namespace Nightmare
 
 
 
-        //    foreach (var portion in PortionDatas.Where(p => p.PotionId == 18 || p.PotionId == 24))
-        //    {
-        //        if (ItemDatas.TryGetValue(portion.PotionId, out Item itemData))
-        //        {
-        //            // PortionCount만큼 ConsumableItems 리스트에 추가
-        //            ConsumableItems.Add(itemData);
-        //            HaveItems.Add(itemData);
-        //        }
-        //    }
-        //}
-
-        //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
-
-        //장착된 아이템 리스트
         public List<Item> EquippedItems = new();
 
         public List<Potion> PortionDatas = new()
@@ -276,13 +262,13 @@ namespace Nightmare
             new Potion()
             {
                 PotionId = 18,
-                PotionCount = 3,
+                PotionCount = 0,
                 PotionMaxCount = 3
             },
             new Potion()
             {
                 PotionId = 24,
-                PotionCount = 3,
+                PotionCount = 0,
                 PotionMaxCount = 3
             },
             new Potion()
@@ -295,14 +281,8 @@ namespace Nightmare
 
         public void DataReset()
         {
-            // 가지고 있는 아이템 중에 하트조각이외에 아이템은 삭제
-            foreach (var item in HaveItems)
-            {
-                if (item.Type != ItemType.HeartPiece)
-                {
-                    HaveItems.Remove(item);
-                }
-            }
+            // 가지고 있는 아이템 중에 하트조각과 스페셜 아이템 이외에 아이템은 삭제
+            HaveItems.RemoveAll(x => x.Type == ItemType.HeartPiece && x.Type == ItemType.Special);
 
             // 장착된 아이템 삭제
             EquippedItems.Clear();
