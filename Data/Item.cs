@@ -100,11 +100,6 @@ namespace Nightmare.Data
             str += $"{Name} | {GetTypeString()} | {Desc}";
             return str;
         }
-
-        public string ShowPortion()
-        {
-            string str = $"{Name} | ";
-            return str;
-        }
+        
     }
 }

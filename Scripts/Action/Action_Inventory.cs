@@ -21,7 +21,6 @@ namespace Nightmare
 
             protected override void DisPlay()
             {
-                Console.Clear();
                 Console.WriteLine("인벤토리");
                 DisPlayInventory();
             }
@@ -32,15 +31,16 @@ namespace Nightmare
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
 
-                foreach (Item item in DataManager.Instance.HaveItems.Values)
+                foreach (Item item in DataManager.Instance.HaveItems)
                 {
                     Console.WriteLine(item.SelectItem());
                 }
 
                 Console.WriteLine();
             }
-        }
-        
-    }
 
+            //Equip();
+            //UnEquip();
+        }
+    }
 }
