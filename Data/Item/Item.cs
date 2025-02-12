@@ -109,6 +109,7 @@ namespace Nightmare
         {
             monsters[0].MonsterHealth -= 999;
             Death++;
+            GameManager.Instance.GameClear();
 
         }
 
