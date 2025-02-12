@@ -9,7 +9,7 @@ namespace Nightmare
         //보상이 스페셜 드랍아이템일때 이함수 사용
         public void PickUpItem(Item item)
         {
-            DataManager.Instance.HaveItems.Add(item);
+            DataManager.Instance.HaveItemDatas.Add(item);
             DataManager.Instance.ConsumableItems.Add(item);
         }
 
@@ -18,7 +18,7 @@ namespace Nightmare
         {
             //Console.WriteLine("사용 조건 구현 시 변경부탁드립니다. ");
             //if(사용조건) {}
-            DataManager.Instance.HaveItems.Remove(item);
+            DataManager.Instance.HaveItemDatas.Remove(item);
             DataManager.Instance.ConsumableItems.Remove(item);
         }
 
@@ -32,6 +32,13 @@ namespace Nightmare
             {
                 UseKillBossItem(item);
             }
+        }
+
+
+        public String ShowBossItem()
+        {
+            string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (효과가 들어갈듯 )";
+            return str;
         }
     }
 }

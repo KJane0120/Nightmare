@@ -30,7 +30,7 @@ namespace Nightmare
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
 
-                foreach (Item item in DataManager.Instance.HaveItems)
+                foreach (Item item in DataManager.Instance.HaveItemDatas)
                 {
                     Console.WriteLine(item.SelectItem());
                 }

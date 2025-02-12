@@ -1,4 +1,4 @@
-﻿using Nightmare.Data;
+﻿
 using static Nightmare.GameManager;
 
 namespace Nightmare
@@ -31,15 +31,20 @@ namespace Nightmare
                 {
                     Stage Tuto = new Stage(0, 0);
                     Console.WriteLine("튜토리얼 스테이지를 클리어해야 합니다.");
-                    Console.WriteLine("1. 튜토리얼 스테이지 입장");
+                    Console.WriteLine("1. 튜토리얼 스테이지 입장\n");
+                    Console.WriteLine("0. 돌아가기");
                     int select = int.Parse(Console.ReadLine());
                     if (select == 1)
                     {
                         Instance.TutorialOk = Tuto.TutorialBattle(player);
                     }
+                    else if(select == 0)
+                    {
+                        Instance.MoveNextAction(ActionType.Dungeon);
+                    }
                     else
                     {
-                        Console.WriteLine("잘못된 선택입니다.");
+                        UtilityManager.PrintErrorMessage();
                     }
                     
                 }

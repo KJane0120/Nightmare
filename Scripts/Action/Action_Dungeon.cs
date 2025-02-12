@@ -15,12 +15,13 @@ namespace Nightmare
             {
                 return new Dictionary<int, ActionBase>()
                 {
-                    { 0,  new Action_Return(0) },
+                    
                     {1, new StageManager(1) },
                     {2, new Action_RecoveryItem(2) },
-                    
-                    
-                    
+                    { 0,  new Action_Return(0) },
+
+
+
                 };
             }
 

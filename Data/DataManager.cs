@@ -1,5 +1,4 @@
-﻿using Nightmare.Data;
-using static Nightmare.Data.Item;
+﻿
 using Newtonsoft.Json;
 using static Nightmare.GameManager;
 

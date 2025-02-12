@@ -163,7 +163,7 @@ namespace Nightmare
                     //플레이어 공격
                     PlayerAction(monster, player, mon, ref DeathCount);
                     turn++;
-                    BossAttack(boss, monster,player, ref DeathCount, ref turn);
+                    BossAttack(boss, monster, player, ref DeathCount, ref turn);
                     //몬스터 공격
 
                 }
@@ -201,8 +201,9 @@ namespace Nightmare
                 boo.MonsterDIe(ref DeathCount);
                 if (boo.IsLive)
                 {
-                  if(turn % 3 != 0) {    
-                    int Damage = boo.MonsterAttackToPlayer();
+                    if (turn % 3 != 0)
+                    {
+                        int Damage = boo.MonsterAttackToPlayer();
                         if (ran.Next(0, 101) < boo.Crtical)
                         {
 
@@ -260,14 +261,14 @@ namespace Nightmare
                                 Instance.MoveNextAction(ActionType.Village);
                             }
                         }
-                  }
-                  else
+                    }
+                    else
                     {
                         int whatSkill = ran.Next(0, boo.BossSkill.Count);
                         turn = 0;
                         if (boo.BossSkill[whatSkill].CurrentCoolTime < boo.BossSkill[whatSkill].SkillCoolTime)
                         {
-                            if(whatSkill == 0)
+                            if (whatSkill == 0)
                             {
                                 boo.BossSkill[whatSkill + 1].SkillUse(player, monsters, ref DeathCount);
 
@@ -287,9 +288,12 @@ namespace Nightmare
                         }
                         Instance.TakeAction();
 
-                        boo.BossSkill[whatSkill].SkillUse(player,monsters,ref DeathCount);
+                        boo.BossSkill[whatSkill].SkillUse(player, monsters, ref DeathCount);
                         boo.BossSkill[whatSkill].CurrentCoolTime = 0;
-                        
+                        if (player.Stat.Hp <= 0)
+                        {
+                            Instance.MoveNextAction(ActionType.Village);
+                        }
 
                     }
                 }
@@ -379,7 +383,12 @@ namespace Nightmare
                     }
                     if (IsFinal || random.Next(0, 11) > 5)
                     {
-                        //DataManager.Instance.HaveItemDatas.Add(); 보스템 떨구기
+                        KillBossItem killBoss = new KillBossItem();
+                        Item item = new Item();
+
+                        item = DataManager.Instance.ItemDatas[18 + (int)player.Job];
+
+                        killBoss.PickUpItem(item);
                     }
                 }
 
@@ -472,39 +481,40 @@ namespace Nightmare
                 }
                 else if (Select == 3)
                 {
-                    int Selects = InputandReturn(4);
 
-                    if (Selects == 1)
-                    {
-                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.HPPortion) as Portion;
-                        if (portion != null)
-                        {
-                            portion.UsePortion();
-                            Console.WriteLine("체력이 회복되었습니다.");
-                        }
-                    }
-                    else if (Selects == 2)
-                    {
-                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.MPPortion) as Portion;
-                        if (portion != null)
-                        {
-                            portion.UsePortion();
-                            Console.WriteLine("체력이 회복되었습니다.");
-                        }
-                    }
-                    else if (DataManager.Instance.ConsumableItems.Any(d => d.Type == ItemType.Special) && Selects == 3)
-                    {
-                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.Special) as Portion;
-                        if (portion != null)
-                        {
-                            portion.UsePortion();
-                            Console.WriteLine("체력이 회복되었습니다.");
-                        }
-                    }
-                    else
-                    {
-                        UtilityManager.PrintErrorMessage();
-                    }
+                    int number = 1;
+                    var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.HPPortion) as Portion;
+                    //var BossItem = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.Accessory) as KillBossItem;
+                    //if (Selects == 1)
+                    //{
+                    //    if (portion != null)
+                    //    {
+                    //        portion.UsePortion();
+                    //        Console.WriteLine("체력이 회복되었습니다.");
+                    //    }
+                    //}
+                    //else if (Selects == 2)
+                    //{
+                    //    var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.MPPortion) as Portion;
+                    //    if (portion != null)
+                    //    {
+                    //        portion.UsePortion();
+                    //        Console.WriteLine("체력이 회복되었습니다.");
+                    //    }
+                    //}
+                    //else if (DataManager.Instance.ConsumableItems.Any(d => d.Type == ItemType.Special) && Selects == 3)
+                    //{
+                    //    var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.Special) as Portion;
+                    //    if (portion != null)
+                    //    {
+                    //        portion.UsePortion();
+                    //        Console.WriteLine("체력이 회복되었습니다.");
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    UtilityManager.PrintErrorMessage();
+                    //}
 
                     Instance.TakeAction();
                 }
