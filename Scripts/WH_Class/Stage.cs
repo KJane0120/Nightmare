@@ -153,16 +153,18 @@ namespace Nightmare
                     //foreach로 넣기
                     foreach (Monster monster in monsters)
                     {
-                        Console.WriteLine($"{ii}. {monster.MonsterDIe(ref DeathCount)}");
+                        Console.WriteLine($"{monster.MonsterDIe(ref DeathCount)}");
                         ii++;
                     }
                     //플레이어 상태 띄우기
                     Console.WriteLine($"Lv.{player.Level.PlayerLevel} {player.Name} ({player.Job})");
-                    Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})");
-                    Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})");
-                    Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
-                    Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}");
-                    Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})");
+                    Console.WriteLine("----------------------------------");
+                    Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})                      |");
+                    Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})                       |");
+                    Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}        |");
+                    Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}                     |");
+                    Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})                      |");
+                    Console.WriteLine("----------------------------------");
 
                     ii = 1;
                     int Select = InputandReturn(1);
