@@ -46,43 +46,70 @@ namespace Nightmare
             Player.Avd = new Avd();
             Player.Crt = new Crt();
 
-            SetName();
+            startGame();
         }
 
-        private void SetName()
+        private void startGame() // 시작화면
         {
             Console.Clear();
-            Console.WriteLine("\"늦었다, 늦었어!\"");
-            Console.WriteLine("하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다.");
-            Console.WriteLine("말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?");
-            Console.WriteLine("당신은 호기심에 말하는 토끼를 쫓아갑니다.");
-            Console.WriteLine("이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다.");
-            Console.WriteLine("떨어지고,");
-            Console.WriteLine("떨어져서,");
-            Console.WriteLine("눈을 뜨면 그곳은…");
-            Console.WriteLine("악몽입니다.");
+            string startMessage = "\"늦었다, 늦었어!\"" +
+                "\n하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다." +
+                "\n말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?" +
+                "\n당신은 호기심에 말하는 토끼를 쫓아갑니다." +
+                "\n이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다." +
+                "\n떨어지고," +
+                "\n떨어져서," +
+                "\n눈을 뜨면 그곳은..." +
+                "\n악몽입니다." +
+                "\n" +
+                "\nOnce Upon a Nightmare";
+
+            foreach (char c in startMessage)
+            {
+                Console.Write(c);
+                Thread.Sleep(30);
+            }
             Console.WriteLine();
-            Console.WriteLine("Once Upon a Nightmare");
             Console.WriteLine();
-            Console.WriteLine();            
+            Console.WriteLine();
             Console.WriteLine("다음 이야기를 들으려면 아무 키나 입력하세요.");
             Console.ReadKey();
 
-            // 이름 설정
-            Console.Clear() ;
-            Console.WriteLine("깜빡, 깜빡.");
-            Console.WriteLine("시계 토끼가 당신을 내려다 보고 있습니다.");            
-            Console.WriteLine();
-            Console.WriteLine("시계 토끼: 안녕? 악몽에서 나가고 싶니?");
-            Console.WriteLine("시계 토끼: 우선 네 이름을 알려 줘.");
-            Console.WriteLine();
-            Console.WriteLine("일그러진 동화 속을 유영할 당신의 이름은?");
+            SetName();
+        }
+
+        // 이름 설정
+        private void SetName()
+        {                                  
+            Console.Clear();
+            string nameMessage = "깜빡, 깜빡." +
+                "\n시계 토끼가 당신을 내려다 보고 있습니다" +
+                "\n" +
+                "\n시계 토끼: 안녕? 악몽에서 나가고 싶니?" +
+                "\n시계 토끼: 우선 네 이름을 알려 줘." +
+                "\n" +
+                "\n일그러진 동화 속을 유영할 당신의 이름은?\n";
+            foreach (char c in nameMessage)
+            {
+                Console.Write(c);
+                Thread.Sleep(30);
+            }
+
             name = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine($"안녕하세요, {name}.");
-            Console.WriteLine("설정하신 이름으로 주인공이 되시겠습니까?");
+            string saveMessage = $"안녕하세요, {name}." +
+                "\n설정하신 이름으로 주인공이 되시겠습니까?" +
+                "\n" +
+                "\n1. 저장\n2. 취소";
+
+            foreach (char c in saveMessage)
+            {
+                Console.Write(c);
+                Thread.Sleep(30);
+            }
+           
             Console.WriteLine();
-            Console.WriteLine("1. 저장\n2. 취소");
+            Console.WriteLine();
 
             UtilityManager.InputNumberInRange(1, 2, SuccessInputNumberInRange, SetName, "어느 페이지로 넘어가시겠습니까?");
         }
@@ -95,7 +122,8 @@ namespace Nightmare
             }
             else
             {
-                SetName();
+                SetName();               
+                
             }
         }
 
@@ -103,7 +131,7 @@ namespace Nightmare
         {
             Console.Clear();
             Console.WriteLine("어떤 동화를 들어보시겠습니까?\n");
-            Console.WriteLine("1. 백설공주와 일곱 번째 난쟁이");
+            Console.WriteLine("1. 백설공주와 일곱째 난쟁이");
             Console.WriteLine("2. 신데렐라의 새 언니");
             Console.WriteLine("3. 모두가 잠든 성의 하인");
             Console.WriteLine("4. 깊은 바다 속 문어 마녀");
