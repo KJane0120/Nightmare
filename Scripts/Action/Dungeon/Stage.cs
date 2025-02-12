@@ -151,6 +151,7 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             public void BossBattlePhase(Monster mon, List<Monster> monster, Player player, Boss boss)
             {
+                SoundManager.PlayBGM("Boss");
                 int turn = 0;
                 int DeathCount = 0;
                 while (boss.IsLive)
@@ -172,6 +173,25 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             public void BattlePhase(Monster mon, List<Monster> monsters, Player player)
             {
+                var bgmName = "";
+
+                switch(RandomRange)
+                {
+                    case 1:
+                    case 2:
+                        bgmName = "Battle1";
+                        break;
+                    case 3:
+                    case 4:
+                        bgmName = "Battle2";
+                        break;
+                    case 5:
+                    case 6:
+                        bgmName = "Battle3";
+                        break;
+                }
+
+                SoundManager.PlayBGM(bgmName);
 
                 int ii = 1;
                 int DeathCount = 0;
