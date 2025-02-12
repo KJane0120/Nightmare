@@ -114,7 +114,33 @@ namespace Nightmare
         public Dictionary<long, Boss> BossDatas = new();
 
         //플레이어 데이터
-        public Dictionary<long, Player> PlayerDatas = new();
+        public Dictionary<long, Player> PlayerDatas = new()
+        {
+            { 1,new Player() },
+            { 2,new Player() },
+            { 3,new Player() },
+            { 4,new Player() },
+            { 5,new Player() }
+        };
+
+        public void SetPlayerDatas()
+        {
+            PlayerDatas[1].Job = Job.Dwarf;
+            PlayerDatas[1].Stat = new Stat(10, 5, 100, 100, 30, 30);
+
+            PlayerDatas[2].Job = Job.NewSister;
+            PlayerDatas[2].Stat = new Stat(15, 5, 70, 70, 30, 30);
+
+            PlayerDatas[3].Job = Job.Saison;
+            PlayerDatas[3].Stat = new Stat(12, 7, 100, 100, 20, 20);
+
+            PlayerDatas[4].Job = Job.OctopusWitch;
+            PlayerDatas[4].Stat = new Stat(7, 4, 50, 50, 50, 50);
+
+            PlayerDatas[5].Job = Job.WildAnimal;
+            PlayerDatas[5].Stat = new Stat(20, 10, 150, 150, 10, 10);
+        }
+
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
         public List<Item> ConsumableItems = new();
