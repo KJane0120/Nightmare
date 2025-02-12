@@ -1,7 +1,4 @@
-﻿using Nightmare.Data;
-using System.Collections.Generic;
-using System.Numerics;
-
+﻿
 namespace Nightmare
 {
     public partial class GameManager
@@ -370,7 +367,7 @@ namespace Nightmare
                         {
                             PortionId = 18
                         };
-                        Healthportion.MaximumHavePortion(Healthportion);
+                        Healthportion.PickUpPortion(Healthportion);
                     }
                     else
                     {
@@ -378,7 +375,7 @@ namespace Nightmare
                         {
                             PortionId = 24
                         };
-                        manaportion.MaximumHavePortion(manaportion);
+                        manaportion.PickUpPortion(manaportion);
                     }
                     if (IsFinal || random.Next(0, 11) > 5)
                     {
@@ -479,7 +476,7 @@ namespace Nightmare
 
                     if (Selects == 1)
                     {
-                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == Item.ItemType.HPPortion) as Portion;
+                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.HPPortion) as Portion;
                         if (portion != null)
                         {
                             portion.UsePortion();
@@ -488,16 +485,16 @@ namespace Nightmare
                     }
                     else if (Selects == 2)
                     {
-                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == Item.ItemType.MPPortion) as Portion;
+                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.MPPortion) as Portion;
                         if (portion != null)
                         {
                             portion.UsePortion();
                             Console.WriteLine("체력이 회복되었습니다.");
                         }
                     }
-                    else if (DataManager.Instance.ConsumableItems.Any(d => d.Type == Item.ItemType.Special) && Selects == 3)
+                    else if (DataManager.Instance.ConsumableItems.Any(d => d.Type == ItemType.Special) && Selects == 3)
                     {
-                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == Item.ItemType.Special) as Portion;
+                        var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.Special) as Portion;
                         if (portion != null)
                         {
                             portion.UsePortion();
