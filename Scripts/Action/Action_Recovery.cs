@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nightmare.Data;
-
+﻿
 namespace Nightmare
 {
     public partial class GameManager
@@ -58,11 +52,6 @@ namespace Nightmare
                     Console.WriteLine($" - {i + 1}. {portion.ShowPortion()}");
                     i++;
                 }
-
-                //Console.WriteLine($"앨리스의 쿠키 : HP 20 회복 (소지 개수: )");
-                //Console.WriteLine($"앨리스의 음료 : MP 10 회복 (소지 개수: )");
-                //Console.WriteLine($"사랑의 정수 : HP 100, Mp 50 회복 (소지 개수: )");
-
 
             }
         }

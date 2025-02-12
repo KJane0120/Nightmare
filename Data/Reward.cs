@@ -1,7 +1,7 @@
 ﻿using Nightmare.Data;
 using System.Text.Json.Serialization;
 
-namespace Nightmare
+﻿namespace Nightmare
 {
     public enum RewardType
     {

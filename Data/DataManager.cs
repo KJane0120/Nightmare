@@ -1,6 +1,4 @@
-﻿using Nightmare.Data;
-using static Nightmare.Data.Item;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nightmare
 {
@@ -85,7 +83,7 @@ namespace Nightmare
 
             return newPath;
         }
-
+      
         public void SaveGameData()
         {
             saveGameData.HaveItems = Instance.HaveItems;
@@ -152,8 +150,13 @@ namespace Nightmare
         //선택 가능한 직업
         public Dictionary<long, Player> CanSelectPlayerDatas = new();
 
-        //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
+        //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션 3종+스페셜 드랍아이템 5종)
+
         public List<Item> ConsumableItems = new();
+        
+        
+        //보스 처치시 필요한 필수 아이템 데이터
+        public Dictionary<long, KillBossItem> KillBossItemDatas = new();
 
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
@@ -166,8 +169,7 @@ namespace Nightmare
                     for (int i = 0; i < portion.PortionCount; i++)
                     {
                         ConsumableItems.Add(itemData);
-                        //HaveItems.Add(itemData.Id, itemData);
-                        //인벤토리 아이템목록에 추가해주고 싶음
+                        HaveItems.Add(itemData);
                     }
                 }
             }
@@ -180,6 +182,7 @@ namespace Nightmare
 
         public List<Portion> PortionDatas = new()
         {
+            
             new Portion()
             {
                 PortionId = 18,
@@ -216,9 +219,6 @@ namespace Nightmare
         }
     }
 }
-
-
-//보스드랍아이템 리스트
 
 
 
