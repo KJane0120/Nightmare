@@ -21,7 +21,7 @@
                     break;
                 case RewardType.Item:
                     Item RewardItem = DataManager.Instance.ItemDatas[RewardId];
-                    DataManager.Instance.HaveItemDatas.Add(RewardItem);
+                    DataManager.Instance.HaveItems.Add(RewardItem);
                     break;
             }
         }

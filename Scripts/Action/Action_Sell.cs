@@ -30,7 +30,7 @@
                     //소수점 계산이 있어서 int가 아닌 float이나 double의 형태로 나중에 수정할 것
                     GameManager.Instance.Player.Gold.PlayerGold += (int)(selectItem.Cost * 0.85f);
                     //인벤토리 딕셔너리에서 삭제
-                    DataManager.Instance.HaveItemDatas.Remove(selectItem);
+                    DataManager.Instance.HaveItems.Remove(selectItem);
                     //상점 아이템 구매 목록에 다시 살수 있도록 IsPurchase == false로 바꾸기
                     selectItem.IsPurchase = false;
                     selectItem.IsEquip = false;

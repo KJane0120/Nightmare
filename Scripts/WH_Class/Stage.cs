@@ -145,7 +145,7 @@ namespace Nightmare
                 Console.WriteLine("스테이지 클리어!");
                 //일정 확률의 보상 얻기
                 GetClearBoSang(monsters, player);
-                DataManager.Instance.HaveItemDatas.Add(DataManager.Instance.ItemDatas[12 + (int)player.Job]);
+                DataManager.Instance.HaveItems.Add(DataManager.Instance.ItemDatas[12 + (int)player.Job]);
                 //다시 돌아가기
                 Instance.GameClear();
             }
@@ -477,40 +477,45 @@ namespace Nightmare
                 }
                 else if (Select == 3)
                 {
+                    List<Item> usableItems = new List<Item>();
 
-                    int number = 1;
-                    var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.HPPortion) as Portion;
-                    //var BossItem = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.Accessory) as KillBossItem;
-                    //if (Selects == 1)
-                    //{
-                    //    if (portion != null)
-                    //    {
-                    //        portion.UsePortion();
-                    //        Console.WriteLine("체력이 회복되었습니다.");
-                    //    }
-                    //}
-                    //else if (Selects == 2)
-                    //{
-                    //    var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.MPPortion) as Portion;
-                    //    if (portion != null)
-                    //    {
-                    //        portion.UsePortion();
-                    //        Console.WriteLine("체력이 회복되었습니다.");
-                    //    }
-                    //}
-                    //else if (DataManager.Instance.ConsumableItems.Any(d => d.Type == ItemType.Special) && Selects == 3)
-                    //{
-                    //    var portion = DataManager.Instance.ConsumableItems.FirstOrDefault(x => x.Type == ItemType.Special) as Portion;
-                    //    if (portion != null)
-                    //    {
-                    //        portion.UsePortion();
-                    //        Console.WriteLine("체력이 회복되었습니다.");
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    UtilityManager.PrintErrorMessage();
-                    //}
+                    usableItems.AddRange(DataManager.Instance.ConsumableItems.OfType<Potion>());
+                    usableItems.AddRange(DataManager.Instance.ConsumableItems.OfType<KillBossItem>());
+
+                    if (usableItems.Count == 0)
+                    {
+                        Console.WriteLine("사용할 수 있는 아이템이 없습니다!");
+                        return;
+                    }
+
+                   
+                    Console.WriteLine("사용할 아이템을 선택하세요:");
+                    for (int i = 0; i < usableItems.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {usableItems[i].showItem()}");
+                    }
+
+                    int choice;
+                    while (true)
+                    {
+                        Console.Write("번호 입력: ");
+                        if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= usableItems.Count)
+                            break;
+                        Console.WriteLine("잘못된 입력입니다..");
+                    }
+
+                    
+                    Item selectedItem = usableItems[choice - 1];
+
+                    
+                    if (selectedItem is Potion potion)
+                    {
+                        potion.UsePotion();
+                    }
+                    else if (selectedItem is KillBossItem bossItem)
+                    {
+                        bossItem.UseKillBossItem(bossItem);
+                    }
 
                     Instance.TakeAction();
                 }
