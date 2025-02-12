@@ -84,11 +84,8 @@ namespace Nightmare
         //상점 아이템 리스트  => json으로 바꾸면서 더이상 이 리스트를 참조하지 않아서 삭제해도 될듯합니다. 
         public Dictionary<int, Item> ShopItems = new();
 
-        //가지고 있는 아이템 리스트
-        public Dictionary<int, Item> HaveItems = new() { };
-
         //Dict 데이터 사용시 for문 오류, 아이템 판매 시 출력되는 아이템목록 리스트 생성
-        public List<Item> HaveItemDatas = new List<Item>();
+        public List<Item> HaveItems = new List<Item>();
 
         //퀘스트 데이터 리스트
         public List<Quest> QuestDatas = new();
