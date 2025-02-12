@@ -95,6 +95,12 @@ namespace Nightmare
             return str;
         }
 
+        public String showItem()
+        {
+            string str = $"{Name} | {GetTypeString()} | {Desc} )";
+            return str;
+        }
+
         public virtual void UseItem(Item item)
         {
             // override를 통해 구현 예정

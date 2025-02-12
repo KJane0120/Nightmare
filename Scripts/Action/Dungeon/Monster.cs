@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 
 namespace Nightmare
 {
@@ -42,13 +43,10 @@ namespace Nightmare
         }
         public string MonsterDIe(ref int DeathCount)
         {
-            StringBuilder sb = new StringBuilder();
-
-
             if (MonsterHealth <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                sb.Append("Lv.").Append(Level).Append(" ").Append(Name).Append("Dead");
+                String s = $"Lv.{Level} {Name} Dead";
                 Console.ResetColor();
                 if (IsLive) // 이미 사망 처리된 몬스터라면 DeathCount 증가 방지
                 {
@@ -57,7 +55,7 @@ namespace Nightmare
                     GameManager.Instance.Player.CurrentExp += MonsterExp;
                     GameManager.Instance.Player.LevelUp();
                 }
-                return sb.ToString();
+                return s.PadLeft(100);
             }
             else
             {
@@ -81,10 +79,10 @@ namespace Nightmare
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Lv.").Append(Level).Append(" ").Append(Name).Append("Hp:").Append(MonsterHealth).Append("\n").Append("공격력").
-                Append(MonsterAttack).Append("방어력").Append(MonsterDefense).Append("\n");
-            return sb.ToString();
+
+            String s = $"Lv.{Level} {Name} Hp:{MonsterHealth}".PadLeft(100);
+            String Ss = $"공격력:{MonsterAttack} 방어력:{MonsterDefense}\n".PadLeft(115);
+            return s+Ss;
         }
 
         public void AttackedFromPlayer(Monster monster, Player player) //Player를 받게할 예정
