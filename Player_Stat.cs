@@ -25,6 +25,20 @@ namespace Nightmare
         { 
             equipDef += add;
         }
+
+        public Stat(float baseAtk, float baseDef, float hp, float maxHp, float mp, float maxMp)
+        {
+            BaseAtk = baseAtk;
+            BaseDef = baseDef;
+            Hp = hp;
+            MaxHp = maxHp;
+            Mp = mp;
+            MaxMp = maxMp;
+        }
+
+        public Stat()
+        {
+        }
     }
 
    
@@ -43,7 +57,7 @@ namespace Nightmare
     {
         None = 0,
 
-        [Description("백설공주와 일곱 번째 난쟁이")]
+        [Description("백설공주와 일곱째 난쟁이")]
         Dwarf = 1,
 
         [Description("신데렐라의 새 언니")]
@@ -62,10 +76,10 @@ namespace Nightmare
 
     public class Avd //회피율
     {
-        public float PlayerAvd;
+        public float PlayerAvd = 0.1f;
         public float EquipAvd;              
 
-        public void AddPlayerAvd(int add) // 회피율 증가
+        public void AddPlayerAvd(float add) // 회피율 증가
         {
             PlayerAvd += add;
         }
@@ -74,10 +88,10 @@ namespace Nightmare
 
     public class Crt //치명타율
     {
-        public float PlayerCrt;
+        public float PlayerCrt = 0.15f;
         public float EquipCrt;
 
-        public void AddPlayerCrt(int add) // 치명타 증가
+        public void AddPlayerCrt(float add) // 치명타 증가
         {
             PlayerCrt += add;
         }

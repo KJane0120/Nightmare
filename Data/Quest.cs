@@ -39,8 +39,7 @@ namespace Nightmare
         public void DisplayQuestTitle()
         {
             string IsProgressText = IsProgress ? "[진행중]" : "";
-            Console.Write($"\n{Id}.{Title}");
-            UtilityManager.ColorWriteLine(IsProgressText,ConsoleColor.Green);
+            Console.WriteLine($"\n{Id}.{Title}{IsProgressText}");
         }
 
         public void DisplayQuestInfo()
@@ -60,13 +59,13 @@ namespace Nightmare
 
         public async void WaitForCondition()
         {
-            Task waitTask = WaitFonClearCondition();
+            Task waitTask = WaitForFirstWeapon();
             await waitTask;
             Console.WriteLine("\n퀘스트 완료!");
             Condition.IsConditionClear = true;
         }
 
-        private async Task WaitFonClearCondition()
+        private async Task WaitForFirstWeapon()
         {
             while (!Condition.GetClearConditoin())
             {
@@ -127,13 +126,14 @@ namespace Nightmare
             switch (QuestType)
             {
                 case QuestType.ChapterClear:
-                    // 튜토리얼 스테이지 클리어
-                    return GameManager.Instance.TutorialOk;
+                    // TODO:튜토리얼 스테이지 클리어
+                    return false;
                 case QuestType.KillBoss:
                     //보스 처치
                     return !DataManager.Instance.BossDatas[ConditionValue].IsLive;
                 case QuestType.Equip:
                     //첫 아이템 장착
+                    //질문사항 : 장착을 하고 있는 상황에서 퀘스트를 수락했을때 완료라고 뜨는지 아님 수락받은 시점부터인지 
                     return DataManager.Instance.EquippedItems.Count > 0;
                 case QuestType.UseItem:
                     //첫 포션 아이템 사용 

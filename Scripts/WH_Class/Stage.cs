@@ -53,8 +53,8 @@ namespace Nightmare
                     Console.WriteLine($"공격력: {player.Stat.BaseAtk + player.Stat.EquipAtk})");
                     Console.WriteLine($"방어력: {player.Stat.BaseDef + player.Stat.EquipDef})");
                     Console.WriteLine($"체력: {player.Stat.Hp}/{player.Stat.MaxHp} 마력: {player.Stat.Mp}/{player.Stat.MaxMp}");
-                    Console.WriteLine($"치명타율: {(player.Crt.PlayerCrt + player.Crt.EquipCrt)}");
-                    Console.WriteLine($"회피율: {player.Avd.EquipAvd + player.Avd.PlayerAvd})");
+                    Console.WriteLine($"치명타율: {Math.Round((player.Crt.PlayerCrt + player.Crt.EquipCrt) * 100), 0} %");
+                    Console.WriteLine($"회피율: {Math.Round((player.Avd.EquipAvd + player.Avd.PlayerAvd) * 100), 0} %");
 
                     Console.WriteLine($"현재 DeathCount: {DeathCount}/{monsters.Count}");
                     ii = 1;
@@ -252,14 +252,8 @@ namespace Nightmare
 
                         if (Select == 1)
                         {
-                            foreach (Portion portion in DataManager.Instance.ConsumableItems)
-                            {
-                                if ((int)portion.Data.Type == 5)
-                                {
-                                    portion.UsePortion();
-                                    break;
-                                }
-                            }
+
+     
                         }
                         Instance.TakeAction();
                     }
@@ -280,7 +274,7 @@ namespace Nightmare
                         {
                             
                             int Damage = mons.MonsterAttackToPlayer();
-                            if ((player.Avd.EquipAvd + player.Avd.PlayerAvd) < ran.Next(0, 101))
+                            if (((player.Avd.EquipAvd + player.Avd.PlayerAvd)*100) < ran.Next(0, 101))
                             {
                                 if (Damage > (player.Stat.BaseDef + player.Stat.EquipDef))
                                 {

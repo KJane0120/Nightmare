@@ -32,11 +32,7 @@ namespace Nightmare
             [Description("회복아이템")]
             RecoveryItem,
             [Description("회복아이템사용")]
-            Recovery,
-            [Description("게임 클리어")]
-            GameClear,
-            [Description("게임 오버")]
-            GameOver
+            Recovery
         }
 
         public ActionBase CurrentAction
@@ -73,9 +69,8 @@ namespace Nightmare
                     { ActionType.StageManager,  new StageManager(0) },
                     { ActionType.Sell, new Action_Sell(0) },
                     { ActionType.QuestList,  new Action_QuestList(0) },
-                    { ActionType.RecoveryItem, new Action_RecoveryItem(0) },
-                    { ActionType.Recovery, new Action_Recovery(0) },
-                    { ActionType.GameClear, new Action_GameClear(0) }
+                    {ActionType.RecoveryItem, new Action_RecoveryItem(0) },
+                    {ActionType.Recovery, new Action_Recovery(0) }
                 };
         }
 

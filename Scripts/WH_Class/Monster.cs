@@ -7,7 +7,7 @@ namespace Nightmare
         public long Id { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
-        public int MonsterHealth { get; set; }
+        public float MonsterHealth { get; set; }
         public int MonsterAttack { get; set; }
         public int MonsterDefense { get; set; }
         public bool IsLive { get; set; } //체력이 0이면 Fales
@@ -15,7 +15,7 @@ namespace Nightmare
         public int MonsterMoney { get; set; }
         public int MonsterExp { get; set; }
 
-        public Monster(int Level, int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp)//생성자
+        public Monster(int Level, float Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp)//생성자
         {
             this.Level = Level;
             MonsterHealth = Health;
@@ -107,7 +107,7 @@ namespace Nightmare
             }
             else
             {
-                if ((player.Crt.PlayerCrt + player.Crt.EquipCrt) < ran.Next(0, 101))
+                if (((player.Crt.PlayerCrt + player.Crt.EquipCrt)*100) < ran.Next(0, 101))
                 {
                     monster.MonsterHealth -= (int)(player.Stat.BaseAtk + player.Stat.EquipAtk) - monster.MonsterDefense;
                     if (monster.MonsterHealth <= 0)
