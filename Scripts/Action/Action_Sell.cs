@@ -1,6 +1,4 @@
-﻿using Nightmare.Data;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {
@@ -21,7 +19,7 @@ namespace Nightmare
 
             private void PrintErrorMsg(int number)
             {
-                Item selectItem = DataManager.Instance.HaveItemDatas[number-1];
+                Item selectItem = DataManager.Instance.HaveItems[number-1];
 
                 //아이템이 판매한 적이 없다면 
                 if (selectItem.IsSold == false)
@@ -32,7 +30,7 @@ namespace Nightmare
                     //소수점 계산이 있어서 int가 아닌 float이나 double의 형태로 나중에 수정할 것
                     GameManager.Instance.Player.Gold.PlayerGold += (int)(selectItem.Cost * 0.85f);
                     //인벤토리 딕셔너리에서 삭제
-                    DataManager.Instance.HaveItems.Remove(selectItem.Id);
+                    DataManager.Instance.HaveItems.Remove(selectItem);
                     //상점 아이템 구매 목록에 다시 살수 있도록 IsPurchase == false로 바꾸기
                     selectItem.IsPurchase = false;
                     selectItem.IsEquip = false;
@@ -62,9 +60,9 @@ namespace Nightmare
 
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
-                for (int i = 0; i < DataManager.Instance.HaveItemDatas.Count; i++)
+                for (int i = 0; i < DataManager.Instance.HaveItems.Count; i++)
                 {
-                    Console.WriteLine($"- {i + 1}.  {DataManager.Instance.HaveItemDatas[i].ShowSellItem()}");
+                    Console.WriteLine($"- {i + 1}.  {DataManager.Instance.HaveItems[i].ShowSellItem()}");
                 }
 
                 Console.WriteLine();

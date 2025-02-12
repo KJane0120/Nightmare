@@ -1,8 +1,4 @@
-﻿using Nightmare.Data;
-using static Nightmare.Data.Item;
-using static Nightmare.Stat;
-
-namespace Nightmare
+﻿namespace Nightmare
 {
     public partial class GameManager
     {
@@ -21,8 +17,7 @@ namespace Nightmare
 
             protected override void DisPlay()
             {
-                Console.Clear();
-                Console.WriteLine("인벤토리 - 장착 관리");
+                UtilityManager.ColorWriteLine("인벤토리 - 장착 관리", ConsoleColor.Green);
                 DisPlayInventory();
                 OnInputInvalidActionNumber = EquipItem;
             }
