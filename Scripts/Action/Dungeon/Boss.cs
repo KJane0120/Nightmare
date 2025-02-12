@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using static Nightmare.GameManager;
 
 
 namespace Nightmare
@@ -21,8 +22,12 @@ namespace Nightmare
                 this.Crtical = Crtical;
 
                 this.SkillCount = skillCount;
+                BossSkill = new List<Skill>();
             }
-            public Boss() { }
+            public Boss()
+            {
+                BossSkill = new List<Skill>(); // 리스트 초기화
+            }
 
             public override string ToString()
             {

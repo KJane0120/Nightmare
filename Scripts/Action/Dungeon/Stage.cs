@@ -130,9 +130,82 @@ namespace Nightmare
             public void BossBattle(Player player) //player
             {
                 Boss boss = new Boss();
-                Skill skill = new Skill();
+                //if ((int)player.Job == 1)
+                //{
+                //    boss.MissRate = 15;
+                //    boss.Crtical = 10;
+                //    boss.SkillCount=3;
+                //    boss.Id =1;
+                //    boss.Level = 10;
+                //    boss.Name = "독기 품은 백설공주";
+                //    boss.MonsterHealth = 250;
+                //    boss.MonsterAttack = 45;
+                //    boss.MonsterDefense = 25;
+                //    boss.IsLive = true;
+                //    boss.MonsterMoney = 1500;
+                //}
+                //else if((int)player.Job == 2)
+                //{
+                //    boss.MissRate = 15;
+                //    boss.Crtical = 10;
+                //    boss.SkillCount = 3;
+                //    boss.Id = 2;
+                //    boss.Level = 10;
+                //    boss.Name = "자정이 넘어간 신데렐라";
+                //    boss.MonsterHealth = 250;
+                //    boss.MonsterAttack = 45;
+                //    boss.MonsterDefense = 25;
+                //    boss.IsLive = true;
+                //    boss.MonsterMoney = 1500;
+                //}
+                //else if ((int)player.Job == 3)
+                //{
+                //    boss.MissRate = 15;
+                //    boss.Crtical = 10;
+                //    boss.SkillCount = 3;
+                //    boss.Id = 3;
+                //    boss.Level = 10;
+                //    boss.Name = "불면증 걸린 숲속의 공주";
+                //    boss.MonsterHealth = 250;
+                //    boss.MonsterAttack = 45;
+                //    boss.MonsterDefense = 15;
+                //    boss.IsLive = true;
+                //    boss.MonsterMoney = 1500;
+                //}
+                //else if ((int)player.Job == 4)
+                //{
+                //    boss.MissRate = 30;
+                //    boss.Crtical = 10;
+                //    boss.SkillCount = 3;
+                //    boss.Id = 4;
+                //    boss.Level = 10;
+                //    boss.Name = "문명파괴자 인어공주";
+                //    boss.MonsterHealth = 250;
+                //    boss.MonsterAttack = 45;
+                //    boss.MonsterDefense = 25;
+                //    boss.IsLive = true;
+                //    boss.MonsterMoney = 1500;
+                //}
+                //else if ((int)player.Job == 5)
+                //{
+                //    boss.MissRate = 30;
+                //    boss.Crtical = 10;
+                //    boss.SkillCount = 3;
+                //    boss.Id = 5;
+                //    boss.Level = 10;
+                //    boss.Name = "3대750 야수의 미녀";
+                //    boss.MonsterHealth = 250;
+                //    boss.MonsterAttack = 45;
+                //    boss.MonsterDefense = 25;
+                //    boss.IsLive = true;
+                //    boss.MonsterMoney = 1500;
+                //}
+
                 boss = DataManager.Instance.BossDatas[(int)player.Job];
-                skill.BossSkillSet(player, boss);
+
+                Skill skill = new Skill();
+               
+                skill.BossSkillSet(boss);
                 boss.BossIntroduce((int)player.Job);
 
                 List<Monster> monsters = new List<Monster>();
