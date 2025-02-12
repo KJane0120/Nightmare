@@ -1,6 +1,4 @@
-﻿using Nightmare.Data;
-using System.Collections.Generic;
-
+﻿
 namespace Nightmare
 {
     public partial class GameManager
@@ -364,13 +362,13 @@ namespace Nightmare
                     {
                         PortionId = 18
                     };
-                    Healthportion.MaximumHavePortion(Healthportion);
+                    Healthportion.PickUpPortion(Healthportion);
 
                     Portion manaportion = new Portion
                     {
                         PortionId = 24
                     };
-                    manaportion.MaximumHavePortion(manaportion);
+                    manaportion.PickUpPortion(manaportion);
 
                     if (IsFinal || random.Next(0, 11) > 5)
                     {
