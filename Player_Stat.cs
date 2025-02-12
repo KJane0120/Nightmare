@@ -36,6 +36,10 @@ namespace Nightmare
             Mp = mp;
             MaxMp = maxMp;
         }
+
+        public Stat()
+        {
+        }
     }
 
    

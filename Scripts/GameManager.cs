@@ -246,7 +246,7 @@ namespace Nightmare
 
         }
         private Job JobChoice(int num)
-        {
+        {            
             var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, float Avd, float Crt)> {
             { 1, (Job.Dwarf,10,5,100,30,0.1f,0.15f) },
             { 2, (Job.NewSister, 15, 5, 70, 30, 0.1f, 0.15f) },
