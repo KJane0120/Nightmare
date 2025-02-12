@@ -28,14 +28,13 @@ namespace Nightmare
         {
             if (isInitialized) return;
             JsonDataLoad();
-            Instance.InitializeConsumableItems();
         }
 
         private static void JsonDataLoad()
         {
-            string questfilePath = GetFilePath("QuestData", "Data");
+            string questfilePath = GetFilePath("QuestData", "Data\\Quest");
             string bossfilePath = GetFilePath("BossData", "Data");
-            string itemfilePath = GetFilePath("ItemData", "Data");
+            string itemfilePath = GetFilePath("ItemData", "Data\\Item");
 
             if (!File.Exists(questfilePath))
             {
@@ -214,25 +213,6 @@ namespace Nightmare
         //보스 처치시 필요한 필수 아이템 데이터
         public Dictionary<long, KillBossItem> KillBossItemDatas = new();
 
-        //기본 포션 3개씩 추가하는 함수
-        public void InitializeConsumableItems()
-        {
-            foreach (var portion in PortionDatas.Where(p => p.PotionId == 18 || p.PotionId == 24))
-            {
-                if (ItemDatas.TryGetValue(portion.PotionId, out Item itemData))
-                {
-                    // PortionCount만큼 ConsumableItems 리스트에 추가
-                    for (int i = 0; i < portion.PotionCount; i++)
-                    {
-                        ConsumableItems.Add(itemData);
-                        HaveItems.Add(itemData);
-                    }
-                }
-            }
-        }
-
-        //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
-
         //장착된 아이템 리스트
         public List<Item> EquippedItems = new();
 
@@ -242,13 +222,13 @@ namespace Nightmare
             new Potion()
             {
                 PotionId = 18,
-                PotionCount = 3,
+                PotionCount = 0,
                 PotionMaxCount = 3
             },
             new Potion()
             {
                 PotionId = 24,
-                PotionCount = 3,
+                PotionCount = 0,
                 PotionMaxCount = 3
             },
             new Potion()
