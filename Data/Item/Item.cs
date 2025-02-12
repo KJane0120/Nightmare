@@ -25,6 +25,8 @@ namespace Nightmare
         public int Id { get; set; }
         public string? Name { get; set; }
         public ItemType Type { get; set; }
+        public int PotionCount { get; set; }
+        public int PotionMaxCount { get; set; }
 
         //Hp, Mp, Atk, Def, Avd, Crt를 하나의 변수로 묶어 아이템타입이 ~면 ~증가. 
         public float Value { get; set; }
@@ -95,10 +97,16 @@ namespace Nightmare
             return str;
         }
 
-        public override string ToString()
+        public virtual String ToShow()
         {
-            String s = $"{Name}";
+            String s = $"{Name}|{GetTypeString()}|{Desc}|{Type}";
             return s;
+        }
+
+        public void BossKill(List<Monster> monsters, ref int Death)
+        {
+            monsters[0].MonsterHealth -= 999;
+            Death++;
         }
 
         public virtual void UseItem(Item item)

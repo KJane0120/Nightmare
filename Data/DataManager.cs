@@ -33,9 +33,9 @@ namespace Nightmare
 
         private static void JsonDataLoad()
         {
-            string questfilePath = GetFilePath("QuestData", "Data");
+            string questfilePath = GetFilePath("QuestData", "Data\\Quest");
             string bossfilePath = GetFilePath("BossData", "Data");
-            string itemfilePath = GetFilePath("ItemData", "Data");
+            string itemfilePath = GetFilePath("ItemData", "Data\\Item");
 
             if (!File.Exists(questfilePath))
             {
@@ -208,28 +208,62 @@ namespace Nightmare
 
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션 3종+스페셜 드랍아이템 5종)
-        public List<Item> ConsumableItems = new();
         
-        
+
+        public List<Potion> HealthConsumableItems = new();
+        public List<Potion> ManaConsumableItems = new();
+        public List<Potion> LoveConsumableItems = new();
+        public List<Item> BossConsumableItems = new();
+
+
         //보스 처치시 필요한 필수 아이템 데이터
         public Dictionary<long, KillBossItem> KillBossItemDatas = new();
 
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
         {
-            foreach (var portion in PortionDatas.Where(p => p.PotionId == 18 || p.PotionId == 24))
+
+            for (int i = 0; i < 3; i++)
             {
-                if (ItemDatas.TryGetValue(portion.PotionId, out Item itemData))
+                Potion potion = new Potion()
                 {
-                    // PortionCount만큼 ConsumableItems 리스트에 추가
-                    for (int i = 0; i < portion.PotionCount; i++)
-                    {
-                        ConsumableItems.Add(itemData);
-                        HaveItems.Add(itemData);
-                    }
-                }
+                    Id = 18,
+                    Type = (ItemType)5,
+                    Name = "앨리스의 쿠키",
+                    Value = 20,
+                    Desc = "Eat Me! 라는 꼬리표가 달려있다.", //임의값
+                };
+                DataManager.Instance.HealthConsumableItems.Add(potion);
+
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                Potion potion = new Potion()
+                {
+                    Id = 24,
+                    Type = (ItemType)6,
+                    Name = "앨리스의 음료",
+                    Value = 10,
+                    Desc = "Drink Me! 라는 꼬리표가 달려있다.", //임의값
+                };
+                DataManager.Instance.ManaConsumableItems.Add(potion);
             }
         }
+
+
+
+
+
+        //    foreach (var portion in PortionDatas.Where(p => p.PotionId == 18 || p.PotionId == 24))
+        //    {
+        //        if (ItemDatas.TryGetValue(portion.PotionId, out Item itemData))
+        //        {
+        //            // PortionCount만큼 ConsumableItems 리스트에 추가
+        //            ConsumableItems.Add(itemData);
+        //            HaveItems.Add(itemData);
+        //        }
+        //    }
+        //}
 
         //스테이지 클리어별 보상에서 드랍될 시 추가해주기(Reward class를 활용하기로 함)
 
@@ -238,7 +272,7 @@ namespace Nightmare
 
         public List<Potion> PortionDatas = new()
         {
-            
+
             new Potion()
             {
                 PotionId = 18,
