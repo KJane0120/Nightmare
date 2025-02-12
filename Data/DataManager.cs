@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using static Nightmare.GameManager;
 
 namespace Nightmare
 {

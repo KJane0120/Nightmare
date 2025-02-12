@@ -1,3 +1,4 @@
+
 ﻿namespace Nightmare
 {
     public partial class GameManager
@@ -23,19 +24,25 @@
             }
             public void SelectStage(Player player) //플레이어 레벨 들어갈거임
             {
+             
                 if (!Instance.TutorialOk)
                 {
                     Stage Tuto = new Stage(0, 0);
                     Console.WriteLine("튜토리얼 스테이지를 클리어해야 합니다.");
-                    Console.WriteLine("1. 튜토리얼 스테이지 입장");
+                    Console.WriteLine("1. 튜토리얼 스테이지 입장\n");
+                    Console.WriteLine("0. 돌아가기");
                     int select = int.Parse(Console.ReadLine());
                     if (select == 1)
                     {
                         Instance.TutorialOk = Tuto.TutorialBattle(player);
                     }
+                    else if(select == 0)
+                    {
+                        Instance.MoveNextAction(ActionType.Dungeon);
+                    }
                     else
                     {
-                        Console.WriteLine("잘못된 선택입니다.");
+                        UtilityManager.PrintErrorMessage();
                     }
                     
                 }
@@ -72,7 +79,7 @@
                         stages.Add(stage);
 
                     }
-                    else if (player.Level.PlayerLevel >= 8)//플레이어가 아이템을 가지고있는지 검사 DataManager.Instance.HaveItemDatas.Contains();
+                    else if (player.Level.PlayerLevel >= 8 && DataManager.Instance.ConsumableItems.Any(d => d.Id == (int)Instance.Player.Job + 17))//플레이어가 아이템을 가지고있는지 검사 DataManager.Instance.HaveItemDatas.Contains();
                     {
 
                         Stage Boss = new Stage(0, 0);
