@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace Nightmare
+namespace Nightmare.Scripts.Manager
 {
     internal class UtilityManager
     {
@@ -30,12 +30,12 @@ namespace Nightmare
         /// <param name="failure">범위밖 숫자였을때 불리는 함수</param>
         /// <param name="nextActionText">다음 행동 텍스트</param>
         /// <param name="waitTime">failure처리를 부르기까지 기다리는 시간</param>
-        static public void InputNumberInRange(int min, int max, Action<int> success, Action failure,string nextActionText,int waitTime = 800)
+        static public void InputNumberInRange(int min, int max, Action<int> success, Action failure, string nextActionText, int waitTime = 800)
         {
             while (true)
             {
                 Console.Write($"\n{nextActionText}\n>>");
-                if (int.TryParse(Console.ReadLine(), out int number) && (min <= number) && (number <= max))
+                if (int.TryParse(Console.ReadLine(), out int number) && min <= number && number <= max)
                 {
                     success?.Invoke(number);
                 }

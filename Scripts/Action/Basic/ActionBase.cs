@@ -1,4 +1,6 @@
-﻿namespace Nightmare
+﻿using Nightmare.Scripts.Manager;
+
+namespace Nightmare
 {
     public partial class GameManager
     {

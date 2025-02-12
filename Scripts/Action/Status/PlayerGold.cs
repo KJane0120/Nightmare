@@ -1,4 +1,4 @@
-﻿namespace Nightmare
+﻿namespace Nightmare.Scripts.Action.Status
 {
     public class Gold
     {

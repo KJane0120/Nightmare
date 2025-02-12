@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Nightmare
+namespace Nightmare.Data.Quest
 {
     public enum QuestType
     {
@@ -19,7 +19,7 @@ namespace Nightmare
         public string? Desc { get; set; } // 퀘스트 내용
         public Condition Condition { get; set; } // 퀘스트 클리어 조건
         public Reward[] Rewards { get; set; } //퀘스트 보상
-        
+
         //퀘스트 진행중인지
         public bool IsProgress
         {
@@ -137,7 +137,7 @@ namespace Nightmare
                     return DataManager.Instance.EquippedItems.Count > 0;
                 case QuestType.UseItem:
                     //첫 포션 아이템 사용 
-                    return GameManager.Instance.IsFirstUsePotion; 
+                    return GameManager.Instance.IsFirstUsePotion;
                 default:
                     return false;
             }

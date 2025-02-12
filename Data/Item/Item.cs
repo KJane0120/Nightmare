@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Nightmare
+namespace Nightmare.Data.Item
 {
     public enum ItemType
     {

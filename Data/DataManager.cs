@@ -1,4 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Nightmare.Data.Item;
+using Nightmare.Data.Quest;
+using Nightmare.Scripts.Action.Dungeon;
+using Nightmare.Scripts.Action.Status;
 
 namespace Nightmare
 {

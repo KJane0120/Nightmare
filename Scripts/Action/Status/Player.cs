@@ -1,7 +1,8 @@
 ﻿using System.Numerics;
+using Nightmare.Scripts.Manager;
 using static Nightmare.GameManager;
 
-namespace Nightmare
+namespace Nightmare.Scripts.Action.Status
 {
     public class Player
     {

@@ -1,20 +1,20 @@
 ﻿using System.Text;
 
 
-namespace Nightmare
+namespace Nightmare.Scripts.Action.Dungeon
 {
     internal class Boss : Monster
     {
-        public int MissRate {  get; set; }
+        public int MissRate { get; set; }
 
         public int SkillCount { get; set; }
 
-        public Boss(int MissRate, int skillCount, int Health, int Attack, int Defense, String name, int MonsterMoney, int MonsterExp, int level) : 
-            base(level,Health,Attack,Defense,name,MonsterMoney, MonsterExp)
+        public Boss(int MissRate, int skillCount, int Health, int Attack, int Defense, string name, int MonsterMoney, int MonsterExp, int level) :
+            base(level, Health, Attack, Defense, name, MonsterMoney, MonsterExp)
         {
             this.MissRate = MissRate;
 
-            this.SkillCount = skillCount;
+            SkillCount = skillCount;
         }
         public Boss() { }
 
@@ -34,7 +34,7 @@ namespace Nightmare
 
         }
 
-   
+
         public void BossIntroduce(int num)
         {
             switch (num)

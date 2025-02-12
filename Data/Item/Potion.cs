@@ -1,5 +1,4 @@
-﻿
-namespace Nightmare
+﻿namespace Nightmare.Data.Item
 {
     public class Potion : Item
     {
@@ -11,7 +10,7 @@ namespace Nightmare
         //포션을 사용했을 때 이벤트
         public Action OnUsePotionEvent = delegate { };
 
-       
+
         public override void UseItem(Item i)
         {
             if (i.Type == ItemType.HPPotion || i.Type == ItemType.MPPotion || i.Type == ItemType.Special)
@@ -20,7 +19,7 @@ namespace Nightmare
             }
             else if (i.Type == ItemType.Accessory)
             {
-                
+
             }
         }
 
@@ -40,7 +39,7 @@ namespace Nightmare
                 PotionCount -= 1;
                 if (Data.Type == ItemType.HPPotion)//체력 회복 포션이라면 
                 {
-                    if ((stat.Hp + 20) > stat.MaxHp)
+                    if (stat.Hp + 20 > stat.MaxHp)
                     {
                         stat.Hp = stat.MaxHp;
                     }
@@ -53,7 +52,7 @@ namespace Nightmare
                 }
                 else if (Data.Type == ItemType.MPPotion) //마나 회복 포션이라면
                 {
-                    if ((stat.Mp + 10) > stat.MaxMp)
+                    if (stat.Mp + 10 > stat.MaxMp)
                     {
                         stat.Mp = stat.MaxMp;
                     }
@@ -67,17 +66,17 @@ namespace Nightmare
                 }
                 else if (Data.Type == ItemType.Special) //체력+마나회복 포션이라면
                 {
-                    if ((stat.Hp + 100) > stat.MaxHp && (stat.Mp + 50) > stat.MaxMp)
+                    if (stat.Hp + 100 > stat.MaxHp && stat.Mp + 50 > stat.MaxMp)
                     {
                         stat.Hp = stat.MaxHp;
                         stat.Mp = stat.MaxMp;
                     }
-                    else if ((stat.Hp + 100) > stat.MaxHp && (stat.Mp + 50) <= stat.MaxMp)
+                    else if (stat.Hp + 100 > stat.MaxHp && stat.Mp + 50 <= stat.MaxMp)
                     {
                         stat.Hp = stat.MaxHp;
                         stat.Mp += 50;
                     }
-                    else if ((stat.Hp + 100) <= stat.MaxHp && (stat.Mp + 50) > stat.MaxMp)
+                    else if (stat.Hp + 100 <= stat.MaxHp && stat.Mp + 50 > stat.MaxMp)
                     {
                         stat.Hp += 100;
                         stat.Mp = stat.MaxMp;

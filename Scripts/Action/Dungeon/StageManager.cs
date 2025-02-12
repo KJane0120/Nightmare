@@ -1,4 +1,5 @@
-﻿using static Nightmare.GameManager;
+﻿using Nightmare.Scripts.Action.Status;
+using static Nightmare.GameManager;
 
 namespace Nightmare
 {
