@@ -175,18 +175,15 @@
             {
                 var bgmName = "";
 
-                switch(RandomRange)
+                switch(MoneyRange)
                 {
                     case 1:
-                    case 2:
                         bgmName = "Battle1";
                         break;
-                    case 3:
-                    case 4:
+                    case 2:
                         bgmName = "Battle2";
                         break;
-                    case 5:
-                    case 6:
+                    case 3:
                         bgmName = "Battle3";
                         break;
                 }
