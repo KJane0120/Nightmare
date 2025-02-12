@@ -53,7 +53,7 @@ namespace Nightmare
 
             foreach (var reward in Rewards)
             {
-                reward.DisplayRewardInfo();
+                Console.WriteLine($"- {reward.GetRewardInfo()}");
             }
         }
 

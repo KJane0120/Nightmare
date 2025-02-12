@@ -25,24 +25,21 @@ namespace Nightmare
                     GameManager.Instance.Player.Gold.GoldIncrease((int)RewardAmount);
                     break;
                 case RewardType.Item:
-                    Item RewardItem = DataManager.Instance.ItemDatas[RewardId];
                     DataManager.Instance.HaveItems.Add(ItemData);
                     break;
             }
         }
 
-        public void DisplayRewardInfo()
+        public string GetRewardInfo()
         {
             switch (RewardType)
             {
                 case RewardType.Gold:
-                    Console.WriteLine($"{RewardAmount}G");
-                    break;
+                    return $"{RewardAmount}G";
                 case RewardType.Item:
-                    Item item = DataManager.Instance.ItemDatas[RewardId];
-                    Console.WriteLine($"{DataManager.Instance.ItemDatas[RewardId].Name} x 1");
-                    break;
+                    return $"{ItemData.Name} x {RewardAmount}";
             }
+            return "";
         }
     }
 }
