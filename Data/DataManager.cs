@@ -1,6 +1,4 @@
-﻿using Nightmare.Data;
-using static Nightmare.Data.Item;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nightmare
 {
@@ -122,6 +120,9 @@ namespace Nightmare
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션+스페셜 아이템)
         public List<Item> ConsumableItems = new();
 
+        //보스 처치시 필요한 필수 아이템 데이터
+        public Dictionary<long, Boss> KillBossItemDatas = new();
+
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
         {
@@ -147,6 +148,7 @@ namespace Nightmare
 
         public List<Portion> PortionDatas = new()
         {
+            
             new Portion()
             {
                 PortionId = 18,
@@ -166,6 +168,8 @@ namespace Nightmare
                 PortionMaxCount = 4
             }
         };
+
+
     }
 }
 
