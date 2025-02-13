@@ -36,7 +36,7 @@
                     Console.WriteLine();
                     Show();
                     Console.WriteLine("번호를 입력해주세요");
-                    int number = int.Parse(Console.ReadLine());
+                    number = int.Parse(Console.ReadLine());
 
                     if (number == 0)
                     {

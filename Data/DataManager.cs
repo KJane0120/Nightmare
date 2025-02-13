@@ -245,32 +245,6 @@ namespace Nightmare
                 i++;
             }
         }
-
-        public List<Item> EquippedItems = new();
-
-        public List<Potion> PortionDatas = new()
-        {
-
-            new Potion()
-            {
-                PotionId = 18,
-                PotionCount = 0,
-                PotionMaxCount = 3
-            },
-            new Potion()
-            {
-                PotionId = 24,
-                PotionCount = 0,
-                PotionMaxCount = 3,
-            },
-            new Potion()
-            {
-                PotionId = 25,
-                PotionCount = 0,
-                PotionMaxCount = 4,
-            }
-        };
-
         public void ResetData()
         {
             // 가지고 있는 아이템 중에 하트조각과 스페셜 아이템 이외에 아이템은 삭제
