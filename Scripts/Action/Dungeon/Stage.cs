@@ -505,7 +505,7 @@ namespace Nightmare
                             Console.WriteLine($"앨리스의 음료 획득! ");
                         }
                     }
-                    if (IsFinal && random.Next(0, 11) > -1)
+                    if (IsFinal && random.Next(0, 11) > 5)
                     {
                         
                         Item item = new Item();
