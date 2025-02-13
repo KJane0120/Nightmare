@@ -14,7 +14,14 @@ namespace Nightmare
         public int CurrentExp { get; set; }
         public long QuestGroupId { get; set; }
 
-
+        public Player()
+        {
+            Level = new Level();
+            Stat = new Stat();
+            Gold = new Gold();
+            Avd = new Avd();
+            Crt = new Crt();
+        }
 
         public void StatusDisplay()
         {

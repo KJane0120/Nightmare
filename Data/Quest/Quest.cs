@@ -49,11 +49,19 @@ namespace Nightmare
 
             Console.Write($"{Condition.GetConditionText()}\n");
 
-            Console.WriteLine($"\n-보상-");
-
-            foreach (var reward in Rewards)
+            if (Rewards.Count() > 0)
             {
-                Console.WriteLine($"- {reward.GetRewardInfo()}");
+                Console.WriteLine($"\n-보상-");
+
+                foreach (var reward in Rewards)
+                {
+                    Console.WriteLine($"- {reward.GetRewardInfo()}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\n-보상-");
+                Console.WriteLine($"악몽에서의 탈출");
             }
         }
 
@@ -111,6 +119,9 @@ namespace Nightmare
                 case QuestType.KillBoss:
                     sb.Append($"{DataManager.Instance.BossDatas[ConditionValue].Name} 처치");
                     break;
+                case QuestType.AllClear:
+                    sb.Append($"하트 완성 ({GameManager.Instance.GameClearCount}/5)");
+                    break;
             }
 
             if (IsConditionClear)
@@ -137,6 +148,9 @@ namespace Nightmare
                 case QuestType.UseItem:
                     //첫 포션 아이템 사용 
                     return GameManager.Instance.IsFirstUsePotion;
+                case QuestType.AllClear:
+                    //하트 조각 완성
+                    return GameManager.Instance.GameClearCount == 5;
                 default:
                     return false;
             }

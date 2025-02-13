@@ -36,7 +36,9 @@ namespace Nightmare
             [Description("게임 클리어")]
             GameClear,
             [Description("게임 오버")]
-            GameOver
+            GameOver,
+            [Description("올 클리어")]
+            AllClear,
         }
 
         public ActionBase CurrentAction
@@ -75,7 +77,8 @@ namespace Nightmare
                     { ActionType.QuestList,  new Action_QuestList(0) },
                     { ActionType.RecoveryItem, new Action_RecoveryItem(0) },
                     { ActionType.GameClear, new Action_GameClear(0) },
-                    { ActionType.GameOver, new Action_GameClear(0) }
+                    { ActionType.GameOver, new Action_GameClear(0) },
+                    { ActionType.AllClear, new Action_AllClear(0) }
 
                 };
         }

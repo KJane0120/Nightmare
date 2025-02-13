@@ -12,7 +12,6 @@ namespace Nightmare
                 if (_Instance == null)
                 {
                     _Instance = new DataManager();
-
                 }
                 return _Instance;
             }
@@ -26,8 +25,13 @@ namespace Nightmare
 
         public static void Initialize()
         {
-            if (isInitialized) return;
+            if (isInitialized)
+            {
+                return;
+            }
+            isInitialized = true;
             JsonDataLoad();
+            Instance.SetPlayerDatas();
         }
 
         private static void JsonDataLoad()
@@ -85,10 +89,14 @@ namespace Nightmare
 
         public void SaveGameData()
         {
+            if (saveGameData == null)
+            {
+                saveGameData = new SaveGameData();
+            }
+
             saveGameData.HaveItems = Instance.HaveItems;
             saveGameData.GameClearCount = GameManager.Instance.GameClearCount;
             saveGameData.GoldAmount = GameManager.Instance.Player.Gold.PlayerGold;
-            saveGameData.CanSelectPlayers = Instance.CanSelectPlayerDatas;
 
             string GameData = JsonConvert.SerializeObject(saveGameData);
             File.WriteAllText(GetFilePath("SaveData", "SaveData"), GameData);
@@ -109,7 +117,6 @@ namespace Nightmare
                 GameManager.Instance.GameClearCount = saveGameData.GameClearCount;
                 GameManager.Instance.Player.Gold.PlayerGold = (int)saveGameData.GoldAmount;
                 Instance.HaveItems = saveGameData.HaveItems;
-                Instance.CanSelectPlayerDatas = saveGameData.CanSelectPlayers;
             }
         }
 
@@ -130,7 +137,7 @@ namespace Nightmare
                 return questGroupId == 0 || questGroupId == playerQuestGroupId;
             }
 
-            return QuestDatas.Where(x => isDisplay(x.QuestGroupId)).ToList();
+            return QuestDatas.Where(x => isDisplay(x.QuestGroupId) || GameManager.Instance.GameClearCount > 0 && x.QuestGroupId ==6).ToList();
         }
 
         //아이템 데이터 리스트
@@ -154,60 +161,31 @@ namespace Nightmare
 
         public void SetPlayerDatas()
         {
-            PlayerDatas[1].Level = GameManager.Instance.Player.Level;
-            PlayerDatas[1].Name = GameManager.Instance.Player.Name;
             PlayerDatas[1].Job = Job.Dwarf;
             PlayerDatas[1].Stat = new Stat(10, 5, 100, 100, 30, 30);
-            PlayerDatas[1].Gold = GameManager.Instance.Player.Gold;
-            PlayerDatas[1].Avd = GameManager.Instance.Player.Avd;
-            PlayerDatas[1].Crt = GameManager.Instance.Player.Crt;
-            PlayerDatas[1].CurrentExp = 0;
-            PlayerDatas[1].QuestGroupId = 12345;
+            PlayerDatas[1].QuestGroupId = 1;
 
-            PlayerDatas[2].Level = GameManager.Instance.Player.Level;
-            PlayerDatas[2].Name = GameManager.Instance.Player.Name;
             PlayerDatas[2].Job = Job.NewSister;
             PlayerDatas[2].Stat = new Stat(15, 5, 70, 70, 30, 30);
-            PlayerDatas[2].Gold = GameManager.Instance.Player.Gold;
-            PlayerDatas[2].Avd = GameManager.Instance.Player.Avd;
-            PlayerDatas[2].Crt = GameManager.Instance.Player.Crt;
-            PlayerDatas[2].CurrentExp = 0;
-            PlayerDatas[2].QuestGroupId = 12345;
+            PlayerDatas[2].QuestGroupId = 2;
 
-            PlayerDatas[3].Level = GameManager.Instance.Player.Level;
-            PlayerDatas[3].Name = GameManager.Instance.Player.Name;
             PlayerDatas[3].Job = Job.Saison;
             PlayerDatas[3].Stat = new Stat(12, 7, 100, 100, 20, 20);
-            PlayerDatas[3].Gold = GameManager.Instance.Player.Gold;
-            PlayerDatas[3].Avd = GameManager.Instance.Player.Avd;
-            PlayerDatas[3].Crt = GameManager.Instance.Player.Crt;
-            PlayerDatas[3].CurrentExp = 0;
-            PlayerDatas[3].QuestGroupId = 12345;
+            PlayerDatas[3].QuestGroupId = 3;
 
-            PlayerDatas[4].Level = GameManager.Instance.Player.Level;
-            PlayerDatas[4].Name = GameManager.Instance.Player.Name;
             PlayerDatas[4].Job = Job.OctopusWitch;
             PlayerDatas[4].Stat = new Stat(7, 4, 50, 50, 50, 50);
-            PlayerDatas[4].Gold = GameManager.Instance.Player.Gold;
-            PlayerDatas[4].Avd = GameManager.Instance.Player.Avd;
-            PlayerDatas[4].Crt = GameManager.Instance.Player.Crt;
-            PlayerDatas[4].CurrentExp = 0;
-            PlayerDatas[4].QuestGroupId = 12345;
+            PlayerDatas[4].QuestGroupId = 4;
 
-            PlayerDatas[5].Level = GameManager.Instance.Player.Level;
-            PlayerDatas[5].Name = GameManager.Instance.Player.Name;
             PlayerDatas[5].Job = Job.WildAnimal;
             PlayerDatas[5].Stat = new Stat(20, 10, 150, 150, 10, 10);
-            PlayerDatas[5].Gold = GameManager.Instance.Player.Gold;
-            PlayerDatas[5].Avd = GameManager.Instance.Player.Avd;
-            PlayerDatas[5].Crt = GameManager.Instance.Player.Crt;
-            PlayerDatas[5].CurrentExp = 0;
-            PlayerDatas[5].QuestGroupId = 12345;
+            PlayerDatas[5].QuestGroupId = 5;
+
         }
 
 
         //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션 3종+스페셜 드랍아이템 5종)
-        
+
 
         public List<Potion> HealthConsumableItems = new();
         public List<Potion> ManaConsumableItems = new();
@@ -251,9 +229,6 @@ namespace Nightmare
         }
 
 
-
-
-
         public List<Item> EquippedItems = new();
 
         public List<Potion> PortionDatas = new()
@@ -286,6 +261,9 @@ namespace Nightmare
 
             // 장착된 아이템 삭제
             EquippedItems.Clear();
+
+            //플레이한 직업 삭제
+            PlayerDatas.Remove((int)GameManager.Instance.Player.Job);
         }
     }
 }

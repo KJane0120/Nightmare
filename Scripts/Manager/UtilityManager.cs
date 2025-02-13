@@ -39,9 +39,13 @@ namespace Nightmare
                 {
                     success?.Invoke(number);
                 }
-                PrintErrorMessage();
+                else
+                {
+                    PrintErrorMessage();
+                    failure?.Invoke();
+                }
+
                 Thread.Sleep(waitTime);
-                failure?.Invoke();
             }
         }
 
