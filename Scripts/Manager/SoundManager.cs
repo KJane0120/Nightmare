@@ -12,7 +12,7 @@ namespace Nightmare
 
         public static void PlayBGM(string fileName)
         {
-            string filePath = GetFilePath(fileName,"BGM");
+            string filePath = GetFilePath(fileName, "BGM");
 
             if (!File.Exists(filePath))
             {
@@ -48,8 +48,11 @@ namespace Nightmare
 
             outputDevice.PlaybackStopped += (sender, args) =>
             {
-                audioFile.Position = 0;
-                outputDevice.Play();
+                if (audioFile != null && outputDevice != null)
+                {
+                    audioFile.Position = 0;
+                    outputDevice.Play();
+                }
             };
         }
 

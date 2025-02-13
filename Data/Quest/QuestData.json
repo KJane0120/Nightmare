@@ -14,7 +14,7 @@
       {
         "RewardId": 0,
         "RewardType": 0,
-        "RewardAmount": 100
+        "RewardAmount": 50 //100에서 수정했습니다
       },
       {
         "RewardId": 11,
@@ -44,7 +44,7 @@
       {
         "RewardId": 0,
         "RewardType": 0,
-        "RewardAmount": 500
+        "RewardAmount": 100 //500에서 수정했습니다
       }
     ],
     "IsProgress": false,
@@ -63,8 +63,8 @@
     "Rewards": [
       {
         "RewardId": 18,
-        "RewardType": 0,
-        "RewardAmount": 500
+        "RewardType": 1, //0에서 수정했습니다
+        "RewardAmount": 1
       }
     ],
     "IsProgress": false,

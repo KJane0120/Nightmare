@@ -14,7 +14,14 @@ namespace Nightmare
         public int CurrentExp { get; set; }
         public long QuestGroupId { get; set; }
 
-
+        public Player()
+        {
+            Level = new Level();
+            Stat = new Stat();
+            Gold = new Gold();
+            Avd = new Avd();
+            Crt = new Crt();
+        }
 
         public void StatusDisplay()
         {
@@ -31,62 +38,14 @@ namespace Nightmare
             Console.WriteLine($"Gold : {Gold.PlayerGold} G");
         }
 
-        //레벨업
-        //public void LevelUp()
-        //{
-        //    int[] Exp = { 10, 12, 15, 30, 36, 40, 48, 54, 60 };
-
-
-        //    if (Level.PlayerLevel < 10)
-        //    {
-        //        CurrentExp -= Exp[Level.PlayerLevel - 1];
-        //        while (Exp[Level.PlayerLevel - 1] < CurrentExp)
-        //        {
-        //            if (Level.PlayerLevel == 4)
-        //            {
-        //                Level.PlayerLevel++;
-        //                Stat.BaseAtk += 5;
-        //                Stat.BaseDef += 3;
-        //                Stat.Hp += 20;
-        //                Stat.MaxHp += 20;
-        //            }
-        //            else if (Level.PlayerLevel == 8)
-        //            {
-        //                Level.PlayerLevel++;
-        //                Stat.BaseAtk += 5;
-        //                Stat.BaseDef += 3;
-        //                Stat.Hp += 20;
-        //                Stat.MaxHp += 20;
-        //            }
-        //            else if (Level.PlayerLevel == 9)
-        //            {
-        //                Level.PlayerLevel++;
-        //                Stat.BaseAtk += 7;
-        //                Stat.BaseDef += 3;
-        //                Stat.Hp += 20;
-        //                Stat.MaxHp += 20;
-        //            }
-        //            else
-        //            {
-        //                Level.PlayerLevel++;
-        //                Stat.BaseAtk += 3;
-        //                Stat.BaseDef += 1;
-        //                Stat.Hp += 10;
-        //                Stat.MaxHp += 10;
-        //            }
-        //            Console.WriteLine();
-        //            Console.WriteLine($"Lv.{Level.PlayerLevel} -> Lv.{Level.PlayerLevel + 1}");
-        //            Console.WriteLine();
-        //        }
-        //    }
-        //}
+   
         public void LevelUp()
         {
-            int[] Exp = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+            int[] Exp = { 10, 12, 15, 30, 36, 40, 48, 54, 60 };
 
             while (Level.PlayerLevel < 10 && Level.PlayerLevel <= Exp.Length && Exp[Level.PlayerLevel - 1] <= CurrentExp)
             {
-                int previousLevel = Level.PlayerLevel; // 레벨업 전 레벨 저장
+                int previousLevel = Level.PlayerLevel; 
 
                 // 경험치 차감
                 CurrentExp -= Exp[Level.PlayerLevel - 1];
@@ -117,7 +76,7 @@ namespace Nightmare
                     Stat.MaxHp += 10;
                 }
 
-                // 올바른 레벨업 메시지 출력
+                
                 Console.WriteLine();
                 Console.WriteLine($"Lv.{previousLevel} -> Lv.{Level.PlayerLevel}");
                 Console.WriteLine();

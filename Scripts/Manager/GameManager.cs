@@ -31,33 +31,20 @@ namespace Nightmare
 
         public int GameClearCount = 0;
 
+        public Dictionary<long, Player> CanSelectPlayers = new();
+
         public void GameClear()
         {
-            GameClearCount++;
-            MoveNextAction(ActionType.GameClear);
-        }
-
-        public void GameReStart()
-        {
-            GameClearCount++;
             MoveNextAction(ActionType.GameClear);
         }
 
         public void GameStart()
         {
             SoundManager.PlayBGM("Intro");
-
-            Player = new Player();
-            Player.Level = new Level();
-            Player.Stat = new Stat();
-            Player.Gold = new Gold();
-            Player.Avd = new Avd();
-            Player.Crt = new Crt();
-
-            startGame();
+            StartGame();
         }
 
-        private void startGame() // 시작화면
+        private void StartGame() // 시작화면
         {
             Console.Clear();
             Console.WriteLine();
@@ -112,8 +99,9 @@ namespace Nightmare
             TutorialOk = false;
             IsFirstUsePotion = false;
             DataManager.Instance.DataReset();
+            DataManager.Instance.SaveGameData();
+            CanSelectPlayers.Clear();
         }
-
 
         // 이름 설정
         private void SetName()
@@ -169,7 +157,9 @@ namespace Nightmare
 
         private void SetJob() // 직업설정
         {
-            Console.Clear();
+            GameLoad();
+
+            DataManager.Instance.CanSelectPlayerDatas.Clear();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("어떤 동화를 읽어보시겠습니까?");
@@ -186,18 +176,15 @@ namespace Nightmare
 
         private void JobInputNumberInRange(int number)
         {
-            if (number >= 1 && number <= 5)
-            {
-                Player.Job = JobChoice(number);
-                Skill skill = new Skill();
-                skill.SkillSet(Player);
-                SoundManager.PlayBGM("Main");
-                Console.SetWindowSize(70, 35);
-                MoveNextAction(ActionType.Village);
-            }
+            Player = CanSelectPlayers[number];
+            Skill skill = new Skill();
+            skill.SkillSet(Player);
+            SoundManager.PlayBGM("Main");
+            Console.SetWindowSize(70, 35);
+            MoveNextAction(ActionType.Village);
         }
 
-        public Player Player { get; set; }
+        public Player Player { get; set; } = new();
 
         private void SaveName(int num, string name)
         {
@@ -343,7 +330,7 @@ namespace Nightmare
                         {
                             player.Crt.PlayerCrt += howmany;
                         }
-                 
+
                         Buffedplayer.RemoveAt(i);
                     }
                     else

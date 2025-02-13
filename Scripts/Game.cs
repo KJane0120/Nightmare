@@ -24,7 +24,12 @@ namespace Nightmare
             Console.WriteLine();
             Console.WriteLine();
 
-            if (int.TryParse(Console.ReadLine(), out int input))
+            UtilityManager.InputNumberInRange(1, 2, ReStart, null, "");
+        }
+
+        static protected void ReStart(int num)
+        {
+            if (num == 1)
             {
                 if (input == 1)
                 {
@@ -42,5 +47,7 @@ namespace Nightmare
                 }
             }
         }
+
     }
 }
+

@@ -7,7 +7,5 @@
         public long GoldAmount { get; set; }
 
         public int GameClearCount { get; set; }
-
-        public Dictionary<long, Player> CanSelectPlayers { get; set; }
     }
 }
