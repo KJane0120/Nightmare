@@ -74,7 +74,7 @@ namespace Nightmare
         [Description("모두가 잠든 성의 하인")]
         Saison = 3,
 
-        [Description("깊은 바다 속 문어 마녀")]
+        [Description("깊은 바닷속 문어 마녀")]
         OctopusWitch = 4,
 
         [Description("힘을 잃은 야수")]

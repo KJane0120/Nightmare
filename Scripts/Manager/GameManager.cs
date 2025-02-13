@@ -136,7 +136,7 @@ namespace Nightmare
             Thread.Sleep(700);
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("1. 저장   2. 취소");
+            Console.WriteLine("1. 저장  2. 취소");
             Console.WriteLine();
             UtilityManager.InputNumberInRange(1, 2, SuccessInputNumberInRange, SetName, "어느 페이지로 넘어가시겠습니까?");
         }
@@ -160,7 +160,7 @@ namespace Nightmare
             GameLoad();
             DataManager.Instance.CanSelectPlayerDatas.Clear();
 
-            string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" + "\n";
+            string jobChoiceMessage = "\n\n어떤 동화를 들어보시겠습니까?" + "\n";
 
             int j = 0;
             foreach (var player in DataManager.Instance.PlayerDatas.Values)
@@ -192,7 +192,7 @@ namespace Nightmare
             Skill skill = new Skill();
             skill.SkillSet(Player);
             SoundManager.PlayBGM("Main");
-            Console.SetWindowSize(70, 35);
+            Console.SetWindowSize(100, 50);
             MoveNextAction(ActionType.Village);
         }
 

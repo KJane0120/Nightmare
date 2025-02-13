@@ -20,9 +20,12 @@
 
             protected override void DisPlay()
             {
-                var CastleAline = ASCIIManager.Getlines("CastleA");
+                Console.Clear();
+                var CastleAline = ASCIIManager.Getlines("Castle");
 
                 ASCIIManager.DisplayAlignASCIIArt(CastleAline, Align.Center, VerticalAlign.Top);
+                Console.WriteLine();
+                Console.WriteLine();
                 SelectStage(Instance.Player);
             }
             public void SelectStage(Player player) //플레이어 레벨 들어갈거임
@@ -34,8 +37,9 @@
                 if (Instance.TutorialOk)
                 {
                     Stage Tuto = new Stage(0, 0);
-                    Console.WriteLine("튜토리얼 스테이지를 클리어해야 합니다.");
-                    Console.WriteLine("1. 튜토리얼 스테이지 입장\n");
+                    Console.WriteLine("시계 토끼: 정화 작업을 체험해보자.");
+                    Console.WriteLine();
+                    Console.WriteLine("1. 튜토리얼 챕터 입장");
                     Console.WriteLine("0. 돌아가기");
                     int select = int.Parse(Console.ReadLine());
                     if (select == 1)
@@ -112,9 +116,11 @@
                         Console.WriteLine($"{i + 1}. Stage {i + 1} {stages[i].ToString()}");
                     }
 
-                    Console.WriteLine();
-                    Console.WriteLine("스테이지를 골라주십시오");
                     Console.WriteLine("0. 나가기");
+                    Console.WriteLine();
+                    Console.WriteLine("정화할 챕터를 선택해주세요.");
+                    Console.Write(">> ");
+                    
                     int StageNumber = int.Parse(Console.ReadLine());
                     if (StageNumber > 0&&  StageNumber <= stages.Count)
                     {

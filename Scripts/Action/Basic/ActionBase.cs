@@ -56,7 +56,7 @@
                 while (true)
                 {
                     DisplayNextActions();
-                    Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
+                    Console.Write("\n어느 페이지로 넘어가시겠습니까?\n>> ");
 
                     if (int.TryParse(Console.ReadLine(), out int actionNumber))
                     {

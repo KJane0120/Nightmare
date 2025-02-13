@@ -42,7 +42,9 @@
                
                 while (true)
                 {
-                    Console.WriteLine("회복");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    UtilityManager.ColorWriteLine("회복", ConsoleColor.Green);
                     Console.WriteLine("포션을 사용하여 HP나 MP를 회복할 수 있습니다.");
 
                     Console.WriteLine("[포션 목록]");

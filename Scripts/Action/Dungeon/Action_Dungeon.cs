@@ -25,10 +25,13 @@
 
             protected override void DisPlay()
             {
-                var CastleAline = ASCIIManager.Getlines("CastleA");
+                Console.Clear();
+                var CastleAline = ASCIIManager.Getlines("Castle");
 
                 ASCIIManager.DisplayAlignASCIIArt(CastleAline, Align.Center, VerticalAlign.Top);
 
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("악몽의 주인을 만나러 갑시다.");
             }
         }
