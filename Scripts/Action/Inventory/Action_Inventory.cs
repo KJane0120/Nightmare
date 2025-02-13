@@ -24,12 +24,10 @@
             {
                 OnInputInvalidActionNumber = PrintErrorMsg;
                 Console.Clear();
-                var Baglines = ASCIIManager.Getlines("BagA");
-
+                var Baglines = ASCIIManager.Getlines("Bag");
                 ASCIIManager.DisplayAlignASCIIArt(Baglines, Align.Center, VerticalAlign.Top);
                 Console.WriteLine("인벤토리");
-                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");                
-
+                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
                 Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
                 

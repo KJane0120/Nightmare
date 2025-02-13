@@ -47,32 +47,40 @@ namespace Nightmare
         private void StartGame() // 시작화면
         {
             Console.Clear();
-            Console.WriteLine("\"늦었다, 늦었어!\"");
-            Thread.Sleep(500);
-            Console.WriteLine("하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다.");
-            Thread.Sleep(500);
-            Console.WriteLine("말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?");
-            Thread.Sleep(500);
-            Console.WriteLine("당신은 호기심에 말하는 토끼를 쫓아갑니다.");
-            Thread.Sleep(500);
-            Console.WriteLine("이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다.");
-            Thread.Sleep(500);
-            Console.WriteLine("떨어지고,");
-            Thread.Sleep(500);
-            Console.WriteLine("떨어져서,");
-            Thread.Sleep(500);
-            Console.WriteLine("눈을 뜨면 그곳은...");
-            Thread.Sleep(500);
-            Console.WriteLine("악몽입니다.");
-            Thread.Sleep(500);
             Console.WriteLine();
-            Console.WriteLine("Once Upon a Nightmare");
+            Console.WriteLine();
+            Console.WriteLine("\"늦었다, 늦었어!\"");
+            Thread.Sleep(700);
+            Console.WriteLine();
+            Console.WriteLine("하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다.");
+            Thread.Sleep(700);
+            Console.WriteLine("말을 하는 토끼라니요? 어떻게 이런 일이 있을 수 있죠?");
+            Thread.Sleep(700);
+            Console.WriteLine("당신은 호기심에 말하는 토끼를 쫓아갑니다.");
+            Thread.Sleep(1000);
+            Console.WriteLine();
+            Console.WriteLine("이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다.");
+            Thread.Sleep(1200);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("떨어지고,");
+            Thread.Sleep(1000);
+            Console.WriteLine("떨어져서,");
+            Thread.Sleep(1000);
+            Console.WriteLine("눈을 뜨면 그곳은...");
+            Thread.Sleep(1500);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("악몽입니다.");
             Thread.Sleep(2000);
-            Console.Clear();
-            var Posterlines = ASCIIManager.Getlines("Poster");
 
-            ASCIIManager.DisplayAlignASCIIArt(Posterlines, Align.Center, VerticalAlign.Top);
-            Thread.Sleep(4000);
+            Console.Clear();
+            Console.SetWindowSize(70, 35);
+            var Posterlines = ASCIIManager.Getlines("Poster");
+            ASCIIManager.DisplayAlignASCIIArt(Posterlines, Align.Center, VerticalAlign.Middle);
+            Thread.Sleep(3000);
+
+            GameLoad();
             SetName();
         }
         public void GameSave(object sender, EventArgs e)
@@ -99,35 +107,38 @@ namespace Nightmare
         private void SetName()
         {
             Console.Clear();
-            string nameMessage = "깜빡, 깜빡." +
-                "\n시계 토끼가 당신을 내려다 보고 있습니다" +
-                "\n" +
-                "\n시계 토끼: 안녕? 악몽에서 나가고 싶니?" +
-                "\n시계 토끼: 우선 네 이름을 알려 줘." +
-                "\n" +
-                "\n일그러진 동화 속을 유영할 당신의 이름은?\n";
-            foreach (char c in nameMessage)
-            {
-                Console.Write(c);
-                //Thread.Sleep(30);
-            }
+            Console.SetWindowSize(60, 20);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("깜빡, 깜빡.");
+            Thread.Sleep(1000);
+            Console.WriteLine();
+            Console.WriteLine("시계 토끼가 당신을 내려다 보고 있습니다.");
+            Thread.Sleep(1000);
+            Console.WriteLine();
+            Console.WriteLine("시계 토끼: 안녕? 악몽에서 나가고 싶니?");
+            Thread.Sleep(700);
+            Console.WriteLine("시계 토끼: 우선 네 이름을 알려 줘.");
+            Thread.Sleep(1000);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("일그러진 동화 속을 유영할 당신의 이름은?");
+            Console.Write(">>");
 
             name = Console.ReadLine();
+
             Console.Clear();
-            string saveMessage = $"안녕하세요, {name}." +
-                "\n설정하신 이름으로 주인공이 되시겠습니까?" +
-                "\n" +
-                "\n1. 저장\n2. 취소";
-
-            foreach (char c in saveMessage)
-            {
-                Console.Write(c);
-                //Thread.Sleep(30);
-            }
-
             Console.WriteLine();
             Console.WriteLine();
-
+            Console.WriteLine($"안녕하세요, {name}.");
+            Thread.Sleep(700);
+            Console.WriteLine("설정하신 이름으로 주인공이 되시겠습니까?");
+            Thread.Sleep(700);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("1. 저장   2. 취소");
+            Console.WriteLine();
+            Console.WriteLine();
             UtilityManager.InputNumberInRange(1, 2, SuccessInputNumberInRange, SetName, "어느 페이지로 넘어가시겠습니까?");
         }
 
@@ -146,44 +157,21 @@ namespace Nightmare
 
         private void SetJob() // 직업설정
         {
-            Console.Clear();
-
             GameLoad();
 
             DataManager.Instance.CanSelectPlayerDatas.Clear();
-
-            //string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" +
-            //    "\n" +
-            //    "\n1. 백설공주와 일곱째 난쟁이" +
-            //    "\n2. 신데렐라의 새 언니" +
-            //    "\n3. 모두가 잠든 성의 하인" +
-            //    "\n4. 깊은 바다 속 문어 마녀" +
-            //    "\n5. 힘을 잃은 야수" +
-            //    "\n";
-
-            string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" + "\n";
-
-            int j = 0;
-            foreach (var player in DataManager.Instance.PlayerDatas.Values)
-            {
-                CanSelectPlayers.Add(j + 1, player);
-                j++;
-            }
-
-            for (int i = 0; i < CanSelectPlayers.Count; i++)
-            {
-                jobChoiceMessage += $"\n{i + 1}.{UtilityManager.GetDescription(CanSelectPlayers[i + 1].Job)}";
-            }
-
-            jobChoiceMessage += "\n";
-
-            foreach (char c in jobChoiceMessage)
-            {
-                Console.Write(c);
-                //Thread.Sleep(30);
-            }
-
-            UtilityManager.InputNumberInRange(1, CanSelectPlayers.Count, JobInputNumberInRange, SetJob, "듣고싶은 동화를 선택해주세요.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("어떤 동화를 읽어보시겠습니까?");
+            Thread.Sleep(700);
+            Console.WriteLine("1. 백설공주와 일곱째 난쟁이");
+            Console.WriteLine("2. 신데렐라의 새 언니");
+            Console.WriteLine("3. 모두가 잠든 성의 하인");
+            Console.WriteLine("4. 깊은 바닷속 문어 마녀");
+            Console.WriteLine("5. 힘을 잃은 야수");
+            Console.WriteLine();
+            Console.WriteLine();
+            UtilityManager.InputNumberInRange(1, 5, JobInputNumberInRange, SetJob, "읽고 싶은 동화를 선택해주세요.");
         }
 
         private void JobInputNumberInRange(int number)
@@ -192,11 +180,8 @@ namespace Nightmare
             Skill skill = new Skill();
             skill.SkillSet(Player);
             SoundManager.PlayBGM("Main");
+            Console.SetWindowSize(70, 35);
             MoveNextAction(ActionType.Village);
-            //if (number >= 1 && number <= 5)
-            //{
-
-            //}
         }
 
         public Player Player { get; set; } = new();

@@ -25,7 +25,9 @@
 
             protected override void DisPlay()
             {
-                string titleText = Instance.GameClearCount > 0 ? "악몽의 주인이 그림자를 드리우는 중..." : "동화의 흐름이 엉키는중....";
+                string titleText = Instance.GameClearCount > 0 ? "악몽의 주인이 그림자를 드리우는 중..." : "동화의 흐름이 뒤엉키는중....";
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine(titleText);
             }
         }
