@@ -33,7 +33,7 @@
                 endTexts.Add("1.다시하기");
                 endTexts.Add("2.게임 종료");
 
-                ASCIIManager.AlignText(endTexts.ToArray(), Align.Center, VerticalAlign.Bottom, 18);
+                ASCIIManager.AlignText(endTexts.ToArray(), Align.Center, VerticalAlign.Bottom, 10);
 
                 UtilityManager.InputNumberInRange(1, 2, ReStart, null, "");
             }

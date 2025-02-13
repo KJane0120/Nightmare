@@ -35,7 +35,14 @@ namespace Nightmare
 
         public void GameClear()
         {
-            MoveNextAction(ActionType.GameClear);
+            if (GameClearCount == 5)
+            {
+                MoveNextAction(ActionType.AllClear);
+            }
+            else
+            {
+                MoveNextAction(ActionType.GameClear);
+            }
         }
 
         public void GameStart()
@@ -150,7 +157,6 @@ namespace Nightmare
             else
             {
                 SetName();
-
             }
         }
 
@@ -225,7 +231,6 @@ namespace Nightmare
 
                     if (remainingTurns <= 0)
                     {
-
                         Console.WriteLine($"{monster.Name}의 디버프가 해제됨!");
                         if (doco.Equals("공격력"))
                         {
