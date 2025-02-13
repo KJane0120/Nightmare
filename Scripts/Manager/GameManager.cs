@@ -31,52 +31,22 @@ namespace Nightmare
 
         public int GameClearCount = 0;
 
+        public Dictionary<long, Player> CanSelectPlayers = new();
+
         public void GameClear()
         {
-            GameClearCount++;
-            MoveNextAction(ActionType.GameClear);
-        }
-
-        public void GameReStart()
-        {
-            GameClearCount++;
             MoveNextAction(ActionType.GameClear);
         }
 
         public void GameStart()
         {
             SoundManager.PlayBGM("Intro");
-
-            Player = new Player();
-            Player.Level = new Level();
-            Player.Stat = new Stat();
-            Player.Gold = new Gold();
-            Player.Avd = new Avd();
-            Player.Crt = new Crt();
-
-            startGame();
+            StartGame();
         }
 
-        private void startGame() // 시작화면
+        private void StartGame() // 시작화면
         {
             Console.Clear();
-            //string startMessage = "\"늦었다, 늦었어!\"" +
-            //    "\n하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다." +
-            //    "\n말을 하는 토끼라니요 ? 어떻게 이런 일이 있을 수 있죠 ?" +
-            //    "\n당신은 호기심에 말하는 토끼를 쫓아갑니다." +
-            //    "\n이런, 발 밑을 잘못 디뎌 끝도 없는 굴로 떨어집니다." +
-            //    "\n떨어지고," +
-            //    "\n떨어져서," +
-            //    "\n눈을 뜨면 그곳은..." +
-            //    "\n악몽입니다." +
-            //    "\n" +
-            //    "\nOnce Upon a Nightmare";
-
-            //foreach (char c in startMessage)
-            //{
-            //    Console.Write(c);
-            //    //Thread.Sleep(30); 
-            //}
             Console.WriteLine("\"늦었다, 늦었어!\"");
             Thread.Sleep(500);
             Console.WriteLine("하얀 토끼가 시계를 든 채 어딘가로 달려 갑니다.");
@@ -95,18 +65,14 @@ namespace Nightmare
             Thread.Sleep(500);
             Console.WriteLine("악몽입니다.");
             Thread.Sleep(500);
-            Console.WriteLine();            
+            Console.WriteLine();
             Console.WriteLine("Once Upon a Nightmare");
             Thread.Sleep(2000);
-            Console.Clear() ;
+            Console.Clear();
             var Posterlines = ASCIIManager.Getlines("Poster");
 
             ASCIIManager.DisplayAlignASCIIArt(Posterlines, Align.Center, VerticalAlign.Top);
             Thread.Sleep(4000);
-            //Console.WriteLine("다음 이야기를 들으려면 아무 키나 입력하세요.");
-            //Console.ReadKey();
-
-            GameLoad();
             SetName();
         }
         public void GameSave(object sender, EventArgs e)
@@ -125,8 +91,9 @@ namespace Nightmare
             TutorialOk = false;
             IsFirstUsePotion = false;
             DataManager.Instance.DataReset();
+            DataManager.Instance.SaveGameData();
+            CanSelectPlayers.Clear();
         }
-
 
         // 이름 설정
         private void SetName()
@@ -180,36 +147,59 @@ namespace Nightmare
         private void SetJob() // 직업설정
         {
             Console.Clear();
-            string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" +
-                "\n" +
-                "\n1. 백설공주와 일곱째 난쟁이" +
-                "\n2. 신데렐라의 새 언니" +
-                "\n3. 모두가 잠든 성의 하인" +
-                "\n4. 깊은 바다 속 문어 마녀" +
-                "\n5. 힘을 잃은 야수" +
-                "\n";
+
+            GameLoad();
+
+            DataManager.Instance.CanSelectPlayerDatas.Clear();
+
+            //string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" +
+            //    "\n" +
+            //    "\n1. 백설공주와 일곱째 난쟁이" +
+            //    "\n2. 신데렐라의 새 언니" +
+            //    "\n3. 모두가 잠든 성의 하인" +
+            //    "\n4. 깊은 바다 속 문어 마녀" +
+            //    "\n5. 힘을 잃은 야수" +
+            //    "\n";
+
+            string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" + "\n";
+
+            int j = 0;
+            foreach (var player in DataManager.Instance.PlayerDatas.Values)
+            {
+                CanSelectPlayers.Add(j + 1, player);
+                j++;
+            }
+
+            for (int i = 0; i < CanSelectPlayers.Count; i++)
+            {
+                jobChoiceMessage += $"\n{i + 1}.{UtilityManager.GetDescription(CanSelectPlayers[i + 1].Job)}";
+            }
+
+            jobChoiceMessage += "\n";
+
             foreach (char c in jobChoiceMessage)
             {
                 Console.Write(c);
                 //Thread.Sleep(30);
             }
 
-            UtilityManager.InputNumberInRange(1, 5, JobInputNumberInRange, SetJob, "듣고싶은 동화를 선택해주세요.");
+            UtilityManager.InputNumberInRange(1, CanSelectPlayers.Count, JobInputNumberInRange, SetJob, "듣고싶은 동화를 선택해주세요.");
         }
 
         private void JobInputNumberInRange(int number)
         {
-            if (number >= 1 && number <= 5)
-            {
-                Player.Job = JobChoice(number);
-                Skill skill = new Skill();
-                skill.SkillSet(Player);
-                SoundManager.PlayBGM("Main");
-                MoveNextAction(ActionType.Village);
-            }
+            Player = CanSelectPlayers[number];
+            Skill skill = new Skill();
+            skill.SkillSet(Player);
+            SoundManager.PlayBGM("Main");
+            MoveNextAction(ActionType.Village);
+            //if (number >= 1 && number <= 5)
+            //{
+
+            //}
         }
 
-        public Player Player { get; set; }
+        public Player Player { get; set; } = new();
 
         private void SaveName(int num, string name)
         {
@@ -355,7 +345,7 @@ namespace Nightmare
                         {
                             player.Crt.PlayerCrt -= howmany;
                         }
-                 
+
                         Buffedplayer.RemoveAt(i);
                     }
                     else
