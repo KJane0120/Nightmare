@@ -246,36 +246,30 @@ namespace Nightmare
             }
         }
 
-        //기본 포션 3개씩 추가하는 함수
-        public void InitializeConsumableItems()
+        public List<Item> EquippedItems = new();
+
+        public List<Potion> PortionDatas = new()
         {
 
-            for (int i = 0; i < 3; i++)
+            new Potion()
             {
-                Potion potion = new Potion()
-                {
-                    Id = 18,
-                    Type = (ItemType)5,
-                    Name = "앨리스의 쿠키",
-                    Value = 20,
-                    Desc = "Eat Me! 라는 꼬리표가 달려있다.", //임의값
-                };
-                DataManager.Instance.HealthConsumableItems.Add(potion);
-
-            }
-            for (int i = 0; i < 3; i++)
+                PotionId = 18,
+                PotionCount = 0,
+                PotionMaxCount = 3
+            },
+            new Potion()
             {
-                Potion potion = new Potion()
-                {
-                    Id = 24,
-                    Type = (ItemType)6,
-                    Name = "앨리스의 음료",
-                    Value = 10,
-                    Desc = "Drink Me! 라는 꼬리표가 달려있다.", //임의값
-                };
-                DataManager.Instance.ManaConsumableItems.Add(potion);
+                PotionId = 24,
+                PotionCount = 0,
+                PotionMaxCount = 3,
+            },
+            new Potion()
+            {
+                PotionId = 25,
+                PotionCount = 0,
+                PotionMaxCount = 4,
             }
-        }
+        };
 
         public void ResetData()
         {
