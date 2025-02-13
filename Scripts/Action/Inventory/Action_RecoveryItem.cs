@@ -19,28 +19,10 @@
             }
             private void PrintErrorMsg(int number)
             {
-
-                if (number >= 0 && number < 2)
-                {
-                    var selectPortion = DataManager.Instance.PortionDatas[number-1];
-                    selectPortion.OnUsePotionEvent = DisPlay;
-
-                    selectPortion.UsePotion();
-                }
-                else
-                {
-                    UtilityManager.PrintErrorMessage();
-                }
-            }
-
-            protected override void DisPlay()
-            {
-                Console.Clear();
-
-
-              //  OnInputInvalidActionNumber = PrintErrorMsg;
-               
-                while (true)
+                Console.WriteLine("[포션 목록]");
+                Console.WriteLine();
+                Show();
+                if (number >= 0 && number < 4)
                 {
                     Console.WriteLine();
                     Console.WriteLine();
@@ -55,6 +37,7 @@
                     Show();
                     Console.WriteLine("번호를 입력해주세요");
                     int number = int.Parse(Console.ReadLine());
+
                     if (number == 0)
                     {
                         Instance.MoveNextAction(ActionType.Village);
@@ -64,7 +47,7 @@
                         if (DataManager.Instance.HealthConsumableItems.Count() == 0)
                         {
                             Console.WriteLine("포션이 없습니다.");
-                            continue;
+                            return;
                         }
                         else
                         {
@@ -77,7 +60,7 @@
                         if (DataManager.Instance.ManaConsumableItems.Count() == 0)
                         {
                             Console.WriteLine("포션이 없습니다.");
-                            continue;
+                            return;
                         }
                         else
                         {
@@ -90,26 +73,40 @@
                         if (DataManager.Instance.LoveConsumableItems.Count() == 0)
                         {
                             Console.WriteLine("포션이 없습니다.");
-                            continue;
+                            return;
                         }
                         else
                         {
                             DataManager.Instance.LoveConsumableItems[0].UsePotion();
-                            DataManager.Instance.LoveConsumableItems.RemoveAt (0);
+                            DataManager.Instance.LoveConsumableItems.RemoveAt(0);
                         }
                     }
                     else
                     {
                         UtilityManager.PrintErrorMessage();
-                        continue;
                     }
 
                     Thread.Sleep(1000);
                     Console.Clear();
                 }
 
+                else
+                {
+                    UtilityManager.PrintErrorMessage();
+                }
+            }
 
+            protected override void DisPlay()
+            {
+                OnInputInvalidActionNumber = PrintErrorMsg;
+                Console.Clear();
 
+                Console.WriteLine("회복");
+                Console.WriteLine("포션을 사용하여 HP나 MP를 회복할 수 있습니다.");
+
+                Console.WriteLine("[포션 목록]");
+                Console.WriteLine();
+                Show();
             }
 
             public void Show()

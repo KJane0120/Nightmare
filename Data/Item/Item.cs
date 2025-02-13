@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Nightmare
 {
@@ -25,9 +26,7 @@ namespace Nightmare
         public int Id { get; set; }
         public string? Name { get; set; }
         public ItemType Type { get; set; }
-        public int PotionCount { get; set; }
-        public int PotionMaxCount { get; set; }
-
+        
         //Hp, Mp, Atk, Def, Avd, Crt를 하나의 변수로 묶어 아이템타입이 ~면 ~증가. 
         public float Value { get; set; }
         public string? Desc { get; set; }
@@ -37,6 +36,7 @@ namespace Nightmare
 
         public bool IsSold { get; set; } = false;
 
+        [JsonIgnore]
         public Action OnEquipEvent = delegate { };
 
         //무기인지 방어구인지에 따라 공격력이나 방어력을 출력
@@ -71,7 +71,6 @@ namespace Nightmare
             }
             return str;
 
-
         }
         //구매 여부에 따른 출력
         public string GetPriceString()
@@ -99,12 +98,6 @@ namespace Nightmare
             return str;
         }
 
-        public virtual String ToShow()
-        {
-            String s = $"{Name}|{GetTypeString()}|{Desc}|{Type}";
-            return s;
-        }
-
         public void BossKill(List<Monster> monsters, ref int Death)
         {
             monsters[0].MonsterHealth -= 999;
@@ -115,11 +108,6 @@ namespace Nightmare
             DataManager.Instance.LoveConsumableItems.Add(potion);
             GameManager.Instance.GameClear();
 
-        }
-
-        public virtual void UseItem(Item item)
-        {
-            // override를 통해 구현 예정
         }
 
         // 장착할 수 없는 특정 아이템 ID 목록

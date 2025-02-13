@@ -28,14 +28,21 @@ namespace Nightmare
         private Dictionary<int, int> map = new Dictionary<int, int>();
 
         public bool IsFirstUsePotion { get; set; } = false;
-
-        public int GameClearCount = 0;
-
-        public Dictionary<long, Player> CanSelectPlayers = new();
+        public int GameClearCount => DataManager.Instance.CurrentEqisodeNumber;
+        public Dictionary<long, Player> CanSelectPlayers => DataManager.Instance.CanSelectPlayers;
 
         public void GameClear()
         {
-            MoveNextAction(ActionType.GameClear);
+            DataManager.Instance.CurrentEqisodeNumber++;
+
+            if (GameClearCount == 5)
+            {
+                MoveNextAction(ActionType.AllClear);
+            }
+            else
+            {
+                MoveNextAction(ActionType.GameClear);
+            }
         }
 
         public void GameStart()
@@ -90,7 +97,7 @@ namespace Nightmare
 
         public void GameLoad()
         {
-            DataManager.Initialize();
+            //DataManager.Initialize();
             DataManager.Instance.LoadGameData();
         }
 
@@ -98,7 +105,7 @@ namespace Nightmare
         {
             TutorialOk = false;
             IsFirstUsePotion = false;
-            DataManager.Instance.DataReset();
+            DataManager.Instance.ResetData();
             DataManager.Instance.SaveGameData();
             CanSelectPlayers.Clear();
         }
@@ -150,7 +157,6 @@ namespace Nightmare
             else
             {
                 SetName();
-
             }
         }
 
@@ -158,16 +164,8 @@ namespace Nightmare
         {
             Console.Clear();
             GameLoad();
-            DataManager.Instance.CanSelectPlayerDatas.Clear();
 
             string jobChoiceMessage = "\n\n어떤 동화를 들어보시겠습니까?" + "\n";
-
-            int j = 0;
-            foreach (var player in DataManager.Instance.PlayerDatas.Values)
-            {
-                CanSelectPlayers.Add(j + 1, player);
-                j++;
-            }
 
             for (int i = 0; i < CanSelectPlayers.Count; i++)
             {
@@ -214,7 +212,6 @@ namespace Nightmare
 
         public void TakeAction()
         {
-
             if (DebuffedMonsters != null)
             {
                 // 디버프 지속 시간 감소 및 제거
@@ -225,7 +222,6 @@ namespace Nightmare
 
                     if (remainingTurns <= 0)
                     {
-
                         Console.WriteLine($"{monster.Name}의 디버프가 해제됨!");
                         if (doco.Equals("공격력"))
                         {
@@ -350,35 +346,7 @@ namespace Nightmare
                         Buffedplayer[i] = (Player, remainingTurns, doco, howmany); // 값 업데이트
                     }
                 }
-
             }
-
-
-
-        }
-        private Job JobChoice(int num)
-        {
-            var jobStats = new Dictionary<int, (Job job, float BaseAtk, int BaseDef, int Hp, int Mp, float Avd, float Crt)> {
-            { 1, (Job.Dwarf,10,5,100,30,0.1f,0.15f) },
-            { 2, (Job.NewSister, 15, 5, 70, 30, 0.1f, 0.15f) },
-            { 3, (Job.Saison, 12, 7, 100, 20, 0.1f, 0.15f) },
-            { 4, (Job.OctopusWitch, 7, 4, 50, 50, 0.1f, 0.15f) },
-            { 5, (Job.WildAnimal, 20, 10, 150, 10, 0.1f, 0.15f) }};
-
-
-            if (jobStats.TryGetValue(num, out var stats))
-            {
-                Player.Stat.BaseAtk = stats.BaseAtk;
-                Player.Stat.BaseDef = stats.BaseDef;
-                Player.Stat.Hp = Player.Stat.MaxHp = stats.Hp;
-                Player.Stat.Mp = Player.Stat.MaxMp = stats.Mp;
-                Player.Avd.PlayerAvd = stats.Avd;
-                Player.Crt.PlayerCrt = stats.Crt;
-                Player.QuestGroupId = num;
-                return stats.job;
-            }
-
-            return Job.None;
         }
     }
 }

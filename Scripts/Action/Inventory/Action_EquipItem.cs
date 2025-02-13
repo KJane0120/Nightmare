@@ -60,8 +60,6 @@
                 {
                     selectItem.Equip(num-1);  // Item 클래스의 Equip() 호출 (num-1로 인덱스 조정)
                 }
-
-
             }
         }
     }
