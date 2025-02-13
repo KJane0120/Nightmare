@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Nightmare
 {
@@ -37,6 +38,7 @@ namespace Nightmare
 
         public bool IsSold { get; set; } = false;
 
+        [JsonIgnore]
         public Action OnEquipEvent = delegate { };
 
         //무기인지 방어구인지에 따라 공격력이나 방어력을 출력

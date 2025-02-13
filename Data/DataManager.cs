@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Data;
 using static Nightmare.GameManager;
 
 namespace Nightmare
@@ -22,6 +23,77 @@ namespace Nightmare
         private static bool isInitialized = false;
 
         private SaveGameData? saveGameData;
+
+        private readonly string SAVEDATA_FILENAME = "SaveData";
+
+        private readonly string SAVEDATA_FOLIDERNAME = "SaveData";
+
+        public Player Player { get; set; } = new();
+        public int CurrentEqisodeNumber { get; set; } = 0;
+
+        public Dictionary<long, Player> CanSelectPlayers = new();
+
+        //Dict 데이터 사용시 for문 오류, 아이템 판매 시 출력되는 아이템목록 리스트 생성
+        public List<Item> HaveItems = new List<Item>();
+
+        //퀘스트 데이터 리스트
+        public List<Quest> QuestDatas = new();
+
+        //아이템 데이터 리스트
+        public Dictionary<long, Item> ItemDatas = new() { };
+
+        //몬스터 데이터
+        [JsonIgnore]
+        public Dictionary<long, Boss> BossDatas = new();
+
+        //플레이어 데이터
+        [JsonIgnore]
+        public Dictionary<long, Player> PlayerDatas = new()
+        {
+            { 1,new Player() },
+            { 2,new Player() },
+            { 3,new Player() },
+            { 4,new Player() },
+            { 5,new Player() }
+        };
+
+        //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션 3종+스페셜 드랍아이템 5종)
+        [JsonIgnore]
+        public List<Potion> HealthConsumableItems = new();
+        [JsonIgnore]
+        public List<Potion> ManaConsumableItems = new();
+        [JsonIgnore]
+        public List<Potion> LoveConsumableItems = new();
+        [JsonIgnore]
+        public List<Item> BossConsumableItems = new();
+        //보스 처치시 필요한 필수 아이템 데이터
+        [JsonIgnore]
+        public Dictionary<long, KillBossItem> KillBossItemDatas = new();
+
+        public List<Item> EquippedItems = new();
+
+        [JsonIgnore]
+        public List<Potion> PortionDatas = new()
+        {
+            new Potion()
+            {
+                PotionId = 18,
+                PotionCount = 0,
+                PotionMaxCount = 3
+            },
+            new Potion()
+            {
+                PotionId = 24,
+                PotionCount = 0,
+                PotionMaxCount = 3
+            },
+            new Potion()
+            {
+                PotionId = 25,
+                PotionCount = 0,
+                PotionMaxCount = 4
+            }
+        };
 
         public static void Initialize()
         {
@@ -94,37 +166,36 @@ namespace Nightmare
                 saveGameData = new SaveGameData();
             }
 
-            saveGameData.HaveItems = Instance.HaveItems;
-            saveGameData.GameClearCount = GameManager.Instance.GameClearCount;
-            saveGameData.GoldAmount = GameManager.Instance.Player.Gold.PlayerGold;
-
-            string GameData = JsonConvert.SerializeObject(saveGameData);
-            File.WriteAllText(GetFilePath("SaveData", "SaveData"), GameData);
+            string GameData = JsonConvert.SerializeObject(Instance);
+            File.WriteAllText(GetFilePath(SAVEDATA_FOLIDERNAME, SAVEDATA_FILENAME), GameData);
         }
 
         public void LoadGameData()
         {
-            if (!File.Exists(GetFilePath("SaveData", "SaveData")))
+            if (!IsExistSaveData())
             {
-                saveGameData = new SaveGameData();
+                Initialize();
                 return;
             }
             else
             {
-                string GameData = File.ReadAllText(GetFilePath("SaveData", "SaveData"));
-                saveGameData = JsonConvert.DeserializeObject<SaveGameData>(GameData);
+                string GameData = File.ReadAllText(GetFilePath(SAVEDATA_FOLIDERNAME, SAVEDATA_FILENAME));
+                var dataManager = JsonConvert.DeserializeObject<DataManager>(GameData);
 
-                GameManager.Instance.GameClearCount = saveGameData.GameClearCount;
-                GameManager.Instance.Player.Gold.PlayerGold = (int)saveGameData.GoldAmount;
-                Instance.HaveItems = saveGameData.HaveItems;
+                Instance.Player = dataManager.Player;
+                Instance.CurrentEqisodeNumber = dataManager.CurrentEqisodeNumber;
+                Instance.CanSelectPlayers = dataManager.CanSelectPlayers;
+                Instance.HaveItems = dataManager.HaveItems;
+                Instance.ItemDatas = dataManager.ItemDatas;
+                Instance.EquippedItems = dataManager.EquippedItems;
+                Instance.QuestDatas = dataManager.QuestDatas;
             }
         }
 
-        //Dict 데이터 사용시 for문 오류, 아이템 판매 시 출력되는 아이템목록 리스트 생성
-        public List<Item> HaveItems = new List<Item>();
-
-        //퀘스트 데이터 리스트
-        public List<Quest> QuestDatas = new();
+        public bool IsExistSaveData()
+        {
+            return File.Exists(GetFilePath(SAVEDATA_FOLIDERNAME, SAVEDATA_FILENAME));
+        }
 
         //퀘스트 가져오기
         public List<Quest> GetPlayerQuestGroup()
@@ -137,28 +208,8 @@ namespace Nightmare
                 return questGroupId == 0 || questGroupId == playerQuestGroupId;
             }
 
-            return QuestDatas.Where(x => isDisplay(x.QuestGroupId) || GameManager.Instance.GameClearCount > 0 && x.QuestGroupId ==6).ToList();
+            return QuestDatas.Where(x => isDisplay(x.QuestGroupId) || GameManager.Instance.GameClearCount > 0 && x.QuestGroupId == 6).ToList();
         }
-
-        //아이템 데이터 리스트
-        public Dictionary<long, Item> ItemDatas = new() { };
-
-        //몬스터 데이터
-        public Dictionary<long, Boss> BossDatas = new();
-
-        //플레이어 데이터
-        public Dictionary<long, Player> PlayerDatas = new()
-        {
-            { 1,new Player() },
-            { 2,new Player() },
-            { 3,new Player() },
-            { 4,new Player() },
-            { 5,new Player() }
-        };
-
-        //선택 가능한 직업
-        public Dictionary<long, Player> CanSelectPlayerDatas = new();
-
         public void SetPlayerDatas()
         {
             PlayerDatas[1].Job = Job.Dwarf;
@@ -181,21 +232,19 @@ namespace Nightmare
             PlayerDatas[5].Stat = new Stat(20, 10, 150, 150, 10, 10);
             PlayerDatas[5].QuestGroupId = 5;
 
+            UpdateCanSelectPlayers();
         }
 
-
-        //소모성 아이템(전투 중 볼 수 있는 인벤토리) 리스트(포션 3종+스페셜 드랍아이템 5종)
-
-
-        public List<Potion> HealthConsumableItems = new();
-        public List<Potion> ManaConsumableItems = new();
-        public List<Potion> LoveConsumableItems = new();
-        public List<Item> BossConsumableItems = new();
-
-
-        //보스 처치시 필요한 필수 아이템 데이터
-        public Dictionary<long, KillBossItem> KillBossItemDatas = new();
-
+        public void UpdateCanSelectPlayers()
+        {
+            CanSelectPlayers.Clear();
+            int i = 0;
+            foreach (var player in Instance.PlayerDatas.Values)
+            {
+                CanSelectPlayers.Add(i + 1, player);
+                i++;
+            }
+        }
 
         //기본 포션 3개씩 추가하는 함수
         public void InitializeConsumableItems()
@@ -228,33 +277,7 @@ namespace Nightmare
             }
         }
 
-
-        public List<Item> EquippedItems = new();
-
-        public List<Potion> PortionDatas = new()
-        {
-
-            new Potion()
-            {
-                PotionId = 18,
-                PotionCount = 0,
-                PotionMaxCount = 3
-            },
-            new Potion()
-            {
-                PotionId = 24,
-                PotionCount = 0,
-                PotionMaxCount = 3
-            },
-            new Potion()
-            {
-                PotionId = 25,
-                PotionCount = 0,
-                PotionMaxCount = 4
-            }
-        };
-
-        public void DataReset()
+        public void ResetData()
         {
             // 가지고 있는 아이템 중에 하트조각과 스페셜 아이템 이외에 아이템은 삭제
             HaveItems.RemoveAll(x => x.Type == ItemType.HeartPiece && x.Type == ItemType.Special);
@@ -264,6 +287,7 @@ namespace Nightmare
 
             //플레이한 직업 삭제
             PlayerDatas.Remove((int)GameManager.Instance.Player.Job);
+            UpdateCanSelectPlayers();
         }
     }
 }
