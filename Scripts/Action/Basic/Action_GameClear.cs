@@ -19,8 +19,6 @@ namespace Nightmare
             {
                 SoundManager.PlayBGM("HappyEnding");
                 Console.Clear();
-                //플레이한 직업 삭제
-                DataManager.Instance.CanSelectPlayerDatas.Remove((int)Instance.Player.Job);
                 //클리어 수 증가
                 Instance.GameClearCount++;
                 DisPlay();
