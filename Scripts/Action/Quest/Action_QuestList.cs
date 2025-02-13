@@ -37,7 +37,7 @@
 
             protected override void DisPlay()
             {
-                ASCIIManager.DisplayAlignASCIIArt("Glasses", Align.Center, VerticalAlign.Top);
+                ASCIIManager.DisplayAlignASCIIArt("Quest", Align.Center, VerticalAlign.Top);
 
                 var questTexts = new List<string>();
                 questTexts.Add("[퀘스트]");

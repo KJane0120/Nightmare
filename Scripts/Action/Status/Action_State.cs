@@ -20,7 +20,7 @@
             {
                 Console.Clear();
 
-                var charlines = ASCIIManager.Getlines("Char");
+                var charlines = ASCIIManager.Getlines("Step");
 
                 ASCIIManager.DisplayAlignASCIIArt(charlines, Align.Center, VerticalAlign.Top);
 
