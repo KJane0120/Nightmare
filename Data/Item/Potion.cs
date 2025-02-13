@@ -4,24 +4,13 @@
     {
         public long PotionId { get; set; }
         public Item Data => DataManager.Instance.ItemDatas[PotionId];
+        public int PotionCount { get; set; }
+        public int PotionMaxCount { get; set; }
         //포션을 사용했을 때 이벤트
         public Action OnUsePotionEvent = delegate { };
-        public override void UseItem(Item i)
-        {
-            if (i.Type == ItemType.HPPotion || i.Type == ItemType.MPPotion || i.Type == ItemType.Special)
-            {
-                UsePotion();
-            }
-            else if (i.Type == ItemType.Accessory)
-            {
-
-            }
-        }
 
         public virtual void UsePotion()
         {
-
-            
             //첫 포션 사용 퀘스트 플래그
             if (!GameManager.Instance.IsFirstUsePotion)
             {
@@ -99,34 +88,11 @@
                 }
             }
             OnUsePotionEvent();
-
-
         }
-        //보상이 포션일 때 이 함수 사용
-        public void PickUpPotion(Potion portion)
-        {
-            if (portion.PotionCount < portion.PotionMaxCount)
-            {
-                portion.PotionCount++;
-                Console.WriteLine($"{portion.Name} 개수가 증가했습니다. 현재 개수: {portion.PotionCount}");
-
-            }
-            else
-            {
-                Console.WriteLine("더이상 가질 수 없습니다.");
-            }
-
-        }
-
         public  string ToShow()
         {
             String s = $"{Name}|{GetTypeString()}|{Desc}|";
             return s;
-        }
-        public string ShowPotion()
-        {
-            string str = $"{Data.Name} | {Data.GetTypeString()} | {Data.Desc} | (개수 : {PotionCount} / {PotionMaxCount} )";
-            return str;
         }
     }
 }
