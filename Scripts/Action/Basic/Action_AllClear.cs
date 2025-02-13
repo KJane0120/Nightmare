@@ -29,8 +29,8 @@
                 var clearTexts = new List<string>();
                 clearTexts.Add($"당신은 모든 이야기를 되돌렸습니다.");
                 clearTexts.Add("책을 덮을 시간입니다.");
-                clearTexts.Add($"“옛날 옛적에….”");
-                clearTexts.Add($"1.다시하기");
+                clearTexts.Add($"\n“옛날 옛적에….”");
+                clearTexts.Add($"\n1.다시하기");
                 clearTexts.Add($"2.나가기");
 
                 ASCIIManager.AlignText(clearTexts.ToArray(), Align.Center, VerticalAlign.Bottom, 15);

@@ -123,7 +123,7 @@ namespace Nightmare
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("일그러진 동화 속을 유영할 당신의 이름은?");
-            Console.Write(">>");
+            Console.Write(">> ");
 
             name = Console.ReadLine();
 
@@ -137,7 +137,6 @@ namespace Nightmare
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("1. 저장   2. 취소");
-            Console.WriteLine();
             Console.WriteLine();
             UtilityManager.InputNumberInRange(1, 2, SuccessInputNumberInRange, SetName, "어느 페이지로 넘어가시겠습니까?");
         }
@@ -157,21 +156,34 @@ namespace Nightmare
 
         private void SetJob() // 직업설정
         {
+            Console.Clear();
             GameLoad();
-
             DataManager.Instance.CanSelectPlayerDatas.Clear();
+
+            string jobChoiceMessage = "어떤 동화를 들어보시겠습니까?" + "\n";
+
+            int j = 0;
+            foreach (var player in DataManager.Instance.PlayerDatas.Values)
+            {
+                CanSelectPlayers.Add(j + 1, player);
+                j++;
+            }
+
+            for (int i = 0; i < CanSelectPlayers.Count; i++)
+            {
+                jobChoiceMessage += $"\n{i + 1}.{UtilityManager.GetDescription(CanSelectPlayers[i + 1].Job)}";
+            }
+
+            jobChoiceMessage += "\n";
+
+            foreach (char c in jobChoiceMessage)
+            {
+                Console.Write(c);
+            }
+
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("어떤 동화를 읽어보시겠습니까?");
-            Thread.Sleep(700);
-            Console.WriteLine("1. 백설공주와 일곱째 난쟁이");
-            Console.WriteLine("2. 신데렐라의 새 언니");
-            Console.WriteLine("3. 모두가 잠든 성의 하인");
-            Console.WriteLine("4. 깊은 바닷속 문어 마녀");
-            Console.WriteLine("5. 힘을 잃은 야수");
-            Console.WriteLine();
-            Console.WriteLine();
-            UtilityManager.InputNumberInRange(1, 5, JobInputNumberInRange, SetJob, "읽고 싶은 동화를 선택해주세요.");
+            UtilityManager.InputNumberInRange(1, CanSelectPlayers.Count, JobInputNumberInRange, SetJob, "읽고 싶은 동화를 선택해주세요.");
         }
 
         private void JobInputNumberInRange(int number)

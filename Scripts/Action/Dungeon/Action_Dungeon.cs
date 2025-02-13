@@ -29,7 +29,7 @@
 
                 ASCIIManager.DisplayAlignASCIIArt(CastleAline, Align.Center, VerticalAlign.Top);
 
-                Console.WriteLine("던전에 어서오세요");
+                Console.WriteLine("악몽의 주인을 만나러 갑시다.");
             }
         }
     }

@@ -34,7 +34,7 @@ namespace Nightmare
         {
             while (true)
             {
-                Console.Write($"\n{nextActionText}\n>>");
+                Console.Write($"\n{nextActionText}\n>> ");
                 if (int.TryParse(Console.ReadLine(), out int number) && min <= number && number <= max)
                 {
                     success?.Invoke(number);
