@@ -29,19 +29,23 @@ namespace Nightmare
             Console.WriteLine(lines[0]);
             Console.WriteLine(lines[1]);
 
-            if (int.TryParse(Console.ReadLine(), out int input))
+            UtilityManager.InputNumberInRange(1, 2, ReStart, null, "");
+        }
+
+        static protected void ReStart(int num)
+        {
+            if (num == 1)
             {
-                if (input == 1)
-                {
-                    GameManager.Instance.GameStart();
-                }
-                else if (input == 2)
-                {
-                    Console.WriteLine("진짜 종료할 거야?");
-                    Console.ReadKey();
-                    Environment.Exit(0);
-                }
+                GameManager.Instance.GameStart();
+            }
+            else if (num == 2)
+            {
+                Console.WriteLine("진짜 종료할 거야?");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
         }
+
     }
 }
+
