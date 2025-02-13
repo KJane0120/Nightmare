@@ -52,7 +52,7 @@
                 questTexts.Add("0. 나가기");
                 questTexts.Add("원하시는 퀘스트를 입력해주세요");
 
-                ASCIIManager.AlignText(questTexts.ToArray(), Align.Center, VerticalAlign.Bottom,3);
+                ASCIIManager.AlignText(questTexts.ToArray(), Align.Center, VerticalAlign.Bottom);
             }
 
             private void SelectQuest(int num)

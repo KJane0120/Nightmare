@@ -25,7 +25,7 @@ namespace Nightmare
                 {
                     if (SkillTarget == 1) // 단일 공격형 스킬
                     {
-                        Console.WriteLine("어떤 적을 공격하십니까");
+                        Console.WriteLine("어느 대상을 공격하시겠습니까?");
                         int num = int.Parse(Console.ReadLine());
                         player.Stat.Mp -= SkillMp;
                         for (int i = 0; i < HowManyAttack; i++)

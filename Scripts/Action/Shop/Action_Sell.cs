@@ -55,9 +55,12 @@
             {
                 Console.Clear();
                 OnInputInvalidActionNumber = PrintErrorMsg;
+                var Weaponlines = ASCIIManager.Getlines("Weapon");
+                ASCIIManager.DisplayAlignASCIIArt(Weaponlines, Align.Center, VerticalAlign.Top);
                 Console.WriteLine();
-                Console.WriteLine("상점 - 아이템 판매");
-                Console.WriteLine("이 곳에서는 보유한 아이템을 판매할 수 있습니다.");
+                Console.WriteLine();
+                UtilityManager.ColorWriteLine("상점 - 아이템 판매", ConsoleColor.Yellow);
+                Console.WriteLine("시계 토끼: 반짝이는 것을 돌려줄게.");
                 Console.WriteLine();
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine($"{GameManager.Instance.Player.Gold.PlayerGold} G");

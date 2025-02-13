@@ -21,8 +21,11 @@
 
             protected override void DisPlay()
             {
-                Console.SetWindowSize(120, 30);
-                ASCIIManager.DisplayAlignASCIIArt("CastleA", Align.Center, VerticalAlign.Top);
+                Console.Clear();
+                var CastleAline = ASCIIManager.Getlines("Castle");
+                ASCIIManager.DisplayAlignASCIIArt(CastleAline, Align.Center, VerticalAlign.Top);
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("악몽의 주인을 만나러 갑시다.");
             }
         }

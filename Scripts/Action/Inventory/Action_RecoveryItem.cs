@@ -24,6 +24,20 @@
                 Show();
                 if (number >= 0 && number < 4)
                 {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    UtilityManager.ColorWriteLine("회복", ConsoleColor.Green);
+                    Console.WriteLine("포션을 사용하여 HP나 MP를 회복할 수 있습니다.");
+
+                    Console.WriteLine("[포션 목록]");
+                    Console.WriteLine();
+                    Console.WriteLine("0. 돌아가기");
+
+                    Console.WriteLine();
+                    Show();
+                    Console.WriteLine("번호를 입력해주세요");
+                    int number = int.Parse(Console.ReadLine());
+
                     if (number == 0)
                     {
                         Instance.MoveNextAction(ActionType.Village);

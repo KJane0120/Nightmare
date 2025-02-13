@@ -39,7 +39,7 @@ namespace Nightmare
                         }
                         else
                         {
-                            Console.WriteLine("골드가 부족합니다 !! ");
+                            Console.WriteLine("골드가 부족합니다!");
                         }
                     }
                     else
@@ -56,10 +56,12 @@ namespace Nightmare
             {
                 OnInputInvalidActionNumber = PrintErrorMsg;
                 Console.Clear();
-
+                var Weaponlines = ASCIIManager.Getlines("Weapon");
+                ASCIIManager.DisplayAlignASCIIArt(Weaponlines, Align.Center, VerticalAlign.Top);
                 Console.WriteLine();
-                Console.WriteLine("상점 - 아이템 구매");
-                Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
+                Console.WriteLine();
+                UtilityManager.ColorWriteLine("상점 - 아이템 구매", ConsoleColor.Yellow);
+                Console.WriteLine("시계 토끼: 좋은 물건들이야.");
                 Console.WriteLine();
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine($"{GameManager.Instance.Player.Gold.PlayerGold} G");

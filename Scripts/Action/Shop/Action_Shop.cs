@@ -28,12 +28,12 @@
                 Console.Clear();
 
                 var Weaponlines = ASCIIManager.Getlines("Weapon");
-
                 ASCIIManager.DisplayAlignASCIIArt(Weaponlines, Align.Center, VerticalAlign.Top);
-                
 
-                Console.WriteLine("상점");
-                Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
+                Console.WriteLine();
+                Console.WriteLine();
+                UtilityManager.ColorWriteLine("상점", ConsoleColor.Yellow);
+                Console.WriteLine("시계 토끼: 반짝이는 것과 좋은 물건을 교환하자!");
 
 
                 Console.WriteLine();

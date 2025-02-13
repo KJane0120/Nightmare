@@ -53,7 +53,9 @@ namespace Nightmare
                     Console.WriteLine($"회피율: {Math.Round((player.Avd.EquipAvd + player.Avd.PlayerAvd) * 100),0} %");
                     ii = 1;
                     Console.WriteLine("행동을 선택해주세요(스킬 사용 정지)");
+                    Console.WriteLine();
                     Console.WriteLine("1. 공격");
+                    Console.WriteLine();
                     int Select = int.Parse(Console.ReadLine());
                     if (Select == 1)
                     {
@@ -61,19 +63,19 @@ namespace Nightmare
                         //어느 적을 공격하는지
                         while (true)
                         {
-                            Console.WriteLine("누굴 공격하니");
+                            Console.WriteLine("어느 대상을 공격하시겠습니까?");
                             try
                             {
                                 AttackSelect = int.Parse(Console.ReadLine());
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine("숫자 제대로 입력해");
+                                Console.WriteLine("잘못된 숫자입니다.");
                                 continue;
                             }
                             if (AttackSelect < 1 || AttackSelect > monsters.Count)
                             {
-                                Console.WriteLine("잘못된 적 선택");
+                                Console.WriteLine("잘못된 대상입니다.");
 
                                 continue;
                             }
@@ -121,7 +123,7 @@ namespace Nightmare
 
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
-                Console.WriteLine("스테이지 클리어!");
+                Console.WriteLine("챕터 클리어!");
                 //일정 확률의 보상 얻기
                 GetClearBoSang(monsters, player);
                 //다시 돌아가기
@@ -146,7 +148,7 @@ namespace Nightmare
                 BossBattlePhase(boss, monsters, player, boss);
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
                 //돈 추가
-                Console.WriteLine("스테이지 클리어!");
+                Console.WriteLine("챕터 클리어!");
                 //일정 확률의 보상 얻기
                 GetClearBoSang(monsters, player);
                 DataManager.Instance.HaveItems.Add(DataManager.Instance.ItemDatas[12 + (int)player.Job]);
@@ -348,25 +350,33 @@ namespace Nightmare
                         if (i == 1)
                         {
                             Console.WriteLine("행동을 골라주세요");
+                            Console.WriteLine();
                             Console.WriteLine("1. 공격");
                             Console.WriteLine("2. 스킬");
                             Console.WriteLine("3. 아이템 사용");
+                            Console.WriteLine();
                         }
                         else if (i == 2)
                         {
                             Console.WriteLine("0. 돌아가기");
-                            Console.WriteLine("어느 적을 공격할거니");
+                            Console.WriteLine();
+                            Console.WriteLine("어느 대상을 공격하시겠습니까?");
+                            Console.WriteLine();
                         }
                         else if (i == 3)
                         {
                             Console.WriteLine("0. 돌아가기");
-                            Console.WriteLine("사용할 스킬을 골라주세요");
+                            Console.WriteLine();
+                            Console.WriteLine("어떤 스킬을 시전하시겠습니까?");
+                            Console.WriteLine();
                         }
                         else
                         {
-                            Console.WriteLine("사용할 아이템을 골라주세요");
+                            Console.WriteLine("어떤 아이템을 사용하시겠습니까?");
+                            Console.WriteLine();
                             Console.WriteLine("1. 앨리스의 쿠키");
                             Console.WriteLine("2. 엘리스의 음료");
+                            Console.WriteLine();
                         }
 
                         number = int.Parse(Console.ReadLine());
@@ -524,7 +534,7 @@ namespace Nightmare
                         }
                         else if (player.Playerskill[str - 1].SkillMp > player.Stat.Mp)
                         {
-                            Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp - player.Stat.Mp}가 부족합니다");
+                            Console.WriteLine($"마나가  {player.Playerskill[str - 1].SkillMp - player.Stat.Mp} 부족합니다");
                             PlayerAction(monsters, player, mon, ref DeathCount);
                             return;
                         }

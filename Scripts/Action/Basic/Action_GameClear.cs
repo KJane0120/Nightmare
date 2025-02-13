@@ -31,7 +31,7 @@ namespace Nightmare
 
                 if (quest == null)
                 {
-                    Console.WriteLine("퀘스트를 찾을수 없습니다");
+                    Console.WriteLine("퀘스트를 찾을 수 없습니다.");
                 }
 
                 var boss = DataManager.Instance.BossDatas[quest.Condition.ConditionValue];
@@ -39,7 +39,7 @@ namespace Nightmare
                 var clearTexts = new List<string>();
                 clearTexts.Add($"{boss.Name}은(는) 끝내 쓰러지고,");
                 clearTexts.Add("당신은 이야기를 원래대로 돌려놓는 데에 성공했습니다.");
-                clearTexts.Add($"{quest.Title}클리어.");
+                clearTexts.Add($"{quest.Title} 클리어.");
                 clearTexts.Add("-보상-");
 
                 foreach (var reward in quest.Rewards)
@@ -48,14 +48,14 @@ namespace Nightmare
                     clearTexts.Add($"{reward.GetRewardInfo()} ");
                 }
 
-                ASCIIManager.AlignText(clearTexts.ToArray(), Align.Center, VerticalAlign.Bottom);
+                ASCIIManager.AlignText(clearTexts.ToArray(), Align.Center, VerticalAlign.Bottom,15);
 
                 Thread.Sleep(5000);
                 Console.Clear();
 
                 ASCIIManager.DisplayAlignASCIIArt("HappyEnd", Align.Center, VerticalAlign.Top);
                 var endTexts = new List<string>();
-                endTexts.Add("다른동화를 읽어 보시겠습니까?");
+                endTexts.Add("다른 동화를 읽어보시겠습니까?");
                 endTexts.Add("1. 네");
                 endTexts.Add("2. 아니오");
 
