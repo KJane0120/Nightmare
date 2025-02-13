@@ -13,7 +13,7 @@ namespace Nightmare
 
             SoundManager.PlayBGM("Intro");
 
-            Console.SetWindowSize(120, 40);
+            //Console.SetWindowSize(120, 40);
             //var titlelines = ASCIIManager.Getlines("Title");
             //var booklines = ASCIIManager.Getlines("Book");
             //var posterlines = ASCIIManager.Getlines("Poster");

@@ -109,6 +109,11 @@ namespace Nightmare
         {
             monsters[0].MonsterHealth -= 999;
             Death++;
+            Potion potion = new Potion();
+
+            potion = DataManager.Instance.PortionDatas[25];
+            DataManager.Instance.LoveConsumableItems.Add(potion);
+            GameManager.Instance.GameClear();
 
         }
 

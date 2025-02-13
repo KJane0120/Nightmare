@@ -110,7 +110,7 @@ namespace Nightmare
                         else if (SkillType.Equals("체력"))
                         {
                             Boss boss = monster[0] as Boss;
-                            boss.MonsterHealth += (int)SkillDamage; ;
+                            boss.MonsterHealth += (int)SkillDamage;
 
                             if (boss.MonsterHealth > 250) { player.Stat.Hp = 250; }
                             Console.WriteLine($"{SkillName}(으)로 체력이 {SkillDamage}만큼 올랐습니다.");

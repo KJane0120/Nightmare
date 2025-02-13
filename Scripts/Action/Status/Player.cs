@@ -82,7 +82,7 @@ namespace Nightmare
         //}
         public void LevelUp()
         {
-            int[] Exp = { 10, 12, 15, 30, 36, 40, 48, 54, 60 };
+            int[] Exp = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
             while (Level.PlayerLevel < 10 && Level.PlayerLevel <= Exp.Length && Exp[Level.PlayerLevel - 1] <= CurrentExp)
             {

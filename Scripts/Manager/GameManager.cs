@@ -349,11 +349,11 @@ namespace Nightmare
                         }
                         else if (doco.Equals("회피율"))
                         {
-                            player.Avd.PlayerAvd -= howmany;
+                            player.Avd.PlayerAvd += howmany;
                         }
                         else if (doco.Equals("치명타율"))
                         {
-                            player.Crt.PlayerCrt -= howmany;
+                            player.Crt.PlayerCrt += howmany;
                         }
                  
                         Buffedplayer.RemoveAt(i);
