@@ -36,7 +36,7 @@
                 UtilityManager.ColorWriteLine("인벤토리 - 장착 관리", ConsoleColor.Green);
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
 
-                var Baglines = ASCIIManager.Getlines("BagA");
+                var Baglines = ASCIIManager.Getlines("Bag");
 
                 ASCIIManager.DisplayAlignASCIIArt(Baglines, Align.Center, VerticalAlign.Top);
 
@@ -60,8 +60,6 @@
                 {
                     selectItem.Equip(num-1);  // Item 클래스의 Equip() 호출 (num-1로 인덱스 조정)
                 }
-
-
             }
         }
     }

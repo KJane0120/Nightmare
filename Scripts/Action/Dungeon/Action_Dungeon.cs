@@ -13,22 +13,16 @@
             {
                 return new Dictionary<int, ActionBase>()
                 {
-                    
                     {1, new StageManager(1) },
                     {2, new Action_RecoveryItem(2) },
                     { 0,  new Action_Return(0) },
-
-
-
                 };
             }
 
             protected override void DisPlay()
             {
-                var CastleAline = ASCIIManager.Getlines("CastleA");
-
-                ASCIIManager.DisplayAlignASCIIArt(CastleAline, Align.Center, VerticalAlign.Top);
-
+                Console.SetWindowSize(120, 30);
+                ASCIIManager.DisplayAlignASCIIArt("CastleA", Align.Center, VerticalAlign.Top);
                 Console.WriteLine("악몽의 주인을 만나러 갑시다.");
             }
         }

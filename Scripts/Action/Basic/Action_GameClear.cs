@@ -20,7 +20,6 @@ namespace Nightmare
                 SoundManager.PlayBGM("HappyEnding");
                 Console.Clear();
                 //클리어 수 증가
-                Instance.GameClearCount++;
                 DisPlay();
             }
 
