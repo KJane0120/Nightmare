@@ -38,8 +38,9 @@ namespace Nightmare
 
         public string GetQuestTitle()
         {
-            string IsProgressText = IsProgress ? "[진행중]" : "";
-            return $"{Id}.{Title}{IsProgressText}";
+            string IsProgressText = IsProgress && !Condition.IsConditionClear ? $"\u001b[33m[진행중]\u001b[0m" : "";
+            string IsSucessText = Condition.IsConditionClear ? $"\x1b[92m[완료]\u001b[0m" : "";
+            return $"{Id}.{Title}{IsProgressText}{IsSucessText}";
         }
 
         public void DisplayQuestInfo()
