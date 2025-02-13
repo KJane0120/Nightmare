@@ -31,20 +31,17 @@ namespace Nightmare
         {
             if (num == 1)
             {
-                if (input == 1)
-                {
-                    GameManager.Instance.GameStart();
-                }
-                else if (input == 2)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.WriteLine("진짜 종료할 거야?");
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.ReadKey();
-                    Environment.Exit(0);
-                }
+                GameManager.Instance.GameStart();
+            }
+            else if (num == 2)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("진짜 종료할 거야?");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.ReadKey();
+                Environment.Exit(0);
             }
         }
 
