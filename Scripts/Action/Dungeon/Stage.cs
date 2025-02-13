@@ -116,7 +116,7 @@ namespace Nightmare
                 {
                     monsters.Add(mon.Monstersummon(Ran.Next(1 + (3 * RandomRange), 4 + (3 * RandomRange)), MoneyRange));
                 }
-
+                player.Stat.Mp = player.Stat.MaxHp;
                 BattlePhase(mon, monsters, player);
 
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
@@ -211,6 +211,8 @@ namespace Nightmare
                 List<Monster> monsters = new List<Monster>();
 
                 monsters.Add(boss);
+
+                player.Stat.Mp = player.Stat.MaxHp;
 
                 BossBattlePhase(boss, monsters, player, boss);
                 //플레이어의 정보를 받아서 일정 확률로 장비 얻기
